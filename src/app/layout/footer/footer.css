@@ -1,0 +1,988 @@
+/* ===========================================
+   PREMIUM FOOTER
+=========================================== */
+
+.footer{
+
+    position:relative;
+    overflow:hidden;
+
+    background:linear-gradient(
+        135deg,
+        #07131f,
+        #0F172A,
+        #111827,
+        #1F2937,
+        #111827
+    );
+
+    background-size:400% 400%;
+
+    padding-top:140px;
+
+    color:white;
+
+}
+
+/*========================
+Wave
+=========================*/
+
+.wave{
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:140px;
+
+    overflow:hidden;
+
+}
+
+.wave svg{
+
+    width:100%;
+    height:100%;
+
+}
+
+/*========================
+Container
+=========================*/
+
+.footer-container{
+
+    width:90%;
+    max-width:1450px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr 1fr 1.2fr;
+
+    gap:35px;
+
+    position:relative;
+
+    z-index:5;
+
+}
+
+/*========================
+Glass Cards
+=========================*/
+
+.footer-about,
+.footer-links,
+.footer-contact{
+
+    background:rgba(255,255,255,.05);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:28px;
+
+    padding:35px;
+
+    transition:.45s;
+
+    position:relative;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.25);
+
+}
+
+.footer-about:hover,
+.footer-links:hover,
+.footer-contact:hover{
+
+    transform:translateY(-12px);
+
+    border-color:#D4AF37;
+
+    box-shadow:
+        0 25px 55px rgba(212,175,55,.20);
+
+}
+
+/* Gold Top Line */
+
+.footer-about::before,
+.footer-links::before,
+.footer-contact::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:4px;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #D4AF37,
+        transparent
+    );
+
+}
+
+/*========================
+Logo
+=========================*/
+
+.logo{
+
+    width:110px;
+
+    border-radius:50%;
+
+    margin-bottom:20px;
+
+    transition:.5s;
+
+}
+
+.footer-about:hover .logo{
+
+    transform:rotate(8deg) scale(1.08);
+
+}
+
+.footer-about h2{
+
+    font-size:32px;
+
+    margin-bottom:15px;
+
+    color:#D4AF37;
+
+}
+
+.footer-about p{
+
+    color:#d8d8d8;
+
+    line-height:1.9;
+
+    margin-bottom:30px;
+
+}
+
+/*========================
+Social Icons
+=========================*/
+
+.social-icons{
+
+    display:flex;
+
+    gap:16px;
+
+}
+
+.social-icons a{
+
+    width:52px;
+    height:52px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-decoration:none;
+
+    color:white;
+
+    font-size:20px;
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.45s;
+
+}
+
+.social-icons a:hover{
+
+    background:#D4AF37;
+
+    color:#111827;
+
+    transform:
+        translateY(-8px)
+        rotate(360deg)
+        scale(1.15);
+
+}
+
+/*========================
+Headings
+=========================*/
+
+.footer-links h3,
+.footer-contact h3{
+
+    color:#D4AF37;
+
+    font-size:24px;
+
+    margin-bottom:28px;
+
+}
+
+/*========================
+Lists
+=========================*/
+
+.footer-links ul{
+
+    list-style:none;
+
+}
+
+.footer-links li{
+
+    margin-bottom:18px;
+
+    transition:.35s;
+
+}
+
+.footer-links li:hover{
+
+    transform:translateX(12px);
+
+}
+
+.footer-links a{
+
+    color:#ddd;
+
+    text-decoration:none;
+
+    transition:.35s;
+
+}
+
+.footer-links a:hover{
+
+    color:#D4AF37;
+
+}
+
+/*========================
+Contact
+=========================*/
+
+.contact-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    margin-bottom:22px;
+
+}
+
+.contact-item i{
+
+    width:46px;
+    height:46px;
+
+    border-radius:50%;
+
+    background:#D4AF37;
+
+    color:#111827;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:18px;
+
+}
+
+.contact-item span{
+
+    color:#ddd;
+
+}
+
+/*========================
+Volunteer Button
+=========================*/
+
+.footer-contact button{
+
+    margin-top:18px;
+
+    width:100%;
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:45px;
+
+    cursor:pointer;
+
+    color:#111827;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    background:linear-gradient(
+        90deg,
+        #D4AF37,
+        #FFD978
+    );
+
+    transition:.4s;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.footer-contact button:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:
+        0 15px 35px rgba(212,175,55,.45);
+
+}
+
+/* Shine */
+
+.footer-contact button::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-120%;
+
+    top:0;
+
+    width:50%;
+    height:100%;
+
+    background:rgba(255,255,255,.35);
+
+    transform:skewX(-30deg);
+
+    transition:.8s;
+
+}
+
+.footer-contact button:hover::before{
+
+    left:150%;
+
+}
+
+/*========================
+Bottom
+=========================*/
+
+.footer-divider{
+
+    width:90%;
+
+    margin:70px auto 30px;
+
+    height:1px;
+
+    background:rgba(255,255,255,.08);
+
+}
+
+.footer-bottom{
+
+    width:90%;
+
+    margin:auto;
+
+    padding-bottom:35px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    color:#bbb;
+
+}
+
+.footer-bottom span{
+
+    color:#ff4d6d;
+
+    font-size:20px;
+
+}
+
+/*========================
+Back To Top
+=========================*/
+
+.top-btn{
+
+    position:fixed;
+
+    right:35px;
+
+    bottom:35px;
+
+    width:58px;
+    height:58px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#D4AF37;
+
+    color:#111827;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+    transition:.4s;
+
+    z-index:999;
+
+}
+
+.top-btn:hover{
+
+    transform:translateY(-8px) rotate(360deg);
+
+}
+
+/*====================================================
+        ANIMATED BACKGROUND
+====================================================*/
+
+.footer{
+
+    animation:gradientBG 18s ease infinite;
+
+}
+
+@keyframes gradientBG{
+
+0%{
+
+background-position:0% 50%;
+
+}
+
+50%{
+
+background-position:100% 50%;
+
+}
+
+100%{
+
+background-position:0% 50%;
+
+}
+
+}
+
+/*====================================================
+        FLOATING BLOBS
+====================================================*/
+
+.blob{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    filter:blur(70px);
+
+    opacity:.35;
+
+    animation:blobMove 15s infinite alternate ease-in-out;
+
+}
+
+.blob1{
+
+    width:320px;
+
+    height:320px;
+
+    background:#D4AF37;
+
+    left:-120px;
+
+    top:120px;
+
+}
+
+.blob2{
+
+    width:260px;
+
+    height:260px;
+
+    background:#4F46E5;
+
+    right:-100px;
+
+    top:40%;
+
+    animation-duration:18s;
+
+}
+
+.blob3{
+
+    width:420px;
+
+    height:420px;
+
+    background:#06B6D4;
+
+    bottom:-220px;
+
+    left:40%;
+
+    animation-duration:20s;
+
+}
+
+@keyframes blobMove{
+
+0%{
+
+transform:translate(0,0) scale(1);
+
+}
+
+50%{
+
+transform:translate(80px,-60px) scale(1.2);
+
+}
+
+100%{
+
+transform:translate(-60px,70px) scale(.9);
+
+}
+
+}
+
+/*====================================================
+            GLASS SHINE
+====================================================*/
+
+.footer-about::after,
+.footer-links::after,
+.footer-contact::after{
+
+content:"";
+
+position:absolute;
+
+top:-120%;
+
+left:-120%;
+
+width:180%;
+
+height:180%;
+
+background:linear-gradient(
+
+120deg,
+
+transparent,
+
+rgba(255,255,255,.12),
+
+transparent
+
+);
+
+transform:rotate(20deg);
+
+transition:1.2s;
+
+}
+
+.footer-about:hover::after,
+.footer-links:hover::after,
+.footer-contact:hover::after{
+
+top:100%;
+
+left:100%;
+
+}
+
+/*====================================================
+            SOCIAL GLOW
+====================================================*/
+
+.social-icons a{
+
+box-shadow:0 0 0 rgba(212,175,55,0);
+
+}
+
+.social-icons a:hover{
+
+box-shadow:
+
+0 0 18px #D4AF37,
+
+0 0 35px rgba(212,175,55,.45);
+
+}
+
+/*====================================================
+        CONTACT ICON ANIMATION
+====================================================*/
+
+.contact-item i{
+
+transition:.45s;
+
+}
+
+.contact-item:hover i{
+
+transform:rotate(360deg) scale(1.2);
+
+}
+
+/*====================================================
+        LINK UNDERLINE
+====================================================*/
+
+.footer-links a{
+
+position:relative;
+
+}
+
+.footer-links a::after{
+
+content:"";
+
+position:absolute;
+
+bottom:-5px;
+
+left:0;
+
+width:0;
+
+height:2px;
+
+background:#D4AF37;
+
+transition:.35s;
+
+}
+
+.footer-links a:hover::after{
+
+width:100%;
+
+}
+
+/*====================================================
+            HEART BEAT
+====================================================*/
+
+.footer-bottom span{
+
+display:inline-block;
+
+animation:heartBeat 1.4s infinite;
+
+}
+
+@keyframes heartBeat{
+
+0%,100%{
+
+transform:scale(1);
+
+}
+
+25%{
+
+transform:scale(1.25);
+
+}
+
+50%{
+
+transform:scale(.9);
+
+}
+
+75%{
+
+transform:scale(1.2);
+
+}
+
+}
+
+/*====================================================
+        BUTTON GLOW
+====================================================*/
+
+.footer-contact button{
+
+animation:pulseGlow 3s infinite;
+
+}
+
+@keyframes pulseGlow{
+
+0%{
+
+box-shadow:0 0 0 rgba(212,175,55,0);
+
+}
+
+50%{
+
+box-shadow:
+
+0 0 30px rgba(212,175,55,.55);
+
+}
+
+100%{
+
+box-shadow:0 0 0 rgba(212,175,55,0);
+
+}
+
+}
+
+/*====================================================
+        BACK TO TOP
+====================================================*/
+
+.top-btn{
+
+animation:floatBtn 2.5s ease-in-out infinite;
+
+}
+
+@keyframes floatBtn{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-12px);
+
+}
+
+}
+
+.top-btn:hover{
+
+background:white;
+
+color:#111827;
+
+box-shadow:
+
+0 0 25px #D4AF37,
+
+0 0 50px rgba(212,175,55,.55);
+
+}
+
+/*====================================================
+        LOGO
+====================================================*/
+
+.logo{
+
+animation:logoFloat 5s ease-in-out infinite;
+
+}
+
+@keyframes logoFloat{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-12px);
+
+}
+
+}
+
+/*====================================================
+        COPYRIGHT
+====================================================*/
+
+.footer-bottom{
+
+border-top:1px solid rgba(255,255,255,.08);
+
+padding-top:25px;
+
+}
+
+/*====================================================
+            RESPONSIVE
+====================================================*/
+
+@media(max-width:1200px){
+
+.footer-container{
+
+grid-template-columns:repeat(2,1fr);
+
+gap:30px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.footer{
+
+padding-top:90px;
+
+}
+
+.footer-container{
+
+grid-template-columns:1fr;
+
+}
+
+.footer-bottom{
+
+flex-direction:column;
+
+gap:18px;
+
+text-align:center;
+
+}
+
+.footer-about,
+.footer-links,
+.footer-contact{
+
+padding:28px;
+
+}
+
+.logo{
+
+width:90px;
+
+}
+
+.top-btn{
+
+right:20px;
+
+bottom:20px;
+
+width:52px;
+
+height:52px;
+
+}
+
+}
+
+@media(max-width:480px){
+
+.footer{
+
+padding-top:70px;
+
+}
+
+.footer-container{
+
+width:95%;
+
+}
+
+.footer-about h2{
+
+font-size:28px;
+
+}
+
+.footer-links h3,
+.footer-contact h3{
+
+font-size:22px;
+
+}
+
+.contact-item{
+
+gap:12px;
+
+}
+
+.social-icons{
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+}
+
+}
