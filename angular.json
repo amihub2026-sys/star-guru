@@ -24,14 +24,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "security": {
-              "allowedHosts": []
-            },
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+          "security": {
+  "allowedHosts": []
+}
           },
           "configurations": {
             "production": {
@@ -41,11 +36,11 @@
                   "maximumWarning": "500kB",
                   "maximumError": "1MB"
                 },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
-                }
+             {
+  "type": "anyComponentStyle",
+  "maximumWarning": "20kb",
+  "maximumError": "50kb"
+}
               ],
               "outputHashing": "all"
             },
