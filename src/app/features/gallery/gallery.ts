@@ -8,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class Gallery {
 
+
+  // Book open / close state
+  bookOpen = false;
+
+
 }
