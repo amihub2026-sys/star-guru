@@ -88,10 +88,175 @@
 /*=================================
         LATEST NEWS
 ==================================*/
+/* =================================
+      LATEST NEWS HEADING STYLE
+================================= */
 
+.latest-news .section-heading{
+
+    max-width:1000px;
+
+    margin:0 auto 80px;
+
+    text-align:center;
+
+}
+
+
+/* TOP LABEL */
+
+.latest-news .section-tag{
+
+
+    display:inline-block;
+
+
+    padding:8px 35px;
+
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #fff1b8,
+        #d4af37
+    );
+
+
+    border-radius:40px;
+
+
+    color:#5a3500;
+
+
+    font-family:Georgia,serif;
+
+
+    font-size:14px;
+
+
+    font-weight:700;
+
+
+    letter-spacing:3px;
+
+
+    text-transform:uppercase;
+
+
+    box-shadow:
+
+    0 8px 25px rgba(212,175,55,.25);
+
+
+}
+
+
+
+/* MAIN HEADING */
+
+.latest-news .section-heading h2{
+
+
+    margin-top:28px;
+
+  display: block;
+    font-family:
+
+    Georgia,
+    "Times New Roman",
+    serif;
+
+
+    font-size:36px;
+
+
+    line-height:1.2;
+
+
+    font-weight:700;
+
+
+    color:#111;
+
+
+}
+/* GOLD PART */
+
+
+.latest-news .section-heading h2 span{
+
+
+    margin-top:8px;
+
+
+    color:#c89b2b;
+
+
+    font-size:42px;
+
+    line-height:1.2;
+
+
+}
+
+/* DESCRIPTION */
+
+
+.latest-news .section-heading p{
+
+
+    max-width:900px;
+
+
+    margin:35px auto 0;
+
+
+    font-family:Georgia,serif;
+
+
+    font-size:18px;
+
+
+    line-height:1.9;
+
+
+    color:#5b4630;
+
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+
+.latest-news .section-heading h2{
+
+    font-size:34px;
+
+}
+
+
+.latest-news .section-heading h2 span{
+
+    font-size:38px;
+
+}
+
+
+.latest-news .section-heading p{
+
+    font-size:15px;
+
+}
+
+
+}
 .latest-news{
 
-    padding:120px 8%;
+    padding:60px 8%;
 
     background:#f8fafc;
 }
@@ -250,10 +415,118 @@
 /*=================================
       UPCOMING EVENTS
 ==================================*/
+/* =================================
+      UPCOMING EVENTS HEADING
+================================= */
 
+.upcoming-events .section-heading{
+
+    max-width:1000px;
+
+    margin:0 auto 80px;
+
+    text-align:center;
+
+}
+
+
+/* TOP TAG */
+
+.upcoming-events .section-tag{
+
+    display:inline-block;
+
+    padding:8px 35px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #fff1b8,
+        #d4af37
+    );
+
+
+    border-radius:40px;
+
+
+    color:#5a3500;
+
+
+    font-family:Georgia,serif;
+
+
+    font-size:14px;
+
+
+    font-weight:700;
+
+
+    letter-spacing:3px;
+
+
+    text-transform:uppercase;
+
+
+    box-shadow:
+    0 8px 25px rgba(212,175,55,.25);
+
+}
+
+
+
+/* MAIN TITLE */
+
+.upcoming-events .section-heading h2{
+
+
+    margin-top:28px;
+
+
+    font-family:Georgia,
+    "Times New Roman",
+    serif;
+
+
+    font-size:46px;
+
+
+    line-height:1;
+
+
+    color:#111;
+
+
+    font-weight:700;
+
+
+}
+
+/* DESCRIPTION */
+
+.upcoming-events .section-heading p{
+
+
+    max-width:900px;
+
+
+    margin:35px auto 0;
+
+
+    font-family:Georgia,serif;
+
+
+    font-size:18px;
+
+
+    line-height:1.9;
+
+
+    color:#5b4630;
+
+}
 .upcoming-events{
 
-    padding:120px 8%;
+    padding:60px 8%;
 
     background:#ffffff;
 }
@@ -425,7 +698,7 @@
 
     max-width:1400px;
 
-    margin:120px auto;
+    margin:60px auto;
 
     padding:0 8%;
 
@@ -460,7 +733,47 @@
 
     transform:scale(1.05);
 }
+.section-tag{
+     display:inline-block;
 
+
+    padding:8px 35px;
+
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #fff1b8,
+        #d4af37
+    );
+
+
+    border-radius:40px;
+
+
+    color:#5a3500;
+
+
+    font-family:Georgia,serif;
+
+
+    font-size:14px;
+
+
+    font-weight:700;
+
+
+    letter-spacing:3px;
+
+
+    text-transform:uppercase;
+
+
+    box-shadow:
+
+    0 8px 25px rgba(212,175,55,.25);
+}
 .featured-content h2{
 
     font-size:46px;
@@ -469,7 +782,10 @@
 
     color:#1f2937;
 }
-
+.featured-content p{
+    line-height:1.9;
+    margin-bottom:5px;
+}
 .event-intro{
 
     color:#64748b;
@@ -489,14 +805,14 @@
 
     gap:20px;
 
-    margin-bottom:35px;
+    margin-bottom:25px;
 }
 
 .detail{
 
     background:#f8fafc;
 
-    padding:20px;
+    padding:15px;
 
     border-radius:16px;
 }
@@ -564,10 +880,146 @@
 /*=================================
       PRESS & MEDIA
 ==================================*/
+/* ================================
+        SECTION HEADING PREMIUM
+================================ */
 
+.section-heading{
+
+    max-width:1100px;
+
+    margin:0 auto 80px;
+
+    text-align:center;
+
+}
+
+
+/* TAG */
+
+.section-heading .section-tag{
+
+    display:inline-block;
+
+    padding:9px 38px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #fff1b8,
+        #d4af37
+    );
+
+    border-radius:40px;
+
+    color:#5a3500;
+
+    font-family:Georgia,serif;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+
+    box-shadow:
+    0 8px 25px rgba(212,175,55,.25);
+
+}
+
+
+
+
+
+/* TITLE */
+
+.section-heading h2{
+
+
+    margin-top:35px;
+
+    font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+
+    font-size:48px;
+
+
+    line-height:1;
+
+
+    font-weight:700;
+
+
+    color:#111827;
+
+
+}
+
+/* GOLD TEXT */
+
+.section-heading h2 span{
+
+
+    color:#d4af37;
+
+
+}
+
+/* DESCRIPTION */
+
+.section-heading p{
+
+
+    max-width:950px;
+
+
+    margin:35px auto 0;
+
+
+    font-family:Georgia,serif;
+
+
+    font-size:18px;
+
+
+    line-height:1.5;
+
+
+    color:#64748b;
+
+
+}
+
+
+
+
+
+
+@media(max-width:768px){
+
+
+.section-heading h2{
+
+    font-size:34px;
+
+}
+
+
+.section-heading p{
+
+    font-size:16px;
+
+}
+
+}
 .media-coverage{
 
-    padding:120px 8%;
+    padding:60px 8%;
 
     background:#f8fafc;
 }
