@@ -9,8 +9,56 @@ import { Component } from '@angular/core';
 export class Gallery {
 
 
-  // Book open / close state
+  // Book states
+
   bookOpen = false;
+
+  pageOpen = false;
+
+  contentOpen = false;
+
+
+
+  // Open book animation
+
+  openBook(){
+
+
+    if(this.bookOpen){
+      return;
+    }
+
+
+
+    // Front cover opens
+
+    this.bookOpen = true;
+
+
+
+    // First page reveal
+
+    setTimeout(()=>{
+
+      this.pageOpen = true;
+
+    },1200);
+
+
+
+
+    // Content reveal
+
+    setTimeout(()=>{
+
+      this.contentOpen = true;
+
+    },2200);
+
+
+
+  }
+
 
 
 }

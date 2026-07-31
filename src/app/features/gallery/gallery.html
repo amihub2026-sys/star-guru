@@ -1,61 +1,234 @@
 <section class="book-scene">
 
 
-<div class="book">
+<div 
+class="book-container"
+
+(click)="openBook()"
+
+[class.book-open]="bookOpen"
+
+[class.page-open]="pageOpen"
+
+[class.content-open]="contentOpen">
 
 
-    <div class="cover">
 
 
-        <div class="leather">
+
+    <!-- MAIN BOOK -->
+
+    <div class="book">
 
 
-            <img src="/images/logo.png" class="logo">
 
 
-            <h1>
-                STAR GURU<br>
-                CHARITABLE<br>
-                FOUNDATION
-            </h1>
+
+        <!-- BACK PAGES -->
+
+        <div class="pages"></div>
 
 
-            <div class="line"></div>
 
 
-            <h2>
-                Dr. T. Gurusamy
-            </h2>
 
 
-            <h3>
-                FOUNDER
-            </h3>
+
+        <!-- OPEN BOOK CONTENT -->
 
 
-            <p>
-                Serving Humanity With Compassion
-            </p>
+        <div class="open-book">
+
+
+
+
+
+            <!-- LEFT PAGE -->
+
+            <div class="left-page page-1">
+
+
+                <img 
+                src="/images/edu1.jpeg">
+
+
+            </div>
+
+
+
+
+
+
+
+            <!-- CENTER FOLD -->
+
+
+            <div class="book-center"></div>
+
+
+
+
+
+
+
+            <!-- RIGHT PAGE -->
+
+
+            <div class="right-page page-2">
+
+
+                <h2>
+                    Star Guru Foundation
+                </h2>
+
+
+
+                <p>
+                    Serving humanity with compassion.
+                    Our foundation supports food
+                    distribution, charity activities,
+                    and community welfare programs.
+                </p>
+
+
+
+                <p>
+                    Every initiative is dedicated
+                    towards creating a better
+                    society with kindness and care.
+                </p>
+
+
+
+                <p>
+                    Foundation supports food
+                    distribution, charity activities,
+                    and community welfare programs.
+                </p>
+
+
+
+            </div>
+
+
+
+
 
 
         </div>
+
+
+
+
+
+
+
+        <!-- FRONT COVER -->
+
+
+
+        <div class="cover">
+
+
+
+            <div class="cover-inner">
+
+
+
+                <div class="leather">
+
+
+
+                    <h1>
+                        STAR GURU<br>
+                        CHARITABLE<br>
+                        FOUNDATION
+                    </h1>
+
+
+
+
+
+                    <img 
+                    src="/images/logo.png"
+                    class="logo">
+
+
+
+
+
+                    <div class="line"></div>
+
+
+
+
+
+
+                    <h2>
+                        Dr. T. Gurusamy
+                    </h2>
+
+
+
+
+
+
+                    <h3 class="founder">
+                        FOUNDER
+                    </h3>
+
+
+
+
+
+
+                    <p class="tagline">
+                        Serving Humanity With Compassion
+                    </p>
+
+
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+        <!-- BOOK SPINE -->
+
+
+        <div class="spine"></div>
+
+
+
+
 
 
     </div>
 
 
 
-    <div class="spine"></div>
 
-
-    <div class="pages"></div>
 
 
 </div>
 
 
-</section>
 
+
+
+</section>
 <!--=================================
         GALLERY CATEGORIES
 ==================================-->
