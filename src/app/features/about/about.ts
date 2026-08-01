@@ -2,65 +2,241 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  HostListener,
+  OnDestroy,
   ViewChild
 } from '@angular/core';
 
 @Component({
   selector: 'app-about',
+  standalone: true,
   imports: [],
   templateUrl: './about.html',
-  styleUrls: ['./about.css']
+  styleUrl: './about.css'
 })
-export class About implements AfterViewInit {
+export class About implements AfterViewInit, OnDestroy {
 
-  @ViewChild('journeySection')
-  journeySection!: ElementRef<HTMLElement>;
+  /* =========================
+     IMPACT SECTION
+  ========================= */
 
-  journeyProgress = 0;
+  @ViewChild('impactSection')
+  impactSection?: ElementRef<HTMLElement>;
+
+  private impactObserver?: IntersectionObserver;
+  private counterStarted = false;
+
+
+  /* =========================
+     FOUNDER MESSAGE SECTION
+  ========================= */
+
+  @ViewChild('founderMessageSection')
+  founderMessageSection?: ElementRef<HTMLElement>;
+
+  private founderMessageObserver?: IntersectionObserver;
+  private founderMessageTimer?: number;
+
+
+  /* =========================
+     COMPONENT LIFECYCLE
+  ========================= */
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.updateJourneyProgress();
-    }, 0);
+
+    /*
+     * setTimeout ensures Angular has completed
+     * rendering all ViewChild elements.
+     */
+    window.setTimeout(() => {
+
+      this.initializeImpactCounter();
+      this.initializeFounderMessageAnimation();
+
+    }, 100);
+
   }
 
-  @HostListener('window:scroll')
-  onWindowScroll(): void {
-    this.updateJourneyProgress();
-  }
 
-  private updateJourneyProgress(): void {
+  /* =========================
+     IMPACT COUNTER
+  ========================= */
 
-    if (!this.journeySection) {
+  private initializeImpactCounter(): void {
+
+    const section = this.impactSection?.nativeElement;
+
+    if (!section) {
+      console.warn('Impact section not found');
       return;
     }
 
-    const rect =
-      this.journeySection.nativeElement.getBoundingClientRect();
+    this.impactObserver = new IntersectionObserver(
+      (entries: IntersectionObserverEntry[]) => {
 
-    const viewportHeight =
-      window.innerHeight;
+        entries.forEach((entry: IntersectionObserverEntry) => {
 
-    const startPoint =
-      viewportHeight * 0.85;
+          if (
+            !entry.isIntersecting ||
+            this.counterStarted
+          ) {
+            return;
+          }
 
-    const endPoint =
-      viewportHeight * 0.25;
+          this.counterStarted = true;
 
-    const totalDistance =
-      startPoint - endPoint;
+          this.startCounters(section);
 
-    const movedDistance =
-      startPoint - rect.top;
+          this.impactObserver?.unobserve(section);
 
-    const progress =
-      movedDistance / totalDistance;
+        });
 
-    this.journeyProgress =
-      Math.max(
-        0,
-        Math.min(100, progress * 100)
-      );
+      },
+      {
+        threshold: 0.2,
+        rootMargin: '0px 0px -60px 0px'
+      }
+    );
+
+    this.impactObserver.observe(section);
+
   }
+
+
+  private startCounters(section: HTMLElement): void {
+
+    const counters =
+      section.querySelectorAll<HTMLElement>('.counter');
+
+    counters.forEach((counter: HTMLElement) => {
+
+      const targetValue =
+        Number(counter.getAttribute('data-target') ?? 0);
+
+      if (
+        Number.isNaN(targetValue) ||
+        targetValue < 0
+      ) {
+        counter.textContent = '0';
+        return;
+      }
+
+      const duration = 2000;
+      const startTime = performance.now();
+
+      counter.textContent = '0';
+
+      const updateCounter = (currentTime: number): void => {
+
+        const elapsedTime = currentTime - startTime;
+
+        const progress = Math.min(
+          elapsedTime / duration,
+          1
+        );
+
+        /*
+         * Ease-out animation gives a smoother
+         * professional counter effect.
+         */
+        const easedProgress =
+          1 - Math.pow(1 - progress, 3);
+
+        const currentValue = Math.floor(
+          targetValue * easedProgress
+        );
+
+        counter.textContent =
+          currentValue.toLocaleString('en-IN');
+
+        if (progress < 1) {
+
+          window.requestAnimationFrame(updateCounter);
+
+          return;
+        }
+
+        counter.textContent =
+          targetValue.toLocaleString('en-IN');
+
+      };
+
+      window.requestAnimationFrame(updateCounter);
+
+    });
+
+  }
+
+
+  /* =========================
+     FOUNDER MESSAGE ANIMATION
+  ========================= */
+
+  private initializeFounderMessageAnimation(): void {
+
+    const section =
+      this.founderMessageSection?.nativeElement;
+
+    if (!section) {
+      console.warn('Founder message section not found');
+      return;
+    }
+
+    this.founderMessageObserver =
+      new IntersectionObserver(
+        (entries: IntersectionObserverEntry[]) => {
+
+          const entry = entries[0];
+
+          if (!entry?.isIntersecting) {
+            return;
+          }
+
+          this.founderMessageObserver?.unobserve(section);
+
+          /*
+           * Small delay after entering viewport.
+           */
+          this.founderMessageTimer =
+            window.setTimeout(() => {
+
+              /*
+               * This must match the CSS:
+               *
+               * .founder-message-section.message-visible
+               */
+              section.classList.add('message-visible');
+
+            }, 250);
+
+        },
+        {
+          threshold: 0.15,
+          rootMargin: '0px 0px -60px 0px'
+        }
+      );
+
+    this.founderMessageObserver.observe(section);
+
+  }
+
+
+  /* =========================
+     CLEANUP
+  ========================= */
+
+  ngOnDestroy(): void {
+
+    this.impactObserver?.disconnect();
+    this.founderMessageObserver?.disconnect();
+
+    if (this.founderMessageTimer !== undefined) {
+
+      window.clearTimeout(
+        this.founderMessageTimer
+      );
+
+    }
+
+  }
+
 }

@@ -106,21 +106,34 @@
 
 <!-- founder section -->
 
-<section class="founder-section">
+<section
+    #founderSection
+    class="founder-section"
+>
 
     <div class="founder-container">
 
-        <div class="founder-image">
-            <img src="./images/gurusamy.jpeg" alt="Dr. T. Gurusamy">
+        <div class="founder-image founder-animate-left">
+
+            <img
+                src="./images/gurusamy.jpeg"
+                alt="Dr. T. Gurusamy"
+            >
+
         </div>
 
-        <div class="founder-content">
+        <div class="founder-content founder-animate-right">
 
-            <span class="section-tag">OUR FOUNDER</span>
+            <span class="section-tag">
+                OUR FOUNDER
+            </span>
 
             <h2>Dr. T. Gurusamy</h2>
 
-            <h4>Founder & Chairman, Star Guru Charitable Foundation</h4>
+            <h4>
+                Founder & Chairman,
+                Star Guru Charitable Foundation
+            </h4>
 
             <p>
                 Dr. T. Gurusamy founded Star Guru Charitable Foundation with a
@@ -136,7 +149,10 @@
                 positive social impact across Tamil Nadu.
             </p>
 
-            <button class="read-btn" routerLink="/about">
+            <button
+                class="read-btn"
+                routerLink="/about"
+            >
                 Read More →
             </button>
 
@@ -148,91 +164,554 @@
 
 <!-- service card section -->
 
-<section class="services">
+<section #servicesSection class="services dark-services">
+
+    <div class="services-glow services-glow-one"></div>
+    <div class="services-glow services-glow-two"></div>
 
     <div class="section-title">
+
         <span>OUR SERVICES</span>
-        <h2>Changing Lives Through Service</h2>
-        <p>Serving humanity through compassion, care and dedication.</p>
+
+        <h2>
+            Changing Lives Through
+            <strong>Meaningful Service</strong>
+        </h2>
+
+        <p>
+            Serving humanity through compassion, care and dedication.
+            Explore the initiatives through which we create lasting impact.
+        </p>
+
     </div>
 
     <div class="service-grid">
 
-        <div class="service-card">
-            <img src="./images/gh1.jpg" alt="Food Distribution">
+        <!-- FOOD DISTRIBUTION -->
 
-            <div class="service-content">
-                <span class="icon">🍛</span>
-                <h3>Daily Food Distribution at GH</h3>
-                <p>Providing nutritious meals every day to people in need.</p>
-                <a routerLink="/services">Learn More →</a>
+        <div
+            #serviceCard
+            class="flip-card service-reveal"
+            [class.is-flipped]="flippedCard === 0"
+            (click)="toggleServiceCard(0)"
+            (mousemove)="handleCardMove($event)"
+            (mouseleave)="resetCardTilt($event)"
+        >
+
+            <div class="flip-card-inner">
+
+                <!-- Front -->
+
+                <div class="flip-card-face flip-card-front">
+
+                    <img
+                        src="./images/gh1.jpg"
+                        alt="Daily Food Distribution at Madurai GH"
+                    >
+
+                    <div class="front-shade"></div>
+
+                    <div class="service-number">01</div>
+
+                    <div class="front-content">
+
+                        <span class="service-category">
+                            Food Service
+                        </span>
+
+                        <h3>
+                            Daily Food Distribution at GH
+                        </h3>
+
+                        <!-- <p>
+                            Serving fresh and nutritious meals every day.
+                        </p> -->
+
+                        <div class="flip-hint">
+                            <span>View our impact</span>
+                            <span class="flip-arrow">↗</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Back -->
+
+                <div class="flip-card-face flip-card-back">
+
+                    <div class="back-icon">01</div>
+
+                    <span class="back-tag">
+                        DAILY MEAL SERVICE
+                    </span>
+
+                    <h3>
+                        Feeding 1,000+ People Every Day
+                    </h3>
+
+                    <p>
+                        We provide freshly prepared and nutritious meals
+                        every day to patients, attendants and people in need
+                        at Madurai Government Rajaji Hospital.
+                    </p>
+
+                    <ul>
+                        <li>1,000+ people served daily</li>
+                        <li>Fresh and nutritious meals</li>
+                        <li>Continuous service with dignity</li>
+                    </ul>
+
+                    <button
+                        type="button"
+                        class="service-btn"
+                        (click)="goToServices($event)"
+                    >
+                        Learn More
+                        <span>→</span>
+                    </button>
+
+                </div>
+
             </div>
+
         </div>
 
-        <div class="service-card">
-            <img src="./images/edu1.jpeg" alt="Education">
 
-            <div class="service-content">
-                <span class="icon">📚</span>
-                <h3>Education Support</h3>
-                <p>Helping students achieve their dreams through education.</p>
-                <a routerLink="/services">Learn More →</a>
+        <!-- EDUCATION -->
+
+        <div
+            #serviceCard
+            class="flip-card service-reveal"
+            [class.is-flipped]="flippedCard === 1"
+            (click)="toggleServiceCard(1)"
+            (mousemove)="handleCardMove($event)"
+            (mouseleave)="resetCardTilt($event)"
+        >
+
+            <div class="flip-card-inner">
+
+                <div class="flip-card-face flip-card-front">
+
+                    <img
+                        src="./images/edu1.jpeg"
+                        alt="Education Support"
+                    >
+
+                    <div class="front-shade"></div>
+
+                    <div class="service-number">02</div>
+
+                    <div class="front-content">
+
+                        <span class="service-category">
+                            Education
+                        </span>
+
+                        <h3>Education Support</h3>
+
+                        <!-- <p>
+                            Helping students move towards a brighter future.
+                        </p> -->
+
+                        <div class="flip-hint">
+                            <span>Discover more</span>
+                            <span class="flip-arrow">↗</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="flip-card-face flip-card-back">
+
+                    <div class="back-icon">02</div>
+
+                    <span class="back-tag">
+                        STUDENT EMPOWERMENT
+                    </span>
+
+                    <h3>
+                        Supporting Dreams Through Education
+                    </h3>
+
+                    <p>
+                        We support deserving students with learning materials,
+                        educational guidance and opportunities that help them
+                        continue their studies confidently.
+                    </p>
+
+                    <ul>
+                        <li>Learning material support</li>
+                        <li>Student encouragement programs</li>
+                        <li>Equal access to education</li>
+                    </ul>
+
+                    <button
+                        type="button"
+                        class="service-btn"
+                        (click)="goToServices($event)"
+                    >
+                        Learn More
+                        <span>→</span>
+                    </button>
+
+                </div>
+
             </div>
+
         </div>
 
-        <div class="service-card">
-            <img src="./images/pc1.jpg" alt="Medical">
 
-            <div class="service-content">
-                <span class="icon">🏥</span>
-                <h3>Physically Challenged</h3>
-                <p>Providing healthcare support and free medical camps.</p>
-                <a routerLink="/services">Learn More →</a>
+        <!-- PHYSICALLY CHALLENGED -->
+
+        <div
+            #serviceCard
+            class="flip-card service-reveal"
+            [class.is-flipped]="flippedCard === 2"
+            (click)="toggleServiceCard(2)"
+            (mousemove)="handleCardMove($event)"
+            (mouseleave)="resetCardTilt($event)"
+        >
+
+            <div class="flip-card-inner">
+
+                <div class="flip-card-face flip-card-front">
+
+                    <img
+                        src="./images/pc1.jpg"
+                        alt="Support for Physically Challenged People"
+                    >
+
+                    <div class="front-shade"></div>
+
+                    <div class="service-number">03</div>
+
+                    <div class="front-content">
+
+                        <span class="service-category">
+                            Special Assistance
+                        </span>
+
+                        <h3>Physically Challenged Support</h3>
+
+                        <!-- <p>
+                            Building confidence through care and assistance.
+                        </p> -->
+
+                        <div class="flip-hint">
+                            <span>View our support</span>
+                            <span class="flip-arrow">↗</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="flip-card-face flip-card-back">
+
+                    <div class="back-icon">03</div>
+
+                    <span class="back-tag">
+                        CARE & INCLUSION
+                    </span>
+
+                    <h3>
+                        Creating an Inclusive Community
+                    </h3>
+
+                    <p>
+                        We support physically challenged individuals through
+                        essential assistance, healthcare support and programs
+                        that encourage independence and dignity.
+                    </p>
+
+                    <ul>
+                        <li>Essential mobility assistance</li>
+                        <li>Healthcare and welfare support</li>
+                        <li>Inclusive community programs</li>
+                    </ul>
+
+                    <button
+                        type="button"
+                        class="service-btn"
+                        (click)="goToServices($event)"
+                    >
+                        Learn More
+                        <span>→</span>
+                    </button>
+
+                </div>
+
             </div>
+
         </div>
-        <div class="service-card">
-            <img src="./images/vaigai1.jpeg" alt="Environment">
 
-            <div class="service-content">
-                <span class="icon">🌱</span>
-                <h3>Vaigai River Cleaning</h3>
-                <p>Cleaning rivers, planting trees and protecting nature.</p>
-                <a routerLink="/services">Learn More →</a>
+
+        <!-- VAIGAI CLEANING -->
+
+        <div
+            #serviceCard
+            class="flip-card service-reveal"
+            [class.is-flipped]="flippedCard === 3"
+            (click)="toggleServiceCard(3)"
+            (mousemove)="handleCardMove($event)"
+            (mouseleave)="resetCardTilt($event)"
+        >
+
+            <div class="flip-card-inner">
+
+                <div class="flip-card-face flip-card-front">
+
+                    <img
+                        src="./images/vaigai1.jpeg"
+                        alt="Vaigai River Cleaning"
+                    >
+
+                    <div class="front-shade"></div>
+
+                    <div class="service-number">04</div>
+
+                    <div class="front-content">
+
+                        <span class="service-category">
+                            Environment
+                        </span>
+
+                        <h3>Vaigai River Cleaning</h3>
+
+                        <!-- <p>
+                            Protecting Madurai’s lifeline for future generations.
+                        </p> -->
+
+                        <div class="flip-hint">
+                            <span>Explore the mission</span>
+                            <span class="flip-arrow">↗</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="flip-card-face flip-card-back">
+
+                    <div class="back-icon">04</div>
+
+                    <span class="back-tag">
+                        CLEAN VAIGAI MISSION
+                    </span>
+
+                    <h3>
+                        Restoring the Beauty of Vaigai
+                    </h3>
+
+                    <p>
+                        Our volunteers participate in river clean-up drives,
+                        environmental awareness campaigns and conservation
+                        activities to protect the Vaigai River.
+                    </p>
+
+                    <ul>
+                        <li>Riverbank clean-up drives</li>
+                        <li>Environmental awareness</li>
+                        <li>Community volunteer participation</li>
+                    </ul>
+
+                    <button
+                        type="button"
+                        class="service-btn"
+                        (click)="goToServices($event)"
+                    >
+                        Learn More
+                        <span>→</span>
+                    </button>
+
+                </div>
+
             </div>
+
         </div>
 
-        <div class="service-card">
-            <img src="./images/sports1.jpg" alt="Sports">
 
-            <div class="service-content">
-                <span class="icon">🏆</span>
-                <h3>Sports Development</h3>
-                <p>Encouraging youth through sports and leadership programs.</p>
-                <a routerLink="/services">Learn More →</a>
+        <!-- SPORTS -->
+
+        <div
+            #serviceCard
+            class="flip-card service-reveal"
+            [class.is-flipped]="flippedCard === 4"
+            (click)="toggleServiceCard(4)"
+            (mousemove)="handleCardMove($event)"
+            (mouseleave)="resetCardTilt($event)"
+        >
+
+            <div class="flip-card-inner">
+
+                <div class="flip-card-face flip-card-front">
+
+                    <img
+                        src="./images/sports1.jpg"
+                        alt="Sports Development"
+                    >
+
+                    <div class="front-shade"></div>
+
+                    <div class="service-number">05</div>
+
+                    <div class="front-content">
+
+                        <span class="service-category">
+                            Youth Development
+                        </span>
+
+                        <h3>Sports Development</h3>
+
+                        <!-- <p>
+                            Inspiring discipline, teamwork and leadership.
+                        </p> -->
+
+                        <div class="flip-hint">
+                            <span>View activities</span>
+                            <span class="flip-arrow">↗</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="flip-card-face flip-card-back">
+
+                    <div class="back-icon">05</div>
+
+                    <span class="back-tag">
+                        EMPOWERING YOUTH
+                    </span>
+
+                    <h3>
+                        Building Future Champions
+                    </h3>
+
+                    <p>
+                        We encourage young people through sports events,
+                        tournaments and leadership activities that develop
+                        confidence, discipline and teamwork.
+                    </p>
+
+                    <ul>
+                        <li>Community sports events</li>
+                        <li>Youth leadership activities</li>
+                        <li>Talent encouragement</li>
+                    </ul>
+
+                    <button
+                        type="button"
+                        class="service-btn"
+                        (click)="goToServices($event)"
+                    >
+                        Learn More
+                        <span>→</span>
+                    </button>
+
+                </div>
+
             </div>
+
         </div>
 
-        <div class="service-card">
-            <img src="./images/we1.jpeg" alt="Women">
 
-            <div class="service-content">
-                <span class="icon">❤️</span>
-                <h3>Women Empowerment</h3>
-                <p>Supporting women through education and skill development.</p>
-                <a routerLink="/services">Learn More →</a>
+        <!-- WOMEN EMPOWERMENT -->
+
+        <div
+            #serviceCard
+            class="flip-card service-reveal"
+            [class.is-flipped]="flippedCard === 5"
+            (click)="toggleServiceCard(5)"
+            (mousemove)="handleCardMove($event)"
+            (mouseleave)="resetCardTilt($event)"
+        >
+
+            <div class="flip-card-inner">
+
+                <div class="flip-card-face flip-card-front">
+
+                    <img
+                        src="./images/we1.jpeg"
+                        alt="Women Empowerment"
+                    >
+
+                    <div class="front-shade"></div>
+
+                    <div class="service-number">06</div>
+
+                    <div class="front-content">
+
+                        <span class="service-category">
+                            Empowerment
+                        </span>
+
+                        <h3>Women Empowerment</h3>
+<!-- 
+                        <p>
+                            Supporting women with skills and opportunities.
+                        </p> -->
+
+                        <div class="flip-hint">
+                            <span>Discover programs</span>
+                            <span class="flip-arrow">↗</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="flip-card-face flip-card-back">
+
+                    <div class="back-icon">06</div>
+
+                    <span class="back-tag">
+                        STRENGTH & INDEPENDENCE
+                    </span>
+
+                    <h3>
+                        Empowering Women to Move Forward
+                    </h3>
+
+                    <p>
+                        We support women through education, skill development,
+                        awareness programs and opportunities that promote
+                        confidence and financial independence.
+                    </p>
+
+                    <ul>
+                        <li>Skill development programs</li>
+                        <li>Educational awareness</li>
+                        <li>Self-reliance initiatives</li>
+                    </ul>
+
+                    <button
+                        type="button"
+                        class="service-btn"
+                        (click)="goToServices($event)"
+                    >
+                        Learn More
+                        <span>→</span>
+                    </button>
+
+                </div>
+
             </div>
+
         </div>
 
     </div>
 
 </section>
-
 <!--===========================
       OUR PROMISE
 ============================-->
-<section class="promise-section">
-
-    <!-- HEADING OUTSIDE THE GRID -->
+<section
+    #promiseSection
+    class="promise-section"
+>
 
     <div class="section-heading">
 
@@ -252,30 +731,24 @@
     </div>
 
 
-    <!-- TWO COLUMN GRID -->
-
     <div class="promise-layout">
-
-        <!-- LEFT SIDE IMAGES -->
 
         <div class="promise-images">
 
-            <div class="promise-image image-large">
+            <div class="promise-image image-large image-reveal image-reveal-large">
                 <img src="/images/food1.JPG" alt="Food Distribution">
             </div>
 
-            <div class="promise-image">
+            <div class="promise-image image-reveal image-reveal-left">
                 <img src="/images/general1.jpeg" alt="Community Service">
             </div>
 
-            <div class="promise-image">
+            <div class="promise-image image-reveal image-reveal-right">
                 <img src="/images/edu1.jpeg" alt="Education Support">
             </div>
 
         </div>
 
-
-        <!-- RIGHT SIDE BUBBLES -->
 
         <div class="bubble-container">
 
@@ -349,93 +822,257 @@
 </section>
 
 <!-- gallery section -->
-<section class="gallery">
+<section
+    #gallerySection
+    class="gallery"
+>
 
     <div class="section-heading">
 
         <span>OUR GALLERY</span>
 
-        <h2>Moments That Inspire</h2>
+        <h2>Moments Along the Vaigai</h2>
 
         <p>
-            Every picture tells a story of compassion, hope and service.
+            Explore the beauty, heritage, and vibrant life of
+            the Vaigai River through our collection of memorable moments.
         </p>
 
     </div>
 
+
     <div class="gallery-grid">
 
-        <div class="gallery-item">
-            <img src="./images/vaigai2.jpeg">
+        <div
+            #galleryItem
+            class="gallery-item gallery-reveal"
+            (mousemove)="galleryCardMove($event)"
+            (mouseleave)="galleryCardLeave($event)"
+            (click)="openGalleryImage('./images/vaigai2.jpeg')"
+        >
+
+            <img
+                src="./images/vaigai2.jpeg"
+                alt="Vaigai River"
+            >
+
+            <div class="gallery-curtain"></div>
 
             <div class="overlay">
-                <button>View Image</button>
+                <button type="button">
+                    View Image
+                </button>
             </div>
+
         </div>
 
-        <div class="gallery-item">
-            <img src="./images/gh2.jpg">
+
+        <div
+            #galleryItem
+            class="gallery-item gallery-reveal"
+            (mousemove)="galleryCardMove($event)"
+            (mouseleave)="galleryCardLeave($event)"
+            (click)="openGalleryImage('./images/vaigai6.jpg')"
+        >
+
+            <img
+                src="./images/vaigai6.jpg"
+                alt="Vaigai River Cleaning"
+            >
+
+            <div class="gallery-curtain"></div>
 
             <div class="overlay">
-                <button>View Image</button>
+                <button type="button">
+                    View Image
+                </button>
             </div>
+
         </div>
 
-        <div class="gallery-item">
-            <img src="./images/vaigai4.jpeg">
+
+        <div
+            #galleryItem
+            class="gallery-item gallery-reveal"
+            (mousemove)="galleryCardMove($event)"
+            (mouseleave)="galleryCardLeave($event)"
+            (click)="openGalleryImage('./images/vaigai4.jpeg')"
+        >
+
+            <img
+                src="./images/vaigai4.jpeg"
+                alt="Vaigai River Service"
+            >
+
+            <div class="gallery-curtain"></div>
 
             <div class="overlay">
-                <button>View Image</button>
+                <button type="button">
+                    View Image
+                </button>
             </div>
+
         </div>
 
-        <div class="gallery-item">
-            <img src="./images/vaigai3.jpeg">
+
+        <div
+            #galleryItem
+            class="gallery-item gallery-reveal"
+            (mousemove)="galleryCardMove($event)"
+            (mouseleave)="galleryCardLeave($event)"
+            (click)="openGalleryImage('./images/vaigai3.jpeg')"
+        >
+
+            <img
+                src="./images/vaigai3.jpeg"
+                alt="Vaigai River Volunteers"
+            >
+
+            <div class="gallery-curtain"></div>
 
             <div class="overlay">
-                <button>View Image</button>
+                <button type="button">
+                    View Image
+                </button>
             </div>
+
         </div>
 
-        <div class="gallery-item">
-            <img src="./images/edu2.jpg">
+
+        <div
+            #galleryItem
+            class="gallery-item gallery-reveal"
+            (mousemove)="galleryCardMove($event)"
+            (mouseleave)="galleryCardLeave($event)"
+            (click)="openGalleryImage('./images/vaigai7.jpeg')"
+        >
+
+            <img
+                src="./images/vaigai7.jpeg"
+                alt="Vaigai River Community"
+            >
+
+            <div class="gallery-curtain"></div>
 
             <div class="overlay">
-                <button>View Image</button>
+                <button type="button">
+                    View Image
+                </button>
             </div>
+
         </div>
 
-        <div class="gallery-item">
-            <img src="./images/edu3.jpg">
+
+        <div
+            #galleryItem
+            class="gallery-item gallery-reveal"
+            (mousemove)="galleryCardMove($event)"
+            (mouseleave)="galleryCardLeave($event)"
+            (click)="openGalleryImage('./images/vaigai11.jpg')"
+        >
+
+            <img
+                src="./images/vaigai11.jpg"
+                alt="Vaigai River Initiative"
+            >
+
+            <div class="gallery-curtain"></div>
 
             <div class="overlay">
-                <button>View Image</button>
+                <button type="button">
+                    View Image
+                </button>
             </div>
+
         </div>
 
-        <div class="gallery-item">
-            <img src="./images/food1.JPG">
+
+        <div
+            #galleryItem
+            class="gallery-item gallery-reveal"
+            (mousemove)="galleryCardMove($event)"
+            (mouseleave)="galleryCardLeave($event)"
+            (click)="openGalleryImage('./images/vaigai12.jpeg')"
+        >
+
+            <img
+                src="./images/vaigai12.jpeg"
+                alt="Vaigai River Moment"
+            >
+
+            <div class="gallery-curtain"></div>
 
             <div class="overlay">
-                <button>View Image</button>
+                <button type="button">
+                    View Image
+                </button>
             </div>
+
         </div>
 
-        <div class="gallery-item">
-            <img src="./images/gh3.jpeg">
+
+        <div
+            #galleryItem
+            class="gallery-item gallery-reveal"
+            (mousemove)="galleryCardMove($event)"
+            (mouseleave)="galleryCardLeave($event)"
+            (click)="openGalleryImage('./images/vaigai5.jpg')"
+        >
+
+            <img
+                src="./images/vaigai5.jpg"
+                alt="Vaigai River Protection"
+            >
+
+            <div class="gallery-curtain"></div>
 
             <div class="overlay">
-                <button>View Image</button>
+                <button type="button">
+                    View Image
+                </button>
             </div>
+
         </div>
 
     </div>
 
 </section>
 
-<!-- news section -->
 
-<section class="news">
+<!-- FULLSCREEN IMAGE VIEWER -->
+
+<div
+    class="gallery-lightbox"
+    [class.lightbox-open]="selectedGalleryImage"
+    (click)="closeGalleryImage()"
+>
+
+    <button
+        type="button"
+        class="lightbox-close"
+        aria-label="Close image"
+        (click)="closeGalleryImage()"
+    >
+        ×
+    </button>
+
+    @if (selectedGalleryImage) {
+
+        <img
+            [src]="selectedGalleryImage"
+            alt="Vaigai gallery preview"
+            (click)="$event.stopPropagation()"
+        >
+
+    }
+
+</div>
+
+<!-- news section -->
+<section
+    #newsSection
+    class="news"
+>
 
     <div class="section-heading">
 
@@ -450,148 +1087,178 @@
 
     </div>
 
-    <div class="news-grid">
 
-        <!-- Card 1 -->
+    <div class="news-slider-wrapper">
 
-        <div class="news-card">
+        <!-- Left Arrow -->
 
-            <div class="news-image">
+        <button
+            type="button"
+            class="news-arrow news-arrow-left"
+            aria-label="Previous news"
+            (click)="scrollNews('left')"
+        >
+            ‹
+        </button>
 
-                <img src="./images/news1.jpeg">
 
-                <div class="news-date">
-                    <h3>15</h3>
-                    <span>JUL</span>
+        <!-- Horizontal Scroll Area -->
+
+        <div
+            #newsSlider
+            class="news-grid"
+        >
+
+            <!-- Card 1 -->
+
+            <div
+                #newsCard
+                class="news-card news-reveal"
+            >
+
+                <div class="news-image">
+
+                    <img
+                        src="./images/news1.jpeg"
+                        alt="Daily food distribution"
+                    >
+
+                    <div class="news-date">
+                        <h3>15</h3>
+                        <span>JUL</span>
+                    </div>
+
+                </div>
+
+                <div class="news-content">
+
+                    <span class="category">
+                        Food Distribution
+                    </span>
+
+                    <h3>
+                        Daily Meal Service Continues to Feed Thousands
+                    </h3>
+
+                    <p>
+                        Our volunteers continue serving nutritious meals every day,
+                        bringing hope and happiness to people across Madurai.
+                    </p>
+
+                    <a routerLink="/news">
+                        Read More →
+                    </a>
+
                 </div>
 
             </div>
 
-            <div class="news-content">
 
-                <span class="category">Food Distribution</span>
+            <!-- Card 2 -->
 
-                <h3>
-                    Daily Meal Service Continues to Feed Thousands
-                </h3>
+            <div
+                #newsCard
+                class="news-card news-reveal"
+            >
 
-                <p>
-                    Our volunteers continue serving nutritious meals every day,
-                    bringing hope and happiness to people across Madurai.
-                </p>
+                <div class="news-image">
 
-                <a routerLink="/news">
-                    Read More →
-                </a>
+                    <img
+                        src="./images/news2.jpeg"
+                        alt="Vaigai river cleaning"
+                    >
+
+                    <div class="news-date">
+                        <h3>08</h3>
+                        <span>JUL</span>
+                    </div>
+
+                </div>
+
+                <div class="news-content">
+
+                    <span class="category">
+                        Environment
+                    </span>
+
+                    <h3>
+                        Vaigai River Cleaning Drive Successfully Completed
+                    </h3>
+
+                    <p>
+                        Hundreds of volunteers joined hands to clean the Vaigai
+                        River and create awareness about environmental protection.
+                    </p>
+
+                    <a routerLink="/news">
+                        Read More →
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Card 3 -->
+
+            <div
+                #newsCard
+                class="news-card news-reveal"
+            >
+
+                <div class="news-image">
+
+                    <img
+                        src="./images/news3.jpeg"
+                        alt="Sports development event"
+                    >
+
+                    <div class="news-date">
+                        <h3>30</h3>
+                        <span>JUN</span>
+                    </div>
+
+                </div>
+
+                <div class="news-content">
+
+                    <span class="category">
+                        Sports
+                    </span>
+
+                    <h3>
+                        Star Premium League Inspires Young Athletes
+                    </h3>
+
+                    <p>
+                        The annual sports event encouraged young talents while
+                        promoting teamwork, discipline and leadership.
+                    </p>
+
+                    <a routerLink="/news">
+                        Read More →
+                    </a>
+
+                </div>
 
             </div>
 
         </div>
 
-        <!-- Card 2 -->
 
-        <div class="news-card">
+        <!-- Right Arrow -->
 
-            <div class="news-image">
-
-                <img src="./images/news2.jpeg">
-
-                <div class="news-date">
-                    <h3>08</h3>
-                    <span>JUL</span>
-                </div>
-
-            </div>
-
-            <div class="news-content">
-
-                <span class="category">Environment</span>
-
-                <h3>
-                    Vaigai River Cleaning Drive Successfully Completed
-                </h3>
-
-                <p>
-                    Hundreds of volunteers joined hands to clean the Vaigai
-                    River and create awareness about environmental protection.
-                </p>
-
-                <a routerLink="/news">
-                    Read More →
-                </a>
-
-            </div>
-
-        </div>
-
-        <!-- Card 3 -->
-
-        <div class="news-card">
-
-            <div class="news-image">
-
-                <img src="./images/news3.jpeg">
-
-                <div class="news-date">
-                    <h3>30</h3>
-                    <span>JUN</span>
-                </div>
-
-            </div>
-
-            <div class="news-content">
-
-                <span class="category">Sports</span>
-
-                <h3>
-                    Star Premium League Inspires Young Athletes
-                </h3>
-
-                <p>
-                    The annual sports event encouraged young talents while
-                    promoting teamwork, discipline and leadership.
-                </p>
-
-                <a routerLink="/news">
-                    Read More →
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- volunters  -->
-
-<section class="volunteer-section">
-
-    <div class="floating circle1"></div>
-    <div class="floating circle2"></div>
-    <div class="floating circle3"></div>
-
-    <div class="volunteer-card">
-
-        <span class="tag">JOIN OUR MISSION</span>
-
-        <h2>Become a Volunteer</h2>
-
-        <h3>Together We Can Make a Difference</h3>
-
-        <p>
-            Every act of kindness creates hope. Join Star Guru Charitable
-            Foundation and become part of a movement dedicated to serving
-            humanity with compassion.
-        </p>
-
-        <button routerLink="/volunteer">
-            Join Us
-            <span>→</span>
+        <button
+            type="button"
+            class="news-arrow news-arrow-right"
+            aria-label="Next news"
+            (click)="scrollNews('right')"
+        >
+            ›
         </button>
 
     </div>
 
 </section>
+
 

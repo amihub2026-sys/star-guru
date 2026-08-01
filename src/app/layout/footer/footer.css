@@ -879,110 +879,310 @@ padding-top:25px;
 /*====================================================
             RESPONSIVE
 ====================================================*/
+/*==================================
+            TABLET
+==================================*/
 
-@media(max-width:1200px){
+@media (max-width:1200px){
 
-.footer-container{
+    .footer-container{
 
-grid-template-columns:repeat(2,1fr);
+        grid-template-columns:repeat(2,1fr);
 
-gap:30px;
+        gap:28px;
 
-}
-
-}
-
-@media(max-width:768px){
-
-.footer{
-
-padding-top:90px;
+    }
 
 }
 
-.footer-container{
 
-grid-template-columns:1fr;
+/*==================================
+            MOBILE
+==================================*/
+
+@media (max-width:768px){
+
+    .footer{
+
+        padding:65px 0 20px;
+
+    }
+
+    /* Hide Our Services only on mobile */
+
+    .footer-services{
+
+        display:none;
+
+    }
+
+    .footer-container{
+
+        width:92%;
+
+        display:grid;
+
+        grid-template-columns:repeat(2,minmax(0,1fr));
+
+        gap:14px;
+
+    }
+
+    /* About */
+
+    .footer-about{
+
+        grid-column:1 / -1;
+
+        padding:20px;
+
+        text-align:center;
+
+        border-radius:18px;
+
+    }
+
+    .logo{
+
+        width:65px;
+        height:65px;
+
+        margin:0 auto 12px;
+
+    }
+
+    .footer-about h2{
+
+        font-size:22px;
+
+    }
+
+    .footer-about p{
+
+        font-size:12px;
+
+        line-height:1.7;
+
+    }
+
+    .social-icons{
+
+        justify-content:center;
+
+        gap:10px;
+
+        margin-top:16px;
+
+    }
+
+    .social-icons a{
+
+        width:38px;
+        height:38px;
+
+        font-size:15px;
+
+    }
+
+    /* Quick Links */
+
+    .footer-links{
+
+        padding:16px;
+
+        border-radius:18px;
+
+    }
+
+    .footer-links h3{
+
+        font-size:18px;
+
+        margin-bottom:12px;
+
+    }
+
+    .footer-links li{
+
+        font-size:13px;
+
+        margin-bottom:8px;
+
+    }
+
+    .footer-links a{
+
+        font-size:13px;
+
+    }
+
+    /* Contact */
+
+    .footer-contact{
+
+        padding:16px;
+
+        border-radius:18px;
+
+    }
+
+    .footer-contact h3{
+
+        font-size:18px;
+
+        margin-bottom:12px;
+
+    }
+
+    .contact-item{
+
+        gap:8px;
+
+        margin-bottom:10px;
+
+        font-size:12px;
+
+    }
+
+    .contact-item i{
+
+        width:30px;
+        height:30px;
+
+        font-size:12px;
+
+    }
+
+    .footer-contact button{
+
+        width:100%;
+
+        padding:10px;
+
+        font-size:12px;
+
+        border-radius:30px;
+
+        margin-top:12px;
+
+    }
+
+    .footer-divider{
+
+        margin:25px auto 16px;
+
+    }
+
+    .footer-bottom{
+
+        flex-direction:column;
+
+        gap:6px;
+
+        text-align:center;
+
+    }
+
+    .copyright,
+    .made{
+
+        font-size:12px;
+
+    }
+
+    .top-btn{
+
+        width:42px;
+        height:42px;
+
+        right:16px;
+        bottom:16px;
+
+        font-size:17px;
+
+    }
 
 }
 
-.footer-bottom{
 
-flex-direction:column;
+/*==================================
+        VERY SMALL MOBILE
+==================================*/
 
-gap:18px;
+@media (max-width:480px){
 
-text-align:center;
+    .footer{
 
-}
+        padding:55px 0 18px;
 
-.footer-about,
-.footer-links,
-.footer-contact{
+    }
 
-padding:28px;
+    .footer-container{
 
-}
+        width:94%;
 
-.logo{
+        gap:10px;
 
-width:90px;
+    }
 
-}
+    .footer-about{
 
-.top-btn{
+        padding:16px;
 
-right:20px;
+    }
 
-bottom:20px;
+    .logo{
 
-width:52px;
+        width:58px;
+        height:58px;
 
-height:52px;
+    }
 
-}
+    .footer-about h2{
 
-}
+        font-size:20px;
 
-@media(max-width:480px){
+    }
 
-.footer{
+    .footer-about p{
 
-padding-top:70px;
+        font-size:11px;
 
-}
+    }
 
-.footer-container{
+    .footer-links,
+    .footer-contact{
 
-width:95%;
+        padding:14px;
 
-}
+    }
 
-.footer-about h2{
+    .footer-links h3,
+    .footer-contact h3{
 
-font-size:28px;
+        font-size:16px;
 
-}
+    }
 
-.footer-links h3,
-.footer-contact h3{
+    .footer-links li,
+    .footer-links a{
 
-font-size:22px;
+        font-size:12px;
 
-}
+    }
 
-.contact-item{
+    .contact-item{
 
-gap:12px;
+        font-size:11px;
 
-}
+    }
 
-.social-icons{
+    .footer-contact button{
 
-justify-content:center;
+        font-size:11px;
 
-flex-wrap:wrap;
+        padding:9px;
 
-}
+    }
 
 }

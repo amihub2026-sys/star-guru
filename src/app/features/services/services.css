@@ -127,10 +127,10 @@
 .trust-title h1{
 
 
-    margin:0;
+    margin:5PX;
 
 
-    font-size:64px;
+    font-size:54px;
 
 
     letter-spacing:8px;
@@ -220,6 +220,7 @@
 
 .rotating-logo{
 
+    padding-top: 100px;
     width:580px;
 
     height:580px;
@@ -364,7 +365,7 @@
 .trust-title h1{
 
 
-    font-size:36px;
+    font-size:30px;
 
     letter-spacing:4px;
 

@@ -1,50 +1,81 @@
 <nav class="navbar">
 
     <div class="logo">
-<img src="images/logo.png" alt="Trust Logo">
+        <img src="images/logo.png" alt="Trust Logo">
         <span>STAR GURU TRUST</span>
     </div>
 
-    <ul class="nav-links">
+    <button
+        type="button"
+        class="menu-toggle"
+        aria-label="Toggle navigation menu"
+        [attr.aria-expanded]="menuOpen"
+        (click)="menuOpen = !menuOpen">
+        {{ menuOpen ? '×' : '☰' }}
+    </button>
+
+    <ul class="nav-links" [class.open]="menuOpen">
 
         <li>
-            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            <a
+                routerLink="/"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="menuOpen = false">
                 Home
             </a>
         </li>
 
         <li>
-            <a routerLink="/about" routerLinkActive="active">
+            <a
+                routerLink="/about"
+                routerLinkActive="active"
+                (click)="menuOpen = false">
                 About
             </a>
         </li>
 
         <li>
-            <a routerLink="/services" routerLinkActive="active">
+            <a
+                routerLink="/services"
+                routerLinkActive="active"
+                (click)="menuOpen = false">
                 Services
             </a>
         </li>
 
         <li>
-            <a routerLink="/impact" routerLinkActive="active">
+            <a
+                routerLink="/impact"
+                routerLinkActive="active"
+                (click)="menuOpen = false">
                 Impact
             </a>
         </li>
 
         <li>
-            <a routerLink="/gallery" routerLinkActive="active">
+            <a
+                routerLink="/gallery"
+                routerLinkActive="active"
+                (click)="menuOpen = false">
                 Gallery
             </a>
         </li>
 
         <li>
-            <a routerLink="/news" routerLinkActive="active">
+            <a
+                routerLink="/news"
+                routerLinkActive="active"
+                (click)="menuOpen = false">
                 News
             </a>
         </li>
 
         <li>
-            <a routerLink="/contact" routerLinkActive="active">
+            <a
+                routerLink="/contact"
+                routerLinkActive="active"
+                (click)="menuOpen = false">
                 Contact
             </a>
         </li>
