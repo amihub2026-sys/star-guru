@@ -21,6 +21,26 @@ export class About implements AfterViewInit, OnDestroy {
 
   @ViewChild('impactSection')
   impactSection?: ElementRef<HTMLElement>;
+  @ViewChild('journeySection')
+journeySection?: ElementRef<HTMLElement>;
+@ViewChild('whoWeAreSection')
+whoWeAreSection?: ElementRef<HTMLElement>;
+@ViewChild('missionSection')
+missionSection?: ElementRef<HTMLElement>;
+@ViewChild('gallerySection')
+gallerySection?: ElementRef<HTMLElement>;
+
+private galleryObserver?: IntersectionObserver;
+private galleryTimer?: number;
+
+private missionObserver?: IntersectionObserver;
+private missionTimer?: number;
+
+private whoWeAreObserver?: IntersectionObserver;
+private whoWeAreTimer?: number;
+
+private journeyObserver?: IntersectionObserver;
+private journeyTimer?: number;
 
   private impactObserver?: IntersectionObserver;
   private counterStarted = false;
@@ -48,9 +68,12 @@ export class About implements AfterViewInit, OnDestroy {
      * rendering all ViewChild elements.
      */
     window.setTimeout(() => {
-
+      this.initializeWhoWeAreAnimation();
+      this.initializeJourneyAnimation();
       this.initializeImpactCounter();
       this.initializeFounderMessageAnimation();
+      this.initializeMissionAnimation();
+      this.initializeGalleryAnimation();
 
     }, 100);
 
@@ -82,11 +105,17 @@ export class About implements AfterViewInit, OnDestroy {
             return;
           }
 
-          this.counterStarted = true;
+         this.counterStarted = true;
 
-          this.startCounters(section);
+section.classList.add('impact-visible');
 
-          this.impactObserver?.unobserve(section);
+window.setTimeout(() => {
+
+    this.startCounters(section);
+
+}, 450);
+
+this.impactObserver?.unobserve(section);
 
         });
 
@@ -219,7 +248,196 @@ export class About implements AfterViewInit, OnDestroy {
 
   }
 
+  /* =========================
+   JOURNEY ANIMATION
+========================= */
 
+private initializeJourneyAnimation(): void {
+
+    const section =
+        this.journeySection?.nativeElement;
+
+    if (!section) {
+        console.warn('Journey section not found');
+        return;
+    }
+
+    this.journeyObserver =
+        new IntersectionObserver(
+            (
+                entries: IntersectionObserverEntry[]
+            ) => {
+
+                const entry = entries[0];
+
+                if (!entry?.isIntersecting) {
+                    return;
+                }
+
+                this.journeyObserver?.unobserve(section);
+
+                this.journeyTimer =
+                    window.setTimeout(() => {
+
+                        section.classList.add(
+                            'journey-visible'
+                        );
+
+                    }, 100);
+
+            },
+            {
+                threshold: 0.12,
+                rootMargin: '0px 0px -50px 0px'
+            }
+        );
+
+    this.journeyObserver.observe(section);
+
+}
+/* =========================
+   WHO WE ARE ANIMATION
+========================= */
+
+private initializeWhoWeAreAnimation(): void {
+
+    const section =
+        this.whoWeAreSection?.nativeElement;
+
+    if (!section) {
+        console.warn('Who we are section not found');
+        return;
+    }
+
+    this.whoWeAreObserver =
+        new IntersectionObserver(
+            (
+                entries: IntersectionObserverEntry[]
+            ) => {
+
+                const entry = entries[0];
+
+                if (!entry?.isIntersecting) {
+                    return;
+                }
+
+                this.whoWeAreObserver?.unobserve(section);
+
+                this.whoWeAreTimer =
+                    window.setTimeout(() => {
+
+                        section.classList.add(
+                            'who-visible'
+                        );
+
+                    }, 100);
+
+            },
+            {
+                threshold: 0.12,
+                rootMargin: '0px 0px -50px 0px'
+            }
+        );
+
+    this.whoWeAreObserver.observe(section);
+
+}
+
+/* =========================
+   MISSION ANIMATION
+========================= */
+
+private initializeMissionAnimation(): void {
+
+    const section =
+        this.missionSection?.nativeElement;
+
+    if (!section) {
+        console.warn('Mission section not found');
+        return;
+    }
+
+    this.missionObserver =
+        new IntersectionObserver(
+            (
+                entries: IntersectionObserverEntry[]
+            ) => {
+
+                const entry = entries[0];
+
+                if (!entry?.isIntersecting) {
+                    return;
+                }
+
+                this.missionObserver?.unobserve(section);
+
+                this.missionTimer =
+                    window.setTimeout(() => {
+
+                        section.classList.add(
+                            'mission-visible'
+                        );
+
+                    }, 100);
+
+            },
+            {
+                threshold: 0.12,
+                rootMargin: '0px 0px -50px 0px'
+            }
+        );
+
+    this.missionObserver.observe(section);
+
+}
+
+/* =========================
+   GALLERY ANIMATION
+========================= */
+
+private initializeGalleryAnimation(): void {
+
+    const section =
+        this.gallerySection?.nativeElement;
+
+    if (!section) {
+        console.warn('Gallery section not found');
+        return;
+    }
+
+    this.galleryObserver =
+        new IntersectionObserver(
+            (
+                entries: IntersectionObserverEntry[]
+            ) => {
+
+                const entry = entries[0];
+
+                if (!entry?.isIntersecting) {
+                    return;
+                }
+
+                this.galleryObserver?.unobserve(section);
+
+                this.galleryTimer =
+                    window.setTimeout(() => {
+
+                        section.classList.add(
+                            'gallery-visible'
+                        );
+
+                    }, 100);
+
+            },
+            {
+                threshold: 0.12,
+                rootMargin: '0px 0px -50px 0px'
+            }
+        );
+
+    this.galleryObserver.observe(section);
+
+}
   /* =========================
      CLEANUP
   ========================= */
@@ -236,7 +454,38 @@ export class About implements AfterViewInit, OnDestroy {
       );
 
     }
+this.journeyObserver?.disconnect();
+
+if (this.journeyTimer !== undefined) {
+
+    window.clearTimeout(
+        this.journeyTimer
+    );
+
+}
+this.missionObserver?.disconnect();
+
+if (this.missionTimer !== undefined) {
+
+    window.clearTimeout(
+        this.missionTimer
+    );
+
+}
+
+this.galleryObserver?.disconnect();
+
+if (this.galleryTimer !== undefined) {
+
+    window.clearTimeout(
+        this.galleryTimer
+    );
+
+}
+
 
   }
+
+  
 
 }
