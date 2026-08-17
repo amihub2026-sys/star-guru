@@ -1,0 +1,46 @@
+.cards{
+
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:25px;
+
+}
+
+
+.card{
+
+background:white;
+padding:30px;
+border-radius:20px;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,.1);
+
+}
+
+
+.card h2{
+
+font-size:40px;
+color:#d4af37;
+
+}
+
+
+.card p{
+
+color:#555;
+
+}
+
+
+
+@media(max-width:900px){
+
+.cards{
+
+grid-template-columns:1fr;
+
+}
+
+}

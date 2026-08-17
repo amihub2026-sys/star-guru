@@ -1,0 +1,86 @@
+.admin-layout{
+
+display:flex;
+height:100vh;
+background:#f5f5f5;
+
+}
+
+
+
+/* SIDEBAR */
+
+.sidebar{
+
+width:260px;
+background:#111827;
+color:white;
+padding:25px;
+
+}
+
+
+
+.logo{
+
+text-align:center;
+margin-bottom:40px;
+
+}
+
+
+.logo h2{
+
+font-size:28px;
+margin:0;
+
+}
+
+
+.logo span{
+
+font-size:13px;
+color:#d4af37;
+
+}
+
+
+
+nav a{
+
+display:block;
+padding:15px;
+margin:8px 0;
+
+color:white;
+text-decoration:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+
+
+nav a:hover{
+
+background:#d4af37;
+color:black;
+
+}
+
+
+
+
+/* MAIN CONTENT */
+
+.admin-content{
+
+flex:1;
+padding:40px;
+overflow:auto;
+
+}

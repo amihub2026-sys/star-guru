@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 
 import { Navbar } from './layout/navbar/navbar';
 import { Footer } from './layout/footer/footer';
+
 
 @Component({
   selector: 'app-root',
@@ -16,5 +17,17 @@ import { Footer } from './layout/footer/footer';
   styleUrl: './app.css'
 })
 export class App {
+
+
+  router = inject(Router);
+
+
+
+  isAdminRoute(): boolean {
+
+    return this.router.url.startsWith('/admin');
+
+  }
+
 
 }

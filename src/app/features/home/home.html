@@ -841,200 +841,43 @@
     </div>
 
 
-    <div class="gallery-grid">
+<div class="gallery-grid">
 
-        <div
-            #galleryItem
-            class="gallery-item gallery-reveal"
-            (mousemove)="galleryCardMove($event)"
-            (mouseleave)="galleryCardLeave($event)"
-            (click)="openGalleryImage('./images/vaigai2.jpeg')"
-        >
+  <p
+    class="gallery-empty"
+    *ngIf="galleryImages.length === 0"
+  >
+    Gallery images will be available soon.
+  </p>
 
-            <img
-                src="./images/vaigai2.jpeg"
-                alt="Vaigai River"
-            >
+  <div
+    #galleryItem
+    class="gallery-item gallery-reveal"
+    *ngFor="let img of galleryImages"
+    (mousemove)="galleryCardMove($event)"
+    (mouseleave)="galleryCardLeave($event)"
+    (click)="openGalleryImage(img.imageUrl)"
+  >
 
-            <div class="gallery-curtain"></div>
+    <img
+      [src]="img.imageUrl"
+      [alt]="img.imageName || 'Star Guru gallery image'"
+      loading="lazy"
+    >
 
-            <div class="overlay">
-                <button type="button">
-                    View Image
-                </button>
-            </div>
+    <div class="gallery-curtain"></div>
 
-        </div>
+    <div class="overlay">
 
-
-        <div
-            #galleryItem
-            class="gallery-item gallery-reveal"
-            (mousemove)="galleryCardMove($event)"
-            (mouseleave)="galleryCardLeave($event)"
-            (click)="openGalleryImage('./images/vaigai6.jpg')"
-        >
-
-            <img
-                src="./images/vaigai6.jpg"
-                alt="Vaigai River Cleaning"
-            >
-
-            <div class="gallery-curtain"></div>
-
-            <div class="overlay">
-                <button type="button">
-                    View Image
-                </button>
-            </div>
-
-        </div>
-
-
-        <div
-            #galleryItem
-            class="gallery-item gallery-reveal"
-            (mousemove)="galleryCardMove($event)"
-            (mouseleave)="galleryCardLeave($event)"
-            (click)="openGalleryImage('./images/vaigai4.jpeg')"
-        >
-
-            <img
-                src="./images/vaigai4.jpeg"
-                alt="Vaigai River Service"
-            >
-
-            <div class="gallery-curtain"></div>
-
-            <div class="overlay">
-                <button type="button">
-                    View Image
-                </button>
-            </div>
-
-        </div>
-
-
-        <div
-            #galleryItem
-            class="gallery-item gallery-reveal"
-            (mousemove)="galleryCardMove($event)"
-            (mouseleave)="galleryCardLeave($event)"
-            (click)="openGalleryImage('./images/vaigai3.jpeg')"
-        >
-
-            <img
-                src="./images/vaigai3.jpeg"
-                alt="Vaigai River Volunteers"
-            >
-
-            <div class="gallery-curtain"></div>
-
-            <div class="overlay">
-                <button type="button">
-                    View Image
-                </button>
-            </div>
-
-        </div>
-
-
-        <div
-            #galleryItem
-            class="gallery-item gallery-reveal"
-            (mousemove)="galleryCardMove($event)"
-            (mouseleave)="galleryCardLeave($event)"
-            (click)="openGalleryImage('./images/vaigai7.jpeg')"
-        >
-
-            <img
-                src="./images/vaigai7.jpeg"
-                alt="Vaigai River Community"
-            >
-
-            <div class="gallery-curtain"></div>
-
-            <div class="overlay">
-                <button type="button">
-                    View Image
-                </button>
-            </div>
-
-        </div>
-
-
-        <div
-            #galleryItem
-            class="gallery-item gallery-reveal"
-            (mousemove)="galleryCardMove($event)"
-            (mouseleave)="galleryCardLeave($event)"
-            (click)="openGalleryImage('./images/vaigai11.jpg')"
-        >
-
-            <img
-                src="./images/vaigai11.jpg"
-                alt="Vaigai River Initiative"
-            >
-
-            <div class="gallery-curtain"></div>
-
-            <div class="overlay">
-                <button type="button">
-                    View Image
-                </button>
-            </div>
-
-        </div>
-
-
-        <div
-            #galleryItem
-            class="gallery-item gallery-reveal"
-            (mousemove)="galleryCardMove($event)"
-            (mouseleave)="galleryCardLeave($event)"
-            (click)="openGalleryImage('./images/vaigai12.jpeg')"
-        >
-
-            <img
-                src="./images/vaigai12.jpeg"
-                alt="Vaigai River Moment"
-            >
-
-            <div class="gallery-curtain"></div>
-
-            <div class="overlay">
-                <button type="button">
-                    View Image
-                </button>
-            </div>
-
-        </div>
-
-
-        <div
-            #galleryItem
-            class="gallery-item gallery-reveal"
-            (mousemove)="galleryCardMove($event)"
-            (mouseleave)="galleryCardLeave($event)"
-            (click)="openGalleryImage('./images/vaigai5.jpg')"
-        >
-
-            <img
-                src="./images/vaigai5.jpg"
-                alt="Vaigai River Protection"
-            >
-
-            <div class="gallery-curtain"></div>
-
-            <div class="overlay">
-                <button type="button">
-                    View Image
-                </button>
-            </div>
-
-        </div>
+      <button type="button">
+        View Image
+      </button>
 
     </div>
+
+  </div>
+
+</div>
 
 </section>
 
@@ -1109,139 +952,52 @@
             class="news-grid"
         >
 
-            <!-- Card 1 -->
+        <article
+  #newsCard
+  class="news-card news-reveal news-visible"
+  *ngFor="let item of homeNewsItems"
+>
+  <div class="news-image">
 
-            <div
-                #newsCard
-                class="news-card news-reveal"
-            >
+    <img
+      [src]="item.imageUrl"
+      [alt]="item.title"
+    >
 
-                <div class="news-image">
+    <div class="news-date">
+      <h3>
+        {{ item.newsDate | date:'dd' }}
+      </h3>
 
-                    <img
-                        src="./images/news1.jpeg"
-                        alt="Daily food distribution"
-                    >
+      <span>
+        {{ item.newsDate | date:'MMM' }}
+      </span>
+    </div>
 
-                    <div class="news-date">
-                        <h3>15</h3>
-                        <span>JUL</span>
-                    </div>
+  </div>
 
-                </div>
+  <div class="news-content">
 
-                <div class="news-content">
+    <span class="category">
+      {{ item.category }}
+    </span>
 
-                    <span class="category">
-                        Food Distribution
-                    </span>
+    <h3>
+      {{ item.title }}
+    </h3>
 
-                    <h3>
-                        Daily Meal Service Continues to Feed Thousands
-                    </h3>
+    <p>
+      {{ item.description }}
+    </p>
 
-                    <p>
-                        Our volunteers continue serving nutritious meals every day,
-                        bringing hope and happiness to people across Madurai.
-                    </p>
+    <a href="/news">
+      Read More →
+    </a>
 
-                    <a routerLink="/news">
-                        Read More →
-                    </a>
+  </div>
 
-                </div>
+</article>
 
-            </div>
-
-
-            <!-- Card 2 -->
-
-            <div
-                #newsCard
-                class="news-card news-reveal"
-            >
-
-                <div class="news-image">
-
-                    <img
-                        src="./images/news2.jpeg"
-                        alt="Vaigai river cleaning"
-                    >
-
-                    <div class="news-date">
-                        <h3>08</h3>
-                        <span>JUL</span>
-                    </div>
-
-                </div>
-
-                <div class="news-content">
-
-                    <span class="category">
-                        Environment
-                    </span>
-
-                    <h3>
-                        Vaigai River Cleaning Drive Successfully Completed
-                    </h3>
-
-                    <p>
-                        Hundreds of volunteers joined hands to clean the Vaigai
-                        River and create awareness about environmental protection.
-                    </p>
-
-                    <a routerLink="/news">
-                        Read More →
-                    </a>
-
-                </div>
-
-            </div>
-
-
-            <!-- Card 3 -->
-
-            <div
-                #newsCard
-                class="news-card news-reveal"
-            >
-
-                <div class="news-image">
-
-                    <img
-                        src="./images/news3.jpeg"
-                        alt="Sports development event"
-                    >
-
-                    <div class="news-date">
-                        <h3>30</h3>
-                        <span>JUN</span>
-                    </div>
-
-                </div>
-
-                <div class="news-content">
-
-                    <span class="category">
-                        Sports
-                    </span>
-
-                    <h3>
-                        Star Premium League Inspires Young Athletes
-                    </h3>
-
-                    <p>
-                        The annual sports event encouraged young talents while
-                        promoting teamwork, discipline and leadership.
-                    </p>
-
-                    <a routerLink="/news">
-                        Read More →
-                    </a>
-
-                </div>
-
-            </div>
 
         </div>
 

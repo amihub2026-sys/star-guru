@@ -1,0 +1,329 @@
+<div class="home-news-page">
+
+  <div class="page-heading">
+
+    <div>
+      <span class="page-label">
+        Homepage Content
+      </span>
+
+      <h1>News & Events Management</h1>
+
+      <p>
+        Publish news images and content displayed in the
+        homepage News & Events section.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- NEWS UPLOAD FORM -->
+
+  <section class="management-card">
+
+    <div class="card-heading">
+
+      <div class="heading-icon">
+        +
+      </div>
+
+      <div>
+        <h2>Add News or Event</h2>
+
+        <p>
+          Complete all fields and select one image.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="form-grid">
+
+      <div class="form-group form-group-wide">
+
+        <label for="newsTitle">
+          News title
+        </label>
+
+        <input
+          id="newsTitle"
+          type="text"
+          [(ngModel)]="title"
+          placeholder="Enter the news title"
+          maxlength="200"
+        >
+
+        <small>
+          {{ title.length }}/200 characters
+        </small>
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="newsCategory">
+          Category
+        </label>
+
+        <input
+          id="newsCategory"
+          type="text"
+          [(ngModel)]="category"
+          placeholder="Example: Food Distribution"
+          maxlength="100"
+          list="newsCategories"
+        >
+
+        <datalist id="newsCategories">
+          <option value="Food Distribution">
+          <option value="Environment">
+          <option value="Education">
+          <option value="Healthcare">
+          <option value="Sports">
+          <option value="Women Empowerment">
+          <option value="Community Service">
+        </datalist>
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="newsDate">
+          News date
+        </label>
+
+        <input
+          id="newsDate"
+          type="date"
+          [(ngModel)]="newsDate"
+        >
+
+      </div>
+
+      <div class="form-group form-group-wide">
+
+        <label for="newsDescription">
+          Description
+        </label>
+
+        <textarea
+          id="newsDescription"
+          [(ngModel)]="description"
+          placeholder="Enter a short description about the news or event"
+          rows="6"
+          maxlength="2000"
+        ></textarea>
+
+        <small>
+          {{ description.length }}/2000 characters
+        </small>
+
+      </div>
+
+      <div class="form-group form-group-wide">
+
+        <label for="newsImage">
+          News image
+        </label>
+
+        <div class="file-upload">
+
+          <input
+            #fileInput
+            id="newsImage"
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            (change)="selectImage($event)"
+          >
+
+          <p>
+            Supported formats: JPG, PNG and WebP.
+            Maximum size: 10 MB.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- SELECTED IMAGE PREVIEW -->
+
+    <div
+      class="selected-preview"
+      *ngIf="imagePreview"
+    >
+
+      <h3>Selected image preview</h3>
+
+      <div class="selected-preview-image">
+
+        <img
+          [src]="imagePreview"
+          alt="Selected News and Events image"
+        >
+
+      </div>
+
+    </div>
+
+    <div class="form-actions">
+
+      <button
+        type="button"
+        class="reset-button"
+        [disabled]="uploading"
+        (click)="resetForm()"
+      >
+        Clear form
+      </button>
+
+      <button
+        type="button"
+        class="publish-button"
+        [disabled]="uploading"
+        (click)="publishNews()"
+      >
+        {{
+          uploading
+            ? 'Publishing...'
+            : 'Publish News'
+        }}
+      </button>
+
+    </div>
+
+    <div
+      class="status-message success-message"
+      *ngIf="message"
+    >
+      {{ message }}
+    </div>
+
+    <div
+      class="status-message error-message"
+      *ngIf="errorMessage"
+    >
+      {{ errorMessage }}
+    </div>
+
+  </section>
+
+  <!-- PUBLISHED NEWS -->
+
+  <section class="published-section">
+
+    <div class="published-heading">
+
+      <div>
+
+        <span class="page-label">
+          Current Content
+        </span>
+
+        <h2>Published News & Events</h2>
+
+      </div>
+
+      <span class="news-count">
+        {{ newsItems.length }}
+        {{
+          newsItems.length === 1
+            ? 'item'
+            : 'items'
+        }}
+      </span>
+
+    </div>
+
+    <div
+      class="empty-state"
+      *ngIf="newsItems.length === 0"
+    >
+      <div class="empty-icon">N</div>
+
+      <h3>No news published yet</h3>
+
+      <p>
+        Published news and events will appear here.
+      </p>
+    </div>
+
+    <div
+      class="news-admin-grid"
+      *ngIf="newsItems.length > 0"
+    >
+
+      <article
+        class="news-admin-card"
+        *ngFor="
+          let item of newsItems;
+          trackBy: trackById
+        "
+      >
+
+        <div class="news-card-image">
+
+          <img
+            [src]="item.imageUrl"
+            [alt]="item.title"
+          >
+
+          <div class="news-date-badge">
+
+            <strong>
+              {{ item.newsDate | date:'dd' }}
+            </strong>
+
+            <span>
+              {{ item.newsDate | date:'MMM' }}
+            </span>
+
+          </div>
+
+        </div>
+
+        <div class="news-card-content">
+
+          <span class="category">
+            {{ item.category }}
+          </span>
+
+          <h3>
+            {{ item.title }}
+          </h3>
+
+          <p>
+            {{ item.description }}
+          </p>
+
+          <time>
+            {{ item.newsDate | date:'dd MMMM yyyy' }}
+          </time>
+
+          <div class="news-card-actions">
+
+            <button
+              type="button"
+              class="delete-button"
+              [disabled]="deletingId === item.id"
+              (click)="deleteNews(item)"
+            >
+              {{
+                deletingId === item.id
+                  ? 'Deleting...'
+                  : 'Delete'
+              }}
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+</div>

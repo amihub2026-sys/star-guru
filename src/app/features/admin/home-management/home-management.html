@@ -1,0 +1,305 @@
+<div class="home-management-page">
+
+  <!-- PAGE HEADING -->
+
+  <header class="page-heading">
+
+    <span class="page-label">
+      HOMEPAGE CONTENT
+    </span>
+
+    <h1>
+      Home Page Management
+    </h1>
+
+    <p>
+      Manage homepage gallery images and
+      News & Events content from one page.
+    </p>
+
+  </header>
+
+
+  <!-- HOME GALLERY MANAGEMENT -->
+
+  <section class="management-section gallery-management-section">
+
+    <div class="section-heading">
+
+      <div class="section-icon">
+        +
+      </div>
+
+      <div>
+
+        <span class="section-label">
+          HOME GALLERY
+        </span>
+
+        <h2>
+          Home Gallery Management
+        </h2>
+
+        <p>
+          Upload images displayed in the homepage gallery section.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- UPLOAD BOX -->
+
+    <div class="upload-box">
+
+      <div class="upload-information">
+
+        <h3>
+          Upload Home Gallery Images
+        </h3>
+
+        <p>
+          Select one or multiple images. Maximum size: 10 MB per image.
+        </p>
+
+      </div>
+
+      <div class="upload-controls">
+
+        <label
+          class="file-button"
+          for="homeGalleryFiles"
+        >
+          Choose Images
+        </label>
+
+        <input
+          #galleryFileInput
+          id="homeGalleryFiles"
+          class="file-input"
+          type="file"
+          multiple
+          accept="image/*"
+          (change)="selectImages($event)"
+        >
+
+        <span class="selected-count">
+          {{
+            selectedFiles.length === 0
+              ? 'No images selected'
+              : selectedFiles.length + ' image(s) selected'
+          }}
+        </span>
+
+        <button
+          type="button"
+          class="upload-button"
+          [disabled]="
+            selectedFiles.length === 0 ||
+            uploading
+          "
+          (click)="uploadImages()"
+        >
+          {{
+            uploading
+              ? 'Uploading...'
+              : 'Upload Images'
+          }}
+        </button>
+
+      </div>
+
+      <p
+        *ngIf="successMessage"
+        class="message success-message"
+      >
+        {{ successMessage }}
+      </p>
+
+      <p
+        *ngIf="errorMessage"
+        class="message error-message"
+      >
+        {{ errorMessage }}
+      </p>
+
+    </div>
+
+
+    <!-- SELECTED IMAGE PREVIEW -->
+
+    <div
+      *ngIf="previewImages.length > 0"
+      class="preview-section"
+    >
+
+      <div class="content-heading">
+
+        <div>
+
+          <span class="section-label">
+            PREVIEW
+          </span>
+
+          <h3>
+            Selected Image Preview
+          </h3>
+
+        </div>
+
+        <span class="item-count">
+          {{ previewImages.length }}
+          item(s)
+        </span>
+
+      </div>
+
+      <div class="image-grid">
+
+        <article
+          class="image-card preview-card"
+          *ngFor="
+            let preview of previewImages;
+            let index = index
+          "
+        >
+
+          <div class="image-wrapper">
+
+            <img
+              [src]="preview"
+              [alt]="
+                selectedFiles[index]?.name ||
+                'Selected gallery image'
+              "
+            >
+
+          </div>
+
+          <div class="image-details">
+
+            <p>
+              {{
+                selectedFiles[index]?.name ||
+                'Selected image'
+              }}
+            </p>
+
+            <button
+              type="button"
+              class="remove-button"
+              [disabled]="uploading"
+              (click)="removeSelectedImage(index)"
+            >
+              Remove
+            </button>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </div>
+
+
+    <!-- UPLOADED GALLERY IMAGES -->
+
+    <div class="uploaded-section">
+
+      <div class="content-heading">
+
+        <div>
+
+          <span class="section-label">
+            CURRENT CONTENT
+          </span>
+
+          <h3>
+            Uploaded Home Gallery Images
+          </h3>
+
+        </div>
+
+        <span class="item-count">
+          {{ galleryImages.length }}
+          item(s)
+        </span>
+
+      </div>
+
+      <div
+        *ngIf="galleryImages.length > 0; else noGalleryImages"
+        class="image-grid"
+      >
+
+        <article
+          class="image-card uploaded-card"
+          *ngFor="
+            let image of galleryImages;
+            trackBy: trackGalleryImage
+          "
+        >
+
+          <div class="image-wrapper">
+
+            <img
+              [src]="image.imageUrl"
+              [alt]="image.imageName"
+            >
+
+          </div>
+
+          <div class="image-details">
+
+            <p>
+              {{ image.imageName }}
+            </p>
+
+            <span class="active-badge">
+              Active
+            </span>
+
+          </div>
+
+        </article>
+
+      </div>
+
+      <ng-template #noGalleryImages>
+
+        <div class="empty-state">
+
+          <div class="empty-icon">
+            ⧉
+          </div>
+
+          <h4>
+            No gallery images uploaded
+          </h4>
+
+          <p>
+            Select images above and click
+            Upload Images.
+          </p>
+
+        </div>
+
+      </ng-template>
+
+    </div>
+
+  </section>
+
+
+  <!-- EXISTING NEWS MANAGEMENT COMPONENT -->
+
+  <section class="news-management-wrapper">
+
+    <app-home-news-management>
+    </app-home-news-management>
+
+  </section>
+
+</div>
