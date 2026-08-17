@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   OnDestroy,
@@ -8,12 +9,26 @@ import {
   ViewChildren
 } from '@angular/core';
 
+
+import { CommonModule } from '@angular/common';
+
 import { Router } from '@angular/router';
+import {
+  HomeNewsApiService,
+  HomeNewsItem
+} from '../services/home-news.service';
+import {
+  HomeGalleryImage,
+  HomeGalleryService
+} from '../../services/home-gallery.service';
 
 
 @Component({
   selector: 'app-hero',
-  imports: [],
+  standalone:true,
+  imports: [
+    CommonModule
+  ],
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
@@ -47,6 +62,8 @@ newsSlider!: ElementRef<HTMLDivElement>;
 private newsObserver?: IntersectionObserver;
 
 private newsAnimationTimers: number[] = [];
+galleryImages: HomeGalleryImage[] = [];
+homeNewsItems: HomeNewsItem[] = [];
 
 selectedGalleryImage: string | null = null;
 
@@ -61,7 +78,12 @@ private servicesObserver?: IntersectionObserver;
 
   private countersStarted = false;
 
-  constructor(private router: Router) {}
+constructor(
+  private router: Router,
+  private homeGalleryService: HomeGalleryService,
+  private homeNewsApiService: HomeNewsApiService,
+  private cdr: ChangeDetectorRef
+) {}
 
 
   /*=================================
@@ -70,19 +92,101 @@ private servicesObserver?: IntersectionObserver;
 
 ngAfterViewInit(): void {
 
+  this.loadGalleryImages();
+  this.loadHomeNews();
+
   setTimeout(() => {
 
     this.initializeImpactCounter();
     this.initializeFounderAnimation();
     this.initializeServiceAnimations();
     this.initializePromiseAnimation();
-    this.initializeGalleryAnimation();
-    this.initializeNewsAnimation();
 
   }, 100);
 
 }
 
+loadGalleryImages(): void {
+
+  this.homeGalleryService
+    .getGallery()
+    .subscribe({
+
+      next: (data: HomeGalleryImage[]) => {
+
+        console.log(
+          'Public Home Gallery Images',
+          data
+        );
+
+        this.galleryImages = data;
+
+        // Refresh the homepage template
+        this.cdr.detectChanges();
+
+        // Wait until gallery cards are rendered
+        window.setTimeout(() => {
+
+          this.galleryObserver?.disconnect();
+
+          this.initializeGalleryAnimation();
+
+          this.cdr.detectChanges();
+
+        }, 100);
+      },
+
+      error: (error: any) => {
+
+        console.error(
+          'Public Gallery Load Error',
+          error
+        );
+      }
+    });
+}
+loadHomeNews(): void {
+
+  this.homeNewsApiService
+    .getPublicNews()
+    .subscribe({
+
+      next: (data: HomeNewsItem[]) => {
+
+        console.log(
+          'Public Home News',
+          data
+        );
+
+        this.homeNewsItems = data;
+
+        this.cdr.detectChanges();
+
+        // Wait until the dynamic news cards are rendered
+        window.setTimeout(() => {
+
+          this.newsObserver?.disconnect();
+
+          this.initializeNewsAnimation();
+
+          this.cdr.detectChanges();
+
+        }, 100);
+
+      },
+
+      error: (error: unknown) => {
+
+        console.error(
+          'Public Home News Load Error',
+          error
+        );
+
+      }
+
+    });
+
+}
   /*=================================
         IMPACT COUNTER OBSERVER
   =================================*/
