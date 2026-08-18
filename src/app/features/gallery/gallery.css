@@ -1747,4 +1747,1684 @@ cursor:pointer;
 
 }
 
+ /* =================================================
+   CORRECT 5 PAGE STACK + FLIP
+================================================= */
 
+.turn-page {
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  width: 50%;
+  height: 100%;
+
+  transform-origin: left center;
+  transform-style: preserve-3d;
+
+  transition:
+    transform 1.35s cubic-bezier(.65,.05,.36,1);
+
+  border-radius: 5px 35px 35px 5px;
+}
+
+
+/* ==============================
+   INITIAL STACK
+   PAGE 1 MUST BE ON TOP
+============================== */
+
+.turn-page-1 {
+  z-index: 50;
+}
+
+.turn-page-2 {
+  z-index: 40;
+}
+
+.turn-page-3 {
+  z-index: 30;
+}
+
+.turn-page-4 {
+  z-index: 20;
+}
+
+.turn-page-5 {
+  z-index: 10;
+}
+
+
+/* ==============================
+   FRONT + BACK
+============================== */
+
+.turn-page-front,
+.turn-page-back {
+  position: absolute;
+
+  inset: 0;
+
+  padding: 45px;
+
+  box-sizing: border-box;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      90deg,
+      #d1aa58,
+      #fff3cd 12%,
+      #fff9e7 70%,
+      #d4ad5b
+    );
+
+  box-shadow:
+    inset 0 0 70px rgba(80,40,0,.25);
+}
+
+
+.turn-page-front {
+  transform: rotateY(0deg);
+
+  border-radius:
+    5px 35px 35px 5px;
+}
+
+
+.turn-page-back {
+  transform: rotateY(180deg);
+
+  border-radius:
+    35px 5px 5px 35px;
+}
+
+
+/* ==============================
+   PAPER TEXTURE
+============================== */
+
+.turn-page-front::before,
+.turn-page-back::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      rgba(100,70,20,.12) 1px,
+      transparent 1px
+    );
+
+  background-size: 14px 14px;
+
+  opacity: .35;
+
+  pointer-events: none;
+}
+
+
+/* ==============================
+   TEXT
+============================== */
+
+.turn-page h2 {
+  position: relative;
+  z-index: 5;
+
+  font-family: Georgia, serif;
+
+  font-size: 35px;
+  line-height: 1.2;
+
+  color: #633500;
+
+  margin-top: 20px;
+
+  text-shadow:
+    0 2px 3px rgba(0,0,0,.15);
+}
+
+
+.turn-page p {
+  position: relative;
+  z-index: 5;
+
+  font-family: Georgia, serif;
+
+  font-size: 18px;
+  line-height: 1.7;
+
+  color: #4a3214;
+}
+
+
+/* ==============================
+   IMAGE ON BACK
+============================== */
+
+.turn-page-back img {
+  position: relative;
+  z-index: 5;
+
+  width: 100%;
+  height: 88%;
+
+  object-fit: cover;
+
+  margin-top: 15px;
+
+  padding: 8px;
+
+  box-sizing: border-box;
+
+  background: white;
+
+  border: 2px solid #d4af37;
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 25px 50px rgba(0,0,0,.45);
+}
+
+
+/* ==============================
+   FLIP
+============================== */
+
+.turn-page.flipped {
+  transform:
+    perspective(1800px)
+    rotateY(-180deg);
+}
+
+
+/* ==============================
+   AFTER FLIP
+   MOVED PAGE GOES TO LEFT STACK
+============================== */
+
+.turn-page-1.flipped {
+  z-index: 50;
+}
+
+.turn-page-2.flipped {
+  z-index: 40;
+}
+
+.turn-page-3.flipped {
+  z-index: 30;
+}
+
+.turn-page-4.flipped {
+  z-index: 20;
+}
+
+.turn-page-5.flipped {
+  z-index: 10;
+}
+
+
+/* ==============================
+   FINAL LOGO
+============================== */
+
+.turn-page-back .final-book-logo {
+  height: auto;
+  max-height: 220px;
+
+  object-fit: contain;
+
+  background: transparent;
+
+  border: none;
+
+  box-shadow: none;
+}
+/* ==================================================
+   GALLERY GRID
+================================================== */
+
+.gallery-category-grid {
+    margin-top: 70px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 30px;
+}
+
+
+/* ==================================================
+   CARD
+================================================== */
+
+.gallery-category-card {
+    position: relative;
+
+    height: 330px;
+
+    border-radius: 30px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    background: #111;
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.15);
+
+    transition:
+        transform .4s ease,
+        box-shadow .4s ease;
+}
+
+
+/* ==================================================
+   IMAGE
+================================================== */
+
+.gallery-category-card > img {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform .65s ease,
+        filter .5s ease;
+}
+
+
+/* ==================================================
+   BLACK PANEL
+   HIDDEN BEFORE HOVER
+================================================== */
+
+.gallery-category-card .card-overlay {
+
+    position: absolute;
+
+    left: 14px;
+    right: 14px;
+
+    /* IMPORTANT:
+       panel starts outside bottom */
+    bottom: -170px;
+
+    height: 145px;
+
+    padding:
+        28px 25px
+        20px;
+
+    box-sizing: border-box;
+
+    background: #1b1b1b;
+
+    color: white;
+
+    border-radius:
+        20px 20px
+        24px 24px;
+
+    z-index: 10;
+
+    opacity: 0;
+
+    transition:
+        bottom .55s
+        cubic-bezier(.22,.8,.25,1),
+        opacity .3s ease;
+
+}
+
+
+/* ==================================================
+   REFERENCE STYLE CURVED TOP PART
+================================================== */
+
+.gallery-category-card .card-overlay::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -25px;
+    left: 0;
+
+    width: 58%;
+    height: 38px;
+
+    background: #1b1b1b;
+
+    border-radius:
+        18px 30px 0 0;
+
+    clip-path:
+        polygon(
+            0 0,
+            78% 0,
+            88% 35%,
+            100% 100%,
+            0 100%
+        );
+
+}
+
+
+/* ==================================================
+   HOVER
+================================================== */
+
+.gallery-category-card:hover .card-overlay {
+
+    bottom: 14px;
+
+    opacity: 1;
+}
+
+
+.gallery-category-card:hover > img {
+
+    transform: scale(1.07);
+
+    filter: brightness(.82);
+}
+
+
+.gallery-category-card:hover {
+
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 28px 60px
+        rgba(0,0,0,.23);
+}
+
+
+/* ==================================================
+   TITLE
+================================================== */
+
+.gallery-category-card
+.card-overlay h3 {
+
+    position: relative;
+    z-index: 3;
+
+    margin: 0 0 6px;
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size: 23px;
+
+    line-height: 1.2;
+
+    color: #fff;
+}
+
+
+/* ==================================================
+   MEMORY COUNT
+================================================== */
+
+.gallery-category-card
+.card-overlay p {
+
+    position: relative;
+    z-index: 3;
+
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.4;
+
+    color:
+        rgba(255,255,255,.55);
+}
+
+
+/* ==================================================
+   VIEW BUTTON
+================================================== */
+
+.gallery-category-card
+.card-overlay button {
+
+    position: absolute;
+
+    right: 22px;
+    bottom: 20px;
+
+    padding:
+        9px 17px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.25);
+
+    border-radius: 30px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    color: #fff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .3s ease;
+}
+
+
+.gallery-category-card
+.card-overlay button:hover {
+
+    background: #fff;
+
+    color: #111;
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media(max-width:1000px) {
+
+    .gallery-category-grid {
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+
+@media(max-width:650px) {
+
+    .gallery-category-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .gallery-category-card {
+        height: 310px;
+    }
+
+}
+/* =========================================
+   CLASSIC PREMIUM HOVER PANEL
+========================================= */
+
+.gallery-category-card .card-overlay {
+    position: absolute;
+
+    left: 18px;
+    right: 18px;
+    bottom: -180px;
+
+    height: 150px;
+
+    padding: 28px 26px 22px;
+
+    box-sizing: border-box;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(38, 20, 8, .96),
+            rgba(20, 12, 5, .97)
+        );
+
+    border:
+        1px solid rgba(212,175,55,.65);
+
+    border-radius:
+        22px 22px 28px 28px;
+
+    color: white;
+
+    z-index: 10;
+
+    opacity: 0;
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    box-shadow:
+        0 22px 45px rgba(0,0,0,.38),
+        inset 0 0 22px rgba(212,175,55,.08);
+
+    transition:
+        bottom .6s cubic-bezier(.22,.8,.25,1),
+        opacity .35s ease;
+}
+
+
+/* CLASSIC CURVED TOP */
+
+.gallery-category-card .card-overlay::before {
+    content: "";
+
+    position: absolute;
+
+    top: -28px;
+    left: 0;
+
+    width: 62%;
+    height: 42px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(38,20,8,.97),
+            rgba(20,12,5,.97)
+        );
+
+    clip-path:
+        polygon(
+            0 0,
+            76% 0,
+            88% 35%,
+            100% 100%,
+            0 100%
+        );
+
+    border-top-left-radius: 18px;
+}
+
+
+/* SMALL GOLD DECORATIVE LINE */
+
+.gallery-category-card .card-overlay::after {
+    content: "";
+
+    position: absolute;
+
+    left: 26px;
+    bottom: 54px;
+
+    width: 58px;
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #d4af37,
+            #f4df8c
+        );
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 0 10px rgba(212,175,55,.5);
+}
+
+
+/* HOVER */
+
+.gallery-category-card:hover .card-overlay {
+    bottom: 16px;
+    opacity: 1;
+}
+
+
+/* IMAGE HOVER */
+
+.gallery-category-card:hover > img {
+    transform: scale(1.08);
+
+    filter:
+        brightness(.75)
+        saturate(.9);
+}
+
+
+/* CARD LIFT */
+
+.gallery-category-card:hover {
+    transform:
+        translateY(-10px)
+        scale(1.015);
+
+    box-shadow:
+        0 30px 65px rgba(0,0,0,.28);
+}
+
+
+/* TITLE */
+
+.gallery-category-card .card-overlay h3 {
+    position: relative;
+    z-index: 3;
+
+    margin: 0 0 7px;
+
+    font-family: Georgia, serif;
+
+    font-size: 24px;
+    font-weight: 700;
+
+    letter-spacing: .4px;
+
+    color: #f7e7ad;
+
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.65);
+}
+
+
+/* MEMORY TEXT */
+
+.gallery-category-card .card-overlay p {
+    position: relative;
+    z-index: 3;
+
+    margin: 0;
+
+    font-family: Georgia, serif;
+
+    font-size: 13px;
+
+    color: rgba(255,255,255,.68);
+}
+
+
+/* BUTTON */
+
+.gallery-category-card .card-overlay button {
+    position: absolute;
+
+    right: 22px;
+    bottom: 19px;
+
+    padding: 9px 18px;
+
+    border:
+        1px solid rgba(212,175,55,.75);
+
+    border-radius: 30px;
+
+    background:
+        rgba(212,175,55,.08);
+
+    color: #f5dd8a;
+
+    font-family: Georgia, serif;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        .3s ease;
+}
+
+
+.gallery-category-card .card-overlay button:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #d4af37,
+            #f1d878
+        );
+
+    color: #2a1704;
+
+    box-shadow:
+        0 8px 20px rgba(212,175,55,.3);
+
+    transform: translateY(-2px);
+}
+/* =========================================
+   IMPACT VIDEO GRID
+========================================= */
+
+.impact-video-grid {
+    margin-top: 60px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 28px;
+
+    max-width: 1350px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* =========================================
+   GLASS VIDEO CARD
+========================================= */
+
+.impact-video-card {
+    position: relative;
+
+    min-height: 430px;
+
+    border-radius: 28px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.16),
+            rgba(18,24,20,.78)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.24);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 24px 55px rgba(0,0,0,.16),
+        inset 0 1px 0 rgba(255,255,255,.3);
+
+    transition:
+        transform .45s ease,
+        box-shadow .45s ease;
+}
+
+
+/* =========================================
+   VIDEO AREA
+========================================= */
+
+.impact-video-card video {
+    width: 100%;
+    height: 250px;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius:
+        28px 28px 0 0;
+
+    background: #111;
+}
+
+
+/* =========================================
+   GLASS CONTENT BODY
+========================================= */
+
+.video-title {
+    position: relative;
+
+    margin: -22px 14px 14px;
+
+    min-height: 145px;
+
+    padding:
+        28px 20px
+        20px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(25,31,26,.86),
+            rgba(13,17,14,.72)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.13);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.22);
+
+    color: #fff;
+
+    z-index: 3;
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.video-title h3 {
+    margin: 0 0 8px;
+
+    font-family: Georgia, serif;
+
+    font-size: 22px;
+    line-height: 1.2;
+
+    color: #ffffff;
+}
+
+
+/* DESCRIPTION
+========================================= */
+
+.video-title p {
+    margin: 0;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+    color:
+        rgba(255,255,255,.68);
+}
+
+
+/* =========================================
+   SMALL GLASS TAG
+========================================= */
+
+.video-title::before {
+    content: "Impact Story";
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 14px;
+
+    padding: 6px 12px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    border:
+        1px solid rgba(255,255,255,.14);
+
+    color:
+        rgba(255,255,255,.82);
+
+    font-size: 11px;
+    letter-spacing: .7px;
+
+    backdrop-filter: blur(8px);
+}
+
+
+/* =========================================
+   HOVER EFFECT
+========================================= */
+
+.impact-video-card:hover {
+    transform:
+        translateY(-12px)
+        scale(1.015);
+
+    box-shadow:
+        0 34px 70px rgba(0,0,0,.24),
+        inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+
+/* slight video zoom */
+
+.impact-video-card video {
+    transition:
+        transform .65s ease,
+        filter .45s ease;
+}
+
+.impact-video-card:hover video {
+    transform: scale(1.04);
+
+    filter:
+        brightness(.86)
+        saturate(1.05);
+}
+
+
+/* =========================================
+   OPTIONAL BOTTOM BUTTON
+========================================= */
+
+.video-title::after {
+    content: "Watch now  →";
+
+    position: absolute;
+
+    left: 20px;
+    right: 20px;
+    bottom: 16px;
+
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 22px;
+
+    background:
+        rgba(255,255,255,.92);
+
+    color: #141714;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    letter-spacing: .2px;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.18);
+}
+
+
+/* leave space for button */
+
+.video-title {
+    padding-bottom: 68px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:1100px) {
+
+    .impact-video-grid {
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+
+@media(max-width:650px) {
+
+    .impact-video-grid {
+        grid-template-columns:1fr;
+    }
+
+    .impact-video-card {
+        min-height: 400px;
+    }
+
+    .impact-video-card video {
+        height: 230px;
+    }
+
+}
+/* =========================================
+   CARD FAN CONTAINER
+========================================= */
+
+.gallery-fan{
+    position:relative;
+
+    width:100%;
+    max-width:1250px;
+
+    height:600px;
+
+    margin:70px auto 0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    perspective:1800px;
+}
+
+
+/* =========================================
+   CARD COMMON
+========================================= */
+
+.fan-card{
+    position:absolute;
+
+    width:300px;
+    height:390px;
+
+    border-radius:28px;
+
+    overflow:hidden;
+
+    background:#fff;
+
+    cursor:pointer;
+
+    transform-origin:center bottom;
+
+    box-shadow:
+        0 20px 55px rgba(0,0,0,.22);
+
+    transition:
+        transform .8s cubic-bezier(.22,.8,.25,1),
+        left .8s cubic-bezier(.22,.8,.25,1),
+        top .8s cubic-bezier(.22,.8,.25,1),
+        box-shadow .5s ease;
+
+    left:50%;
+    top:50%;
+
+    margin-left:-150px;
+    margin-top:-195px;
+}
+
+
+.fan-card img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.6s ease;
+}
+
+
+/* =========================================
+   STACKED STATE
+========================================= */
+
+.card-1{
+    transform:
+        translateX(-45px)
+        rotate(-10deg);
+    z-index:1;
+}
+
+.card-2{
+    transform:
+        translateX(-28px)
+        rotate(-6deg);
+    z-index:2;
+}
+
+.card-3{
+    transform:
+        translateX(-12px)
+        rotate(-2deg);
+    z-index:3;
+}
+
+.card-4{
+    transform:
+        translateX(8px)
+        rotate(2deg);
+    z-index:4;
+}
+
+.card-5{
+    transform:
+        translateX(25px)
+        rotate(6deg);
+    z-index:5;
+}
+
+.card-6{
+    transform:
+        translateX(42px)
+        rotate(10deg);
+    z-index:6;
+}
+
+
+/* =========================================
+   FAN OPEN ON HOVER
+========================================= */
+
+.gallery-fan:hover .card-1{
+    transform:
+        translate(-420px,-40px)
+        rotate(-15deg);
+}
+
+.gallery-fan:hover .card-2{
+    transform:
+        translate(-255px,-105px)
+        rotate(-9deg);
+}
+
+.gallery-fan:hover .card-3{
+    transform:
+        translate(-85px,-135px)
+        rotate(-3deg);
+}
+
+.gallery-fan:hover .card-4{
+    transform:
+        translate(85px,-135px)
+        rotate(3deg);
+}
+
+.gallery-fan:hover .card-5{
+    transform:
+        translate(255px,-105px)
+        rotate(9deg);
+}
+
+.gallery-fan:hover .card-6{
+    transform:
+        translate(420px,-40px)
+        rotate(15deg);
+}
+
+
+/* =========================================
+   INDIVIDUAL CARD HOVER
+========================================= */
+
+.fan-card:hover{
+    z-index:50;
+
+    box-shadow:
+        0 35px 80px rgba(0,0,0,.32);
+}
+
+
+.gallery-fan:hover .fan-card:hover{
+    scale:1.07;
+}
+
+
+.fan-card:hover img{
+    transform:scale(1.07);
+}
+
+
+/* =========================================
+   CLASSIC INFO PANEL
+========================================= */
+
+.fan-info{
+    position:absolute;
+
+    left:15px;
+    right:15px;
+    bottom:15px;
+
+    padding:18px 20px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(55,28,8,.90),
+            rgba(24,13,5,.94)
+        );
+
+    border:
+        1px solid rgba(212,175,55,.55);
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
+    color:#fff;
+
+    transform:translateY(120%);
+
+    opacity:0;
+
+    transition:.45s ease;
+}
+
+
+.fan-card:hover .fan-info{
+    transform:translateY(0);
+    opacity:1;
+}
+
+
+.fan-info h3{
+    margin:0 0 6px;
+
+    font-family:Georgia,serif;
+
+    font-size:21px;
+
+    color:#f0d27d;
+}
+
+
+.fan-info p{
+    margin:0;
+
+    font-size:13px;
+
+    color:rgba(255,255,255,.72);
+}
+
+
+/* =========================================
+   PREMIUM CINEMATIC IMPACT VIDEO SECTION
+========================================= */
+
+.gallery-impact {
+    padding: 90px 7%;
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(212,175,55,.10),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f6f1e8
+        );
+}
+
+
+/* GRID */
+
+.impact-video-grid {
+    max-width: 1400px;
+    margin: 65px auto 0;
+
+    display: grid;
+
+    grid-template-columns:
+        1.25fr .75fr .75fr;
+
+    grid-template-rows:
+        260px 260px;
+
+    gap: 24px;
+}
+
+
+/* =========================================
+   CARD COMMON
+========================================= */
+
+.impact-video-card {
+    position: relative;
+
+    min-height: 0;
+
+    border-radius: 30px;
+
+    overflow: hidden;
+
+    background: #20150b;
+
+    border:
+        1px solid rgba(190,145,50,.28);
+
+    box-shadow:
+        0 25px 60px rgba(70,40,10,.16);
+
+    transition:
+        transform .45s ease,
+        box-shadow .45s ease;
+}
+
+
+/* FEATURED FIRST CARD */
+
+.impact-video-card:nth-child(1) {
+    grid-row: 1 / 3;
+}
+
+
+/* FOURTH CARD WIDER */
+
+.impact-video-card:nth-child(4) {
+    grid-column: 2 / 4;
+}
+
+
+/* =========================================
+   VIDEO
+========================================= */
+
+.impact-video-card video {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: inherit;
+
+    transition:
+        transform .7s ease,
+        filter .5s ease;
+}
+
+
+/* CINEMATIC OVERLAY */
+
+.impact-video-card::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(24,13,5,.90) 0%,
+            rgba(24,13,5,.58) 32%,
+            rgba(24,13,5,.10) 65%,
+            transparent 100%
+        );
+
+    pointer-events: none;
+
+    z-index: 2;
+}
+
+
+/* =========================================
+   FLOATING CONTENT
+========================================= */
+
+.video-title {
+    position: absolute;
+
+    left: 22px;
+    right: 22px;
+    bottom: 20px;
+
+    margin: 0;
+
+    min-height: auto;
+
+    padding: 18px 20px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(55,30,10,.72),
+            rgba(25,14,6,.60)
+        );
+
+    border:
+        1px solid rgba(230,195,110,.30);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.12),
+        0 15px 35px rgba(0,0,0,.18);
+
+    z-index: 5;
+}
+
+
+/* CLASSIC TAG */
+
+.video-title::before {
+    content: "IMPACT STORY";
+
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(212,175,55,.14);
+
+    border:
+        1px solid rgba(212,175,55,.40);
+
+    color: #e3c56c;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+
+/* REMOVE OLD FAKE BUTTON */
+
+.video-title::after {
+    display: none;
+}
+
+
+/* TITLE */
+
+.video-title h3 {
+    margin: 0 0 6px;
+
+    font-family: Georgia, serif;
+
+    font-size: 23px;
+    line-height: 1.2;
+
+    color: #fff2c8;
+
+    text-shadow:
+        0 3px 12px rgba(0,0,0,.40);
+}
+
+
+/* DESCRIPTION */
+
+.video-title p {
+    margin: 0;
+
+    font-family: Georgia, serif;
+
+    font-size: 13px;
+    line-height: 1.55;
+
+    color:
+        rgba(255,255,255,.72);
+}
+
+
+/* GOLD ACCENT */
+
+.video-title h3::after {
+    content: "";
+
+    display: block;
+
+    width: 42px;
+    height: 2px;
+
+    margin-top: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #d4af37,
+            transparent
+        );
+}
+
+
+/* =========================================
+   HOVER
+========================================= */
+
+.impact-video-card:hover {
+    transform:
+        translateY(-8px)
+        scale(1.012);
+
+    box-shadow:
+        0 35px 80px rgba(65,37,8,.24),
+        0 0 28px rgba(212,175,55,.10);
+}
+
+
+.impact-video-card:hover video {
+    transform: scale(1.07);
+
+    filter:
+        brightness(.78)
+        saturate(.95);
+}
+
+
+.impact-video-card:hover .video-title {
+    border-color:
+        rgba(232,196,100,.60);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(68,38,12,.85),
+            rgba(27,15,6,.78)
+        );
+}
+
+
+/* =========================================
+   FEATURED CARD BIG TITLE
+========================================= */
+
+.impact-video-card:nth-child(1) .video-title h3 {
+    font-size: 30px;
+}
+
+
+.impact-video-card:nth-child(1) .video-title {
+    left: 28px;
+    right: 28px;
+    bottom: 28px;
+
+    padding: 23px 24px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:1100px) {
+
+    .impact-video-grid {
+        grid-template-columns:
+            repeat(2,1fr);
+
+        grid-template-rows: auto;
+    }
+
+    .impact-video-card,
+    .impact-video-card:nth-child(1),
+    .impact-video-card:nth-child(4) {
+        grid-column: auto;
+        grid-row: auto;
+
+        height: 360px;
+    }
+}
+
+
+@media(max-width:650px) {
+
+    .gallery-impact {
+        padding:
+            60px 18px;
+    }
+
+    .impact-video-grid {
+        grid-template-columns:1fr;
+        gap:20px;
+    }
+
+    .impact-video-card,
+    .impact-video-card:nth-child(1),
+    .impact-video-card:nth-child(4) {
+        height:320px;
+    }
+
+    .video-title {
+        left:14px;
+        right:14px;
+        bottom:14px;
+    }
+
+}
+.view-story-btn {
+    margin-top: 15px;
+
+    padding: 9px 18px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    border: 1px solid rgba(212, 175, 55, .65);
+    border-radius: 30px;
+
+    background: rgba(212, 175, 55, .08);
+
+    color: #f0d27d;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all .35s ease;
+}
+
+.view-story-btn span {
+    font-size: 17px;
+
+    transition: transform .35s ease;
+}
+
+.view-story-btn:hover {
+    color: #2d1908;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f1d77a,
+            #c99a32
+        );
+
+    border-color: #e2bd5c;
+
+    box-shadow:
+        0 8px 20px rgba(174, 125, 30, .28);
+
+    transform: translateY(-2px);
+}
+
+.view-story-btn:hover span {
+    transform: translateX(5px);
+}

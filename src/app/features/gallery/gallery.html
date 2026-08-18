@@ -34,88 +34,223 @@ class="book-container"
 
 
 
-        <!-- OPEN BOOK CONTENT -->
-
-
-        <div class="open-book">
 
 
 
+    <!-- OPEN BOOK CONTENT -->
+  <div class="open-book">
 
 
-            <!-- LEFT PAGE -->
+  <!-- PERMANENT LEFT PAGE -->
+  <div class="left-page">
 
-            <div class="left-page page-1">
+    <img
+      src="/images/edu1.jpeg"
+      alt="Star Guru Foundation"
+    >
 
-
-                <img 
-                src="/images/edu1.jpeg">
-
-
-            </div>
-
+  </div>
 
 
+  <!-- CENTER FOLD -->
+  <div class="book-center"></div>
 
 
+  <!-- PERMANENT RIGHT BACK PAGE -->
+  <div class="right-page">
+
+    <h2>Star Guru Foundation</h2>
+
+    <p>
+      Serving humanity with compassion.
+      Our foundation supports food distribution,
+      charity activities and community welfare
+      programs.
+    </p>
+
+    <p>
+      Every initiative is dedicated towards
+      creating a better society with kindness
+      and care.
+    </p>
+
+  </div>
 
 
-            <!-- CENTER FOLD -->
+  <!-- =========================
+       PAGE 1
+  ========================== -->
+
+  <div
+    class="turn-page turn-page-1"
+    [class.flipped]="currentPage >= 1"
+  >
+
+    <div class="turn-page-front">
+
+      <h2>Our Mission</h2>
+
+      <p>
+        Our mission is to serve people with
+        compassion and create meaningful change
+        in communities.
+      </p>
+
+    </div>
+
+    <div class="turn-page-back">
+
+      <img
+        src="/images/edu2.jpeg"
+        alt="Our Mission"
+      >
+
+    </div>
+
+  </div>
 
 
-            <div class="book-center"></div>
+  <!-- =========================
+       PAGE 2
+  ========================== -->
+
+  <div
+    class="turn-page turn-page-2"
+    [class.flipped]="currentPage >= 2"
+  >
+
+    <div class="turn-page-front">
+
+      <h2>Food Distribution</h2>
+
+      <p>
+        Supporting families and communities
+        through food distribution and
+        charitable activities.
+      </p>
+
+    </div>
+
+    <div class="turn-page-back">
+
+      <img
+        src="/images/news1.jpeg"
+        alt="Food Distribution"
+      >
+
+    </div>
+
+  </div>
 
 
+  <!-- =========================
+       PAGE 3
+  ========================== -->
+
+  <div
+    class="turn-page turn-page-3"
+    [class.flipped]="currentPage >= 3"
+  >
+
+    <div class="turn-page-front">
+
+      <h2>Education Support</h2>
+
+      <p>
+        Helping students and young people
+        access opportunities for education
+        and personal development.
+      </p>
+
+    </div>
+
+    <div class="turn-page-back">
+
+      <img
+        src="/images/edu4.jpeg"
+        alt="Education Support"
+      >
+
+    </div>
+
+  </div>
 
 
+  <!-- =========================
+       PAGE 4
+  ========================== -->
+
+  <div
+    class="turn-page turn-page-4"
+    [class.flipped]="currentPage >= 4"
+  >
+
+    <div class="turn-page-front">
+
+      <h2>Community Welfare</h2>
+
+      <p>
+        Working together to support communities,
+        families and people who need a helping
+        hand.
+      </p>
+
+    </div>
+
+    <div class="turn-page-back">
+
+      <img
+        src="/images/edu5.jpg"
+        alt="Community Welfare"
+      >
+
+    </div>
+
+  </div>
 
 
+  <!-- =========================
+       PAGE 5
+  ========================== -->
 
-            <!-- RIGHT PAGE -->
+  <div
+    class="turn-page turn-page-5"
+    [class.flipped]="currentPage >= 5"
+  >
 
+    <div class="turn-page-front">
 
-            <div class="right-page page-2">
+      <h2>Our Journey Continues</h2>
 
+      <p>
+        Together we can create a better society
+        through kindness, care and compassion.
+      </p>
 
-                <h2>
-                    Star Guru Foundation
-                </h2>
+    </div>
 
+    <div class="turn-page-back final-page">
 
+      <img
+        src="/images/logo.png"
+        class="final-book-logo"
+        alt="Star Guru"
+      >
 
-                <p>
-                    Serving humanity with compassion.
-                    Our foundation supports food
-                    distribution, charity activities,
-                    and community welfare programs.
-                </p>
+      <h2>
+        Star Guru Charitable Foundation
+      </h2>
 
+      <p>
+        Serving Humanity With Compassion
+      </p>
 
+    </div>
 
-                <p>
-                    Every initiative is dedicated
-                    towards creating a better
-                    society with kindness and care.
-                </p>
-
-
-
-                <p>
-                    Foundation supports food
-                    distribution, charity activities,
-                    and community welfare programs.
-                </p>
-
-
-
-            </div>
-
-
+  </div>
 
 
-
-
-        </div>
+</div>
 
 
 
@@ -209,13 +344,7 @@ class="book-container"
 
 
         <div class="spine"></div>
-
-
-
-
-
-
-    </div>
+         </div>
 
 
 
@@ -238,203 +367,114 @@ class="book-container"
 
 <section class="gallery-premium">
 
+  <div class="gallery-title">
 
-    <div class="gallery-title">
+    <span>Our Gallery</span>
 
-        <span>
-            Our Gallery
-        </span>
+    <h2>
+      Stories Captured Through
+      <strong>Service & Compassion</strong>
+    </h2>
 
-        <h2>
-            Stories Captured Through
-            <strong>Service & Compassion</strong>
-        </h2>
+    <p>
+      Explore our journey through meaningful moments,
+      community activities and memories of impact.
+    </p>
 
-        <p>
-            Explore our journey through meaningful moments,
-            community activities and memories of impact.
-        </p>
+  </div>
 
+
+<div
+  class="gallery-fan"
+  [class.fan-open]="fanOpen"
+  (click)="openFan()"
+>
+
+  <div
+    class="fan-card card-1"
+    [class.selected]="selectedCard === 1"
+    (click)="selectCard(1, $event)"
+  >
+    <img src="./images/food7.jpeg">
+
+    <div class="fan-info">
+      <h3>Food Distribution</h3>
+      <p>250+ Memories</p>
+      
     </div>
-
-
-
-    <!-- CATEGORY CARDS -->
-
-    <div class="gallery-category-grid">
-
-
-        <div class="gallery-category-card">
-
-            <img src="./images/food7.jpeg">
-
-
-            <div class="card-overlay">
-
-                <h3>
-                    Food Distribution
-                </h3>
-
-                <p>
-                    250+ Memories
-                </p>
-
-
-                <button>
-                    View Gallery
-                </button>
-
-            </div>
-
-
-        </div>
-
-
-
-
-        <div class="gallery-category-card">
-
-            <img src="./images/vaigai7.jpeg">
-
-
-            <div class="card-overlay">
-
-                <h3>
-                    Environment
-                </h3>
-
-                <p>
-                    180+ Memories
-                </p>
-
-                <button>
-                    View Gallery
-                </button>
-
-            </div>
-
-
-        </div>
-
-
-
-
-
-        <div class="gallery-category-card">
-
-            <img src="./images/edu8.jpg">
-
-
-            <div class="card-overlay">
-
-                <h3>
-                    Education
-                </h3>
-
-                <p>
-                    120+ Memories
-                </p>
-
-                <button>
-                    View Gallery
-                </button>
-
-            </div>
-
-        </div>
-
-
-
-
-
-        <div class="gallery-category-card">
-
-            <img src="./images/medi1.jpeg">
-
-
-            <div class="card-overlay">
-
-                <h3>
-                    Medical Camps
-                </h3>
-
-                <p>
-                    90+ Memories
-                </p>
-
-                <button>
-                    View Gallery
-                </button>
-
-            </div>
-
-        </div>
-
-
-
-
-
-        <div class="gallery-category-card">
-
-            <img src="./images/sports1.jpg">
-
-
-            <div class="card-overlay">
-
-                <h3>
-                    Sports Events
-                </h3>
-
-                <p>
-                    140+ Memories
-                </p>
-
-
-                <button>
-                    View Gallery
-                </button>
-
-            </div>
-
-
-        </div>
-
-
-
-
-
-        <div class="gallery-category-card">
-
-            <img src="./images/general7.jpeg">
-
-
-            <div class="card-overlay">
-
-                <h3>
-                    Community Welfare
-                </h3>
-
-
-                <p>
-                    200+ Memories
-                </p>
-
-
-                <button>
-                    View Gallery
-                </button>
-
-
-            </div>
-
-
-        </div>
-
-
-
+  </div>
+
+
+  <div
+    class="fan-card card-2"
+    [class.selected]="selectedCard === 2"
+    (click)="selectCard(2, $event)"
+  >
+    <img src="./images/vaigai7.jpeg">
+
+    <div class="fan-info">
+      <h3>Environment</h3>
+      <p>180+ Memories</p>
     </div>
+  </div>
 
 
+  <div
+    class="fan-card card-3"
+    [class.selected]="selectedCard === 3"
+    (click)="selectCard(3, $event)"
+  >
+    <img src="./images/edu8.jpg">
+
+    <div class="fan-info">
+      <h3>Education</h3>
+      <p>120+ Memories</p>
+    </div>
+  </div>
+
+
+  <div
+    class="fan-card card-4"
+    [class.selected]="selectedCard === 4"
+    (click)="selectCard(4, $event)"
+  >
+    <img src="./images/medi1.jpeg">
+
+    <div class="fan-info">
+      <h3>Medical Camps</h3>
+      <p>90+ Memories</p>
+    </div>
+  </div>
+
+
+  <div
+    class="fan-card card-5"
+    [class.selected]="selectedCard === 5"
+    (click)="selectCard(5, $event)"
+  >
+    <img src="./images/sports1.jpg">
+
+    <div class="fan-info">
+      <h3>Sports Events</h3>
+      <p>140+ Memories</p>
+    </div>
+  </div>
+
+
+  <div
+    class="fan-card card-6"
+    [class.selected]="selectedCard === 6"
+    (click)="selectCard(6, $event)"
+  >
+    <img src="./images/general7.jpeg">
+
+    <div class="fan-info">
+      <h3>Community Welfare</h3>
+      <p>200+ Memories</p>
+    </div>
+  </div>
+
+</div>
 
 </section>
 
@@ -538,9 +578,7 @@ class="book-container"
 
 </section>
 
-<!--=================================
-        IMPACT THROUGH IMAGES
-==================================-->
+
 <!--=================================
       IMPACT VIDEOS
 ==================================-->
@@ -567,8 +605,6 @@ class="book-container"
             environmental activities, education support, and community service
             initiatives.
         </p>
-
-
     </div>
 
 
@@ -597,6 +633,14 @@ class="book-container"
                 <p>
                     Serving meals with compassion
                 </p>
+               <button 
+      type="button"
+      class="view-story-btn"
+      (click)="viewStory(6, $event)"
+    >
+      View Story
+      <span>→</span>
+    </button>
 
             </div>
 
@@ -625,6 +669,14 @@ class="book-container"
                 <p>
                     Building a cleaner environment
                 </p>
+                 <button 
+      type="button"
+      class="view-story-btn"
+      (click)="viewStory(6, $event)"
+    >
+      View Story
+      <span>→</span>
+    </button>
 
             </div>
 
@@ -653,6 +705,14 @@ class="book-container"
                 <p>
                     Empowering young minds
                 </p>
+                <button 
+      type="button"
+      class="view-story-btn"
+      (click)="viewStory(6, $event)"
+    >
+      View Story
+      <span>→</span>
+    </button>
 
             </div>
 
@@ -681,8 +741,15 @@ class="book-container"
                 <p>
                     Creating positive change
                 </p>
-
-            </div>
+               <button 
+         type="button"
+        class="view-story-btn"
+        (click)="viewStory(6, $event)"
+         >
+      View Story
+      <span>→</span>
+    </button>
+    </div>
 
         </div>
 
