@@ -8,57 +8,84 @@ import { Component } from '@angular/core';
 })
 export class Gallery {
 
-
-  // Book states
-
   bookOpen = false;
-
   pageOpen = false;
-
   contentOpen = false;
 
+  currentPage = 0;
+  totalPages = 5;
 
+  isClosing = false;
 
-  // Open book animation
+ openBook(): void {
 
-  openBook(){
-
-
-    if(this.bookOpen){
-      return;
-    }
-
-
-
-    // Front cover opens
+  // CLOSED BOOK -> OPEN COVER
+  if (!this.bookOpen) {
 
     this.bookOpen = true;
 
-
-
-    // First page reveal
-
-    setTimeout(()=>{
-
+    setTimeout(() => {
       this.pageOpen = true;
+    }, 1200);
 
-    },1200);
-
-
-
-
-    // Content reveal
-
-    setTimeout(()=>{
-
+    setTimeout(() => {
       this.contentOpen = true;
+    }, 2200);
 
-    },2200);
-
-
-
+    return;
   }
 
+  // TURN PAGE 1 -> 5
+  if (this.currentPage < this.totalPages) {
+
+    this.currentPage++;
+
+    return;
+  }
+
+  // AFTER PAGE 5 -> RESET -> FULL CLOSED BOOK
+  this.currentPage = 0;
+
+  this.pageOpen = false;
+  this.contentOpen = false;
+
+  this.bookOpen = false;
+}
 
 
+fanOpen = false;
+
+selectedCard: number | null = null;
+
+
+openFan(): void {
+
+  if (!this.fanOpen) {
+    this.fanOpen = true;
+  }
+
+}
+
+
+selectCard(cardNumber: number, event: Event): void {
+
+  // VERY IMPORTANT
+  // prevents the card click from triggering openFan()
+  event.stopPropagation();
+
+  // keep fan open
+  this.fanOpen = true;
+
+  // select clicked card
+  this.selectedCard = cardNumber;
+
+}
+  viewStory(cardNumber: number, event: Event): void {
+
+  event.stopPropagation();
+
+  console.log('View story:', cardNumber);
+
+  // We can open the gallery/modal here next.
+}
 }
