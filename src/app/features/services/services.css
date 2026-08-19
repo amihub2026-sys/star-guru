@@ -978,134 +978,286 @@ padding-top: 2px;
 /*=================================
     DAILY FOOD DISTRIBUTION
 ==================================*/
+/*=================================
+      DAILY FOOD DISTRIBUTION
+==================================*/
 
-.service-feature{
+.service-feature {
+  width: min(1400px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 100px 4%;
+  display: grid;
 
-    max-width:1400px;
+  /* Image left and text right */
+  grid-template-columns:
+    minmax(0, 1.05fr)
+    minmax(0, 1fr);
 
-    margin:auto;
-
-    padding:60px 8%;
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:70px;
-
-    align-items:center;
+  align-items: center;
+  gap: 75px;
 }
-
-.service-image{
-    overflow:hidden;
-    border-radius:25px;
-    height:390px;
-}
-
-
-.image-slider{
-
-     width:100%;
-    height:390px;
-    position:relative;
-
-}
-
-
-.image-slider img{
-
-    position:absolute;
-
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    border-radius:25px;
-
-    opacity:0;
-
-    transform:translateY(100%);
-
-    animation:slideUp 15s infinite;
-
-}
-
-
-/* each image timing */
-
-.image-slider img:nth-child(1){
-    animation-delay:0s;
-}
-
-.image-slider img:nth-child(2){
-    animation-delay:3s;
-}
-
-.image-slider img:nth-child(3){
-    animation-delay:6s;
-}
-
-.image-slider img:nth-child(4){
-    animation-delay:9s;
-}
-
-.image-slider img:nth-child(5){
-    animation-delay:12s;
-}
-
-
-
-@keyframes slideUp{
-
-
-0%{
-
-    opacity:0;
-    transform:translateY(100%);
-
-}
-
-
-5%{
-
-    opacity:1;
-    transform:translateY(0);
-
-}
-
-
-20%{
-
-    opacity:1;
-    transform:translateY(0);
-
-}
-
-
-25%{
-
-    opacity:0;
-    transform:translateY(-100%);
-
-}
-
-
-100%{
-
-    opacity:0;
-
-}
-
-}
-
 
 /*=================================
-        MOBILE
+      LEFT IMAGE SLIDER
 ==================================*/
+
+.service-image {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  overflow: hidden;
+  border-radius: 30px;
+  background: #e5e7eb;
+  box-shadow: 0 25px 55px rgba(15, 23, 42, 0.18);
+}
+
+.image-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.image-slider img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transform: translateX(-100%);
+  animation: foodSlide 15s infinite;
+}
+
+.image-slider img:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.image-slider img:nth-child(2) {
+  animation-delay: 3s;
+}
+
+.image-slider img:nth-child(3) {
+  animation-delay: 6s;
+}
+
+.image-slider img:nth-child(4) {
+  animation-delay: 9s;
+}
+
+.image-slider img:nth-child(5) {
+  animation-delay: 12s;
+}
+
+@keyframes foodSlide {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  5% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  20% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  25% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.food-image-label {
+  position: absolute;
+  z-index: 5;
+  left: 24px;
+  bottom: 24px;
+  padding: 12px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50px;
+  color: white;
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(10px);
+  font-size: 14px;
+  font-weight: 700;
+}
+
 /*=================================
-        MOBILE
+      RIGHT CONTENT
 ==================================*/
+
+.service-content {
+  min-width: 0;
+}
+
+.service-content .section-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  border-radius: 50px;
+  color: #111827;
+  background: #ffc107;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 0 10px 25px rgba(255, 193, 7, 0.25);
+}
+
+.service-content h2 {
+  margin: 22px 0;
+  color: #0f172a;
+  font-size: clamp(40px, 4vw, 58px);
+  line-height: 1.08;
+}
+
+.service-content .intro {
+  margin: 0 0 32px;
+  color: #475569;
+  font-size: 17px;
+  line-height: 1.9;
+}
+
+/*=================================
+      HIGHLIGHTS
+==================================*/
+
+.highlights {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  margin-bottom: 35px;
+}
+
+.highlight {
+  display: flex;
+  align-items: center;
+  min-height: 68px;
+  padding: 16px 18px;
+  border: 1px solid rgba(255, 193, 7, 0.22);
+  border-radius: 16px;
+  color: #283548;
+  background: #fff9e8;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.highlight span {
+  flex-shrink: 0;
+  margin-right: 10px;
+  color: #d99d00;
+  font-size: 19px;
+  font-weight: 900;
+}
+
+/*=================================
+      STATISTICS
+==================================*/
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.stat-box {
+  padding: 25px 20px;
+  border-radius: 20px;
+  text-align: center;
+  background: #ffffff;
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.09);
+}
+
+.stat-box h3 {
+  margin: 0 0 8px;
+  color: #e9ac00;
+  font-size: 34px;
+}
+
+.stat-box span {
+  color: #475569;
+  font-size: 15px;
+}
+
+/*=================================
+      TABLET
+==================================*/
+
+@media (max-width: 900px) {
+  .service-feature {
+    grid-template-columns: 1fr;
+    gap: 45px;
+    padding: 75px 4%;
+  }
+
+  /* Text first and image second on smaller screens */
+
+  .service-content {
+    order: 1;
+  }
+
+  .service-image {
+    order: 2;
+    height: 430px;
+  }
+}
+
+/*=================================
+      MOBILE
+==================================*/
+
+@media (max-width: 600px) {
+  .service-feature {
+    width: calc(100% - 24px);
+    padding: 55px 0;
+  }
+
+  .service-content h2 {
+    font-size: 36px;
+  }
+
+  .service-content .intro {
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  .highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .stat-box {
+    padding: 20px 10px;
+  }
+
+  .stat-box h3 {
+    font-size: 28px;
+  }
+
+  .service-image {
+    height: 330px;
+    border-radius: 20px;
+  }
+
+  .food-image-label {
+    left: 16px;
+    bottom: 16px;
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+}
 
 /* =========================================
    DAILY FOOD DISTRIBUTION — MOBILE
