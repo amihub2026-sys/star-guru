@@ -722,11 +722,15 @@
         AWARDS & RECOGNITION
 ==================================-->
 
-<section class="recognition-section">
+<!--=================================
+          RECOGNITION SECTION
+==================================-->
 
-  <div class="section-heading">
+<section class="impact-recognition-section">
 
-    <span class="section-tag">
+  <div class="impact-recognition-heading">
+
+    <span class="impact-recognition-tag">
       Recognition
     </span>
 
@@ -738,40 +742,85 @@
     <p>
       Every appreciation reflects the dedication,
       compassion and commitment behind our journey.
+      These recognitions encourage us to continue
+      creating meaningful change in society.
     </p>
 
   </div>
 
-  <div class="recognition-grid">
+  <div
+    *ngIf="recognitionsLoading"
+    class="impact-recognition-message"
+  >
+    Loading recognition cards...
+  </div>
+
+  <div
+    *ngIf="
+      !recognitionsLoading &&
+      recognitionsError
+    "
+    class="impact-recognition-message error"
+  >
+    {{ recognitionsError }}
+  </div>
+
+  <div
+    *ngIf="
+      !recognitionsLoading &&
+      !recognitionsError &&
+      recognitions.length > 0
+    "
+    class="impact-recognition-grid"
+  >
 
     <article
       *ngFor="
         let item of recognitions;
         trackBy: trackById
       "
-      class="recognition-card"
+      class="impact-recognition-card"
     >
 
-      <img
-        *ngIf="item.recognitionImageUrl"
-        [src]="item.recognitionImageUrl"
-        [alt]="item.title"
-      >
+      <div class="impact-recognition-image">
 
-      <div class="recognition-content">
+        <img
+          *ngIf="item.recognitionImageUrl"
+          [src]="item.recognitionImageUrl"
+          [alt]="item.title"
+        >
 
-        <span class="recognition-badge">
+      </div>
+
+      <div class="impact-recognition-content">
+
+        <span class="impact-recognition-badge">
           {{ item.badgeText }}
         </span>
 
-        <h3>{{ item.title }}</h3>
+        <h3>
+          {{ item.title }}
+        </h3>
 
-        <p>{{ item.description }}</p>
+        <p>
+          {{ item.description }}
+        </p>
 
       </div>
 
     </article>
 
+  </div>
+
+  <div
+    *ngIf="
+      !recognitionsLoading &&
+      !recognitionsError &&
+      recognitions.length === 0
+    "
+    class="impact-recognition-message"
+  >
+    No recognition cards available.
   </div>
 
 </section>

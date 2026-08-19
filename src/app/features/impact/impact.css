@@ -4429,85 +4429,6 @@
 }
 
 
-/* =================================================
-   MOBILE
-================================================= */
-
-@media (max-width: 550px) {
-
-    .impact-hero {
-        min-height: 850px;
-
-        padding:
-            80px 20px
-            40px;
-    }
-
-
-    .hero-content h1 {
-        font-size: 39px;
-    }
-
-
-    .hero-content > p {
-        font-size: 14px;
-
-        line-height: 1.7;
-    }
-
-
-    .hero-impact {
-        height: 350px;
-
-        margin-top: 35px;
-    }
-
-
-    .glass {
-        min-width: 115px;
-
-        padding: 12px;
-    }
-
-
-    .glass h2 {
-        font-size: 21px;
-    }
-
-
-    .glass p {
-        font-size: 10px;
-    }
-
-
-    .glass1 {
-        top: 10px;
-        left: 0;
-    }
-
-
-    .glass2 {
-        top: 10px;
-        right: 0;
-    }
-
-
-    .glass3 {
-        bottom: 10px;
-        left: 0;
-    }
-
-
-    .glass4 {
-        bottom: 10px;
-        right: 0;
-    }
-
-
-    .heart {
-        width: 95px;
-        height: 95px;
-    }
 
 /* Video modal */
 
@@ -4639,112 +4560,206 @@
   background: #0aaf55;
 }
 
-/* Recognition */
-
-.recognition-section {
-  padding: 90px 8%;
-  background: #fafafa;
-}
-
-.recognition-grid {
-  width: min(1200px, 100%);
-  margin: 50px auto 0;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 32px;
-}
-
-.recognition-card {
-  overflow: hidden;
-  border: 1px solid #f0e5c5;
-  border-radius: 24px;
-  background: #fff;
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.09);
-}
-
-.recognition-card > img {
+:host {
   display: block;
   width: 100%;
-  height: 260px;
-  object-fit: cover;
+  overflow-x: hidden;
 }
 
-.recognition-content {
-  padding: 26px;
+/* Entire section */
+
+.impact-recognition-section {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  padding: 100px 7%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(224, 174, 28, 0.1),
+      transparent 32%
+    ),
+    #fafafa;
 }
 
-.recognition-badge {
-  display: inline-block;
-  margin-bottom: 18px;
-  padding: 8px 17px;
-  border-radius: 30px;
-  background: #fff4d6;
-  color: #d88700;
-  font-size: 13px;
-  font-weight: 700;
-}
+/* Heading */
 
-.recognition-content h3 {
-  margin: 0 0 14px;
-  color: #071a3a;
-  font-size: 24px;
-}
-
-.recognition-content p {
-  margin: 0;
-  color: #52627a;
-  line-height: 1.8;
-}
-
-.impact-loading,
-.impact-error,
-.empty-message {
-  padding: 30px;
+.impact-recognition-heading {
+  box-sizing: border-box;
+  width: min(850px, 100%);
+  margin: 0 auto;
   text-align: center;
 }
 
-.impact-error {
-  color: #b91c1c;
+.impact-recognition-tag {
+  display: table;
+  margin: 0 auto 20px;
+  padding: 9px 22px;
+  border: 1px solid #dfad22;
+  border-radius: 50px;
+  color: #8d6500;
+  background: #fff9e8;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
 }
 
-/* Responsive */
+.impact-recognition-heading h2 {
+  margin: 0 auto 22px;
+  color: #071a3a;
+  font-size: clamp(38px, 5vw, 58px);
+  line-height: 1.12;
+  text-align: center;
+}
 
-@media (max-width: 900px) {
-  .transformation-card-grid,
-  .recognition-grid {
-    grid-template-columns: 1fr;
+.impact-recognition-heading h2 span {
+  color: #d8a51c;
+}
+
+.impact-recognition-heading p {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  color: #52627a;
+  font-size: 16px;
+  line-height: 1.9;
+  text-align: center;
+}
+
+/* Card grid */
+
+.impact-recognition-grid {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
+  margin: 55px auto 0;
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+  justify-content: center;
+  align-items: stretch;
+  gap: 28px;
+}
+
+/* Card */
+
+.impact-recognition-card {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #eee3c3;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow:
+    0 18px 45px rgba(15, 23, 42, 0.1);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.impact-recognition-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 28px 60px rgba(15, 23, 42, 0.16);
+}
+
+.impact-recognition-image {
+  position: relative;
+  width: 100%;
+  height: 270px;
+  overflow: hidden;
+  background: #e8ebef;
+}
+
+.impact-recognition-image img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+.impact-recognition-content {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 28px;
+  text-align: left;
+}
+
+.impact-recognition-badge {
+  display: inline-flex;
+  margin-bottom: 18px;
+  padding: 7px 17px;
+  border: 1px solid #f0dfaa;
+  border-radius: 50px;
+  color: #b47600;
+  background: #fff7df;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.impact-recognition-content h3 {
+  margin: 0 0 15px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  color: #071a3a;
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+.impact-recognition-content p {
+  margin: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  color: #52627a;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* Tablet */
+
+@media (max-width: 950px) {
+  .impact-recognition-section {
+    padding: 80px 30px;
   }
 
-  .recognition-card > img {
-    height: 320px;
+  .impact-recognition-grid {
+    max-width: 780px;
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 600px) {
-  .impact-video-modal {
-    padding: 15px;
+/* Mobile */
+
+@media (max-width: 650px) {
+  .impact-recognition-section {
+    padding: 70px 18px;
   }
 
-  .modal-close {
-    top: 15px;
-    right: 15px;
+  .impact-recognition-heading h2 {
+    font-size: 36px;
   }
 
-  .transformation-images {
+  .impact-recognition-grid {
+    max-width: 420px;
     grid-template-columns: 1fr;
+    gap: 22px;
+    margin-top: 38px;
   }
 
-  .transformation-image {
-    height: 260px;
-  }
-
-  .dynamic-transformations,
-  .recognition-section {
-    padding: 70px 20px;
-  }
-
-  .recognition-card > img {
+  .impact-recognition-image {
     height: 240px;
   }
 
+  .impact-recognition-content {
+    padding: 23px;
+  }
 }
