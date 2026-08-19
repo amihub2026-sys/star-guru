@@ -1769,6 +1769,10 @@ cursor:pointer;
   border-radius: 5px 35px 35px 5px;
 }
 
+.book-cover {
+  z-index: 100;
+  transform-origin: left center;
+}
 
 /* ==============================
    INITIAL STACK
@@ -1952,11 +1956,11 @@ cursor:pointer;
 ============================== */
 
 .turn-page-1.flipped {
-  z-index: 50;
+  z-index: 10;
 }
 
 .turn-page-2.flipped {
-  z-index: 40;
+  z-index: 20;
 }
 
 .turn-page-3.flipped {
@@ -1964,11 +1968,11 @@ cursor:pointer;
 }
 
 .turn-page-4.flipped {
-  z-index: 20;
+  z-index: 40;
 }
 
 .turn-page-5.flipped {
-  z-index: 10;
+  z-index: 50;
 }
 
 
@@ -2234,7 +2238,7 @@ cursor:pointer;
     cursor: pointer;
 
     transition: .3s ease;
-}
+                           }
 
 
 .gallery-category-card

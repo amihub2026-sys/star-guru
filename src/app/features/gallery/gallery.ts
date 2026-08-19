@@ -17,23 +17,26 @@ export class Gallery {
 
   isClosing = false;
 
- openBook(): void {
+openBook(): void {
 
   // CLOSED BOOK -> OPEN COVER
   if (!this.bookOpen) {
 
     this.bookOpen = true;
 
+    // Show inside pages almost immediately
     setTimeout(() => {
       this.pageOpen = true;
-    }, 1200);
+    }, 250);
 
+    // Show page content shortly after
     setTimeout(() => {
       this.contentOpen = true;
-    }, 2200);
+    }, 450);
 
     return;
   }
+
 
   // TURN PAGE 1 -> 5
   if (this.currentPage < this.totalPages) {
@@ -43,7 +46,8 @@ export class Gallery {
     return;
   }
 
-  // AFTER PAGE 5 -> RESET -> FULL CLOSED BOOK
+
+  // AFTER LAST PAGE -> CLOSE BOOK
   this.currentPage = 0;
 
   this.pageOpen = false;

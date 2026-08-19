@@ -1,87 +1,650 @@
 /*=================================
       NEWS HERO
 ==================================*/
+/* =========================================
+   NEWS HERO - ANIMATED NEWSPAPER
+========================================= */
 
-.news-hero{
+.news-hero {
+  position: relative;
+  min-height: 760px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    position:relative;
+  padding: 100px 20px 70px;
 
-    height:90vh;
+  overflow: hidden;
 
-    display:flex;
+  background:
+    radial-gradient(
+      circle at center,
+      #343434 0%,
+      #181818 55%,
+      #080808 100%
+    );
 
-    justify-content:center;
-
-    align-items:center;
-
-    text-align:center;
-
-    background:url("https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1800&q=80");
-
-    background-size:cover;
-
-    background-position:center;
-
-    overflow:hidden;
+  perspective: 1200px;
 }
 
-.news-overlay{
 
-    position:absolute;
+/* =========================================
+   BACKGROUND LIGHT EFFECT
+========================================= */
 
-    inset:0;
+.paper-bg {
+  position: absolute;
 
-    background:rgba(15,23,42,.80);
+  width: 900px;
+  height: 900px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.05);
+
+  filter: blur(100px);
+
+  animation: backgroundGlow 5s ease-in-out infinite alternate;
 }
 
-.news-content{
 
-    position:relative;
+@keyframes backgroundGlow {
 
-    z-index:2;
+  from {
+    transform: scale(0.9);
+    opacity: 0.3;
+  }
 
-    width:90%;
-
-    max-width:900px;
-
-    color:white;
-}
-
-.news-content h1{
-
-    font-size:62px;
-
-    margin:25px 0;
-
-    line-height:1.2;
-
-    font-weight:800;
-}
-
-.news-content p{
-
-    font-size:18px;
-
-    line-height:1.9;
-
-    color:#e5e7eb;
-
-    margin-bottom:40px;
-}
-
-@media(max-width:768px){
-
-.news-content h1{
-
-    font-size:40px;
+  to {
+    transform: scale(1.15);
+    opacity: 0.7;
+  }
 
 }
 
-.news-content p{
 
-    font-size:16px;
+/* =========================================
+   NEWSPAPER
+========================================= */
+
+.newspaper {
+
+  position: relative;
+
+  width: min(1100px, 94%);
+
+  padding: 25px 40px 45px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f8f4e8,
+      #eee8d7
+    );
+
+  color: #111;
+
+  box-shadow:
+    0 35px 80px rgba(0, 0, 0, 0.65),
+    0 5px 20px rgba(0, 0, 0, 0.4);
+
+  transform-origin: center;
+
+  animation:
+    newspaperEntry 1.5s cubic-bezier(.16, .8, .25, 1) forwards,
+    paperFloat 5s ease-in-out 1.5s infinite;
+
+  opacity: 0;
 
 }
+
+
+/* subtle paper texture */
+
+.newspaper::before {
+
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.12;
+
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,0.04) 0px,
+      rgba(0,0,0,0.04) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+
+}
+
+
+/* =========================================
+   NEWSPAPER ENTRANCE
+========================================= */
+
+@keyframes newspaperEntry {
+
+  0% {
+
+    opacity: 0;
+
+    transform:
+      translateY(180px)
+      rotateX(35deg)
+      rotateZ(-5deg)
+      scale(0.7);
+
+  }
+
+  65% {
+
+    opacity: 1;
+
+    transform:
+      translateY(-15px)
+      rotateX(-3deg)
+      rotateZ(1deg)
+      scale(1.02);
+
+  }
+
+  100% {
+
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      rotateX(0)
+      rotateZ(0)
+      scale(1);
+
+  }
+
+}
+
+
+@keyframes paperFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+
+}
+
+
+/* =========================================
+   TOP DETAILS
+========================================= */
+
+.paper-top {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+
+}
+
+
+.paper-line {
+
+  height: 1px;
+
+  background: #111;
+
+  margin: 12px 0;
+
+}
+
+
+.paper-line.thick {
+
+  height: 4px;
+
+  margin: 8px 0;
+
+}
+
+
+/* =========================================
+   NEWSPAPER NAME
+========================================= */
+
+.paper-title {
+
+  text-align: center;
+
+  font-family:
+    "Times New Roman",
+    Georgia,
+    serif;
+
+  font-size: clamp(38px, 6vw, 76px);
+
+  font-weight: 900;
+
+  line-height: 1;
+
+  letter-spacing: -2px;
+
+  text-transform: uppercase;
+
+}
+
+
+.paper-date {
+
+  text-align: center;
+
+  font-family: Georgia, serif;
+
+  font-size: 13px;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
+
+  margin: 11px 0 25px;
+
+}
+
+
+/* =========================================
+   NEWSPAPER COLUMNS
+========================================= */
+
+.news-columns {
+
+  display: grid;
+
+  grid-template-columns: 1fr 2.3fr 1fr;
+
+  gap: 28px;
+
+  align-items: stretch;
+
+}
+
+
+/* SIDE NEWS */
+
+.side-news {
+
+  padding: 20px;
+
+  font-family: Georgia, serif;
+
+  border-top: 5px solid #111;
+
+  border-bottom: 1px solid #555;
+
+}
+
+
+.side-news span {
+
+  display: block;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 15px;
+
+}
+
+
+.side-news p {
+
+  font-size: 15px;
+
+  line-height: 1.7;
+
+  text-align: justify;
+
+}
+
+
+/* =========================================
+   MAIN NEWS
+========================================= */
+
+.main-story {
+
+  text-align: center;
+
+  border-left: 1px solid #777;
+  border-right: 1px solid #777;
+
+  padding: 10px 30px 20px;
+
+}
+
+
+.breaking-label {
+
+  display: inline-block;
+
+  padding: 7px 14px;
+
+  background: #111;
+
+  color: white;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 18px;
+
+  animation: labelReveal 1s ease 1.2s both;
+
+}
+
+
+@keyframes labelReveal {
+
+  from {
+
+    opacity: 0;
+    transform: translateY(-15px);
+
+  }
+
+  to {
+
+    opacity: 1;
+    transform: translateY(0);
+
+  }
+
+}
+
+
+/* =========================================
+   MAIN HEADLINE
+========================================= */
+
+.main-story h1 {
+
+  margin: 0;
+
+  font-family:
+    "Times New Roman",
+    Georgia,
+    serif;
+
+  font-size: clamp(42px, 6vw, 78px);
+
+  line-height: 0.9;
+
+  font-weight: 900;
+
+  letter-spacing: -3px;
+
+  text-transform: uppercase;
+
+  animation: headlineReveal 1.2s ease 0.8s both;
+
+}
+
+
+@keyframes headlineReveal {
+
+  from {
+
+    opacity: 0;
+
+    transform:
+      scale(1.25)
+      translateY(30px);
+
+    filter: blur(5px);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform:
+      scale(1)
+      translateY(0);
+
+    filter: blur(0);
+
+  }
+
+}
+
+
+.main-story > p {
+
+  font-family: Georgia, serif;
+
+  font-style: italic;
+
+  margin: 24px auto;
+
+  font-size: 16px;
+
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.hero-buttons {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  margin-top: 25px;
+
+}
+
+
+.hero-buttons a {
+
+  text-decoration: none;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  letter-spacing: .5px;
+
+  transition:
+    transform .3s ease,
+    background .3s ease,
+    color .3s ease;
+
+}
+
+
+.primary-btn {
+
+  padding: 12px 22px;
+
+  background: #111;
+
+  color: white;
+
+  border: 1px solid #111;
+
+}
+
+
+.secondary-btn {
+
+  padding: 12px 22px;
+
+  background: transparent;
+
+  color: #111;
+
+  border: 1px solid #111;
+
+}
+
+
+.hero-buttons a:hover {
+
+  transform: translateY(-3px);
+
+}
+
+
+.secondary-btn:hover {
+
+  background: #111;
+
+  color: white;
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 850px) {
+
+  .news-hero {
+
+    min-height: auto;
+
+    padding:
+      100px 12px
+      50px;
+
+  }
+
+
+  .newspaper {
+
+    width: 100%;
+
+    padding:
+      20px
+      18px
+      35px;
+
+  }
+
+
+  .paper-top {
+
+    font-size: 8px;
+
+    gap: 8px;
+
+  }
+
+
+  .news-columns {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+  .side-news {
+
+    display: none;
+
+  }
+
+
+  .main-story {
+
+    border: none;
+
+    padding: 10px;
+
+  }
+
+
+  .main-story h1 {
+
+    font-size: clamp(38px, 12vw, 60px);
+
+    letter-spacing: -2px;
+
+  }
+
+
+  .paper-title {
+
+    font-size: clamp(32px, 10vw, 50px);
+
+    letter-spacing: -1px;
+
+  }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+  .paper-top span:first-child {
+
+    display: none;
+
+  }
+
+
+  .hero-buttons {
+
+    flex-direction: column;
+
+  }
+
+
+  .hero-buttons a {
+
+    width: 100%;
+
+    text-align: center;
+
+  }
 
 }
 
@@ -1328,5 +1891,98 @@
     grid-template-columns:1fr;
 
 }
+
+}
+/* =========================================
+   NEWSPAPER VIDEO
+========================================= */
+
+.newspaper-video {
+  position: relative;
+
+  width: 100%;
+  max-width: 520px;
+
+  margin: 25px auto 0;
+
+  padding: 6px;
+
+  background: #111;
+
+  border: 1px solid #333;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.25);
+
+  opacity: 0;
+
+  animation: videoReveal 1.2s ease 1.4s forwards;
+}
+
+
+/* VIDEO */
+
+.newspaper-video video {
+  display: block;
+
+  width: 100%;
+  height: 240px;
+
+  object-fit: cover;
+
+  filter:
+    grayscale(25%)
+    contrast(1.08)
+    sepia(8%);
+}
+
+
+/* NEWSPAPER STYLE CAPTION */
+
+.video-caption {
+  padding: 8px 5px 3px;
+
+  color: #f8f4e8;
+
+  background: #111;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+
+  text-align: center;
+}
+
+
+/* VIDEO APPEAR ANIMATION */
+
+@keyframes videoReveal {
+
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+    filter: blur(5px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .newspaper-video video {
+    height: 190px;
+  }
 
 }
