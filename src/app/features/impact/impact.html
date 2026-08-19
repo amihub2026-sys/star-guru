@@ -140,207 +140,176 @@
 
 </section>
 
+
 <!--=================================
-        IMPACT STORIES VIDEOS
+        DYNAMIC IMPACT VIDEOS
 ==================================-->
 
 <section class="impact-story-section">
 
+  <div class="impact-story-header">
 
-    <!-- Heading -->
+    <span class="impact-story-tag">
+      Our Impact Stories
+    </span>
 
-    <div class="impact-story-header">
+    <h2>
+      Real Stories.
+      <span>Real People.</span>
+      Real Change.
+    </h2>
 
-        <span class="impact-story-tag">
-            Our Impact Stories
-        </span>
+    <p>
+      Behind every initiative is a story of hope,
+      kindness and transformation. Explore the journeys
+      of people and communities touched by our mission.
+    </p>
 
+  </div>
 
-        <h2>
-            Real Stories.
-            <span>Real People.</span>
-            Real Change.
-        </h2>
+  <div
+    *ngIf="impactVideosLoading"
+    class="impact-video-message"
+  >
+    Loading Impact videos...
+  </div>
 
+  <div
+    *ngIf="impactVideosError"
+    class="impact-video-message error-message"
+  >
+    {{ impactVideosError }}
+  </div>
 
-        <p>
-            Behind every initiative is a story of hope,
-            kindness, and transformation. Explore the journeys
-            of people and communities touched by our mission.
-        </p>
+  <div
+    *ngIf="
+      !impactVideosLoading &&
+      !impactVideosError &&
+      impactVideos.length === 0
+    "
+    class="impact-video-message"
+  >
+    No Impact videos are currently available.
+  </div>
 
-    </div>
+  <div
+    *ngIf="
+      !impactVideosLoading &&
+      impactVideos.length > 0
+    "
+    class="impact-story-grid"
+  >
 
+    <article
+      *ngFor="
+        let item of impactVideos;
+        let i = index;
+        trackBy: trackByImpactVideoId
+      "
+      class="impact-story-card"
+      role="button"
+      tabindex="0"
+      (click)="openImpactVideo(item)"
+      (keydown.enter)="openImpactVideo(item)"
+    >
 
+      <!-- Cloudinary video thumbnail -->
 
-    <!-- Video Cards -->
+      <img
+        class="impact-story-preview"
+        [src]="getImpactPoster(item.videoUrl)"
+        [alt]="item.title"
+      >
 
-    <div class="impact-story-grid">
+      <div class="impact-story-overlay">
 
+        <div class="impact-story-play">
+          ▶
+        </div>
 
-        <!-- Food -->
+        <div class="impact-story-content">
 
-        <div class="impact-story-card"
-     (click)="openVideo($event)">
+          <span>
+            0{{ i + 1 }}
+          </span>
 
-            <video
-    src="./images/video.mp4"
-    poster="/images/vs1.jpeg"
-    muted
-    loop
-    playsinline>
-</video>
+          <h3>
+            {{ item.title }}
+          </h3>
 
-
-            <div class="impact-story-overlay">
-
-
-                <div class="impact-story-play">
-                    ▶
-                </div>
-
-
-                <div class="impact-story-content">
-
-                    <span>
-                        01
-                    </span>
-
-
-                    <h3>
-                        Food Distribution
-                    </h3>
-
-
-                    <p>
-                        Nourishing lives with care,
-                        compassion and dignity.
-                    </p>
-
-                </div>
-
-
-            </div>
-
+          <p>
+            {{ item.description }}
+          </p>
 
         </div>
 
-        <!-- Environment -->
+      </div>
 
+    </article>
 
-        <div class="impact-story-card"
-     (click)="openVideo($event)">
-
-
-            <video
-                src="/images/vaigai-video.mp4"
-                poster="/images/vaigai1.jpeg"
-                autoplay
-                muted
-                loop
-                playsinline>
-            </video>
-
-
-
-            <div class="impact-story-overlay">
-
-
-                <div class="impact-story-play">
-                    ▶
-                </div>
-
-
-                <div class="impact-story-content">
-
-                    <span>
-                        02
-                    </span>
-
-
-                    <h3>
-                        Vaigai River Cleaning
-                    </h3>
-
-
-                    <p>
-                        Volunteers creating a cleaner
-                        and greener future.
-                    </p>
-
-
-                </div>
-
-
-            </div>
-
-
-        </div>
-
-        <!-- Education -->
-
-
-        <div class="impact-story-card"
-     (click)="openVideo($event)">
-
-
-            <video
-                src="/images/education-video.mp4"
-                poster="/images/vs2.JPG"
-                autoplay
-                muted
-                loop
-                playsinline>
-            </video>
-
-
-
-            <div class="impact-story-overlay">
-
-
-                <div class="impact-story-play">
-                    ▶
-                </div>
-
-
-                <div class="impact-story-content">
-
-
-                    <span>
-                        03
-                    </span>
-
-
-                    <h3>
-                        Education Support
-                    </h3>
-
-
-                    <p>
-                        Empowering young minds
-                        through opportunities.
-                    </p>
-
-
-                </div>
-
-
-            </div>
-
-
-        </div>
-
-    </div>
-
+  </div>
 
 </section>
 
-
 <!--=================================
+        FULL-SCREEN VIDEO POPUP
+==================================-->
+
+<div
+  *ngIf="selectedImpactVideo"
+  class="impact-video-modal"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-label]="selectedImpactVideo.title"
+  (click)="closeImpactVideo()"
+>
+
+  <button
+    type="button"
+    class="impact-modal-close"
+    aria-label="Close video"
+    (click)="closeImpactVideo(); $event.stopPropagation()"
+  >
+    ×
+  </button>
+
+  <div
+    class="impact-modal-container"
+    (click)="$event.stopPropagation()"
+  >
+
+    <video
+      class="impact-modal-video"
+      [src]="selectedImpactVideo.videoUrl"
+      [poster]="getImpactPoster(selectedImpactVideo.videoUrl)"
+      controls
+      autoplay
+      playsinline
+      preload="auto"
+    ></video>
+
+    <div class="impact-modal-information">
+
+      <h3>
+        {{ selectedImpactVideo.title }}
+      </h3>
+
+      <p>
+        {{ selectedImpactVideo.description }}
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!--=================================F
       SUCCESS STORIES
 ==================================-->
 
-<section class="success-stories">
+<!-- <section class="success-stories">
 
    <div class="section-heading success-heading">
 
@@ -362,11 +331,11 @@
     </p>
 
 
-</div>
+</div> -->
 
     <!-- Story 1 -->
 
-    <div class="story-row">
+    <!-- <div class="story-row">
 
         <div class="story-image">
 
@@ -406,11 +375,11 @@
 
         </div>
 
-    </div>
+    </div> -->
 
     <!-- Story 2 -->
 
-    <div class="story-row reverse">
+    <!-- <div class="story-row reverse">
 
         <div class="story-image">
 
@@ -449,11 +418,11 @@
 
         </div>
 
-    </div>
+    </div> -->
 
     <!-- Story 3 -->
 
-    <div class="story-row">
+    <!-- <div class="story-row">
 
         <div class="story-image">
 
@@ -494,136 +463,116 @@
 
     </div>
 
-</section>
+</section> -->
+
+
 
 <!--=================================
-      BEFORE & AFTER
+       DYNAMIC TRANSFORMATIONS   BEFORE & AFTER
 ==================================-->
 
-<section class="before-after">
+<section class="transformation-section">
 
-    <div class="transformation-header">
+  <div class="transformation-heading">
 
-    <span class="transformation-tag">
-        Real Transformation
+    <span>
+      Real Transformation
     </span>
 
-
     <h2>
-        Witness The
-        <span>Change We Create</span>
+      Witness The Change We Create
     </h2>
 
-
     <p>
-        Every initiative reflects a journey of dedication, teamwork,
-        and hope. From neglected spaces to thriving communities,
-        together we create meaningful transformations.
+      Every initiative reflects a journey of dedication,
+      teamwork and hope. Together, we create meaningful
+      transformations.
     </p>
 
-</div>
+  </div>
 
-    <div class="comparison-grid">
+  <div
+    *ngIf="transformationsLoading"
+    class="impact-video-message"
+  >
+    Loading transformations...
+  </div>
 
-        <!-- Project 1 -->
+  <div
+    *ngIf="transformationsError"
+    class="impact-video-message error-message"
+  >
+    {{ transformationsError }}
+  </div>
 
-        <div class="comparison-card">
+  <div
+    *ngIf="
+      !transformationsLoading &&
+      !transformationsError &&
+      impactTransformations.length === 0
+    "
+    class="impact-video-message"
+  >
+    No transformations are currently available.
+  </div>
 
-            <h3>
+  <div
+    *ngIf="
+      !transformationsLoading &&
+      impactTransformations.length > 0
+    "
+    class="transformation-grid"
+  >
 
-                🌊 River Restoration
+    <article
+      *ngFor="
+        let item of impactTransformations;
+        trackBy: trackByImpactVideoId
+      "
+      class="transformation-card"
+    >
 
-            </h3>
+      <h3>
+        {{ item.title }}
+      </h3>
 
-            <div class="comparison-images">
+      <div class="before-after-grid">
 
-                <div class="image-box">
+        <div class="transformation-image">
 
-                    <img src="./images/vaigai8.jpeg">
-                         
+          <span class="before-badge">
+            BEFORE
+          </span>
 
-                    <span class="label before">
-
-                        BEFORE
-
-                    </span>
-
-                </div>
-
-                <div class="image-box">
-
-                    <img src="./images/vaigai9.jpeg"
-                         alt="After">
-
-                    <span class="label after">
-
-                        AFTER
-
-                    </span>
-
-                </div>
-
-            </div>
-
-            <p>
-
-                Community volunteers worked together to restore the area,
-                improving cleanliness and encouraging environmental awareness.
-
-            </p>
-
-        </div>
-
-        <!-- Project 2 -->
-
-        <div class="comparison-card">
-
-            <h3>
-
-                🌳 Community Clean-up
-
-            </h3>
-
-            <div class="comparison-images">
-
-                <div class="image-box">
-
-                    <img src="./images/vaigai10.jpg"
-                         alt="Before">
-
-                    <span class="label before">
-
-                        BEFORE
-
-                    </span>
-
-                </div>
-
-                <div class="image-box">
-
-                    <img src="./images/vaigai11.jpg"
-                         alt="After">
-
-                    <span class="label after">
-
-                        AFTER
-
-                    </span>
-
-                </div>
-
-            </div>
-
-            <p>
-
-                Local communities joined hands to transform public spaces
-                into cleaner and greener environments.
-
-            </p>
+          <img
+            [src]="item.beforeImageUrl"
+            [alt]="item.title + ' before'"
+          >
 
         </div>
 
-    </div>
+        <div class="transformation-image">
+
+          <span class="after-badge">
+            AFTER
+          </span>
+
+          <img
+            [src]="item.afterImageUrl"
+            [alt]="item.title + ' after'"
+          >
+
+        </div>
+
+      </div>
+
+      <p>
+        {{ item.description }}
+      </p>
+
+    </article>
+
+  </div>
 
 </section>
 
@@ -773,131 +722,56 @@
         AWARDS & RECOGNITION
 ==================================-->
 
-<section class="awards-section">
+<section class="recognition-section">
 
- <div class="section-heading awards-heading">
+  <div class="section-heading">
 
     <span class="section-tag">
-        Awards & Recognition
+      Recognition
     </span>
 
-
     <h2>
-        Celebrating Milestones,
-        <span>Honouring Our Service</span>
+      Recognition of
+      <span>Our Service</span>
     </h2>
 
-
     <p>
-        Every appreciation reflects the dedication, compassion, and
-        commitment behind our journey. These recognitions inspire us
-        to continue creating meaningful change in society.
+      Every appreciation reflects the dedication,
+      compassion and commitment behind our journey.
     </p>
 
-</div>
+  </div>
 
-    <div class="awards-grid">
+  <div class="recognition-grid">
 
-        <!-- Award -->
+    <article
+      *ngFor="
+        let item of recognitions;
+        trackBy: trackById
+      "
+      class="recognition-card"
+    >
 
-        <div class="award-card">
+      <img
+        *ngIf="item.recognitionImageUrl"
+        [src]="item.recognitionImageUrl"
+        [alt]="item.title"
+      >
 
-            <img
-                src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80"
-                alt="Award">
+      <div class="recognition-content">
 
-            <div class="award-content">
+        <span class="recognition-badge">
+          {{ item.badgeText }}
+        </span>
 
-                <span class="award-year">
+        <h3>{{ item.title }}</h3>
 
-                    2026
+        <p>{{ item.description }}</p>
 
-                </span>
+      </div>
 
-                <h3>
+    </article>
 
-                    Community Service Excellence
-
-                </h3>
-
-                <p>
-
-                    Recognition for outstanding contribution towards
-                    community welfare and humanitarian service.
-
-                </p>
-
-            </div>
-
-        </div>
-
-        <!-- Certificate -->
-
-        <div class="award-card">
-
-            <img
-                src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=80"
-                alt="Certificate">
-
-            <div class="award-content">
-
-                <span class="award-year">
-
-                    Appreciation
-
-                </span>
-
-                <h3>
-
-                    Certificate of Appreciation
-
-                </h3>
-
-                <p>
-
-                    Presented in recognition of dedication to
-                    environmental conservation initiatives.
-
-                </p>
-
-            </div>
-
-        </div>
-
-        <!-- Media -->
-
-        <div class="award-card">
-
-            <img
-                src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=900&q=80"
-                alt="Media">
-
-            <div class="award-content">
-
-                <span class="award-year">
-
-                    Media
-
-                </span>
-
-                <h3>
-
-                    Featured in Local News
-
-                </h3>
-
-                <p>
-
-                    Community initiatives highlighted through
-                    newspapers, television, and digital media.
-
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
+  </div>
 
 </section>
-

@@ -1,1 +1,463 @@
-<p>impact-management works!</p>
+<section class="impact-management">
+
+  <header class="page-header">
+    <span>ADMIN PANEL</span>
+    <h1>Impact Management</h1>
+    <p>
+      Manage impact videos, transformation images
+      and recognition cards.
+    </p>
+  </header>
+
+  <div
+    *ngIf="successMessage"
+    class="message success"
+  >
+    {{ successMessage }}
+  </div>
+
+  <div
+    *ngIf="errorMessage"
+    class="message error"
+  >
+    {{ errorMessage }}
+  </div>
+
+  <button
+    type="button"
+    class="refresh-button"
+    [disabled]="loading"
+    (click)="loadAllItems()"
+  >
+    {{ loading ? 'Loading...' : 'Refresh all' }}
+  </button>
+
+  <!-- VIDEO UPLOAD -->
+
+  <section class="management-card">
+
+    <div class="card-heading">
+      <div>
+        <span class="card-label">VIDEOS</span>
+        <h2>Impact Story Videos</h2>
+        <p>Maximum three videos are allowed.</p>
+      </div>
+
+      <strong>{{ videos.length }}/3</strong>
+    </div>
+
+    <div class="upload-form">
+
+      <label>
+        Video
+        <input
+          #videoInput
+          type="file"
+          accept="video/*"
+          (change)="onVideoSelected($event)"
+        >
+      </label>
+
+      <label>
+        Title
+        <input
+          type="text"
+          [(ngModel)]="videoTitle"
+          placeholder="Video title"
+        >
+      </label>
+
+      <label>
+        Description
+        <textarea
+          [(ngModel)]="videoDescription"
+          placeholder="Video description"
+        ></textarea>
+      </label>
+
+      <label>
+        Display order
+        <input
+          type="number"
+          min="0"
+          [(ngModel)]="videoDisplayOrder"
+        >
+      </label>
+
+      <button
+        type="button"
+        class="upload-button"
+        [disabled]="uploadingVideo"
+        (click)="uploadVideo(videoInput)"
+      >
+        {{
+          uploadingVideo
+            ? 'Uploading video...'
+            : 'Upload video'
+        }}
+      </button>
+
+    </div>
+
+    <div class="item-grid">
+
+      <article
+        *ngFor="
+          let item of videos;
+          trackBy: trackById
+        "
+        class="item-card"
+      >
+
+        <video
+          *ngIf="item.videoUrl"
+          [src]="item.videoUrl"
+          controls
+          preload="metadata"
+        ></video>
+
+        <ng-container
+          *ngTemplateOutlet="
+            editForm;
+            context: { $implicit: item }
+          "
+        ></ng-container>
+
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- TRANSFORMATION UPLOAD -->
+
+  <section class="management-card">
+
+    <div class="card-heading">
+      <div>
+        <span class="card-label">
+          BEFORE AND AFTER
+        </span>
+
+        <h2>Transformation Cards</h2>
+        <p>Maximum two cards are allowed.</p>
+      </div>
+
+      <strong>
+        {{ transformations.length }}/2
+      </strong>
+    </div>
+
+    <div class="upload-form two-column">
+
+      <label>
+        Before image
+        <input
+          #beforeInput
+          type="file"
+          accept="image/*"
+          (change)="onBeforeImageSelected($event)"
+        >
+      </label>
+
+      <label>
+        After image
+        <input
+          #afterInput
+          type="file"
+          accept="image/*"
+          (change)="onAfterImageSelected($event)"
+        >
+      </label>
+
+      <label>
+        Title
+        <input
+          type="text"
+          [(ngModel)]="transformationTitle"
+          placeholder="Transformation title"
+        >
+      </label>
+
+      <label>
+        Display order
+        <input
+          type="number"
+          min="0"
+          [(ngModel)]="
+            transformationDisplayOrder
+          "
+        >
+      </label>
+
+      <label class="full-width">
+        Description
+        <textarea
+          [(ngModel)]="
+            transformationDescription
+          "
+          placeholder="Transformation description"
+        ></textarea>
+      </label>
+
+      <button
+        type="button"
+        class="upload-button full-width"
+        [disabled]="uploadingTransformation"
+        (click)="
+          uploadTransformation(
+            beforeInput,
+            afterInput
+          )
+        "
+      >
+        {{
+          uploadingTransformation
+            ? 'Uploading...'
+            : 'Upload transformation'
+        }}
+      </button>
+
+    </div>
+
+    <div class="item-grid transformation-grid">
+
+      <article
+        *ngFor="
+          let item of transformations;
+          trackBy: trackById
+        "
+        class="item-card"
+      >
+
+        <div class="before-after-preview">
+
+          <div>
+            <span>Before</span>
+
+            <img
+              *ngIf="item.beforeImageUrl"
+              [src]="item.beforeImageUrl"
+              [alt]="item.title + ' before'"
+            >
+          </div>
+
+          <div>
+            <span>After</span>
+
+            <img
+              *ngIf="item.afterImageUrl"
+              [src]="item.afterImageUrl"
+              [alt]="item.title + ' after'"
+            >
+          </div>
+
+        </div>
+
+        <ng-container
+          *ngTemplateOutlet="
+            editForm;
+            context: { $implicit: item }
+          "
+        ></ng-container>
+
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- RECOGNITION UPLOAD -->
+
+  <section class="management-card">
+
+    <div class="card-heading">
+      <div>
+        <span class="card-label">
+          RECOGNITIONS
+        </span>
+
+        <h2>Recognition Cards</h2>
+        <p>Maximum three cards are allowed.</p>
+      </div>
+
+      <strong>{{ recognitions.length }}/3</strong>
+    </div>
+
+    <div class="upload-form two-column">
+
+      <label>
+        Recognition image
+        <input
+          #recognitionInput
+          type="file"
+          accept="image/*"
+          (change)="
+            onRecognitionImageSelected($event)
+          "
+        >
+      </label>
+
+      <label>
+        Badge text
+        <input
+          type="text"
+          [(ngModel)]="recognitionBadgeText"
+          placeholder="Example: 2026"
+        >
+      </label>
+
+      <label>
+        Title
+        <input
+          type="text"
+          [(ngModel)]="recognitionTitle"
+          placeholder="Recognition title"
+        >
+      </label>
+
+      <label>
+        Display order
+        <input
+          type="number"
+          min="0"
+          [(ngModel)]="
+            recognitionDisplayOrder
+          "
+        >
+      </label>
+
+      <label class="full-width">
+        Description
+        <textarea
+          [(ngModel)]="
+            recognitionDescription
+          "
+          placeholder="Recognition description"
+        ></textarea>
+      </label>
+
+      <button
+        type="button"
+        class="upload-button full-width"
+        [disabled]="uploadingRecognition"
+        (click)="
+          uploadRecognition(recognitionInput)
+        "
+      >
+        {{
+          uploadingRecognition
+            ? 'Uploading...'
+            : 'Upload recognition'
+        }}
+      </button>
+
+    </div>
+
+    <div class="item-grid">
+
+      <article
+        *ngFor="
+          let item of recognitions;
+          trackBy: trackById
+        "
+        class="item-card"
+      >
+
+        <img
+          *ngIf="item.recognitionImageUrl"
+          class="recognition-image"
+          [src]="item.recognitionImageUrl"
+          [alt]="item.title"
+        >
+
+        <span class="badge">
+          {{ item.badgeText }}
+        </span>
+
+        <ng-container
+          *ngTemplateOutlet="
+            editForm;
+            context: { $implicit: item }
+          "
+        ></ng-container>
+
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- SHARED EDIT FORM -->
+
+  <ng-template
+    #editForm
+    let-item
+  >
+
+    <div class="edit-form">
+
+      <label>
+        Title
+        <input
+          type="text"
+          [(ngModel)]="item.title"
+        >
+      </label>
+
+      <label>
+        Description
+        <textarea
+          [(ngModel)]="item.description"
+        ></textarea>
+      </label>
+
+      <label>
+        Display order
+        <input
+          type="number"
+          min="0"
+          [(ngModel)]="item.displayOrder"
+        >
+      </label>
+
+      <div class="item-actions">
+
+        <button
+          type="button"
+          class="save-button"
+          (click)="saveDetails(item)"
+        >
+          Save
+        </button>
+
+        <button
+          type="button"
+          class="status-button"
+          (click)="toggleStatus(item)"
+        >
+          {{ item.active ? 'Hide' : 'Show' }}
+        </button>
+
+        <button
+          type="button"
+          class="delete-button"
+          (click)="deleteItem(item)"
+        >
+          Delete
+        </button>
+
+      </div>
+
+      <span
+        class="status"
+        [class.visible]="item.active"
+      >
+        {{ item.active ? 'Visible' : 'Hidden' }}
+      </span>
+
+    </div>
+
+  </ng-template>
+
+</section>
