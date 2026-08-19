@@ -6446,3 +6446,19 @@ p {
     }
 
 }
+
+.gallery-grid .gallery-item {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  min-height: 280px;
+}
+
+.gallery-grid .gallery-item img {
+  display: block !important;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1 !important;
+  visibility: visible !important;
+}

@@ -848,76 +848,61 @@
 
 <section class="service-gallery">
 
-    <div class="section-heading">
+  <div class="section-heading">
+    <span class="section-tag">
+      Our Gallery
+    </span>
 
-        <span class="section-tag">
-            Our Gallery
-        </span>
+    <h2>Moments of Service & Compassion</h2>
 
-        <h2>
-            Moments of Service & Compassion
-        </h2>
+    <p>
+      Every photograph reflects our commitment to serving communities
+      with compassion, dignity and dedication.
+    </p>
+  </div>
 
-        <p>
-            Every photograph reflects our commitment to serving communities
-            with compassion, dignity, and dedication. These moments capture
-            the impact of our volunteers and the lives we strive to uplift
-            every day.
-        </p>
+  <div
+    *ngIf="galleryLoading"
+    class="gallery-message"
+  >
+    Loading gallery...
+  </div>
 
-    </div>
+  <div
+    *ngIf="
+      !galleryLoading &&
+      serviceGalleryImages.length > 0
+    "
+    class="gallery-mosaic"
+  >
+    <article
+      *ngFor="
+        let image of serviceGalleryImages;
+        let i = index
+      "
+      class="gallery-mosaic-item"
+    >
+      <img
+        [src]="image.imageUrl"
+        [alt]="image.imageName"
+        loading="lazy"
+      >
 
-    <div class="gallery-grid">
+      <div class="gallery-overlay">
+        <span>Service moment</span>
+        <strong>0{{ i + 1 }}</strong>
+      </div>
+    </article>
+  </div>
 
-        <div class="gallery-item large">
-            <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80">
-
-            <div class="gallery-overlay">
-                <h3>Food Distribution</h3>
-            </div>
-        </div>
-
-        <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1492496913980-501348b61469?auto=format&fit=crop&w=1200&q=80">
-
-            <div class="gallery-overlay">
-                <h3>Environment</h3>
-            </div>
-        </div>
-
-        <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80">
-
-            <div class="gallery-overlay">
-                <h3>Education</h3>
-            </div>
-        </div>
-
-        <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80">
-
-            <div class="gallery-overlay">
-                <h3>Medical Camp</h3>
-            </div>
-        </div>
-
-        <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1200&q=80">
-
-            <div class="gallery-overlay">
-                <h3>Sports</h3>
-            </div>
-        </div>
-
-        <div class="gallery-item large">
-            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80">
-
-            <div class="gallery-overlay">
-                <h3>Community Welfare</h3>
-            </div>
-        </div>
-
-    </div>
+  <div
+    *ngIf="
+      !galleryLoading &&
+      serviceGalleryImages.length === 0
+    "
+    class="gallery-message"
+  >
+    No gallery images are currently available.
+  </div>
 
 </section>
-

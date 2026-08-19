@@ -1,1 +1,374 @@
-<p>services-management works!</p>
+<section class="services-management">
+
+    <header class="page-header">
+
+        <div>
+            <span class="page-label">
+                ADMIN PANEL
+            </span>
+
+            <h1>Service Gallery Management</h1>
+
+            <p>
+                Select a Service Item ID and manage its
+                gallery images.
+            </p>
+        </div>
+
+    </header>
+
+
+    <div
+        *ngIf="successMessage"
+        class="message success-message"
+    >
+        {{ successMessage }}
+    </div>
+
+
+    <div
+        *ngIf="errorMessage"
+        class="message error-message"
+    >
+        {{ errorMessage }}
+    </div>
+
+
+    <!-- SERVICE SELECTION -->
+
+    <section class="management-card">
+
+        <div class="card-heading">
+
+            <div>
+                <h2>Select Service</h2>
+
+                <p>
+                    Enter the ID of the service you want
+                    to manage.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="service-selection">
+
+            <div class="input-group">
+
+                <label for="serviceItemId">
+                    Service Item ID
+                </label>
+
+                <input
+                    id="serviceItemId"
+                    type="number"
+                    min="1"
+                    placeholder="Example: 1"
+                    [(ngModel)]="serviceItemId"
+                >
+
+            </div>
+
+
+            <button
+                type="button"
+                class="load-button"
+                [disabled]="loading"
+                (click)="loadServiceGallery()"
+            >
+                {{
+                    loading
+                        ? 'Loading...'
+                        : 'Load Gallery'
+                }}
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- IMAGE UPLOAD -->
+
+    <section class="management-card">
+
+        <div class="card-heading">
+
+            <div>
+                <h2>Upload Service Images</h2>
+
+                <p>
+                    Upload JPG, PNG or WEBP gallery images
+                    for Service Item ID
+                    <strong>
+                        {{ serviceItemId || 'Not selected' }}
+                    </strong>.
+                </p>
+            </div>
+
+        </div>
+
+
+        <input
+            #fileInput
+            type="file"
+            accept="image/*"
+            multiple
+            hidden
+            (change)="onFilesSelected($event)"
+        >
+
+
+        <div
+            class="upload-area"
+            role="button"
+            tabindex="0"
+            (click)="fileInput.click()"
+            (keydown.enter)="fileInput.click()"
+        >
+
+            <div class="upload-icon">＋</div>
+
+            <strong>Choose service gallery images</strong>
+
+            <span>
+                Click here to select multiple images
+            </span>
+
+        </div>
+
+
+        <div
+            *ngIf="previewUrls.length > 0"
+            class="preview-section"
+        >
+
+            <div class="preview-header">
+
+                <h3>
+                    Selected images
+                    ({{ selectedFiles.length }})
+                </h3>
+
+                <button
+                    type="button"
+                    class="clear-button"
+                    (click)="clearSelectedFiles(fileInput)"
+                >
+                    Clear selection
+                </button>
+
+            </div>
+
+
+            <div class="preview-grid">
+
+                <article
+                    *ngFor="
+                        let previewUrl of previewUrls;
+                        let i = index
+                    "
+                    class="preview-card"
+                >
+
+                    <img
+                        [src]="previewUrl"
+                        [alt]="selectedFiles[i].name"
+                    >
+
+                    <span>
+                        {{ selectedFiles[i].name }}
+                    </span>
+
+                </article>
+
+            </div>
+
+        </div>
+
+
+     <button
+    type="button"
+    class="upload-button"
+    [disabled]="
+        uploading ||
+        selectedFiles.length === 0
+    "
+    (click)="uploadImages(fileInput)"
+>
+    {{ uploading ? 'Uploading...' : 'Upload Images' }}
+</button>
+
+    </section>
+
+
+    <!-- UPLOADED IMAGES -->
+
+    <section class="management-card">
+
+        <div class="card-heading">
+
+            <div>
+                <h2>Uploaded Gallery Images</h2>
+
+                <p>
+                    {{ galleryImages.length }}
+                    image(s) for Service Item ID
+                    {{ serviceItemId || '-' }}
+                </p>
+            </div>
+
+
+            <button
+                type="button"
+                class="refresh-button"
+                [disabled]="
+                    loading ||
+                    !serviceItemId
+                "
+                (click)="loadServiceGallery()"
+            >
+                Refresh
+            </button>
+
+        </div>
+
+
+        <div
+            *ngIf="loading"
+            class="empty-state"
+        >
+            Loading service gallery...
+        </div>
+
+
+        <div
+            *ngIf="
+                !loading &&
+                serviceItemId &&
+                galleryImages.length === 0
+            "
+            class="empty-state"
+        >
+            <h3>No images uploaded</h3>
+
+            <p>
+                Upload the first image for this service.
+            </p>
+        </div>
+
+
+        <div
+            *ngIf="
+                !loading &&
+                galleryImages.length > 0
+            "
+            class="gallery-grid"
+        >
+
+            <article
+                *ngFor="
+                    let image of galleryImages;
+                    trackBy: trackByImageId
+                "
+                class="gallery-card"
+                [class.hidden-card]="!image.active"
+            >
+
+                <div class="image-wrapper">
+
+                    <img
+                        [src]="image.imageUrl"
+                        [alt]="image.imageName"
+                    >
+
+                    <span
+                        class="status-badge"
+                        [class.visible-badge]="image.active"
+                        [class.hidden-badge]="!image.active"
+                    >
+                        {{
+                            image.active
+                                ? 'Visible'
+                                : 'Hidden'
+                        }}
+                    </span>
+
+                </div>
+
+
+                <div class="image-information">
+
+                    <h3 [title]="image.imageName">
+                        {{ image.imageName }}
+                    </h3>
+
+
+                    <div class="order-section">
+
+                        <label
+                            [for]="'order-' + image.id"
+                        >
+                            Display order
+                        </label>
+
+
+                        <div class="order-row">
+
+                            <input
+                                [id]="'order-' + image.id"
+                                type="number"
+                                min="0"
+                                [(ngModel)]="image.displayOrder"
+                            >
+
+                            <button
+                                type="button"
+                                class="save-button"
+                                (click)="saveDisplayOrder(image)"
+                            >
+                                Save
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-actions">
+
+                        <button
+                            type="button"
+                            class="status-button"
+                            [class.hide-button]="image.active"
+                            [class.show-button]="!image.active"
+                            (click)="toggleImageStatus(image)"
+                        >
+                            {{
+                                image.active
+                                    ? 'Hide'
+                                    : 'Show'
+                            }}
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="delete-button"
+                            (click)="deleteImage(image)"
+                        >
+                            Delete
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+</section>

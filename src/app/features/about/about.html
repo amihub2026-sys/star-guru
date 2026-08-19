@@ -947,78 +947,27 @@
 
     <div class="gallery-grid">
 
-        <div class="gallery-item large gallery-item-reveal gallery-item-1">
+    <div
+        *ngFor="
+            let image of aboutGalleryImages;
+            let i = index
+        "
+        class="gallery-item gallery-item-reveal"
+        [class.large]="i === 0 || i === 5"
+        [ngClass]="'gallery-item-' + (i + 1)"
+    >
 
-            <img
-                src="./images/gh1.jpg"
-                alt="Food Distribution"
-            >
+        <img
+            [src]="image.imageUrl"
+            [alt]="image.imageName || 'Gallery image'"
+            loading="lazy"
+        >
 
-            <div class="gallery-overlay"></div>
-
-        </div>
-
-
-        <div class="gallery-item gallery-item-reveal gallery-item-2">
-
-            <img
-                src="./images/gh2.jpg"
-                alt="Environment"
-            >
-
-            <div class="gallery-overlay"></div>
-
-        </div>
-
-
-        <div class="gallery-item gallery-item-reveal gallery-item-3">
-
-            <img
-                src="./images/gh4.jpeg"
-                alt="Community Service"
-            >
-
-            <div class="gallery-overlay"></div>
-
-        </div>
-
-
-        <div class="gallery-item gallery-item-reveal gallery-item-4">
-
-            <img
-                src="./images/gh5.jpeg"
-                alt="Medical Camp"
-            >
-
-            <div class="gallery-overlay"></div>
-
-        </div>
-
-
-        <div class="gallery-item gallery-item-reveal gallery-item-5">
-
-            <img
-                src="./images/gh6.jpeg"
-                alt="Education Support"
-            >
-
-            <div class="gallery-overlay"></div>
-
-        </div>
-
-
-        <div class="gallery-item large gallery-item-reveal gallery-item-6">
-
-            <img
-                src="./images/gh3.jpeg"
-                alt="Sports Development"
-            >
-
-            <div class="gallery-overlay"></div>
-
-        </div>
+        <div class="gallery-overlay"></div>
 
     </div>
+
+</div>
 
 </section>
 

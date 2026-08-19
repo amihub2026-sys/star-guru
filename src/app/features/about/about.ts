@@ -1,20 +1,37 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   OnDestroy,
+  OnInit,
   ViewChild
 } from '@angular/core';
+
+import { CommonModule } from '@angular/common';
+
+import {
+  AboutGalleryImage,
+  AboutGalleryService
+} from '../../services/about-gallery';
+
+
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './about.html',
   styleUrl: './about.css'
 })
-export class About implements AfterViewInit, OnDestroy {
+export class About implements OnInit, AfterViewInit, OnDestroy {
+  aboutGalleryImages: AboutGalleryImage[] = [];
 
+
+  constructor(
+  private aboutGalleryService: AboutGalleryService,
+  private changeDetectorRef: ChangeDetectorRef
+) {}
   /* =========================
      IMPACT SECTION
   ========================= */
@@ -57,9 +74,40 @@ private journeyTimer?: number;
   private founderMessageTimer?: number;
 
 
+loadAboutGallery(): void {
+  this.aboutGalleryService
+    .getActiveImages()
+    .subscribe({
+      next: (images: AboutGalleryImage[]) => {
+        console.log(
+          'PUBLIC ABOUT IMAGES:',
+          images
+        );
+
+        this.aboutGalleryImages = [...images];
+
+        console.log(
+          'ASSIGNED IMAGE COUNT:',
+          this.aboutGalleryImages.length
+        );
+
+        this.changeDetectorRef.detectChanges();
+      },
+      error: (error: unknown) => {
+        console.error(
+          'ABOUT GALLERY ERROR:',
+          error
+        );
+      }
+    });
+}
   /* =========================
      COMPONENT LIFECYCLE
   ========================= */
+
+  ngOnInit(): void {
+  this.loadAboutGallery();
+}
 
   ngAfterViewInit(): void {
 
