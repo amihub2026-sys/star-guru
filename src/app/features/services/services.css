@@ -2499,12 +2499,7 @@ padding-top: 2px;
         SERVICE GALLERY
 ==================================*/
 
-.service-gallery{
 
-    padding:70px 8%;
-
-    background:#ffffff;
-}
 
 .gallery-grid{
 
@@ -2591,30 +2586,172 @@ padding-top: 2px;
     font-weight:600;
 }
 
-@media(max-width:992px){
+/*=================================
+       ASYMMETRIC GALLERY
+==================================*/
 
-.gallery-grid{
-
-    grid-template-columns:repeat(2,1fr);
-
+.service-gallery {
+  padding: 140px 7% 100px;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 193, 7, 0.11),
+      transparent 35%
+    ),
+    #ffffff;
+  overflow: hidden;
 }
 
+.section-heading {
+  max-width: 850px;
+  margin: 0 auto 60px;
+  text-align: center;
 }
 
-@media(max-width:768px){
-
-.gallery-grid{
-
-    grid-template-columns:1fr;
-
+.gallery-message {
+  padding: 60px 20px;
+  text-align: center;
+  color: #64748b;
+  font-size: 17px;
 }
 
-.gallery-item.large{
-
-    grid-row:span 1;
-
+.gallery-mosaic {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-rows: 145px;
+  grid-auto-flow: dense;
+  gap: 18px;
 }
 
+.gallery-mosaic-item {
+  position: relative;
+  grid-column: span 6;
+  grid-row: span 2;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #e5e7eb;
+  box-shadow: 0 16px 35px rgba(15, 23, 42, 0.13);
+}
+
+/* Large vertical feature image */
+.gallery-mosaic-item:nth-child(6n + 1) {
+  grid-column: span 5;
+  grid-row: span 4;
+}
+
+/* Large horizontal image */
+.gallery-mosaic-item:nth-child(6n + 2) {
+  grid-column: span 7;
+  grid-row: span 2;
+}
+
+/* Two different smaller images */
+.gallery-mosaic-item:nth-child(6n + 3) {
+  grid-column: span 3;
+  grid-row: span 2;
+}
+
+.gallery-mosaic-item:nth-child(6n + 4) {
+  grid-column: span 4;
+  grid-row: span 2;
+}
+
+.gallery-mosaic-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition:
+    transform 700ms ease,
+    filter 700ms ease;
+}
+
+.gallery-mosaic-item:hover img {
+  transform: scale(1.08);
+  filter: brightness(0.78);
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 24px;
+  color: white;
+  background: linear-gradient(
+    to top,
+    rgba(5, 15, 30, 0.82),
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 350ms ease;
+}
+
+.gallery-mosaic-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-overlay span {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.gallery-overlay strong {
+  color: #ffc107;
+  font-size: 30px;
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+  .gallery-mosaic {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 240px;
+  }
+
+  .gallery-mosaic-item,
+  .gallery-mosaic-item:nth-child(n) {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .gallery-mosaic-item:nth-child(5n + 1) {
+    grid-column: span 2;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .service-gallery {
+    padding: 110px 16px 70px;
+  }
+
+  .gallery-mosaic {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 260px;
+    gap: 14px;
+  }
+
+  .gallery-mosaic-item,
+  .gallery-mosaic-item:nth-child(n) {
+    grid-column: span 1;
+    grid-row: span 1;
+    border-radius: 18px;
+  }
+
+  .gallery-mosaic-item:nth-child(4n + 1) {
+    height: 340px;
+  }
+
+  .gallery-overlay {
+    opacity: 1;
+  }
 }
 
 /*=================================
@@ -2764,6 +2901,52 @@ padding-top: 2px;
     color:#111827;
 
     transform:translateY(-5px);
+}
+
+.service-gallery-grid {
+  width: min(1200px, calc(100% - 40px));
+  margin: 40px auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.service-gallery-card {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #f3f3f3;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.service-gallery-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .service-gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .service-gallery-grid {
+    width: calc(100% - 24px);
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .service-gallery-card {
+    height: 240px;
+  }
 }
 
 @media(max-width:768px){

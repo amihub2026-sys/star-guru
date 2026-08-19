@@ -1,1 +1,235 @@
-<p>about-management works!</p>
+<section class="about-management">
+
+  <div class="page-heading">
+    <div>
+      <span class="heading-label">ADMIN PANEL</span>
+
+      <h1>About Gallery Management</h1>
+
+      <p>
+        Upload and manage the images displayed in the
+        public About page gallery.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="refresh-button"
+      [disabled]="loading"
+      (click)="loadImages()"
+    >
+      {{ loading ? 'Loading...' : 'Refresh' }}
+    </button>
+  </div>
+
+  <div
+    *ngIf="successMessage"
+    class="message success-message"
+  >
+    {{ successMessage }}
+  </div>
+
+  <div
+    *ngIf="errorMessage"
+    class="message error-message"
+  >
+    {{ errorMessage }}
+  </div>
+
+  <div class="upload-card">
+
+    <div class="upload-heading">
+      <div>
+        <h2>Upload New Images</h2>
+
+        <p>
+          Select one or multiple JPG, PNG or WEBP images.
+        </p>
+      </div>
+    </div>
+
+    <input
+      #fileInput
+      type="file"
+      accept="image/*"
+      multiple
+      hidden
+      (change)="onFileSelected($event)"
+    >
+
+    <div
+      class="upload-area"
+      role="button"
+      tabindex="0"
+      (click)="fileInput.click()"
+      (keydown.enter)="fileInput.click()"
+    >
+      <div class="upload-icon">＋</div>
+
+      <strong>Choose gallery images</strong>
+
+      <span>
+        Click here to select multiple images
+      </span>
+    </div>
+
+    <div
+      *ngIf="previewUrls.length > 0"
+      class="preview-section"
+    >
+      <div class="preview-heading">
+        <h3>
+          Selected images ({{ selectedFiles.length }})
+        </h3>
+
+        <button
+          type="button"
+          class="text-button"
+          (click)="clearSelection(fileInput)"
+        >
+          Clear selection
+        </button>
+      </div>
+
+      <div class="preview-grid">
+        <div
+          *ngFor="let url of previewUrls; let i = index"
+          class="preview-card"
+        >
+          <img
+            [src]="url"
+            [alt]="selectedFiles[i].name"
+          >
+
+          <span>{{ selectedFiles[i].name }}</span>
+        </div>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="upload-button"
+      [disabled]="
+        uploading ||
+        selectedFiles.length === 0
+      "
+      (click)="uploadImages(fileInput)"
+    >
+      {{
+        uploading
+          ? 'Uploading...'
+          : 'Upload Images'
+      }}
+    </button>
+  </div>
+
+  <div class="gallery-section">
+
+    <div class="section-heading">
+      <div>
+        <h2>Uploaded Images</h2>
+
+        <p>
+          {{ images.length }} gallery image(s)
+        </p>
+      </div>
+    </div>
+
+    <div
+      *ngIf="loading"
+      class="empty-state"
+    >
+      Loading images...
+    </div>
+
+    <div
+      *ngIf="!loading && images.length === 0"
+      class="empty-state"
+    >
+      <h3>No images uploaded</h3>
+
+      <p>
+        Upload your first About Gallery image.
+      </p>
+    </div>
+
+    <div
+      *ngIf="!loading && images.length > 0"
+      class="gallery-grid"
+    >
+      <article
+        *ngFor="
+          let image of images;
+          trackBy: trackByImageId
+        "
+        class="image-card"
+        [class.inactive-card]="!image.active"
+      >
+        <div class="image-wrapper">
+          <img
+            [src]="image.imageUrl"
+            [alt]="image.imageName"
+          >
+
+          <span
+            class="status-badge"
+            [class.active-badge]="image.active"
+            [class.inactive-badge]="!image.active"
+          >
+            {{ image.active ? 'Visible' : 'Hidden' }}
+          </span>
+        </div>
+
+        <div class="image-details">
+          <h3 [title]="image.imageName">
+            {{ image.imageName }}
+          </h3>
+
+          <div class="order-control">
+            <label [for]="'order-' + image.id">
+              Display order
+            </label>
+
+            <div class="order-row">
+              <input
+                [id]="'order-' + image.id"
+                type="number"
+                min="0"
+                [(ngModel)]="image.displayOrder"
+              >
+
+              <button
+                type="button"
+                class="save-button"
+                (click)="saveDisplayOrder(image)"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button
+              type="button"
+              class="status-button"
+              [class.hide-button]="image.active"
+              [class.show-button]="!image.active"
+              (click)="toggleActive(image)"
+            >
+              {{ image.active ? 'Hide' : 'Show' }}
+            </button>
+
+            <button
+              type="button"
+              class="delete-button"
+              (click)="deleteImage(image)"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+</section>
