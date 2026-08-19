@@ -1,361 +1,286 @@
 <section class="book-scene">
 
-
-<div 
-class="book-container"
-
-(click)="openBook()"
-
-[class.book-open]="bookOpen"
-
-[class.page-open]="pageOpen"
-
-[class.content-open]="contentOpen">
-
-
-
-
-
-    <!-- MAIN BOOK -->
+  <div
+    class="book-container"
+    (click)="openBook()"
+    [class.book-open]="bookOpen"
+    [class.page-open]="pageOpen"
+    [class.content-open]="contentOpen"
+  >
 
     <div class="book">
 
-
-
-
-
-        <!-- BACK PAGES -->
-
-        <div class="pages"></div>
-
-
-
-
-
-
-
-
-
-
-    <!-- OPEN BOOK CONTENT -->
-  <div class="open-book">
-
-
-  <!-- PERMANENT LEFT PAGE -->
-  <div class="left-page">
-
-    <img
-      src="/images/edu1.jpeg"
-      alt="Star Guru Foundation"
-    >
-
-  </div>
-
-
-  <!-- CENTER FOLD -->
-  <div class="book-center"></div>
-
-
-  <!-- PERMANENT RIGHT BACK PAGE -->
-  <div class="right-page">
-
-    <h2>Star Guru Foundation</h2>
-
-    <p>
-      Serving humanity with compassion.
-      Our foundation supports food distribution,
-      charity activities and community welfare
-      programs.
-    </p>
-
-    <p>
-      Every initiative is dedicated towards
-      creating a better society with kindness
-      and care.
-    </p>
-
-  </div>
-
-
-  <!-- =========================
-       PAGE 1
-  ========================== -->
-
-  <div
-    class="turn-page turn-page-1"
-    [class.flipped]="currentPage >= 1"
-  >
-
-    <div class="turn-page-front">
-
-      <h2>Our Mission</h2>
-
-      <p>
-        Our mission is to serve people with
-        compassion and create meaningful change
-        in communities.
-      </p>
-
-    </div>
-
-    <div class="turn-page-back">
-
-      <img
-        src="/images/edu2.jpeg"
-        alt="Our Mission"
-      >
-
-    </div>
-
-  </div>
-
-
-  <!-- =========================
-       PAGE 2
-  ========================== -->
-
-  <div
-    class="turn-page turn-page-2"
-    [class.flipped]="currentPage >= 2"
-  >
-
-    <div class="turn-page-front">
-
-      <h2>Food Distribution</h2>
-
-      <p>
-        Supporting families and communities
-        through food distribution and
-        charitable activities.
-      </p>
-
-    </div>
-
-    <div class="turn-page-back">
-
-      <img
-        src="/images/news1.jpeg"
-        alt="Food Distribution"
-      >
-
-    </div>
-
-  </div>
-
-
-  <!-- =========================
-       PAGE 3
-  ========================== -->
-
-  <div
-    class="turn-page turn-page-3"
-    [class.flipped]="currentPage >= 3"
-  >
-
-    <div class="turn-page-front">
-
-      <h2>Education Support</h2>
-
-      <p>
-        Helping students and young people
-        access opportunities for education
-        and personal development.
-      </p>
-
-    </div>
-
-    <div class="turn-page-back">
-
-      <img
-        src="/images/edu4.jpeg"
-        alt="Education Support"
-      >
-
-    </div>
-
-  </div>
-
-
-  <!-- =========================
-       PAGE 4
-  ========================== -->
-
-  <div
-    class="turn-page turn-page-4"
-    [class.flipped]="currentPage >= 4"
-  >
-
-    <div class="turn-page-front">
-
-      <h2>Community Welfare</h2>
-
-      <p>
-        Working together to support communities,
-        families and people who need a helping
-        hand.
-      </p>
-
-    </div>
-
-    <div class="turn-page-back">
-
-      <img
-        src="/images/edu5.jpg"
-        alt="Community Welfare"
-      >
-
-    </div>
-
-  </div>
-
-
-  <!-- =========================
-       PAGE 5
-  ========================== -->
-
-  <div
-    class="turn-page turn-page-5"
-    [class.flipped]="currentPage >= 5"
-  >
-
-    <div class="turn-page-front">
-
-      <h2>Our Journey Continues</h2>
-
-      <p>
-        Together we can create a better society
-        through kindness, care and compassion.
-      </p>
-
-    </div>
-
-    <div class="turn-page-back final-page">
-
-      <img
-        src="/images/logo.png"
-        class="final-book-logo"
-        alt="Star Guru"
-      >
-
-      <h2>
-        Star Guru Charitable Foundation
-      </h2>
-
-      <p>
-        Serving Humanity With Compassion
-      </p>
-
-    </div>
-
-  </div>
-
-
-</div>
-
-
-
-
-
-
-
-        <!-- FRONT COVER -->
-
-
-
-        <div class="cover">
-
-
-
-            <div class="cover-inner">
-
-
-
-                <div class="leather">
-
-
-
-                    <h1>
-                        STAR GURU<br>
-                        CHARITABLE<br>
-                        FOUNDATION
-                    </h1>
-
-
-
-
-
-                    <img 
-                    src="/images/logo.png"
-                    class="logo">
-
-
-
-
-
-                    <div class="line"></div>
-
-
-
-
-
-
-                    <h2>
-                        Dr. T. Gurusamy
-                    </h2>
-
-
-
-
-
-
-                    <h3 class="founder">
-                        FOUNDER
-                    </h3>
-
-
-
-
-
-
-                    <p class="tagline">
-                        Serving Humanity With Compassion
-                    </p>
-
-
-
-
-
-                </div>
-
-
-
-            </div>
-
-
+      <!-- ==============================
+           CLOSED BOOK PAGE EDGE
+      =============================== -->
+      <div class="pages"></div>
+
+
+      <!-- ==============================
+           OPEN BOOK
+      =============================== -->
+      <div class="open-book">
+
+        <!-- PERMANENT LEFT PAGE -->
+        <div class="left-page">
+
+          <img
+            src="/images/edu1.jpeg"
+            alt="Star Guru Foundation"
+          >
 
         </div>
 
 
+        <!-- CENTER -->
+        <div class="book-center"></div>
 
 
+        <!-- PERMANENT RIGHT BACK PAGE -->
+        <div class="right-page">
+
+          <h2>Star Guru Foundation</h2>
+
+          <p>
+            Serving humanity with compassion.
+            Our foundation supports food distribution,
+            charity activities and community welfare
+            programs.
+          </p>
+
+          <p>
+            Every initiative is dedicated towards
+            creating a better society with kindness
+            and care.
+          </p>
+
+        </div>
 
 
-        <!-- BOOK SPINE -->
+        <!-- ==============================
+             TURN PAGE 1
+        =============================== -->
+        <div
+          class="turn-page turn-page-1"
+          [class.flipped]="currentPage >= 1"
+        >
+
+          <div class="turn-page-front">
+
+            <h2>Our Mission</h2>
+
+            <p>
+              Our mission is to serve people with
+              compassion and create meaningful change
+              in communities.
+            </p>
+
+          </div>
 
 
-        <div class="spine"></div>
-         </div>
+          <div class="turn-page-back">
+
+            <img
+              src="/images/edu2.jpeg"
+              alt="Our Mission"
+            >
+
+          </div>
+
+        </div>
 
 
+        <!-- ==============================
+             TURN PAGE 2
+        =============================== -->
+        <div
+          class="turn-page turn-page-2"
+          [class.flipped]="currentPage >= 2"
+        >
+
+          <div class="turn-page-front">
+
+            <h2>Food Distribution</h2>
+
+            <p>
+              Supporting families and communities
+              through food distribution and
+              charitable activities.
+            </p>
+
+          </div>
 
 
+          <div class="turn-page-back">
+
+            <img
+              src="/images/news1.jpeg"
+              alt="Food Distribution"
+            >
+
+          </div>
+
+        </div>
 
 
-</div>
+        <!-- ==============================
+             TURN PAGE 3
+        =============================== -->
+        <div
+          class="turn-page turn-page-3"
+          [class.flipped]="currentPage >= 3"
+        >
+
+          <div class="turn-page-front">
+
+            <h2>Education Support</h2>
+
+            <p>
+              Helping students and young people
+              access opportunities for education
+              and personal development.
+            </p>
+
+          </div>
 
 
+          <div class="turn-page-back">
+
+            <img
+              src="/images/edu4.jpeg"
+              alt="Education Support"
+            >
+
+          </div>
+
+        </div>
 
 
+        <!-- ==============================
+             TURN PAGE 4
+        =============================== -->
+        <div
+          class="turn-page turn-page-4"
+          [class.flipped]="currentPage >= 4"
+        >
+
+          <div class="turn-page-front">
+
+            <h2>Community Welfare</h2>
+
+            <p>
+              Working together to support communities,
+              families and people who need a helping
+              hand.
+            </p>
+
+          </div>
+
+
+          <div class="turn-page-back">
+
+            <img
+              src="/images/edu5.jpg"
+              alt="Community Welfare"
+            >
+
+          </div>
+
+        </div>
+
+
+        <!-- ==============================
+             TURN PAGE 5
+        =============================== -->
+        <div
+          class="turn-page turn-page-5"
+          [class.flipped]="currentPage >= 5"
+        >
+
+          <div class="turn-page-front">
+
+            <h2>Our Journey Continues</h2>
+
+            <p>
+              Together we can create a better society
+              through kindness, care and compassion.
+            </p>
+
+          </div>
+
+
+          <div class="turn-page-back final-page">
+
+            <img
+              src="/images/logo.png"
+              class="final-book-logo"
+              alt="Star Guru"
+            >
+
+            <h2>
+              Star Guru Charitable Foundation
+            </h2>
+
+            <p>
+              Serving Humanity With Compassion
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ==============================
+           FRONT COVER
+           IMPORTANT: SEPARATE FROM PAGES
+      =============================== -->
+      <div class="cover">
+
+        <div class="cover-inner">
+
+          <div class="leather">
+
+            <h1>
+              STAR GURU<br>
+              CHARITABLE<br>
+              FOUNDATION
+            </h1>
+
+            <img
+              src="/images/logo.png"
+              class="logo"
+              alt="Star Guru Charitable Foundation"
+            >
+
+            <div class="line"></div>
+
+            <h2>
+              Dr. T. Gurusamy
+            </h2>
+
+            <h3 class="founder">
+              FOUNDER
+            </h3>
+
+            <p class="tagline">
+              Serving Humanity With Compassion
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- BOOK SPINE -->
+      <div class="spine"></div>
+
+    </div>
+
+  </div>
 
 </section>
 <!--=================================
@@ -730,8 +655,6 @@ class="book-container"
             poster="./images/general7.jpeg"
             controls>
             </video>
-
-
             <div class="video-title">
 
                 <h3>
