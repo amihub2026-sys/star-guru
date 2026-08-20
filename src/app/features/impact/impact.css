@@ -4762,7 +4762,7 @@
         max-width: 100% !important;
     }
 
-=======
+
 .impact-recognition-image img {
   display: block !important;
   width: 100% !important;
@@ -4848,4 +4848,5 @@
   .impact-recognition-content {
     padding: 23px;
   }
+}
 }
