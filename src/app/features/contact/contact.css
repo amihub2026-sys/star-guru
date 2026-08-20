@@ -556,7 +556,8 @@ line-height:1.7;
 }
 
 .contact-map {
-  min-height: 390px;
+  min-height: 590px;
+  width: 650px;
 }
 
 .contact-map iframe {
