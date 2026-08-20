@@ -1,9 +1,6 @@
 /*=================================
       NEWS HERO
 ==================================*/
-/* =========================================
-   NEWS HERO - ANIMATED NEWSPAPER
-========================================= */
 
 .news-hero {
   position: relative;
@@ -537,120 +534,7 @@
 }
 
 
-/* =========================================
-   MOBILE
-========================================= */
 
-@media (max-width: 850px) {
-
-  .news-hero {
-
-    min-height: auto;
-
-    padding:
-      100px 12px
-      50px;
-
-  }
-
-
-  .newspaper {
-
-    width: 100%;
-
-    padding:
-      20px
-      18px
-      35px;
-
-  }
-
-
-  .paper-top {
-
-    font-size: 8px;
-
-    gap: 8px;
-
-  }
-
-
-  .news-columns {
-
-    grid-template-columns: 1fr;
-
-  }
-
-
-  .side-news {
-
-    display: none;
-
-  }
-
-
-  .main-story {
-
-    border: none;
-
-    padding: 10px;
-
-  }
-
-
-  .main-story h1 {
-
-    font-size: clamp(38px, 12vw, 60px);
-
-    letter-spacing: -2px;
-
-  }
-
-
-  .paper-title {
-
-    font-size: clamp(32px, 10vw, 50px);
-
-    letter-spacing: -1px;
-
-  }
-
-}
-
-
-/* =========================================
-   SMALL MOBILE
-========================================= */
-
-@media (max-width: 480px) {
-
-  .paper-top span:first-child {
-
-    display: none;
-
-  }
-
-
-  .hero-buttons {
-
-    flex-direction: column;
-
-  }
-
-
-  .hero-buttons a {
-
-    width: 100%;
-
-    text-align: center;
-
-  }
-
-}
-
-/*=================================
-        LATEST NEWS
-==================================*/
 /* =================================
       LATEST NEWS HEADING STYLE
 ================================= */
@@ -788,7 +672,222 @@
 
 
 }
+/* =========================================
+   NEWS PAGE MOBILE PADDING
+========================================= */
 
+@media (max-width: 768px) {
+
+  .news-hero {
+    padding:
+      70px 20px
+      50px;
+  }
+
+  .newspaper {
+    width: 100%;
+
+    padding:
+      22px 20px
+      30px;
+
+    box-sizing: border-box;
+  }
+
+  .latest-news {
+    padding-left: 20px;
+    padding-right: 20px;
+
+    box-sizing: border-box;
+  }
+
+  .latest-news .section-heading {
+    width: 100%;
+
+    margin-bottom: 50px;
+  }
+
+  .latest-news .section-heading h2 {
+    font-size: 30px;
+
+    line-height: 1.25;
+  }
+
+  .latest-news .section-heading h2 span {
+    font-size: 34px;
+  }
+
+  .latest-news .section-heading p {
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    margin-top: 25px;
+  }
+
+}
+
+
+/* =========================================
+   NORMAL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+  .news-hero {
+    padding:
+      60px 16px
+      45px;
+  }
+
+  .newspaper {
+    width: 100%;
+
+    padding:
+      20px 16px
+      25px;
+  }
+
+  .latest-news {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .paper-top {
+    font-size: 9px;
+
+    gap: 10px;
+  }
+
+  .paper-title {
+    font-size: 34px;
+
+    letter-spacing: -1px;
+  }
+
+  .paper-date {
+    font-size: 10px;
+
+    letter-spacing: 2px;
+  }
+
+  .news-columns {
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+  }
+
+  .main-story {
+    border-left: none;
+    border-right: none;
+
+    border-top: 1px solid #777;
+    border-bottom: 1px solid #777;
+
+    padding:
+      20px 5px;
+  }
+
+  .side-news {
+    padding:
+      16px 5px;
+  }
+
+  .main-story h1 {
+    font-size: 36px;
+
+    line-height: 0.95;
+
+    letter-spacing: -2px;
+  }
+
+  .main-story > p {
+    font-size: 14px;
+
+    line-height: 1.6;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+
+    width: 100%;
+  }
+
+  .hero-buttons a {
+    width: 100%;
+
+    text-align: center;
+
+    box-sizing: border-box;
+  }
+
+  .latest-news .section-heading {
+    margin-bottom: 40px;
+  }
+
+  .latest-news .section-tag {
+    padding: 7px 22px;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+  }
+
+  .latest-news .section-heading h2 {
+    font-size: 26px;
+
+    margin-top: 22px;
+  }
+
+  .latest-news .section-heading h2 span {
+    display: block;
+
+    font-size: 30px;
+
+    margin-top: 7px;
+  }
+
+  .latest-news .section-heading p {
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    margin-top: 20px;
+  }
+
+}
+
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+
+@media (max-width: 360px) {
+
+  .news-hero {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .newspaper {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .latest-news {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .paper-title {
+    font-size: 30px;
+  }
+
+  .main-story h1 {
+    font-size: 32px;
+  }
+
+}
 
 /* MOBILE */
 
@@ -1985,4 +2084,453 @@
     height: 190px;
   }
 
+}
+
+
+/* =========================================================
+   FINAL RESPONSIVE OVERRIDES
+   Correct mobile padding + prevent horizontal overflow
+   Keep this block at the VERY END of the file.
+========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* ---------- TABLET / MOBILE ---------- */
+@media (max-width: 768px) {
+
+  /* Main section side padding */
+  .news-hero,
+  .latest-news,
+  .upcoming-events,
+  .media-coverage,
+  .newsletter {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  /* Hero */
+  .news-hero {
+    min-height: auto;
+    padding-top: 70px !important;
+    padding-bottom: 50px !important;
+    overflow: hidden;
+  }
+
+  /* Newspaper must stay inside viewport */
+  .newspaper {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 22px 20px 30px !important;
+    overflow: hidden;
+  }
+
+  .paper-bg {
+    width: 650px;
+    height: 650px;
+    max-width: none;
+  }
+
+  .paper-top {
+    width: 100%;
+    min-width: 0;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .paper-top > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .paper-title,
+  .paper-date {
+    width: 100%;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .news-columns {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .news-columns > *,
+  .main-story,
+  .side-news {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .main-story {
+    padding: 20px 8px !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-top: 1px solid #777;
+    border-bottom: 1px solid #777;
+  }
+
+  .side-news {
+    padding: 16px 8px !important;
+  }
+
+  .main-story h1,
+  .main-story p,
+  .side-news p {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .newspaper-video {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Latest news */
+  .latest-news .section-heading,
+  .upcoming-events .section-heading,
+  .media-coverage .section-heading,
+  .section-heading {
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .news-grid,
+  .events-grid,
+  .media-grid {
+    width: 100%;
+    max-width: 100%;
+    grid-template-columns: 1fr !important;
+    gap: 24px;
+  }
+
+  .news-card,
+  .event-card,
+  .media-card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  /* Featured event has its own outer padding in desktop CSS */
+  .featured-event {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    grid-template-columns: 1fr !important;
+    gap: 35px;
+  }
+
+  .featured-image,
+  .featured-content {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .featured-image img {
+    width: 100%;
+    height: auto;
+  }
+
+  .event-details,
+  .event-highlights {
+    grid-template-columns: 1fr !important;
+  }
+
+  .newsletter-content,
+  .newsletter-form,
+  .newsletter-features {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .newsletter-form input,
+  .newsletter-form button {
+    max-width: 100%;
+  }
+}
+
+
+/* ---------- PHONE ---------- */
+@media (max-width: 480px) {
+
+  .news-hero,
+  .latest-news,
+  .upcoming-events,
+  .media-coverage,
+  .newsletter {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .news-hero {
+    padding-top: 60px !important;
+    padding-bottom: 42px !important;
+  }
+
+  .newspaper {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 18px 14px 24px !important;
+  }
+
+  .paper-top {
+    font-size: 8px !important;
+    letter-spacing: .5px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .paper-title {
+    font-size: 30px !important;
+    line-height: 1.05;
+    letter-spacing: -1px !important;
+  }
+
+  .paper-date {
+    font-size: 9px !important;
+    line-height: 1.5;
+    letter-spacing: 1px !important;
+    margin-bottom: 18px;
+  }
+
+  .breaking-label {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    padding: 6px 11px;
+  }
+
+  .main-story {
+    padding: 18px 4px !important;
+  }
+
+  .main-story h1 {
+    font-size: clamp(30px, 10vw, 38px) !important;
+    line-height: .98 !important;
+    letter-spacing: -1.5px !important;
+  }
+
+  .main-story > p {
+    font-size: 13px !important;
+    line-height: 1.6;
+    margin: 18px auto;
+  }
+
+  .side-news {
+    padding: 14px 4px !important;
+  }
+
+  .side-news p {
+    font-size: 13px;
+    line-height: 1.65;
+    text-align: left;
+  }
+
+  .newspaper-video {
+    padding: 4px;
+  }
+
+  .newspaper-video video {
+    width: 100%;
+    height: 180px;
+  }
+
+  .latest-news .section-heading,
+  .upcoming-events .section-heading,
+  .media-coverage .section-heading,
+  .section-heading {
+    margin-bottom: 40px;
+  }
+
+  .latest-news .section-tag,
+  .upcoming-events .section-tag,
+  .section-heading .section-tag,
+  .section-tag {
+    max-width: 100%;
+    padding: 7px 18px !important;
+    font-size: 10px !important;
+    letter-spacing: 1.5px !important;
+  }
+
+  .latest-news .section-heading h2,
+  .upcoming-events .section-heading h2,
+  .section-heading h2 {
+    font-size: 28px !important;
+    line-height: 1.2 !important;
+    margin-top: 20px;
+  }
+
+  .latest-news .section-heading h2 span {
+    display: block;
+    font-size: 31px !important;
+    line-height: 1.15 !important;
+  }
+
+  .latest-news .section-heading p,
+  .upcoming-events .section-heading p,
+  .section-heading p {
+    font-size: 14px !important;
+    line-height: 1.7 !important;
+    margin-top: 20px;
+  }
+
+  .news-grid,
+  .events-grid,
+  .media-grid {
+    margin-top: 40px;
+    gap: 20px;
+  }
+
+  .news-content,
+  .media-content {
+    padding: 22px 18px;
+  }
+
+  .news-image {
+    height: 220px;
+  }
+
+  .media-image {
+    height: 210px;
+  }
+
+  .news-meta {
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 12px;
+  }
+
+  .news-content h3,
+  .media-content h3 {
+    font-size: 20px;
+  }
+
+  .event-card {
+    flex-direction: column;
+  }
+
+  .event-date {
+    width: 100% !important;
+    min-height: 90px;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .day {
+    font-size: 34px;
+  }
+
+  .month {
+    font-size: 16px;
+  }
+
+  .event-content {
+    padding: 22px 18px;
+  }
+
+  .event-content h3 {
+    font-size: 20px;
+  }
+
+  .event-info {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .featured-event {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    margin-top: 45px;
+    margin-bottom: 45px;
+  }
+
+  .featured-content h2 {
+    font-size: 30px;
+    line-height: 1.2;
+  }
+
+  .featured-buttons {
+    gap: 12px;
+  }
+
+  .newsletter {
+    padding-top: 70px !important;
+    padding-bottom: 70px !important;
+  }
+
+  .newsletter-content h2 {
+    font-size: 30px !important;
+    line-height: 1.2;
+  }
+
+  .newsletter-content p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .newsletter-form {
+    gap: 12px;
+  }
+
+  .newsletter-form input,
+  .newsletter-form button {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
+
+/* ---------- VERY SMALL PHONE ---------- */
+@media (max-width: 360px) {
+
+  .news-hero,
+  .latest-news,
+  .upcoming-events,
+  .media-coverage,
+  .newsletter,
+  .featured-event {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .newspaper {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .paper-title {
+    font-size: 27px !important;
+  }
+
+  .main-story h1 {
+    font-size: 29px !important;
+  }
+
+  .newspaper-video video {
+    height: 165px;
+  }
 }
