@@ -92,337 +92,233 @@
 <!--=================================
         LATEST NEWS
 ==================================-->
-
 <section class="latest-news">
 
-    <div class="section-heading">
+  <div class="section-heading">
 
-        <span class="section-tag">
-            Latest Updates
+    <span class="section-tag">
+      Latest Updates
+    </span>
+
+    <h2>
+      News from
+      <span>Star Guru</span>
+      Charitable Foundation
+    </h2>
+
+    <p>
+      Stay informed about our recent initiatives, community programs,
+      environmental campaigns, healthcare services, educational support,
+      and special events making a positive impact across society.
+    </p>
+
+  </div>
+
+  <div
+    class="news-message"
+    *ngIf="loading"
+  >
+    Loading latest news...
+  </div>
+
+  <div
+    class="news-message news-error"
+    *ngIf="errorMessage"
+  >
+    {{ errorMessage }}
+  </div>
+
+  <div
+    class="news-message"
+    *ngIf="!loading && newsCards.length === 0"
+  >
+    No news cards are available.
+  </div>
+
+  <div
+    class="news-card-grid"
+    *ngIf="!loading && newsCards.length > 0"
+  >
+
+    <article
+      class="news-card"
+      *ngFor="let news of newsCards"
+    >
+
+      <div class="news-card-image">
+
+        <img
+          [src]="news.imageUrl"
+          [alt]="news.title"
+        >
+
+        <span class="news-category">
+          {{ news.category }}
         </span>
 
-        <h2>
-            News from <span>Star Guru </span> Charitable Foundation
-        </h2>
+      </div>
+
+      <div class="news-card-content">
+
+        <div class="news-meta">
+
+          <span>
+            📅 {{ news.publishedDate | date:'dd MMMM yyyy' }}
+          </span>
+
+          <span>
+            {{ news.readTime }}
+          </span>
+
+        </div>
+
+        <h3>
+          {{ news.title }}
+        </h3>
 
         <p>
-            Stay informed about our recent initiatives, community programs,
-            environmental campaigns, healthcare services, educational support,
-            and special events making a positive impact across society.
+          {{ news.description }}
         </p>
 
-    </div>
+        <button
+          class="read-more"
+          type="button"
+        >
+          Read More →
+        </button>
 
-    <div class="news-grid">
+      </div>
 
-        <!-- News Card -->
+    </article>
 
-        <article class="news-card">
-
-            <div class="news-image">
-
-                <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80"
-                     alt="Food Distribution">
-
-                <span class="news-category">
-                    Food Distribution
-                </span>
-
-            </div>
-
-            <div class="news-content">
-
-                <div class="news-meta">
-
-                    <span>📅 20 July 2026</span>
-
-                    <span>5 min read</span>
-
-                </div>
-
-                <h3>
-                    Daily Food Distribution Continues to Serve Hundreds of Families
-                </h3>
-
-                <p>
-                    Our volunteers continue serving fresh and nutritious meals,
-                    bringing hope and dignity to families in need through our
-                    daily food distribution initiative.
-                </p>
-
-                <a routerLink="/news-details" class="read-more">
-                    Read More →
-                </a>
-
-            </div>
-
-        </article>
-
-        <!-- News Card -->
-
-        <article class="news-card">
-
-            <div class="news-image">
-
-                <img src="https://images.unsplash.com/photo-1492496913980-501348b61469?auto=format&fit=crop&w=1200&q=80"
-                     alt="Environment">
-
-                <span class="news-category">
-                    Environment
-                </span>
-
-            </div>
-
-            <div class="news-content">
-
-                <div class="news-meta">
-
-                    <span>📅 15 July 2026</span>
-
-                    <span>4 min read</span>
-
-                </div>
-
-                <h3>
-                    Volunteers Continue Vaigai River Cleaning Mission
-                </h3>
-
-                <p>
-                    Dedicated volunteers joined hands to clean the Vaigai River,
-                    promoting environmental conservation and raising awareness
-                    about keeping water bodies clean.
-                </p>
-
-                <a routerLink="/news-details" class="read-more">
-                    Read More →
-                </a>
-
-            </div>
-
-        </article>
-
-        <!-- News Card -->
-
-        <article class="news-card">
-
-            <div class="news-image">
-
-                <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1200&q=80"
-                     alt="Sports">
-
-                <span class="news-category">
-                    Sports
-                </span>
-
-            </div>
-
-            <div class="news-content">
-
-                <div class="news-meta">
-
-                    <span>📅 10 July 2026</span>
-
-                    <span>3 min read</span>
-
-                </div>
-
-                <h3>
-                    Youth Sports Tournament Encourages Future Champions
-                </h3>
-
-                <p>
-                    Young athletes showcased teamwork and sportsmanship during
-                    our community sports event, inspiring the next generation
-                    through healthy competition.
-                </p>
-
-                <a routerLink="/news-details" class="read-more">
-                    Read More →
-                </a>
-
-            </div>
-
-        </article>
-
-    </div>
+  </div>
 
 </section>
+
 
 <!--=================================
         UPCOMING EVENTS
 ==================================-->
 
-<section class="upcoming-events">
+<!-- =========================================
+              UPCOMING EVENTS
+========================================= -->
 
-    <div class="section-heading">
+<section class="dynamic-events-section">
 
-        <span class="section-tag">
-            Join Our Events
+  <div class="dynamic-events-heading">
+
+    <span class="dynamic-events-tag">
+      Join Our Events
+    </span>
+
+    <h2>Upcoming Events</h2>
+
+    <p>
+      Be part of our upcoming community initiatives,
+      awareness campaigns, sports events, medical camps,
+      and volunteer activities. Together, we can create
+      a lasting impact.
+    </p>
+
+  </div>
+
+  <div
+    class="dynamic-events-message"
+    *ngIf="eventsLoading"
+  >
+    Loading upcoming events...
+  </div>
+
+  <div
+    class="dynamic-events-message error"
+    *ngIf="eventsErrorMessage"
+  >
+    {{ eventsErrorMessage }}
+  </div>
+
+  <div
+    class="dynamic-events-message"
+    *ngIf="
+      !eventsLoading &&
+      eventCards.length === 0
+    "
+  >
+    No upcoming events available.
+  </div>
+
+  <div
+    class="dynamic-events-grid"
+    *ngIf="
+      !eventsLoading &&
+      eventCards.length > 0
+    "
+  >
+
+    <article
+      class="dynamic-event-card"
+      *ngFor="let event of eventCards"
+    >
+
+      <div class="dynamic-event-date">
+
+        <strong>
+          {{ event.eventDay }}
+        </strong>
+
+        <span>
+          {{ event.eventMonth }}
         </span>
 
-        <h2>
-            Upcoming Events
-        </h2>
+      </div>
+
+      <div class="dynamic-event-content">
+
+        <span class="dynamic-event-category">
+          {{ event.category }}
+        </span>
+
+        <h3>
+          {{ event.title }}
+        </h3>
 
         <p>
-            Be part of our upcoming community initiatives, awareness campaigns,
-            sports events, medical camps, and volunteer activities. Together,
-            we can create a lasting impact.
+          {{ event.description }}
         </p>
 
-    </div>
+        <div class="dynamic-event-details">
 
-    <div class="events-grid">
+          <span>
+            <span class="detail-icon">◷</span>
+            {{ event.eventTime }}
+          </span>
 
-        <!-- Event 1 -->
-
-        <div class="event-card">
-
-            <div class="event-date">
-
-                <span class="day">28</span>
-
-                <span class="month">JUL</span>
-
-            </div>
-
-            <div class="event-content">
-
-                <span class="event-category">
-                    Community Service
-                </span>
-
-                <h3>
-                    Daily Food Distribution Drive
-                </h3>
-
-                <p>
-
-                    Join our volunteers in serving nutritious meals to
-                    underprivileged families and spreading kindness.
-
-                </p>
-
-                <div class="event-info">
-
-                    <span>🕘 8:00 AM</span>
-
-                    <span>📍 Madurai</span>
-
-                </div>
-
-                <a routerLink="/contact" class="event-btn">
-
-                    Register Now
-
-                </a>
-
-            </div>
+          <span>
+            <span class="detail-icon">📍</span>
+            {{ event.eventLocation }}
+          </span>
 
         </div>
 
-        <!-- Event 2 -->
+        <button
+          class="dynamic-event-button"
+          type="button"
+        >
+          {{ event.buttonText || 'Register Now' }}
+        </button>
 
-        <div class="event-card">
+      </div>
 
-            <div class="event-date">
+    </article>
 
-                <span class="day">10</span>
-
-                <span class="month">AUG</span>
-
-            </div>
-
-            <div class="event-content">
-
-                <span class="event-category">
-                    Environment
-                </span>
-
-                <h3>
-                    Vaigai River Cleaning Campaign
-                </h3>
-
-                <p>
-
-                    Help us protect nature by joining our river cleaning
-                    mission with volunteers from across the city.
-
-                </p>
-
-                <div class="event-info">
-
-                    <span>🕗 7:00 AM</span>
-
-                    <span>📍 Vaigai River</span>
-
-                </div>
-
-                <a routerLink="/contact" class="event-btn">
-
-                    Participate
-
-                </a>
-
-            </div>
-
-        </div>
-
-        <!-- Event 3 -->
-
-        <div class="event-card">
-
-            <div class="event-date">
-
-                <span class="day">18</span>
-
-                <span class="month">AUG</span>
-
-            </div>
-
-            <div class="event-content">
-
-                <span class="event-category">
-                    Medical Camp
-                </span>
-
-                <h3>
-                    Free Health Check-up Camp
-                </h3>
-
-                <p>
-
-                    Free health screening, consultation, and awareness
-                    programs conducted by experienced medical professionals.
-
-                </p>
-
-                <div class="event-info">
-
-                    <span>🕘 9:30 AM</span>
-
-                    <span>📍 Community Hall</span>
-
-                </div>
-
-                <a routerLink="/contact" class="event-btn">
-
-                    Register Free
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
+  </div>
 
 </section>
 
 <!--=================================
         FEATURED EVENT
 ==================================-->
-
+<!-- 
 <section class="featured-event">
 
     <div class="featured-image">
@@ -485,180 +381,111 @@
 
     </div>
 
-</section>
+</section> -->
 
 
 <!--=================================
       PRESS & MEDIA COVERAGE
 ==================================-->
 
-<section class="media-coverage">
+<!-- =========================================
+        FEATURED ACROSS MEDIA PLATFORMS
+========================================= -->
 
-    <div class="section-heading">
+<section class="featured-media-section">
 
-        <span class="section-tag">
-            Press & Media
+  <div class="featured-media-heading">
+
+    <span>MEDIA COVERAGE</span>
+
+    <h2>
+      Featured Across
+      <strong>Media</strong>
+      Platforms
+    </h2>
+
+    <p>
+      Our initiatives have been featured across newspapers,
+      television and digital media, helping us spread awareness
+      and inspire more people to join our mission.
+    </p>
+
+  </div>
+
+  <div
+    class="featured-media-message"
+    *ngIf="mediaLoading"
+  >
+    Loading media coverage...
+  </div>
+
+  <div
+    class="featured-media-message error"
+    *ngIf="mediaErrorMessage"
+  >
+    {{ mediaErrorMessage }}
+  </div>
+
+  <div
+    class="featured-media-message"
+    *ngIf="
+      !mediaLoading &&
+      mediaCards.length === 0
+    "
+  >
+    No media coverage available.
+  </div>
+
+  <div
+    class="featured-media-grid"
+    *ngIf="
+      !mediaLoading &&
+      mediaCards.length > 0
+    "
+  >
+
+    <article
+      class="featured-media-card"
+      *ngFor="let media of mediaCards"
+    >
+
+      <div class="featured-media-image">
+
+        <img
+          [src]="media.imageUrl"
+          [alt]="media.title"
+        >
+
+        <span class="featured-media-category">
+          {{ media.category }}
         </span>
 
-        <h2>
-            Featured Across<span> Media </span> Platforms
-        </h2>
+      </div>
 
-        <p>
+      <div class="featured-media-content">
 
-            Our initiatives have been highlighted through newspapers,
-            television, online media, and digital platforms, helping
-            spread awareness and inspire more people to join our mission.
+        <span class="featured-media-date">
+          {{ media.publishedDate | date:'dd MMMM yyyy' }}
+        </span>
 
-        </p>
+        <h3>{{ media.title }}</h3>
 
-    </div>
+        <p>{{ media.description }}</p>
 
-    <div class="media-grid">
+        <a
+          class="featured-media-link"
+          [href]="media.buttonLink || '#'"
+          [target]="media.buttonLink ? '_blank' : '_self'"
+          [rel]="media.buttonLink ? 'noopener noreferrer' : null"
+        >
+          {{ media.buttonText || 'Read More' }} →
+        </a>
 
-        <!-- Media Card -->
+      </div>
 
-        <div class="media-card">
+    </article>
 
-            <div class="media-image">
-
-                <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=1200&q=80"
-                     alt="Newspaper">
-
-                <div class="media-type">
-
-                    📰 Newspaper
-
-                </div>
-
-            </div>
-
-            <div class="media-content">
-
-                <span class="media-date">
-                    18 July 2026
-                </span>
-
-                <h3>
-
-                    Daily Food Distribution Featured in Local Newspaper
-
-                </h3>
-
-                <p>
-
-                    Highlighting the continuous efforts of volunteers
-                    serving meals and supporting families in need.
-
-                </p>
-
-                <a href="#" class="media-btn">
-
-                    Read Article →
-
-                </a>
-
-            </div>
-
-        </div>
-
-        <!-- Media Card -->
-
-        <div class="media-card">
-
-            <div class="media-image">
-
-                <img src="https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=1200&q=80"
-                     alt="TV Interview">
-
-                <div class="media-type">
-
-                    🎥 Television
-
-                </div>
-
-            </div>
-
-            <div class="media-content">
-
-                <span class="media-date">
-
-                    10 July 2026
-
-                </span>
-
-                <h3>
-
-                    Community Service Campaign Broadcast
-
-                </h3>
-
-                <p>
-
-                    Local television featured our environmental
-                    awareness and volunteer participation initiatives.
-
-                </p>
-
-                <a href="#" class="media-btn">
-
-                    Watch Video →
-
-                </a>
-
-            </div>
-
-        </div>
-
-        <!-- Media Card -->
-
-        <div class="media-card">
-
-            <div class="media-image">
-
-                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80"
-                     alt="Social Media">
-
-                <div class="media-type">
-
-                    📱 Digital Media
-
-                </div>
-
-            </div>
-
-            <div class="media-content">
-
-                <span class="media-date">
-
-                    05 July 2026
-
-                </span>
-
-                <h3>
-
-                    Social Media Campaign Reaches Thousands
-
-                </h3>
-
-                <p>
-
-                    Our awareness campaign inspired thousands
-                    through digital platforms and community support.
-
-                </p>
-
-                <a href="#" class="media-btn">
-
-                    View Post →
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
+  </div>
 
 </section>
 
