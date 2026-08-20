@@ -2645,7 +2645,310 @@ padding-top: 2px;
 
 }
 
+/* =====================================================
+   WORK PROCESS - TABLET
+===================================================== */
 
+@media (max-width: 992px) {
+
+  .work-process {
+    padding: 60px 30px;
+  }
+
+  .section-heading {
+    margin-bottom: 55px;
+  }
+
+  .section-heading h2 {
+    font-size: 36px;
+  }
+
+  .section-heading p {
+    font-size: 16px;
+  }
+
+  .infinity-wrapper {
+    width: 100%;
+    max-width: 760px;
+  }
+
+}
+
+
+/* =====================================================
+   WORK PROCESS - MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .work-process {
+    width: 100%;
+
+    /* MOBILE SIDE PADDING */
+    padding: 50px 20px;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+  }
+
+
+  /* HEADING */
+
+  .section-heading {
+    width: 100%;
+
+    margin: 0 auto 45px;
+
+    padding: 0;
+
+    box-sizing: border-box;
+  }
+
+  .section-tag {
+    padding: 8px 18px;
+
+    margin-bottom: 15px;
+
+    font-size: 12px;
+  }
+
+  .section-heading h2 {
+    font-size: 30px;
+
+    line-height: 1.25;
+
+    margin-bottom: 14px;
+  }
+
+  .section-heading p {
+    font-size: 14px;
+
+    line-height: 1.7;
+  }
+
+
+  /* INFINITY */
+
+  .infinity-wrapper {
+    width: 100%;
+
+    max-width: 100%;
+
+    height: 460px;
+
+    margin: 0 auto;
+
+    box-sizing: border-box;
+  }
+
+  .infinity-svg {
+    width: 100%;
+
+    height: 100%;
+  }
+
+
+  /* PROCESS STEPS */
+
+  .process-step {
+    width: 140px;
+  }
+
+  .step-icon {
+    width: 65px;
+
+    height: 65px;
+
+    font-size: 29px;
+  }
+
+  .process-step h3 {
+    margin-top: 12px;
+
+    font-size: 18px;
+  }
+
+  .process-step p {
+    margin-top: 6px;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+  }
+
+
+  /* POSITIONS */
+
+  .identify {
+    top: 0;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+  }
+
+  .volunteer {
+    top: 155px;
+
+    left: 0;
+  }
+
+  .planning {
+    top: 155px;
+
+    right: 0;
+  }
+
+  .execute {
+    bottom: 10px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+  }
+
+
+  /* IMPACT FLOW */
+
+  .impact-flow {
+    width: 100%;
+
+    margin-top: 25px;
+  }
+
+  .flow-line {
+    height: 60px;
+  }
+
+  .flow-line.small {
+    height: 45px;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+
+  .work-process {
+
+    /* NEAT MOBILE PADDING */
+    padding: 45px 16px;
+  }
+
+
+  .section-heading {
+    margin-bottom: 35px;
+  }
+
+  .section-heading h2 {
+    font-size: 26px;
+
+    line-height: 1.3;
+  }
+
+  .section-heading p {
+    font-size: 13px;
+  }
+
+
+  .infinity-wrapper {
+    width: 100%;
+
+    height: 410px;
+  }
+
+
+  .process-step {
+    width: 115px;
+  }
+
+
+  .step-icon {
+    width: 58px;
+
+    height: 58px;
+
+    font-size: 25px;
+  }
+
+
+  .process-step h3 {
+    font-size: 15px;
+
+    margin-top: 10px;
+  }
+
+
+  .process-step p {
+    font-size: 10.5px;
+
+    line-height: 1.45;
+  }
+
+
+  .volunteer {
+    left: 0;
+
+    top: 145px;
+  }
+
+
+  .planning {
+    right: 0;
+
+    top: 145px;
+  }
+
+
+  .execute {
+    bottom: 5px;
+  }
+
+
+  .flow-line {
+    height: 50px;
+  }
+
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 360px) {
+
+  .work-process {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .section-heading h2 {
+    font-size: 23px;
+  }
+
+  .infinity-wrapper {
+    height: 390px;
+  }
+
+  .process-step {
+    width: 105px;
+  }
+
+  .process-step h3 {
+    font-size: 14px;
+  }
+
+  .process-step p {
+    font-size: 10px;
+  }
+
+}
 
 /*=================================
         SERVICE GALLERY
@@ -3130,5 +3433,97 @@ padding-top: 2px;
     text-align:center;
 
 }
+/* ================================
+   TABLET
+================================ */
 
+@media (max-width: 768px) {
+
+  .stats {
+    margin-top: 28px;
+
+    /* MOBILE/TABLET SIDE PADDING */
+    padding-left: 20px;
+    padding-right: 20px;
+
+    box-sizing: border-box;
+
+    gap: 14px;
+  }
+
+  .stat-box {
+    padding: 20px 14px;
+  }
+
+  .stat-box h3 {
+    font-size: 28px;
+  }
+
+  .stat-box span {
+    font-size: 12px;
+  }
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 480px) {
+
+  .stats {
+    width: 100%;
+
+    /* IMPORTANT MOBILE PADDING */
+    padding-left: 16px;
+    padding-right: 16px;
+
+    margin: 25px auto 0;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+
+    box-sizing: border-box;
+  }
+
+  .stat-box {
+    min-width: 0;
+
+    padding: 18px 10px;
+
+    border-radius: 14px;
+  }
+
+  .stat-box h3 {
+    font-size: 25px;
+  }
+
+  .stat-box span {
+    font-size: 11px;
+
+    line-height: 1.4;
+  }
+}
+
+
+/* ================================
+   VERY SMALL MOBILE
+================================ */
+
+@media (max-width: 360px) {
+
+  .stats {
+    padding-left: 14px;
+    padding-right: 14px;
+
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+  }
+
+  .stat-box {
+    padding: 17px 12px;
+  }
+}
 }

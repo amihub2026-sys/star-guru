@@ -799,12 +799,12 @@
 .hero-content h1{
 
     font-size:34px;
-
+     color: white;
 }
 
 .hero-btn{
 
-    width:100%;
+    width:70%;
 
 }
 
@@ -3138,7 +3138,7 @@
     font-size:58px;
     line-height:1.08;
 
-    color:#231307;
+    color:white;
 }
 
 
@@ -4677,6 +4677,92 @@
   background: #e8ebef;
 }
 
+
+/* ==========================================================
+   GLOBAL MOBILE SIDE PADDING
+   ADD THIS AT THE VERY BOTTOM OF YOUR CSS FILE
+========================================================== */
+
+@media (max-width: 768px) {
+
+    .impact-hero,
+    .impact-overview,
+    .impact-story-section,
+    .impact-stats,
+    .success-stories,
+    .before-after,
+    .our-reach,
+    .awards-section,
+    .work-process {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+
+        box-sizing: border-box;
+    }
+
+}
+
+
+/* ==========================================================
+   SMALL MOBILE
+========================================================== */
+
+@media (max-width: 480px) {
+
+    .impact-hero,
+    .impact-overview,
+    .impact-story-section,
+    .impact-stats,
+    .success-stories,
+    .before-after,
+    .our-reach,
+    .awards-section,
+    .work-process {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+}
+
+
+/* ==========================================================
+   VERY SMALL MOBILE
+========================================================== */
+
+@media (max-width: 360px) {
+
+    .impact-hero,
+    .impact-overview,
+    .impact-story-section,
+    .impact-stats,
+    .success-stories,
+    .before-after,
+    .our-reach,
+    .awards-section,
+    .work-process {
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+    }
+
+}
+@media (max-width: 768px) {
+
+    .infinity-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+
+        margin-left: auto !important;
+        margin-right: auto !important;
+
+        box-sizing: border-box;
+    }
+
+    .infinity-svg {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+
 .impact-recognition-image img {
   display: block !important;
   width: 100% !important;
@@ -4762,4 +4848,5 @@
   .impact-recognition-content {
     padding: 23px;
   }
+}
 }
