@@ -1,1 +1,892 @@
-<p>news-management works!</p>
+<section class="news-management">
+
+  <div class="management-header">
+    <div>
+      <span class="section-label">ADMIN PANEL</span>
+
+      <h1>News Card Management</h1>
+
+      <p>
+        Upload and manage the three cards displayed
+        on the public News page.
+      </p>
+    </div>
+
+    <div class="card-counter">
+      {{ newsCards.length }} cards
+    </div>
+  </div>
+
+  <div
+    class="message success"
+    *ngIf="successMessage"
+  >
+    {{ successMessage }}
+  </div>
+
+  <div
+    class="message error"
+    *ngIf="errorMessage"
+  >
+    {{ errorMessage }}
+  </div>
+
+  <div class="management-layout">
+
+    <form
+      class="news-form"
+      (ngSubmit)="saveNews()"
+    >
+
+      <h2>
+        {{ editingId === null
+          ? 'Add News Card'
+          : 'Edit News Card' }}
+      </h2>
+
+      <div class="image-upload">
+
+        <img
+          *ngIf="imagePreview"
+          [src]="imagePreview"
+          alt="News image preview"
+        >
+
+        <div
+          class="empty-preview"
+          *ngIf="!imagePreview"
+        >
+          Select news image
+        </div>
+
+        <input
+          id="newsImage"
+          type="file"
+          accept="image/*"
+          (change)="onImageSelected($event)"
+        >
+
+      </div>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Category *</label>
+
+          <input
+            type="text"
+            name="category"
+            [(ngModel)]="form.category"
+            placeholder="Food Distribution"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label>Published date *</label>
+
+          <input
+            type="date"
+            name="publishedDate"
+            [(ngModel)]="form.publishedDate"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label>Reading time *</label>
+
+          <input
+            type="text"
+            name="readTime"
+            [(ngModel)]="form.readTime"
+            placeholder="3 min read"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label>Display order</label>
+
+          <input
+            type="number"
+            name="displayOrder"
+            [(ngModel)]="form.displayOrder"
+            min="0"
+          >
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <label>Title *</label>
+
+        <input
+          type="text"
+          name="title"
+          [(ngModel)]="form.title"
+          placeholder="Enter news title"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Description *</label>
+
+        <textarea
+          name="description"
+          [(ngModel)]="form.description"
+          rows="5"
+          placeholder="Enter news description"
+          required
+        ></textarea>
+      </div>
+
+      <label class="checkbox-field">
+        <input
+          type="checkbox"
+          name="active"
+          [(ngModel)]="form.active"
+        >
+
+        Show this card on user page
+      </label>
+
+      <div class="form-actions">
+
+        <button
+          class="save-button"
+          type="submit"
+          [disabled]="saving"
+        >
+          {{
+            saving
+              ? 'Saving...'
+              : editingId === null
+                ? 'Upload Card'
+                : 'Update Card'
+          }}
+        </button>
+
+        <button
+          *ngIf="editingId !== null"
+          class="cancel-button"
+          type="button"
+          (click)="resetForm()"
+        >
+          Cancel
+        </button>
+
+      </div>
+
+    </form>
+
+    <div class="existing-news">
+
+      <h2>Uploaded Cards</h2>
+
+      <div
+        class="loading"
+        *ngIf="loading"
+      >
+        Loading cards...
+      </div>
+
+      <div
+        class="empty-state"
+        *ngIf="!loading && newsCards.length === 0"
+      >
+        No news cards uploaded.
+      </div>
+
+      <article
+        class="admin-news-card"
+        *ngFor="let news of newsCards"
+      >
+
+        <img
+          [src]="news.imageUrl"
+          [alt]="news.title"
+        >
+
+        <div class="admin-card-content">
+
+          <div class="card-top-row">
+
+            <span class="category">
+              {{ news.category }}
+            </span>
+
+            <span
+              class="status"
+              [class.inactive]="!news.active"
+            >
+              {{ news.active ? 'Active' : 'Hidden' }}
+            </span>
+
+          </div>
+
+          <h3>{{ news.title }}</h3>
+
+          <p>{{ news.description }}</p>
+
+          <small>
+            {{ news.publishedDate | date:'dd MMMM yyyy' }}
+            • {{ news.readTime }}
+            • Order {{ news.displayOrder }}
+          </small>
+
+          <div class="card-actions">
+
+            <button
+              type="button"
+              class="edit-button"
+              (click)="editNews(news)"
+            >
+              Edit
+            </button>
+
+            <button
+              type="button"
+              class="delete-button"
+              (click)="deleteNews(news)"
+            >
+              Delete
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================
+          UPCOMING EVENT MANAGEMENT
+========================================= -->
+
+<section class="event-management-section">
+
+  <div class="event-management-heading">
+
+    <span>UPCOMING EVENTS</span>
+
+    <h2>Event Card Management</h2>
+
+    <p>
+      Add and manage the three upcoming event cards
+      displayed on the public News page.
+    </p>
+
+  </div>
+
+  <div class="event-management-layout">
+
+    <!-- EVENT FORM -->
+
+    <form
+      class="event-form"
+      (ngSubmit)="saveEvent()"
+    >
+
+      <h3>
+        {{
+          editingEventId === null
+            ? 'Add Upcoming Event'
+            : 'Edit Upcoming Event'
+        }}
+      </h3>
+
+      <div class="event-form-grid">
+
+        <div class="event-form-group">
+
+          <label>Category *</label>
+
+          <input
+            type="text"
+            name="eventCategory"
+            [(ngModel)]="eventForm.category"
+            placeholder="Community Service"
+            required
+          >
+
+        </div>
+
+        <div class="event-form-group">
+
+          <label>Event day *</label>
+
+          <input
+            type="number"
+            name="eventDay"
+            [(ngModel)]="eventForm.eventDay"
+            min="1"
+            max="31"
+            required
+          >
+
+        </div>
+
+        <div class="event-form-group">
+
+          <label>Event month *</label>
+
+          <select
+            name="eventMonth"
+            [(ngModel)]="eventForm.eventMonth"
+            required
+          >
+
+            <option value="JAN">JAN</option>
+            <option value="FEB">FEB</option>
+            <option value="MAR">MAR</option>
+            <option value="APR">APR</option>
+            <option value="MAY">MAY</option>
+            <option value="JUN">JUN</option>
+            <option value="JUL">JUL</option>
+            <option value="AUG">AUG</option>
+            <option value="SEP">SEP</option>
+            <option value="OCT">OCT</option>
+            <option value="NOV">NOV</option>
+            <option value="DEC">DEC</option>
+
+          </select>
+
+        </div>
+
+        <div class="event-form-group">
+
+          <label>Display order</label>
+
+          <input
+            type="number"
+            name="eventDisplayOrder"
+            [(ngModel)]="eventForm.displayOrder"
+            min="0"
+          >
+
+        </div>
+
+      </div>
+
+      <div class="event-form-group">
+
+        <label>Event title *</label>
+
+        <input
+          type="text"
+          name="eventTitle"
+          [(ngModel)]="eventForm.title"
+          placeholder="Daily Food Distribution Drive"
+          required
+        >
+
+      </div>
+
+      <div class="event-form-group">
+
+        <label>Description *</label>
+
+        <textarea
+          name="eventDescription"
+          [(ngModel)]="eventForm.description"
+          rows="5"
+          placeholder="Enter event description"
+          required
+        ></textarea>
+
+      </div>
+
+      <div class="event-form-grid">
+
+        <div class="event-form-group">
+
+          <label>Event time *</label>
+
+          <input
+            type="text"
+            name="eventTime"
+            [(ngModel)]="eventForm.eventTime"
+            placeholder="8:00 AM"
+            required
+          >
+
+        </div>
+
+        <div class="event-form-group">
+
+          <label>Event location *</label>
+
+          <input
+            type="text"
+            name="eventLocation"
+            [(ngModel)]="eventForm.eventLocation"
+            placeholder="Madurai"
+            required
+          >
+
+        </div>
+
+      </div>
+
+      <div class="event-form-group">
+
+        <label>Button text *</label>
+
+        <input
+          type="text"
+          name="buttonText"
+          [(ngModel)]="eventForm.buttonText"
+          placeholder="Register Now"
+          required
+        >
+
+      </div>
+
+      <label class="event-checkbox">
+
+        <input
+          type="checkbox"
+          name="eventActive"
+          [(ngModel)]="eventForm.active"
+        >
+
+        Show this event on user page
+
+      </label>
+
+      <div class="event-form-actions">
+
+        <button
+  class="event-save-button"
+  type="button"
+  [disabled]="eventSaving"
+  (click)="saveEvent()"
+>
+  {{
+    eventSaving
+      ? 'Saving...'
+      : editingEventId === null
+        ? 'Upload Event'
+        : 'Update Event'
+  }}
+</button>
+
+        <button
+          *ngIf="editingEventId !== null"
+          class="event-cancel-button"
+          type="button"
+          (click)="resetEventForm()"
+        >
+          Cancel
+        </button>
+
+      </div>
+
+    </form>
+
+    <!-- UPLOADED EVENTS -->
+
+    <div class="uploaded-events">
+
+      <div class="uploaded-events-heading">
+
+        <h3>Uploaded Events</h3>
+
+        <span>
+          {{ eventCards.length }} cards
+        </span>
+
+      </div>
+
+      <div
+        class="event-empty"
+        *ngIf="eventCards.length === 0"
+      >
+        No upcoming events uploaded.
+      </div>
+
+      <article
+        class="admin-event-card"
+        *ngFor="let event of eventCards"
+      >
+
+        <div class="admin-event-date">
+
+          <strong>
+            {{ event.eventDay }}
+          </strong>
+
+          <span>
+            {{ event.eventMonth }}
+          </span>
+
+        </div>
+
+        <div class="admin-event-content">
+
+          <div class="admin-event-top">
+
+            <span class="admin-event-category">
+              {{ event.category }}
+            </span>
+
+            <span
+              class="admin-event-status"
+              [class.event-inactive]="!event.active"
+            >
+              {{ event.active ? 'Active' : 'Hidden' }}
+            </span>
+
+          </div>
+
+          <h4>{{ event.title }}</h4>
+
+          <p>
+            {{ event.description }}
+          </p>
+
+          <div class="admin-event-details">
+
+            <span>
+              ⏱ {{ event.eventTime }}
+            </span>
+
+            <span>
+              📍 {{ event.eventLocation }}
+            </span>
+
+          </div>
+
+          <div class="admin-event-actions">
+
+            <button
+              class="admin-event-edit"
+              type="button"
+              (click)="editEvent(event)"
+            >
+              Edit
+            </button>
+
+            <button
+              class="admin-event-delete"
+              type="button"
+              (click)="deleteEvent(event)"
+            >
+              Delete
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================
+        FEATURED MEDIA MANAGEMENT
+========================================= -->
+
+<section class="media-management-section">
+
+  <div class="media-management-heading">
+
+    <span>FEATURED MEDIA</span>
+
+    <h2>Media Card Management</h2>
+
+    <p>
+      Upload and manage the three media cards shown
+      on the public News page.
+    </p>
+
+  </div>
+
+  <div class="media-management-layout">
+
+    <!-- MEDIA FORM -->
+
+    <div class="media-form">
+
+      <h3>
+        {{
+          editingMediaId === null
+            ? 'Add Media Card'
+            : 'Edit Media Card'
+        }}
+      </h3>
+
+      <div class="media-image-upload">
+
+        <img
+          *ngIf="mediaImagePreview"
+          [src]="mediaImagePreview"
+          alt="Media image preview"
+        >
+
+        <div
+          class="media-empty-preview"
+          *ngIf="!mediaImagePreview"
+        >
+          Select media image
+        </div>
+
+        <input
+          id="mediaImage"
+          type="file"
+          accept="image/*"
+          (change)="onMediaImageSelected($event)"
+        >
+
+      </div>
+
+      <div class="media-form-grid">
+
+        <div class="media-form-group">
+
+          <label>Category *</label>
+
+          <input
+            type="text"
+            name="mediaCategory"
+            [(ngModel)]="mediaForm.category"
+            placeholder="Newspaper"
+          >
+
+        </div>
+
+        <div class="media-form-group">
+
+          <label>Published date *</label>
+
+          <input
+            type="date"
+            name="mediaPublishedDate"
+            [(ngModel)]="mediaForm.publishedDate"
+          >
+
+        </div>
+
+      </div>
+
+      <div class="media-form-group">
+
+        <label>Title *</label>
+
+        <input
+          type="text"
+          name="mediaTitle"
+          [(ngModel)]="mediaForm.title"
+          placeholder="Enter media title"
+        >
+
+      </div>
+
+      <div class="media-form-group">
+
+        <label>Description *</label>
+
+        <textarea
+          name="mediaDescription"
+          [(ngModel)]="mediaForm.description"
+          rows="5"
+          placeholder="Enter media description"
+        ></textarea>
+
+      </div>
+
+      <div class="media-form-grid">
+
+        <div class="media-form-group">
+
+          <label>Button text *</label>
+
+          <input
+            type="text"
+            name="mediaButtonText"
+            [(ngModel)]="mediaForm.buttonText"
+            placeholder="Read Article"
+          >
+
+        </div>
+
+        <div class="media-form-group">
+
+          <label>Display order</label>
+
+          <input
+            type="number"
+            name="mediaDisplayOrder"
+            [(ngModel)]="mediaForm.displayOrder"
+            min="0"
+          >
+
+        </div>
+
+      </div>
+
+      <div class="media-form-group">
+
+        <label>Button link</label>
+
+        <input
+          type="url"
+          name="mediaButtonLink"
+          [(ngModel)]="mediaForm.buttonLink"
+          placeholder="https://example.com/article"
+        >
+
+      </div>
+
+      <label class="media-checkbox">
+
+        <input
+          type="checkbox"
+          name="mediaActive"
+          [(ngModel)]="mediaForm.active"
+        >
+
+        Show this card on user page
+
+      </label>
+
+      <div class="media-form-actions">
+
+        <button
+          type="button"
+          class="media-save-button"
+          [disabled]="mediaSaving"
+          (click)="saveMedia()"
+        >
+          {{
+            mediaSaving
+              ? 'Saving...'
+              : editingMediaId === null
+                ? 'Upload Media'
+                : 'Update Media'
+          }}
+        </button>
+
+        <button
+          *ngIf="editingMediaId !== null"
+          type="button"
+          class="media-cancel-button"
+          (click)="resetMediaForm()"
+        >
+          Cancel
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- UPLOADED MEDIA -->
+
+    <div class="uploaded-media">
+
+      <div class="uploaded-media-heading">
+
+        <h3>Uploaded Media</h3>
+
+        <span>
+          {{ mediaCards.length }} cards
+        </span>
+
+      </div>
+
+      <div
+        class="media-admin-loading"
+        *ngIf="mediaLoading"
+      >
+        Loading media cards...
+      </div>
+
+      <div
+        class="media-admin-empty"
+        *ngIf="
+          !mediaLoading &&
+          mediaCards.length === 0
+        "
+      >
+        No media cards uploaded.
+      </div>
+
+      <article
+        class="admin-media-card"
+        *ngFor="let media of mediaCards"
+      >
+
+        <img
+          [src]="media.imageUrl"
+          [alt]="media.title"
+        >
+
+        <div class="admin-media-content">
+
+          <div class="admin-media-top">
+
+            <span class="admin-media-category">
+              {{ media.category }}
+            </span>
+
+            <span
+              class="admin-media-status"
+              [class.inactive]="!media.active"
+            >
+              {{ media.active ? 'Active' : 'Hidden' }}
+            </span>
+
+          </div>
+
+          <h4>{{ media.title }}</h4>
+
+          <p>{{ media.description }}</p>
+
+          <small>
+            {{ media.publishedDate | date:'dd MMMM yyyy' }}
+            • Order {{ media.displayOrder }}
+          </small>
+
+          <div class="admin-media-actions">
+
+            <button
+              type="button"
+              class="admin-media-edit"
+              (click)="editMedia(media)"
+            >
+              Edit
+            </button>
+
+            <button
+              type="button"
+              class="admin-media-delete"
+              (click)="deleteMedia(media)"
+            >
+              Delete
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>

@@ -1,1 +1,234 @@
-<p>contact-management works!</p>
+<section class="contact-admin">
+
+  <div class="contact-admin-header">
+
+    <div>
+
+      <span class="admin-section-tag">
+        CONTACT INBOX
+      </span>
+
+      <h1>Contact Message Management</h1>
+
+      <p>
+        View, manage and respond to messages submitted
+        through the website contact form.
+      </p>
+
+    </div>
+
+    <div class="new-message-counter">
+
+      <strong>
+        {{ newMessageCount }}
+      </strong>
+
+      <span>New Messages</span>
+
+    </div>
+
+  </div>
+
+  <div
+    class="admin-alert success"
+    *ngIf="successMessage"
+  >
+    {{ successMessage }}
+  </div>
+
+  <div
+    class="admin-alert error"
+    *ngIf="errorMessage"
+  >
+    {{ errorMessage }}
+  </div>
+
+  <div class="contact-toolbar">
+
+    <div>
+
+      <h2>Customer Enquiries</h2>
+
+      <span>
+        {{ messages.length }} messages
+      </span>
+
+    </div>
+
+    <label class="status-filter">
+
+      <span>Filter Status</span>
+
+      <select
+        [(ngModel)]="selectedStatus"
+        (ngModelChange)="filterMessages()"
+      >
+
+        <option value="ALL">
+          All Messages
+        </option>
+
+        <option
+          *ngFor="let status of statusOptions"
+          [value]="status"
+        >
+          {{ status }}
+        </option>
+
+      </select>
+
+    </label>
+
+  </div>
+
+  <div
+    class="contact-admin-loading"
+    *ngIf="loading"
+  >
+    Loading contact messages...
+  </div>
+
+  <div
+    class="contact-admin-empty"
+    *ngIf="
+      !loading &&
+      messages.length === 0
+    "
+  >
+    <div class="empty-icon">✉</div>
+
+    <h3>No messages found</h3>
+
+    <p>
+      Customer enquiries will appear here.
+    </p>
+  </div>
+
+  <div
+    class="contact-message-grid"
+    *ngIf="
+      !loading &&
+      messages.length > 0
+    "
+  >
+
+    <article
+      class="contact-admin-card"
+      *ngFor="
+        let message of messages;
+        trackBy: trackMessage
+      "
+      [class.unread]="message.status === 'NEW'"
+    >
+
+      <div class="message-card-top">
+
+        <div class="customer-avatar">
+          {{
+            message.fullName
+              .charAt(0)
+              .toUpperCase()
+          }}
+        </div>
+
+        <div class="customer-details">
+
+          <div class="customer-name-row">
+
+            <h3>{{ message.fullName }}</h3>
+
+            <span
+              class="message-status"
+              [class.status-new]="message.status === 'NEW'"
+              [class.status-read]="message.status === 'READ'"
+              [class.status-replied]="message.status === 'REPLIED'"
+              [class.status-closed]="message.status === 'CLOSED'"
+            >
+              {{ message.status }}
+            </span>
+
+          </div>
+
+          <p>
+            {{ message.inquiryType }}
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="customer-contact">
+
+        <a
+          [href]="'tel:' + message.mobileNumber"
+        >
+          ☎ {{ message.mobileNumber }}
+        </a>
+
+        <a
+          [href]="'mailto:' + message.email"
+        >
+          ✉ {{ message.email }}
+        </a>
+
+      </div>
+
+      <div class="message-subject">
+
+        <span>Subject</span>
+
+        <h4>{{ message.subject }}</h4>
+
+      </div>
+
+      <div class="message-body">
+        {{ message.message }}
+      </div>
+
+      <div class="message-date">
+        Received:
+        {{ message.createdAt | date:'dd MMM yyyy, hh:mm a' }}
+      </div>
+
+      <div class="message-card-actions">
+
+        <label>
+
+          <span>Status</span>
+
+          <select
+            [ngModel]="message.status"
+            (ngModelChange)="
+              updateMessageStatus(
+                message,
+                $event
+              )
+            "
+          >
+
+            <option
+              *ngFor="let status of statusOptions"
+              [value]="status"
+            >
+              {{ status }}
+            </option>
+
+          </select>
+
+        </label>
+
+        <button
+          type="button"
+          class="delete-message-button"
+          (click)="deleteMessage(message)"
+        >
+          Delete
+        </button>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
