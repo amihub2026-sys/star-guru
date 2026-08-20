@@ -136,23 +136,7 @@
 
 }
 
-@media(max-width:768px){
 
-.hero-content h1{
-
-    font-size:40px;
-
-}
-
-.hero-buttons{
-
-    flex-direction:column;
-
-    align-items:center;
-
-}
-
-}
 
 /*=================================
       CONTACT INFORMATION
@@ -354,29 +338,7 @@ line-height:1.7;
 
 
 
-@media(max-width:900px){
 
-.premium-contact{
-
-grid-template-columns:1fr;
-
-}
-
-
-.contact-right{
-
-grid-template-columns:1fr;
-
-}
-
-
-.contact-left h2{
-
-font-size:40px;
-
-}
-
-}
 
 /*=================================
     CONTACT FORM & MAP
@@ -572,21 +534,7 @@ textarea{
 
 }
 
-@media(max-width:992px){
 
-.contact-wrapper{
-
-    grid-template-columns:1fr;
-
-}
-
-.form-grid{
-
-    grid-template-columns:1fr;
-
-}
-
-}
 
 /*=================================
     OFFICE & WORKING HOURS
@@ -692,21 +640,7 @@ textarea{
 
 /* MOBILE */
 
-@media(max-width:768px){
 
-.section-heading h2{
-
-    font-size:34px;
-
-}
-
-.section-heading p{
-
-    font-size:16px;
-
-}
-
-}
 .office-section{
 
     padding:120px 8%;
@@ -865,15 +799,7 @@ textarea{
 
 }
 
-@media(max-width:992px){
 
-.office-wrapper{
-
-    grid-template-columns:1fr;
-
-}
-
-}
 
 /*=================================
       SOCIAL MEDIA
@@ -958,15 +884,7 @@ textarea{
 
 
 
-@media(max-width:768px){
 
-.social-heading h2{
-
-    font-size:34px;
-
-}
-
-}
 
 .social-grid{
 
@@ -1088,23 +1006,531 @@ textarea{
 
 }
 
-@media(max-width:992px){
+/* =========================================================
+   CLEAN RESPONSIVE SYSTEM
+   Existing conflicting @media rules removed.
+========================================================= */
 
-.social-grid{
-
-    grid-template-columns:repeat(2,1fr);
-
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
-@media(max-width:768px){
+/* ===========================
+   TABLET
+=========================== */
+@media (max-width: 992px) {
 
-.social-grid{
+    .premium-contact,
+    .contact-wrapper,
+    .office-wrapper,
+    .social-grid {
+        grid-template-columns: 1fr !important;
+    }
 
-    grid-template-columns:1fr;
+    .contact-right {
+        grid-template-columns: 1fr !important;
+    }
 
+    .form-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .contact-hero {
+        min-height: 680px;
+        height: auto;
+    }
+
+    .hero-content {
+        width: 100%;
+        max-width: 760px;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .contact-form-section,
+    .premium-contact,
+    .office-section {
+        padding-left: 28px !important;
+        padding-right: 28px !important;
+    }
+
+    .social-grid {
+        width: calc(100% - 56px);
+        max-width: 100%;
+    }
 }
 
+
+/* ===========================
+   MOBILE
+=========================== */
+@media (max-width: 768px) {
+
+    .contact-hero {
+        min-height: 620px;
+        height: auto;
+
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .hero-content {
+        width: 100%;
+        max-width: 100%;
+
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .hero-content h1 {
+        font-size: 40px;
+        line-height: 1.15;
+
+        margin: 22px 0;
+    }
+
+    .hero-content p {
+        font-size: 15px;
+        line-height: 1.75;
+
+        margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+        width: 100%;
+
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 12px;
+    }
+
+    .hero-buttons a {
+        width: 100%;
+
+        text-align: center;
+    }
+
+
+    /* Main section side padding */
+
+     .premium-contact,
+  .contact-form-section,
+  .office-section {
+    width: 100%;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .premium-contact {
+    padding-top: 45px;
+    padding-bottom: 45px;
+    gap: 28px;
+  }
+
+  .contact-left h2 {
+    font-size: 32px;
+    line-height: 1.2;
+  }
+
+  .contact-left p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .contact-quote {
+    margin-top: 22px;
+    padding: 16px;
+    font-size: 15px;
+    border-radius: 12px;
+  }
+
+  .contact-right {
+    width: 100%;
+
+    grid-template-columns: 1fr !important;
+
+    gap: 14px;
+  }
+
+  .contact-box {
+    width: 100%;
+
+    padding: 20px 18px;
+
+    border-radius: 16px;
+
+    min-height: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .icon {
+    width: 48px;
+    height: 48px;
+
+    font-size: 22px;
+
+    margin-bottom: 14px;
+  }
+
+  .contact-box h3 {
+    font-size: 20px;
+
+    line-height: 1.2;
+
+    margin: 0 0 10px;
+  }
+
+  .contact-box p {
+    font-size: 13px;
+
+    line-height: 1.55;
+
+    margin: 0;
+  }
+
+
+
+    /* Form / Map */
+
+    .contact-form-section {
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
+
+    .contact-wrapper {
+        width: 100%;
+        max-width: 100%;
+
+        grid-template-columns: 1fr !important;
+
+        gap: 30px;
+    }
+
+    .contact-form-card {
+        width: 100%;
+
+        padding: 28px 20px;
+    }
+
+    .contact-form-card h2 {
+        font-size: 32px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr !important;
+
+        gap: 0;
+    }
+
+    .form-grid input,
+    .form-grid select,
+    .subject,
+    textarea {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .map-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .map-card iframe {
+        width: 100%;
+        height: 340px;
+    }
+
+    .office-info {
+        padding: 22px 18px;
+    }
+
+
+    /* Section headings */
+
+    .section-heading,
+    .social-heading {
+        width: 100%;
+        max-width: 100%;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .section-heading h2,
+    .social-heading h2 {
+        font-size: 32px;
+        line-height: 1.2;
+    }
+
+    .section-heading p,
+    .social-heading p {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .section-tag,
+    .social-heading .section-tag {
+        max-width: 100%;
+
+        padding: 8px 20px;
+
+        font-size: 11px;
+        letter-spacing: 2px;
+    }
+
+
+    /* Office section */
+
+    .office-section {
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
+
+    .office-wrapper {
+        width: 100%;
+        max-width: 100%;
+
+        grid-template-columns: 1fr !important;
+
+        gap: 22px;
+
+        margin-top: 45px;
+    }
+
+    .office-card,
+    .hours-card {
+        width: 100%;
+
+        padding: 26px 20px;
+    }
+
+    .office-card h3,
+    .hours-card h3 {
+        font-size: 25px;
+    }
+
+    .hours-card li {
+        gap: 15px;
+    }
+
+
+    /* Social */
+
+    .social-grid {
+        width: 100%;
+        max-width: 100%;
+
+        margin: 45px auto 0;
+
+        padding-left: 20px;
+        padding-right: 20px;
+
+        grid-template-columns: 1fr !important;
+
+        gap: 18px;
+    }
+
+    .social-card {
+        width: 100%;
+        max-width: 100%;
+    }
 }
 
+
+/* ===========================
+   NORMAL PHONE
+=========================== */
+@media (max-width: 480px) {
+
+    .contact-hero {
+        min-height: 560px;
+
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .hero-content h1 {
+        font-size: 34px;
+    }
+
+    .hero-content p {
+        font-size: 14px;
+    }
+
+    .hero-tag {
+        padding: 8px 18px;
+
+        font-size: 12px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+        padding: 15px 22px;
+    }
+
+
+    .premium-contact,
+    .contact-form-section,
+    .office-section {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    .premium-contact {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    .contact-left h2 {
+        font-size: 32px;
+    }
+
+    .contact-quote {
+        padding: 18px 16px;
+
+        font-size: 16px;
+    }
+
+    .contact-box {
+        padding: 22px 18px;
+
+        border-radius: 20px;
+    }
+
+    .icon {
+        width: 56px;
+        height: 56px;
+
+        font-size: 25px;
+    }
+
+
+    .contact-form-section {
+        padding-top: 55px;
+        padding-bottom: 55px;
+    }
+
+    .contact-form-card {
+        padding: 24px 16px;
+
+        border-radius: 20px;
+    }
+
+    .contact-form-card h2 {
+        font-size: 28px;
+    }
+
+    .map-card iframe {
+        height: 290px;
+    }
+
+
+    .section-heading {
+        margin-bottom: 45px;
+    }
+
+    .section-heading h2,
+    .social-heading h2 {
+        font-size: 28px;
+    }
+
+    .section-heading p,
+    .social-heading p {
+        font-size: 14px;
+    }
+
+    .section-tag,
+    .social-heading .section-tag {
+        padding: 7px 16px;
+
+        font-size: 10px;
+        letter-spacing: 1.5px;
+    }
+
+
+    .office-section {
+        padding-top: 55px;
+        padding-bottom: 55px;
+    }
+
+    .office-card,
+    .hours-card {
+        padding: 22px 16px;
+
+        border-radius: 20px;
+    }
+
+    .office-card h3,
+    .hours-card h3 {
+        font-size: 23px;
+    }
+
+    .hours-card li {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        padding: 13px 0;
+    }
+
+
+    .social-grid {
+        padding-left: 16px;
+        padding-right: 16px;
+
+        gap: 16px;
+    }
+
+    .social-card {
+        padding: 20px 16px;
+    }
+}
+
+
+/* ===========================
+   VERY SMALL PHONE
+=========================== */
+@media (max-width: 360px) {
+
+    .contact-hero,
+    .premium-contact,
+    .contact-form-section,
+    .office-section {
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+    }
+
+    .social-grid {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .hero-content h1 {
+        font-size: 30px;
+    }
+
+    .contact-left h2 {
+        font-size: 29px;
+    }
+
+    .contact-form-card h2 {
+        font-size: 26px;
+    }
+    
+}
