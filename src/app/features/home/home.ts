@@ -11,6 +11,7 @@ import {
 
 
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 import { Router } from '@angular/router';
 import {
@@ -27,13 +28,14 @@ import {
   selector: 'app-hero',
   standalone:true,
   imports: [
-    CommonModule
+    CommonModule,
+        RouterLink
   ],
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
 export class Home implements AfterViewInit, OnDestroy {
-
+    
   @ViewChild('impactSection')
   impactSection?: ElementRef<HTMLElement>;
 

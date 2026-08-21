@@ -14,13 +14,14 @@ import {
   AboutGalleryImage,
   AboutGalleryService
 } from '../../services/about-gallery';
-
+  import { RouterLink } from '@angular/router';
+  
 
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './about.html',
   styleUrl: './about.css'
 })
