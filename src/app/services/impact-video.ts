@@ -45,7 +45,7 @@ export interface ImpactVideo {
 export class ImpactVideoService {
 
   private readonly apiUrl =
-    'http://localhost:8080/api/impact';
+    'https://star-guru-backend.onrender.com/api/impact';
 
   constructor(
     private readonly http: HttpClient
