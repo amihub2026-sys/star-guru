@@ -17,7 +17,7 @@ export interface HomeGalleryImage {
 export class HomeGalleryService {
 
   private readonly apiUrl =
-    'http://localhost:8080/api/home-gallery';
+    'https://star-guru-backend.onrender.com/api/home-gallery';
 
   constructor(private http: HttpClient) {}
 
@@ -51,7 +51,7 @@ uploadImages(files: File[]) {
   });
 
   return this.http.post<HomeGalleryImage[]>(
-    'http://localhost:8080/api/home-gallery/upload',
+    'https://star-guru-backend.onrender.com/api/home-gallery/upload',
     formData
   );
 

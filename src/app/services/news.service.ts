@@ -35,7 +35,7 @@ export interface NewsCard {
 export class NewsService {
 
   private readonly apiUrl =
-    'http://localhost:8080/api/news';
+    'https://star-guru-backend.onrender.com/api/news';
 
   constructor(
     private http: HttpClient

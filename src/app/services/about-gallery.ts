@@ -20,7 +20,7 @@ export interface AboutGalleryImage {
 export class AboutGalleryService {
 
   private readonly apiUrl =
-    'http://localhost:8080/api/about-gallery';
+    'https://star-guru-backend.onrender.com/api/about-gallery';
 
   constructor(private http: HttpClient) {}
 
