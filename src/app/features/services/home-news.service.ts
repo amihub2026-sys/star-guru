@@ -21,7 +21,7 @@ export interface HomeNewsItem {
 export class HomeNewsApiService {
 
   private readonly apiUrl =
-    'http://localhost:8080/api/home-news';
+    'https://star-guru-backend.onrender.com/api/home-news';
 
   constructor(private http: HttpClient) {}
 

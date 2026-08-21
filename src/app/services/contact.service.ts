@@ -36,7 +36,7 @@ export interface ContactSubmitResponse {
 export class ContactService {
 
   private readonly apiUrl =
-    'http://localhost:8080/api/contact-messages';
+    'https://star-guru-backend.onrender.com/api/contact-messages';
 
   constructor(
     private http: HttpClient

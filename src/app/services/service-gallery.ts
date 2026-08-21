@@ -21,14 +21,14 @@ export interface ServiceGalleryImage {
 export class ServiceGalleryService {
 
   private readonly apiUrl =
-    'http://localhost:8080/api/service-gallery';
+    'https://star-guru-backend.onrender.com/api/service-gallery';
 
   constructor(private http: HttpClient) {}
 
   // Public page
 getActiveImages(serviceItemId: number): Observable<ServiceGalleryImage[]> {
   return this.http.get<ServiceGalleryImage[]>(
-    `http://localhost:8080/api/service-gallery/service/${serviceItemId}`
+    `https://star-guru-backend.onrender.com/api/service-gallery/service/${serviceItemId}`
   );
 }
 
@@ -43,7 +43,7 @@ getActiveImages(serviceItemId: number): Observable<ServiceGalleryImage[]> {
 
   getAllActiveImages(): Observable<ServiceGalleryImage[]> {
   return this.http.get<ServiceGalleryImage[]>(
-    'http://localhost:8080/api/service-gallery'
+    'https://star-guru-backend.onrender.com/api/service-gallery'
   );
 }
 
