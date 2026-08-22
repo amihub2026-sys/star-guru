@@ -39,6 +39,8 @@ export class HomeManagement implements OnInit {
 
   galleryImages: HomeGalleryImage[] = [];
 
+  deletingImageId: number | null = null;
+
   uploading = false;
 
   successMessage = '';
@@ -252,5 +254,70 @@ uploadImages(): void {
     return image.id ?? index;
 
   }
+
+  deleteGalleryImage(
+  image: HomeGalleryImage
+): void {
+
+  if (
+    image.id === undefined ||
+    image.id === null ||
+    this.deletingImageId !== null
+  ) {
+    return;
+  }
+
+  const confirmed = window.confirm(
+    `Are you sure you want to delete "${image.imageName}"?`
+  );
+
+  if (!confirmed) {
+    return;
+  }
+
+  this.deletingImageId = image.id;
+  this.successMessage = '';
+  this.errorMessage = '';
+
+  this.homeGalleryService
+    .deleteImage(image.id)
+    .pipe(
+      finalize(() => {
+
+        this.deletingImageId = null;
+        this.cdr.detectChanges();
+
+      })
+    )
+    .subscribe({
+
+      next: () => {
+
+        this.galleryImages =
+          this.galleryImages.filter(
+            item => item.id !== image.id
+          );
+
+        this.successMessage =
+          'Gallery image deleted successfully.';
+
+        this.cdr.detectChanges();
+      },
+
+      error: (error: unknown) => {
+
+        console.error(
+          'Home Gallery Delete Error:',
+          error
+        );
+
+        this.errorMessage =
+          'Unable to delete the gallery image.';
+
+        this.cdr.detectChanges();
+      }
+
+    });
+}
 
 }
