@@ -13,7 +13,7 @@ import { finalize } from 'rxjs';
 import {
   HomeNewsApiService,
   HomeNewsItem
-} from '../../services/home-news.service';
+} from '../../../services/home-news.service';
 
 @Component({
   selector: 'app-home-news-management',
