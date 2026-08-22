@@ -26,8 +26,9 @@ export interface CreateGalleryTopic {
 })
 export class GalleryService {
 
-private readonly apiUrl =
-  'http://localhost:8080/api/gallery';
+  private readonly apiUrl =
+    'https://star-guru-backend.onrender.com/api/gallery';
+
 
   constructor(private http: HttpClient) {}
 

@@ -4,38 +4,38 @@ import {
   Component,
   ElementRef,
   OnDestroy,
+  OnInit,
   QueryList,
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+
 import { CommonModule } from '@angular/common';
 
-import { RouterLink } from '@angular/router';
-import { Router } from '@angular/router';
+import {
+  Router,
+  RouterLink
+} from '@angular/router';
+
 import {
   HomeNewsApiService,
   HomeNewsItem
-} from '../services/home-news.service';
+} from '../../services/home-news.service';
+
 import {
   HomeGalleryImage,
   HomeGalleryService
 } from '../../services/home-gallery.service';
 
-@Injectable({
-  providedIn: 'root'
-})
 @Component({
   selector: 'app-hero',
-  standalone:true,
+  standalone: true,
   imports: [
     CommonModule,
-        RouterLink
+    RouterLink
   ],
   templateUrl: './home.html',
-  styleUrls: ['./home.css']
+  styleUrl: './home.css'
 })
 export class Home implements AfterViewInit, OnDestroy {
     
@@ -87,7 +87,6 @@ constructor(
   private router: Router,
   private homeGalleryService: HomeGalleryService,
   private homeNewsApiService: HomeNewsApiService,
-   private http: HttpClient,
   private cdr: ChangeDetectorRef
 ) {}
 
