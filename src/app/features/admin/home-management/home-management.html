@@ -41,7 +41,8 @@
         </h2>
 
         <p>
-          Upload images displayed in the homepage gallery section.
+          Upload and manage images displayed
+          in the homepage gallery section.
         </p>
 
       </div>
@@ -60,10 +61,12 @@
         </h3>
 
         <p>
-          Select one or multiple images. Maximum size: 10 MB per image.
+          Select one or multiple images.
+          Maximum size: 10 MB per image.
         </p>
 
       </div>
+
 
       <div class="upload-controls">
 
@@ -80,16 +83,18 @@
           class="file-input"
           type="file"
           multiple
-          accept="image/*"
+          accept="image/jpeg,image/png,image/webp"
           (change)="selectImages($event)"
         >
 
         <span class="selected-count">
+
           {{
             selectedFiles.length === 0
               ? 'No images selected'
               : selectedFiles.length + ' image(s) selected'
           }}
+
         </span>
 
         <button
@@ -101,14 +106,19 @@
           "
           (click)="uploadImages()"
         >
+
           {{
             uploading
               ? 'Uploading...'
               : 'Upload Images'
           }}
+
         </button>
 
       </div>
+
+
+      <!-- SUCCESS MESSAGE -->
 
       <p
         *ngIf="successMessage"
@@ -116,6 +126,9 @@
       >
         {{ successMessage }}
       </p>
+
+
+      <!-- ERROR MESSAGE -->
 
       <p
         *ngIf="errorMessage"
@@ -155,6 +168,7 @@
 
       </div>
 
+
       <div class="image-grid">
 
         <article
@@ -177,9 +191,12 @@
 
           </div>
 
+
           <div class="image-details">
 
-            <p>
+            <p
+              [title]="selectedFiles[index]?.name"
+            >
               {{
                 selectedFiles[index]?.name ||
                 'Selected image'
@@ -229,43 +246,72 @@
 
       </div>
 
+
+      <!-- IMAGE GRID -->
+
       <div
-        *ngIf="galleryImages.length > 0; else noGalleryImages"
+        *ngIf="
+          galleryImages.length > 0;
+          else noGalleryImages
+        "
         class="image-grid"
       >
 
-        <article
-          class="image-card uploaded-card"
-          *ngFor="
-            let image of galleryImages;
-            trackBy: trackGalleryImage
-          "
-        >
+      <article
+  class="image-card uploaded-card"
+  *ngFor="
+    let image of galleryImages;
+    trackBy: trackGalleryImage
+  "
+>
 
-          <div class="image-wrapper">
+  <div class="image-wrapper">
 
-            <img
-              [src]="image.imageUrl"
-              [alt]="image.imageName"
-            >
+    <img
+      [src]="image.imageUrl"
+      [alt]="image.imageName || 'Home gallery image'"
+      loading="lazy"
+    >
 
-          </div>
+    <!-- DELETE BUTTON -->
 
-          <div class="image-details">
+    <button
+      type="button"
+      class="gallery-delete-button"
+      [disabled]="deletingImageId === image.id"
+      (click)="deleteGalleryImage(image)"
+      aria-label="Delete gallery image"
+    >
+      {{
+        deletingImageId === image.id
+          ? '...'
+          : '×'
+      }}
+    </button>
 
-            <p>
-              {{ image.imageName }}
-            </p>
+  </div>
 
-            <span class="active-badge">
-              Active
-            </span>
+  <div class="image-details">
 
-          </div>
+    <p [title]="image.imageName">
+      {{ image.imageName || 'Gallery image' }}
+    </p>
 
-        </article>
+    <span
+      class="active-badge"
+      [class.inactive-badge]="!image.active"
+    >
+      {{ image.active ? 'Active' : 'Inactive' }}
+    </span>
+
+  </div>
+
+</article>
 
       </div>
+
+
+      <!-- EMPTY STATE -->
 
       <ng-template #noGalleryImages>
 
