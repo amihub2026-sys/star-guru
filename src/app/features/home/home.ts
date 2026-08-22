@@ -8,10 +8,10 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-
-
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
-
 import { Router } from '@angular/router';
 import {
   HomeNewsApiService,
@@ -22,7 +22,9 @@ import {
   HomeGalleryService
 } from '../../services/home-gallery.service';
 
-
+@Injectable({
+  providedIn: 'root'
+})
 @Component({
   selector: 'app-hero',
   standalone:true,
@@ -82,6 +84,7 @@ constructor(
   private router: Router,
   private homeGalleryService: HomeGalleryService,
   private homeNewsApiService: HomeNewsApiService,
+   private http: HttpClient,
   private cdr: ChangeDetectorRef
 ) {}
 
