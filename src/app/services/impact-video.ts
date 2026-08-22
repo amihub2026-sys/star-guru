@@ -48,7 +48,7 @@ export class ImpactVideoService {
     'https://star-guru-backend.onrender.com/api/impact';
 
   constructor(
-    private readonly http: HttpClient
+    private readonly http: HttpClient 
   ) {}
 
   /*

@@ -1,1 +1,351 @@
-<p>gallery-management works!</p>
+<section class="gallery-admin">
+
+  <header class="admin-heading">
+
+    <div>
+      <span class="eyebrow">CONTENT MANAGEMENT</span>
+
+      <h1>Gallery Management</h1>
+
+      <p>
+        Create gallery topics and upload multiple images
+        for the public website.
+      </p>
+    </div>
+
+    <div class="heading-stats">
+
+      <div class="stat-card">
+        <strong>{{ topics.length }}</strong>
+        <span>Topics</span>
+      </div>
+
+      <div class="stat-card">
+        <strong>{{ getTotalImages() }}</strong>
+        <span>Images</span>
+      </div>
+
+    </div>
+
+  </header>
+
+  <div
+    class="message success-message"
+    *ngIf="successMessage"
+  >
+    <span>✓</span>
+    {{ successMessage }}
+  </div>
+
+  <div
+    class="message error-message"
+    *ngIf="errorMessage"
+  >
+    <span>!</span>
+    {{ errorMessage }}
+  </div>
+
+  <form
+    class="create-topic-panel"
+    (ngSubmit)="createTopic()"
+  >
+
+    <div class="panel-title">
+      <span class="panel-icon">＋</span>
+
+      <div>
+        <h2>Create New Topic</h2>
+        <p>
+          This topic will automatically appear on the
+          user gallery page.
+        </p>
+      </div>
+    </div>
+
+    <div class="create-form">
+
+      <label class="field topic-field">
+        <span>Topic name</span>
+
+        <input
+          type="text"
+          name="newTopicName"
+          [(ngModel)]="newTopic.topicName"
+          placeholder="Example: Medical Service"
+          maxlength="150"
+          required
+        />
+      </label>
+
+      <label class="field order-field">
+        <span>Display order</span>
+
+        <input
+          type="number"
+          name="newDisplayOrder"
+          [(ngModel)]="newTopic.displayOrder"
+          min="0"
+        />
+      </label>
+
+      <label class="active-control">
+        <input
+          type="checkbox"
+          name="newTopicActive"
+          [(ngModel)]="newTopic.active"
+        />
+
+        <span class="switch"></span>
+        <span>Active</span>
+      </label>
+
+      <button
+        class="primary-button"
+        type="submit"
+        [disabled]="creating"
+      >
+        <span
+          class="button-spinner"
+          *ngIf="creating"
+        ></span>
+
+        {{ creating ? 'Creating...' : 'Create Topic' }}
+      </button>
+
+    </div>
+
+  </form>
+
+  <div
+    class="loading-state"
+    *ngIf="loading"
+  >
+    <span class="loader"></span>
+    <h3>Loading gallery</h3>
+    <p>Please wait while gallery topics are loaded.</p>
+  </div>
+
+  <div
+    class="empty-state"
+    *ngIf="!loading && topics.length === 0"
+  >
+    <div class="empty-icon">▧</div>
+    <h2>No gallery topics</h2>
+    <p>
+      Create your first gallery topic using the form above.
+    </p>
+  </div>
+
+  <div
+    class="topic-list"
+    *ngIf="!loading && topics.length > 0"
+  >
+
+    <article
+      class="topic-card"
+      *ngFor="
+        let topic of topics;
+        trackBy: trackTopic
+      "
+      [class.inactive-topic]="!topic.active"
+    >
+
+      <div class="topic-card-header">
+
+        <div class="topic-identity">
+          <span class="topic-number">
+            {{ topic.displayOrder }}
+          </span>
+
+          <div>
+            <h2>{{ topic.topicName }}</h2>
+
+            <p>
+              {{ topic.imageUrls.length || 0 }}
+              {{
+                topic.imageUrls.length === 1
+                  ? 'image'
+                  : 'images'
+              }}
+            </p>
+          </div>
+        </div>
+
+        <span
+          class="status-badge"
+          [class.active-status]="topic.active"
+        >
+          {{ topic.active ? 'Active' : 'Hidden' }}
+        </span>
+
+      </div>
+
+      <div class="topic-settings">
+
+        <label class="field">
+          <span>Topic name</span>
+
+          <input
+            type="text"
+            [(ngModel)]="topic.topicName"
+            [name]="'topicName-' + topic.id"
+          />
+        </label>
+
+        <label class="field small-field">
+          <span>Order</span>
+
+          <input
+            type="number"
+            min="0"
+            [(ngModel)]="topic.displayOrder"
+            [name]="'displayOrder-' + topic.id"
+          />
+        </label>
+
+        <label class="active-control">
+          <input
+            type="checkbox"
+            [(ngModel)]="topic.active"
+            [name]="'active-' + topic.id"
+          />
+
+          <span class="switch"></span>
+          <span>Show topic</span>
+        </label>
+
+        <button
+          type="button"
+          class="save-button"
+          (click)="updateTopic(topic)"
+          [disabled]="savingTopicId === topic.id"
+        >
+          {{
+            savingTopicId === topic.id
+              ? 'Saving...'
+              : 'Save Changes'
+          }}
+        </button>
+
+        <button
+          type="button"
+          class="delete-topic-button"
+          (click)="deleteTopic(topic)"
+          [disabled]="deletingTopicId === topic.id"
+        >
+          {{
+            deletingTopicId === topic.id
+              ? 'Deleting...'
+              : 'Delete Topic'
+          }}
+        </button>
+
+      </div>
+
+      <div class="upload-panel">
+
+        <div class="upload-copy">
+          <h3>Upload Images</h3>
+          <p>
+            JPEG, PNG, WEBP — maximum 10 MB per image.
+          </p>
+        </div>
+
+        <label class="file-selector">
+
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            (change)="onFilesSelected($event, topic.id)"
+          />
+
+          <span class="upload-symbol">↑</span>
+
+          <span>
+            {{
+              selectedFiles[topic.id]?.length
+                ? selectedFiles[topic.id].length +
+                  ' image(s) selected'
+                : 'Choose multiple images'
+            }}
+          </span>
+
+        </label>
+
+        <button
+          type="button"
+          class="upload-button"
+          (click)="uploadImages(topic.id)"
+          [disabled]="
+            uploadingTopicId === topic.id ||
+            !selectedFiles[topic.id]?.length
+          "
+        >
+          <span
+            class="button-spinner"
+            *ngIf="uploadingTopicId === topic.id"
+          ></span>
+
+          {{
+            uploadingTopicId === topic.id
+              ? 'Uploading...'
+              : 'Upload Images'
+          }}
+        </button>
+
+      </div>
+
+      <div
+        class="admin-image-grid"
+        *ngIf="topic.imageUrls.length > 0"
+      >
+
+        <figure
+          class="admin-image-card"
+          *ngFor="
+            let imageUrl of topic.imageUrls;
+            let imageIndex = index;
+            trackBy: trackImage
+          "
+        >
+          <img
+            [src]="imageUrl"
+            [alt]="topic.topicName + ' gallery image'"
+          />
+
+          <div class="image-overlay">
+            <span>Image {{ imageIndex + 1 }}</span>
+
+            <button
+              type="button"
+              (click)="deleteImage(topic, imageIndex)"
+              [disabled]="
+                deletingImageKey ===
+                topic.id + '-' + imageIndex
+              "
+            >
+              {{
+                deletingImageKey ===
+                topic.id + '-' + imageIndex
+                  ? 'Deleting...'
+                  : 'Delete'
+              }}
+            </button>
+          </div>
+        </figure>
+
+      </div>
+
+      <div
+        class="no-images"
+        *ngIf="topic.imageUrls.length === 0"
+      >
+        No images have been uploaded under this topic.
+      </div>
+
+    </article>
+
+  </div>
+
+</section>

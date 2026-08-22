@@ -283,9 +283,7 @@
   </div>
 
 </section>
-<!--=================================
-        GALLERY CATEGORIES
-==================================-->
+
 <!-- =========================
       PREMIUM GALLERY
 ========================= -->
@@ -320,7 +318,7 @@
     [class.selected]="selectedCard === 1"
     (click)="selectCard(1, $event)"
   >
-    <img src="./images/food7.jpeg">
+    <img src="./images/gurusamy.jpeg">
 
     <div class="fan-info">
       <h3>Food Distribution</h3>
@@ -335,7 +333,7 @@
     [class.selected]="selectedCard === 2"
     (click)="selectCard(2, $event)"
   >
-    <img src="./images/vaigai7.jpeg">
+    <img src="./images/gurusasmy1.JPG">
 
     <div class="fan-info">
       <h3>Environment</h3>
@@ -349,7 +347,7 @@
     [class.selected]="selectedCard === 3"
     (click)="selectCard(3, $event)"
   >
-    <img src="./images/edu8.jpg">
+    <img src="./images/gurusamy2.jpeg">
 
     <div class="fan-info">
       <h3>Education</h3>
@@ -363,7 +361,7 @@
     [class.selected]="selectedCard === 4"
     (click)="selectCard(4, $event)"
   >
-    <img src="./images/medi1.jpeg">
+    <img src="./images/gurusamy3.jpeg">
 
     <div class="fan-info">
       <h3>Medical Camps</h3>
@@ -377,7 +375,7 @@
     [class.selected]="selectedCard === 5"
     (click)="selectCard(5, $event)"
   >
-    <img src="./images/sports1.jpg">
+    <img src="./images/gurusamy4.jpeg">
 
     <div class="fan-info">
       <h3>Sports Events</h3>
@@ -391,7 +389,7 @@
     [class.selected]="selectedCard === 6"
     (click)="selectCard(6, $event)"
   >
-    <img src="./images/general7.jpeg">
+    <img src="./images/gurusamy5.jpeg">
 
     <div class="fan-info">
       <h3>Community Welfare</h3>
@@ -404,282 +402,242 @@
 </section>
 
 <!--=================================
-        FEATURED GALLERY
+        GALLERY CATEGORIES
 ==================================-->
+<section class="gallery-page">
 
-<section class="featured-gallery">
+  <header class="gallery-hero">
 
-   <div class="section-heading">
+    <div class="hero-decoration decoration-one"></div>
+    <div class="hero-decoration decoration-two"></div>
 
-    <span class="section-tag">
-        Moments That Matter
-    </span>
+    <div class="hero-content">
 
+      <span class="hero-eyebrow">
+        STAR GURU CHARITABLE FOUNDATION
+      </span>
 
-    <h2>
-        Capturing Every Moment of Service
-        <span>Dr T.Gurusamy</span>
-    </h2>
+      <h1>
+        Moments of
+        <span>Hope & Humanity</span>
+      </h1>
 
+      <p>
+        Explore the meaningful moments, community services
+        and unforgettable events from our journey.
+      </p>
 
-    <p>
-        Every picture preserves a journey of kindness, dedication,
-        and hope. Explore the unforgettable moments created by our
-        volunteers and communities through every initiative we serve.
-    </p>
+      <div class="hero-stats">
 
-
-</div>
-
-    <div class="masonry-gallery">
-
-        <div class="gallery-box large">
-
-            <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80">
-
-            <div class="gallery-info">
-                <span>Food Distribution</span>
-                <h3>Serving Thousands Every Day</h3>
-            </div>
-
+        <div>
+          <strong>{{ topics.length }}</strong>
+          <span>Categories</span>
         </div>
 
-        <div class="gallery-box">
-
-            <img src="https://images.unsplash.com/photo-1492496913980-501348b61469?auto=format&fit=crop&w=1200&q=80">
-
-            <div class="gallery-info">
-                <span>Environment</span>
-                <h3>Vaigai River Cleaning</h3>
-            </div>
-
+        <div>
+          <strong>{{ totalImages }}</strong>
+          <span>Memories</span>
         </div>
 
-        <div class="gallery-box">
-
-            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80">
-
-            <div class="gallery-info">
-                <span>Education</span>
-                <h3>Empowering Young Minds</h3>
-            </div>
-
-        </div>
-
-        <div class="gallery-box">
-
-            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80">
-
-            <div class="gallery-info">
-                <span>Medical Camp</span>
-                <h3>Healthcare for Everyone</h3>
-            </div>
-
-        </div>
-
-        <div class="gallery-box">
-
-            <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1200&q=80">
-
-            <div class="gallery-info">
-                <span>Sports</span>
-                <h3>Youth Sports Development</h3>
-            </div>
-
-        </div>
-
-        <div class="gallery-box wide">
-
-            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80">
-
-            <div class="gallery-info">
-                <span>Community Welfare</span>
-                <h3>Serving Society with Compassion</h3>
-            </div>
-
-        </div>
+      </div>
 
     </div>
 
-</section>
+  </header>
 
-
-<!--=================================
-      IMPACT VIDEOS
-==================================-->
-
-<section class="gallery-impact">
-
+  <main class="gallery-content">
 
     <div class="section-heading">
 
+      <div>
+        <span>OUR MEMORIES</span>
+        <h2>Explore the Gallery</h2>
+      </div>
 
-        <span class="section-tag">
-            Our Impact Videos
-        </span>
+      <p>
+        Select a category to discover our programmes,
+        celebrations and community initiatives.
+      </p>
 
+    </div>
 
-        <h2>
-            Stories In Motion
-            <span>Real Moments. Real Change.</span>
-        </h2>
+    <nav
+      class="topic-filter"
+      *ngIf="topics.length > 0"
+      aria-label="Gallery categories"
+    >
 
+      <button
+        type="button"
+        [class.active]="selectedTopicId === 'all'"
+        (click)="selectTopic('all')"
+      >
+        <span>All</span>
+        <small>{{ totalImages }}</small>
+      </button>
+
+      <button
+        type="button"
+        *ngFor="
+          let topic of topics;
+          trackBy: trackTopic
+        "
+        [class.active]="selectedTopicId === topic.id"
+        (click)="selectTopic(topic.id)"
+      >
+        <span>{{ topic.topicName }}</span>
+        <small>{{ topic.imageUrls.length }}</small>
+      </button>
+
+    </nav>
+
+    <div
+      class="gallery-loading"
+      *ngIf="galleryLoading"
+    >
+      <span class="gallery-loader"></span>
+      <h3>Loading gallery...</h3>
+      <p>Beautiful memories are on their way.</p>
+    </div>
+
+    <div
+      class="gallery-error"
+      *ngIf="!galleryLoading && galleryErrorMessage"
+    >
+      <span>!</span>
+      <h3>Unable to load gallery</h3>
+      <p>{{ galleryErrorMessage }}</p>
+
+      <button
+        type="button"
+        (click)="loadGallery()"
+      >
+        Try Again
+      </button>
+    </div>
+
+    <div
+      class="empty-gallery"
+      *ngIf="
+        !galleryLoading &&
+        !galleryErrorMessage &&
+        visibleImages.length === 0
+      "
+    >
+      <div class="empty-gallery-icon">◇</div>
+      <h3>No images available</h3>
+      <p>
+        Images have not yet been uploaded under this topic.
+      </p>
+    </div>
+
+    <div
+      class="gallery-grid"
+      *ngIf="
+        !galleryLoading &&
+        !galleryErrorMessage &&
+        visibleImages.length > 0
+      "
+    >
+
+      <article
+        class="gallery-card"
+        *ngFor="
+          let image of visibleImages;
+          let imageIndex = index;
+          trackBy: trackImage
+        "
+        [style.animation-delay.ms]="
+          (imageIndex % 12) * 55
+        "
+        (click)="openLightbox(imageIndex)"
+        tabindex="0"
+        role="button"
+        (keydown.enter)="openLightbox(imageIndex)"
+      >
+
+        <img
+          [src]="image.url"
+          [alt]="image.topicName + ' gallery image'"
+          loading="lazy"
+        />
+
+        <div class="card-shade"></div>
+
+        <div class="card-content">
+          <span>{{ image.topicName }}</span>
+
+          <button
+            type="button"
+            aria-label="Open image"
+          >
+            ↗
+          </button>
+        </div>
+
+      </article>
+
+    </div>
+
+  </main>
+
+  <div
+    class="lightbox"
+    *ngIf="lightboxOpen && currentImage"
+    (click)="closeLightbox()"
+  >
+
+    <button
+      type="button"
+      class="lightbox-close"
+      aria-label="Close image"
+      (click)="closeLightbox()"
+    >
+      ×
+    </button>
+
+    <button
+      type="button"
+      class="lightbox-navigation previous"
+      aria-label="Previous image"
+      (click)="showPrevious($event)"
+    >
+      ‹
+    </button>
+
+    <div
+      class="lightbox-content"
+      (click)="stopPropagation($event)"
+    >
+      <img
+        [src]="currentImage.url"
+        [alt]="currentImage.topicName"
+      />
+
+      <div class="lightbox-caption">
+        <div>
+          <span>GALLERY CATEGORY</span>
+          <h3>{{ currentImage.topicName }}</h3>
+        </div>
 
         <p>
-            Experience our journey through real videos of food distribution,
-            environmental activities, education support, and community service
-            initiatives.
+          {{ currentImageIndex + 1 }} /
+          {{ visibleImages.length }}
         </p>
+      </div>
     </div>
 
-
-
-    <div class="impact-video-grid">
-
-
-
-        <!-- Video 1 -->
-
-        <div class="impact-video-card">
-
-            <video 
-            src="./images/food-video.mp4"
-            poster="./images/food7.jpeg"
-            controls>
-            </video>
-
-
-            <div class="video-title">
-
-                <h3>
-                    Food Distribution
-                </h3>
-
-                <p>
-                    Serving meals with compassion
-                </p>
-               <button 
+    <button
       type="button"
-      class="view-story-btn"
-      (click)="viewStory(6, $event)"
+      class="lightbox-navigation next"
+      aria-label="Next image"
+      (click)="showNext($event)"
     >
-      View Story
-      <span>→</span>
+      ›
     </button>
 
-            </div>
-
-        </div>
-
-
-
-
-        <!-- Video 2 -->
-
-        <div class="impact-video-card">
-
-            <video 
-            src="./images/vaigai-video.mp4"
-            poster="./images/vaigai7.jpeg"
-            controls>
-            </video>
-
-
-            <div class="video-title">
-
-                <h3>
-                    Vaigai River Cleaning
-                </h3>
-
-                <p>
-                    Building a cleaner environment
-                </p>
-                 <button 
-      type="button"
-      class="view-story-btn"
-      (click)="viewStory(6, $event)"
-    >
-      View Story
-      <span>→</span>
-    </button>
-
-            </div>
-
-        </div>
-
-
-
-
-        <!-- Video 3 -->
-
-        <div class="impact-video-card">
-
-            <video 
-            src="./images/education-video.mp4"
-            poster="./images/edu8.jpg"
-            controls>
-            </video>
-
-
-            <div class="video-title">
-
-                <h3>
-                    Education Support
-                </h3>
-
-                <p>
-                    Empowering young minds
-                </p>
-                <button 
-      type="button"
-      class="view-story-btn"
-      (click)="viewStory(6, $event)"
-    >
-      View Story
-      <span>→</span>
-    </button>
-
-            </div>
-
-        </div>
-
-
-
-
-        <!-- Video 4 -->
-
-        <div class="impact-video-card">
-
-            <video 
-            src="./images/community-video.mp4"
-            poster="./images/general7.jpeg"
-            controls>
-            </video>
-            <div class="video-title">
-
-                <h3>
-                    Community Welfare
-                </h3>
-
-                <p>
-                    Creating positive change
-                </p>
-               <button 
-         type="button"
-        class="view-story-btn"
-        (click)="viewStory(6, $event)"
-         >
-      View Story
-      <span>→</span>
-    </button>
-    </div>
-
-        </div>
-
-
-
-    </div>
-
-
+  </div>
 
 </section>
+
+
