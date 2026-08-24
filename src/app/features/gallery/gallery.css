@@ -4613,3 +4613,451 @@ body {
     padding-right: 75px;
   }
 }
+/* =========================================================
+   MOBILE FAN GALLERY - FINAL
+   Fan -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> Fan
+========================================================= */
+
+@media (max-width: 768px) {
+
+  /* Main section mobile padding */
+  .gallery-premium {
+    width: 100%;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+
+  /* =====================================
+     FAN CONTAINER
+  ===================================== */
+
+  .gallery-fan {
+    position: relative;
+
+    width: 100% !important;
+    max-width: 360px !important;
+
+    height: 430px !important;
+
+    margin: 40px auto 0 !important;
+
+    overflow: visible !important;
+
+    display: block !important;
+
+    perspective: 1200px;
+
+    touch-action: manipulation;
+  }
+
+
+  /* =====================================
+     CARD COMMON
+  ===================================== */
+
+  .gallery-fan .fan-card {
+    position: absolute !important;
+
+    left: 50% !important;
+    top: 50% !important;
+
+    width: 210px !important;
+    height: 290px !important;
+
+    margin-left: -105px !important;
+    margin-top: -145px !important;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    transform-origin:
+      center bottom;
+
+    transition:
+      transform .55s cubic-bezier(.22,.8,.25,1),
+      opacity .4s ease,
+      filter .4s ease,
+      box-shadow .4s ease !important;
+
+    cursor: pointer;
+  }
+
+
+  .gallery-fan .fan-card img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transform: none !important;
+  }
+
+
+  /* =====================================
+     ORIGINAL 6 CARD FAN
+  ===================================== */
+
+  .gallery-fan .card-1 {
+    transform:
+      translateX(-62px)
+      translateY(15px)
+      rotate(-14deg) !important;
+
+    z-index: 6;
+  }
+
+
+  .gallery-fan .card-2 {
+    transform:
+      translateX(-40px)
+      translateY(5px)
+      rotate(-9deg) !important;
+
+    z-index: 5;
+  }
+
+
+  .gallery-fan .card-3 {
+    transform:
+      translateX(-16px)
+      translateY(0)
+      rotate(-4deg) !important;
+
+    z-index: 4;
+  }
+
+
+  .gallery-fan .card-4 {
+    transform:
+      translateX(16px)
+      translateY(0)
+      rotate(4deg) !important;
+
+    z-index: 3;
+  }
+
+
+  .gallery-fan .card-5 {
+    transform:
+      translateX(40px)
+      translateY(5px)
+      rotate(9deg) !important;
+
+    z-index: 2;
+  }
+
+
+  .gallery-fan .card-6 {
+    transform:
+      translateX(62px)
+      translateY(15px)
+      rotate(14deg) !important;
+
+    z-index: 1;
+  }
+
+
+  /* =====================================
+     IMPORTANT
+     DISABLE DESKTOP HOVER ON MOBILE
+  ===================================== */
+
+  .gallery-fan:hover .card-1 {
+    transform:
+      translateX(-62px)
+      translateY(15px)
+      rotate(-14deg) !important;
+  }
+
+  .gallery-fan:hover .card-2 {
+    transform:
+      translateX(-40px)
+      translateY(5px)
+      rotate(-9deg) !important;
+  }
+
+  .gallery-fan:hover .card-3 {
+    transform:
+      translateX(-16px)
+      translateY(0)
+      rotate(-4deg) !important;
+  }
+
+  .gallery-fan:hover .card-4 {
+    transform:
+      translateX(16px)
+      translateY(0)
+      rotate(4deg) !important;
+  }
+
+  .gallery-fan:hover .card-5 {
+    transform:
+      translateX(40px)
+      translateY(5px)
+      rotate(9deg) !important;
+  }
+
+  .gallery-fan:hover .card-6 {
+    transform:
+      translateX(62px)
+      translateY(15px)
+      rotate(14deg) !important;
+  }
+
+
+  /* =====================================
+     FAN OPEN
+  ===================================== */
+
+  .gallery-fan.fan-open
+  .fan-card {
+
+    opacity: .65;
+
+    filter:
+      brightness(.65);
+
+  }
+
+
+  /* =====================================
+     SELECTED CARD COMES FRONT
+  ===================================== */
+
+  .gallery-fan.fan-open
+  .fan-card.selected,
+
+  .gallery-fan.fan-open:hover
+  .fan-card.selected {
+
+    transform:
+      translateX(0)
+      translateY(-15px)
+      rotate(0deg)
+      scale(1.08) !important;
+
+    opacity: 1 !important;
+
+    filter:
+      brightness(1) !important;
+
+    z-index: 100 !important;
+
+    box-shadow:
+      0 25px 55px
+      rgba(0,0,0,.35) !important;
+  }
+
+
+  /* =====================================
+     SELECTED IMAGE
+  ===================================== */
+
+  .gallery-fan
+  .fan-card.selected img {
+
+    transform:
+      scale(1.02) !important;
+
+  }
+
+
+  /* =====================================
+     INFO PANEL
+     Only selected card
+  ===================================== */
+
+  .gallery-fan .fan-info {
+
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+
+    padding:
+      14px 15px;
+
+    border-radius: 14px;
+
+    transform:
+      translateY(120%) !important;
+
+    opacity: 0 !important;
+
+    transition:
+      .4s ease !important;
+  }
+
+
+  .gallery-fan
+  .fan-card.selected
+  .fan-info {
+
+    transform:
+      translateY(0) !important;
+
+    opacity: 1 !important;
+  }
+
+
+  .gallery-fan
+  .fan-info h3 {
+
+    font-size: 17px;
+
+  }
+
+
+  .gallery-fan
+  .fan-info p {
+
+    font-size: 11px;
+
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .gallery-premium {
+
+    padding-left:
+      16px !important;
+
+    padding-right:
+      16px !important;
+
+  }
+
+
+  .gallery-fan {
+
+    max-width:
+      340px !important;
+
+    height:
+      410px !important;
+
+  }
+
+
+  .gallery-fan
+  .fan-card {
+
+    width:
+      195px !important;
+
+    height:
+      275px !important;
+
+    margin-left:
+      -97.5px !important;
+
+    margin-top:
+      -137.5px !important;
+
+  }
+
+
+  .gallery-fan .card-1,
+  .gallery-fan:hover .card-1 {
+
+    transform:
+      translateX(-55px)
+      translateY(14px)
+      rotate(-14deg) !important;
+
+  }
+
+
+  .gallery-fan .card-2,
+  .gallery-fan:hover .card-2 {
+
+    transform:
+      translateX(-35px)
+      translateY(6px)
+      rotate(-9deg) !important;
+
+  }
+
+
+  .gallery-fan .card-3,
+  .gallery-fan:hover .card-3 {
+
+    transform:
+      translateX(-14px)
+      rotate(-4deg) !important;
+
+  }
+
+
+  .gallery-fan .card-4,
+  .gallery-fan:hover .card-4 {
+
+    transform:
+      translateX(14px)
+      rotate(4deg) !important;
+
+  }
+
+
+  .gallery-fan .card-5,
+  .gallery-fan:hover .card-5 {
+
+    transform:
+      translateX(35px)
+      translateY(6px)
+      rotate(9deg) !important;
+
+  }
+
+
+  .gallery-fan .card-6,
+  .gallery-fan:hover .card-6 {
+
+    transform:
+      translateX(55px)
+      translateY(14px)
+      rotate(14deg) !important;
+
+  }
+
+
+  /*
+   * Selected MUST come after
+   * all fan transforms.
+   */
+  .gallery-fan.fan-open
+  .fan-card.selected,
+
+  .gallery-fan.fan-open:hover
+  .fan-card.selected {
+
+    transform:
+      translateX(0)
+      translateY(-12px)
+      rotate(0deg)
+      scale(1.08) !important;
+
+    z-index:
+      100 !important;
+
+    opacity:
+      1 !important;
+
+    filter:
+      brightness(1) !important;
+
+  }
+
+}
