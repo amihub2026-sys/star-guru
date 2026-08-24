@@ -1891,403 +1891,379 @@
 
 }
 
-/*=================================
-      BEFORE & AFTER
-==================================*/
+/* ==========================================================
+   DYNAMIC TRANSFORMATIONS — BEFORE & AFTER
+========================================================== */
 
-/* ==============================
-   BEFORE AFTER HEADER
-============================== */
-
-.transformation-header{
-
-    max-width:850px;
-
-    margin:0 auto 70px;
-
-    text-align:center;
-
+.transformation-section {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  padding: 100px 7%;
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(216, 165, 28, 0.1),
+      transparent 32%
+    ),
+    #ffffff;
 }
 
+/* ==========================================================
+   HEADING
+========================================================== */
 
-.transformation-tag{
-
-    display:inline-block;
-
-    padding:5px 18px;
-
-    border-radius:50px;
-
-    background:
-    linear-gradient(135deg,#fff3c4,#ffffff);
-
-    color:#b8860b;
-
-    font-weight:600;
-
-    letter-spacing:2px;
-
-    font-size:14px;
-
-    border:1px solid #d4af37;
-
-    margin-bottom:25px;
-
+.transformation-heading {
+  width: min(850px, 100%);
+  margin: 0 auto;
+  text-align: center;
 }
 
-
-
-.transformation-header h2{
-
-    font-family:Georgia,serif;
-
-    font-size:42px;
-
-    line-height:1.2;
-
-    color:#0f172a;
-
-    margin-bottom:25px;
-
+.transformation-heading > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: 9px 22px;
+  border: 1px solid #d4af37;
+  border-radius: 50px;
+  color: #9b7100;
+  background: linear-gradient(135deg, #fff3c4, #ffffff);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
 }
 
-
-
-.transformation-header h2 span{
-
-    color:#d4af37;
-
+.transformation-heading h2 {
+  margin: 0 0 22px;
+  color: #071a3a;
+  font-size: clamp(38px, 5vw, 58px);
+  font-weight: 800;
+  line-height: 1.15;
 }
 
-
-
-.transformation-header p{
-
-    color:#64748b;
-
-    font-size:18px;
-
-    line-height:1.8;
-
-    max-width:750px;
-
-    margin:auto;
-
+.transformation-heading p {
+  width: 100%;
+  max-width: 750px;
+  margin: 0 auto;
+  color: #64748b;
+  font-size: 16px;
+  line-height: 1.85;
 }
 
+/* ==========================================================
+   LOADING AND ERROR MESSAGE
+========================================================== */
 
-
-/* ==============================
-   CARD PREMIUM LOOK
-============================== */
-
-
-.comparison-card{
-
-    background:#ffffff;
-
-    border-radius:30px;
-
-    padding:25px;
-
-    box-shadow:
-    0 25px 60px rgba(0,0,0,.08);
-
-    border:1px solid rgba(212,175,55,.15);
-
-    transition:.4s;
-
+.transformation-section .impact-video-message {
+  width: min(600px, 100%);
+  margin: 45px auto 0;
+  padding: 20px;
+  border: 1px solid #eee3c3;
+  border-radius: 15px;
+  color: #52627a;
+  background: #ffffff;
+  text-align: center;
 }
 
-
-
-.comparison-card:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:
-    0 35px 80px rgba(212,175,55,.18);
-
+.transformation-section .error-message {
+  border-color: #fecaca;
+  color: #b91c1c;
+  background: #fef2f2;
 }
 
+/* ==========================================================
+   TRANSFORMATION GRID
+========================================================== */
 
-
-.comparison-card h3{
-
-    font-family:Georgia,serif;
-
-    font-size:28px;
-
-    color:#111827;
-
-    margin-top: 1px;
-
-    margin-bottom:15px;
-
+.transformation-grid {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1250px;
+  margin: 55px auto 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 34px;
 }
 
+/* ==========================================================
+   TRANSFORMATION CARD
+========================================================== */
 
-
-.comparison-images{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:18px;
-
+.transformation-card {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 26px;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 26px;
+  background: #ffffff;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.1);
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
 }
 
-
-
-.image-box{
-
-    position:relative;
-
-    overflow:hidden;
-
-    border-radius:15px;
-
+.transformation-card:hover {
+  transform: translateY(-8px);
+  border-color: #d4af37;
+  box-shadow: 0 30px 70px rgba(15, 23, 42, 0.16);
 }
 
-
-
-.image-box img{
-
-    width:100%;
-
-    height:230px;
-
-    object-fit:cover;
-
-    transition:.5s;
-
+.transformation-card h3 {
+  margin: 0 0 22px;
+  color: #071a3a;
+  font-size: 27px;
+  font-weight: 800;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
 }
 
+/* ==========================================================
+   BEFORE AND AFTER IMAGES — DESKTOP
+========================================================== */
 
-.image-box:hover img{
-
-    transform:scale(1.08);
-
+.before-after-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
 }
 
-
-
-/* LABEL */
-
-.label{
-
-    position:absolute;
-
-    top:15px;
-
-    left:15px;
-
-    padding:8px 20px;
-
-    border-radius:30px;
-
-    font-size:12px;
-
-    font-weight:700;
-
+.transformation-image {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #e8ebef;
 }
 
-
-.before{
-
-    background:#dc2626;
-
-    color:white;
-
+.transformation-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition:
+    transform 0.55s ease,
+    filter 0.55s ease;
 }
 
-
-.after{
-
-    background:#16a34a;
-
-    color:white;
-
+.transformation-image:hover img {
+  transform: scale(1.07);
+  filter: brightness(1.05);
 }
 
+/* ==========================================================
+   BEFORE AND AFTER BADGES
+========================================================== */
 
-
-.comparison-card p{
-
-    margin-top:15px;
-
-    color:#64748b;
-
-    line-height:1.7;
-
-    margin-bottom: 5px;
+.before-badge,
+.after-badge {
+  position: absolute;
+  z-index: 2;
+  top: 14px;
+  left: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 82px;
+  padding: 8px 16px;
+  border-radius: 50px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2);
 }
 
-
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-.transformation-header h2{
-
-    font-size:34px;
-
+.before-badge {
+  background: #dc2626;
 }
 
-
-.comparison-images{
-
-    grid-template-columns:1fr;
-
+.after-badge {
+  background: #16a34a;
 }
 
+/* Card description */
 
-.image-box img{
-
-    height:200px;
-
+.transformation-card > p {
+  margin: 22px 0 2px;
+  color: #64748b;
+  font-size: 15px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
 }
 
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media (max-width: 992px) {
+  .transformation-section {
+    padding: 80px 30px;
+  }
+
+  .transformation-grid {
+    max-width: 700px;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .transformation-image {
+    height: 320px;
+  }
 }
 
-.before-after{
+/* ==========================================================
+   MOBILE
+   Images change from left/right to top/bottom
+========================================================== */
 
-    padding:10px 8%;
+@media (max-width: 650px) {
+  .transformation-section {
+    padding: 70px 20px;
+  }
 
-    background:#ffffff;
+  .transformation-heading h2 {
+    font-size: 34px;
+    line-height: 1.18;
+  }
 
+  .transformation-heading p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .transformation-grid {
+    width: 100%;
+    max-width: 440px;
+    margin-top: 40px;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .transformation-card {
+    width: 100%;
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  .transformation-card h3 {
+    margin-bottom: 18px;
+    font-size: 24px;
+  }
+
+  /*
+    Important:
+    This makes BEFORE and AFTER appear vertically.
+  */
+
+  .before-after-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .transformation-image {
+    width: 100%;
+    height: 245px;
+    border-radius: 16px;
+  }
+
+  .transformation-card > p {
+    margin-top: 19px;
+    font-size: 14px;
+    line-height: 1.75;
+  }
 }
 
-.comparison-grid{
+/* ==========================================================
+   SMALL MOBILE
+========================================================== */
 
-    max-width:1400px;
+@media (max-width: 480px) {
+  .transformation-section {
+    padding: 60px 16px;
+  }
 
-    margin:70px auto 0;
+  .transformation-heading > span {
+    margin-bottom: 16px;
+    padding: 8px 17px;
+    font-size: 11px;
+  }
 
-    display:grid;
+  .transformation-heading h2 {
+    margin-bottom: 18px;
+    font-size: 30px;
+  }
 
-    grid-template-columns:repeat(2,1fr);
+  .transformation-heading p {
+    font-size: 14px;
+  }
 
-    gap:40px;
+  .transformation-grid {
+    max-width: 100%;
+  }
 
+  .transformation-card {
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .transformation-card h3 {
+    font-size: 22px;
+  }
+
+  .before-after-grid {
+    gap: 14px;
+  }
+
+  .transformation-image {
+    height: 230px;
+  }
+
+  .before-badge,
+  .after-badge {
+    top: 12px;
+    left: 12px;
+    min-width: 76px;
+    padding: 7px 14px;
+    font-size: 11px;
+  }
 }
 
-.comparison-card{
+/* ==========================================================
+   VERY SMALL MOBILE
+========================================================== */
 
-    background:#fff;
+@media (max-width: 360px) {
+  .transformation-section {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
 
-    border-radius:24px;
+  .transformation-heading h2 {
+    font-size: 27px;
+  }
 
-    overflow:hidden;
+  .transformation-card {
+    padding: 14px;
+  }
 
-    box-shadow:0 20px 40px rgba(0,0,0,.08);
-
-    transition:.35s;
-
+  .transformation-image {
+    height: 215px;
+  }
 }
-
-.comparison-card:hover{
-
-    transform:translateY(-10px);
-
-}
-
-.comparison-card h3{
-
-    padding:30px;
-
-    color:#1F2937;
-
-    font-size:30px;
-
-}
-
-.comparison-images{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-}
-
-.image-box{
-
-    position:relative;
-
-}
-
-.image-box img{
-
-    width:100%;
-
-    height:320px;
-
-    object-fit:cover;
-
-    display:block;
-
-}
-
-.label{
-
-    position:absolute;
-
-    top:15px;
-
-    left:15px;
-
-    padding:8px 18px;
-
-    border-radius:30px;
-
-    color:white;
-
-    font-weight:700;
-
-    font-size:14px;
-
-}
-
-.before{
-
-    background:#DC2626;
-
-}
-
-.after{
-
-    background:#16A34A;
-
-}
-
-.comparison-card p{
-
-    padding:30px;
-
-    color:#64748B;
-
-    line-height:1.8;
-
-}
-
-@media(max-width:992px){
-
-.comparison-grid{
-
-    grid-template-columns:1fr;
-
-}
-
-.comparison-images{
-
-    grid-template-columns:1fr;
-
-}
-
-}
-
 
 /* ============================
       OUR REACH SECTION
@@ -4566,7 +4542,9 @@
   overflow-x: hidden;
 }
 
-/* Entire section */
+/* ==========================================================
+   RECOGNITION SECTION
+========================================================== */
 
 .impact-recognition-section {
   box-sizing: border-box;
@@ -4574,14 +4552,11 @@
   max-width: 100%;
   overflow: hidden;
   padding: 100px 7%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   background:
     radial-gradient(
       circle at 50% 0%,
-      rgba(224, 174, 28, 0.1),
-      transparent 32%
+      rgba(224, 174, 28, 0.12),
+      transparent 34%
     ),
     #fafafa;
 }
@@ -4589,15 +4564,16 @@
 /* Heading */
 
 .impact-recognition-heading {
-  box-sizing: border-box;
   width: min(850px, 100%);
   margin: 0 auto;
   text-align: center;
 }
 
 .impact-recognition-tag {
-  display: table;
-  margin: 0 auto 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
   padding: 9px 22px;
   border: 1px solid #dfad22;
   border-radius: 50px;
@@ -4606,14 +4582,15 @@
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .impact-recognition-heading h2 {
-  margin: 0 auto 22px;
+  margin: 0 0 20px;
   color: #071a3a;
   font-size: clamp(38px, 5vw, 58px);
+  font-weight: 800;
   line-height: 1.12;
-  text-align: center;
 }
 
 .impact-recognition-heading h2 span {
@@ -4621,13 +4598,31 @@
 }
 
 .impact-recognition-heading p {
-  width: 100%;
   max-width: 800px;
   margin: 0 auto;
   color: #52627a;
   font-size: 16px;
-  line-height: 1.9;
+  line-height: 1.8;
+}
+
+/* Loading and error message */
+
+.impact-recognition-message {
+  width: min(600px, 100%);
+  margin: 45px auto 0;
+  padding: 22px;
+  border: 1px solid #eee3c3;
+  border-radius: 16px;
+  color: #52627a;
+  background: #ffffff;
   text-align: center;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);
+}
+
+.impact-recognition-message.error {
+  border-color: #fecaca;
+  color: #b91c1c;
+  background: #fef2f2;
 }
 
 /* Card grid */
@@ -4638,9 +4633,7 @@
   max-width: 1200px;
   margin: 55px auto 0;
   display: grid;
-  grid-template-columns:
-    repeat(3, minmax(0, 1fr));
-  justify-content: center;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: stretch;
   gap: 28px;
 }
@@ -4653,163 +4646,110 @@
   width: 100%;
   min-width: 0;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
   border: 1px solid #eee3c3;
   border-radius: 24px;
   background: #ffffff;
-  box-shadow:
-    0 18px 45px rgba(15, 23, 42, 0.1);
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.1);
   transition:
     transform 0.35s ease,
-    box-shadow 0.35s ease;
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
 }
 
 .impact-recognition-card:hover {
   transform: translateY(-8px);
-  box-shadow:
-    0 28px 60px rgba(15, 23, 42, 0.16);
+  border-color: #dfad22;
+  box-shadow: 0 28px 60px rgba(15, 23, 42, 0.16);
 }
+
+/* Card image */
 
 .impact-recognition-image {
   position: relative;
   width: 100%;
   height: 270px;
+  flex-shrink: 0;
   overflow: hidden;
   background: #e8ebef;
 }
 
-
-/* ==========================================================
-   GLOBAL MOBILE SIDE PADDING
-   ADD THIS AT THE VERY BOTTOM OF YOUR CSS FILE
-========================================================== */
-
-@media (max-width: 768px) {
-
-    .impact-hero,
-    .impact-overview,
-    .impact-story-section,
-    .impact-stats,
-    .success-stories,
-    .before-after,
-    .our-reach,
-    .awards-section,
-    .work-process {
-        padding-left: 20px !important;
-        padding-right: 20px !important;
-
-        box-sizing: border-box;
-    }
-
+.impact-recognition-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(7, 26, 58, 0.12),
+    transparent 45%
+  );
 }
-
-
-/* ==========================================================
-   SMALL MOBILE
-========================================================== */
-
-@media (max-width: 480px) {
-
-    .impact-hero,
-    .impact-overview,
-    .impact-story-section,
-    .impact-stats,
-    .success-stories,
-    .before-after,
-    .our-reach,
-    .awards-section,
-    .work-process {
-        padding-left: 16px !important;
-        padding-right: 16px !important;
-    }
-
-}
-
-
-/* ==========================================================
-   VERY SMALL MOBILE
-========================================================== */
-
-@media (max-width: 360px) {
-
-    .impact-hero,
-    .impact-overview,
-    .impact-story-section,
-    .impact-stats,
-    .success-stories,
-    .before-after,
-    .our-reach,
-    .awards-section,
-    .work-process {
-        padding-left: 14px !important;
-        padding-right: 14px !important;
-    }
-
-}
-@media (max-width: 768px) {
-
-    .infinity-wrapper {
-        width: 100% !important;
-        max-width: 100% !important;
-
-        margin-left: auto !important;
-        margin-right: auto !important;
-
-        box-sizing: border-box;
-    }
-
-    .infinity-svg {
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-
 
 .impact-recognition-image img {
-  display: block !important;
-  width: 100% !important;
-  height: 100% !important;
-  max-width: 100% !important;
-  object-fit: cover !important;
-  object-position: center !important;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
 }
+
+.impact-recognition-card:hover
+.impact-recognition-image img {
+  transform: scale(1.05);
+}
+
+/* Card content */
 
 .impact-recognition-content {
   box-sizing: border-box;
   width: 100%;
   padding: 28px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
   text-align: left;
 }
 
 .impact-recognition-badge {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 18px;
   padding: 7px 17px;
   border: 1px solid #f0dfaa;
   border-radius: 50px;
-  color: #b47600;
+  color: #9c6700;
   background: #fff7df;
   font-size: 12px;
   font-weight: 800;
+  line-height: 1.2;
 }
 
 .impact-recognition-content h3 {
-  margin: 0 0 15px;
-  overflow-wrap: anywhere;
-  word-break: break-word;
+  margin: 0 0 14px;
   color: #071a3a;
-  font-size: 24px;
-  line-height: 1.3;
+  font-size: 23px;
+  font-weight: 800;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
 .impact-recognition-content p {
   margin: 0;
-  overflow-wrap: anywhere;
-  word-break: break-word;
   color: #52627a;
   font-size: 15px;
   line-height: 1.8;
+  overflow-wrap: anywhere;
 }
 
-/* Tablet */
+/* ==========================================================
+   TABLET
+========================================================== */
 
 @media (max-width: 950px) {
   .impact-recognition-section {
@@ -4818,27 +4758,36 @@
 
   .impact-recognition-grid {
     max-width: 780px;
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
   }
 }
 
-/* Mobile */
+/* ==========================================================
+   MOBILE
+========================================================== */
 
 @media (max-width: 650px) {
   .impact-recognition-section {
-    padding: 70px 18px;
+    padding: 70px 20px;
   }
 
   .impact-recognition-heading h2 {
-    font-size: 36px;
+    font-size: 34px;
+    line-height: 1.18;
+  }
+
+  .impact-recognition-heading p {
+    font-size: 15px;
+    line-height: 1.7;
   }
 
   .impact-recognition-grid {
-    max-width: 420px;
-    grid-template-columns: 1fr;
-    gap: 22px;
+    width: 100%;
+    max-width: 430px;
     margin-top: 38px;
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .impact-recognition-image {
@@ -4846,7 +4795,79 @@
   }
 
   .impact-recognition-content {
-    padding: 23px;
+    padding: 24px;
+  }
+
+  .impact-recognition-content h3 {
+    font-size: 21px;
   }
 }
+
+/* ==========================================================
+   SMALL MOBILE
+========================================================== */
+
+@media (max-width: 480px) {
+  .impact-recognition-section {
+    padding: 60px 16px;
+  }
+
+  .impact-recognition-heading h2 {
+    font-size: 30px;
+  }
+
+  .impact-recognition-tag {
+    margin-bottom: 16px;
+    padding: 8px 18px;
+    font-size: 11px;
+  }
+
+  .impact-recognition-grid {
+    max-width: 100%;
+    gap: 20px;
+  }
+
+  .impact-recognition-card {
+    border-radius: 20px;
+  }
+
+  .impact-recognition-image {
+    height: 220px;
+  }
+
+  .impact-recognition-content {
+    padding: 21px 20px 24px;
+  }
+
+  .impact-recognition-content h3 {
+    font-size: 20px;
+  }
+
+  .impact-recognition-content p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+}
+
+/* ==========================================================
+   VERY SMALL MOBILE
+========================================================== */
+
+@media (max-width: 360px) {
+  .impact-recognition-section {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .impact-recognition-heading h2 {
+    font-size: 27px;
+  }
+
+  .impact-recognition-image {
+    height: 200px;
+  }
+
+  .impact-recognition-content {
+    padding: 19px 18px 22px;
+  }
 }
