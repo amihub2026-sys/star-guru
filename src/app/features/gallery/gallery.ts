@@ -100,53 +100,190 @@ export class Gallery
    * EXISTING FAN CARDS
    * ==========================================
    */
+/*
+ * ==========================================
+ * EXISTING FAN CARDS
+ * ==========================================
+ */
 
-  fanOpen = false;
+fanOpen = false;
 
-  selectedCard: number | null = null;
+selectedCard: number | null = null;
 
-  openFan(): void {
-    if (!this.fanOpen) {
-      this.fanOpen = true;
-    }
-  }
+/*
+ * Total number of fan cards
+ */
+private readonly totalFanCards = 6;
 
-  closeFan(event?: Event): void {
-    event?.stopPropagation();
 
-    this.selectedCard = null;
-    this.fanOpen = false;
-  }
+/*
+ * Open fan.
+ *
+ * First click on fan:
+ * Card 1 comes to front.
+ */
+openFan(): void {
 
-  selectCard(
-    cardNumber: number,
-    event: Event
-  ): void {
+  if (!this.fanOpen) {
 
-    // Prevent card click from triggering openFan()
-    event.stopPropagation();
-
-    // Keep fan open
     this.fanOpen = true;
 
-    // Select clicked card
+    this.selectedCard = 1;
+
+  }
+
+}
+
+
+/*
+ * Close/reset fan.
+ */
+closeFan(event?: Event): void {
+
+  event?.stopPropagation();
+
+  this.selectedCard = null;
+
+  this.fanOpen = false;
+
+}
+
+
+/*
+ * Main fan card click logic.
+ *
+ * Mobile behaviour:
+ *
+ * Fan
+ *  ↓
+ * Card 1
+ *  ↓
+ * Card 2
+ *  ↓
+ * Card 3
+ *  ↓
+ * Card 4
+ *  ↓
+ * Card 5
+ *  ↓
+ * Card 6
+ *  ↓
+ * Fan
+ */
+selectCard(
+  cardNumber: number,
+  event: Event
+): void {
+
+  event.stopPropagation();
+
+
+  /*
+   * FAN CLOSED
+   *
+   * If user clicks any card while
+   * fan is still closed,
+   * start from that card.
+   */
+  if (!this.fanOpen) {
+
+    this.fanOpen = true;
+
     this.selectedCard = cardNumber;
+
+    return;
+
   }
 
-  viewStory(
-    cardNumber: number,
-    event: Event
-  ): void {
 
-    event.stopPropagation();
+  /*
+   * FAN OPEN BUT NOTHING SELECTED
+   */
+  if (this.selectedCard === null) {
 
-    console.log(
-      'View story:',
-      cardNumber
-    );
+    this.selectedCard = cardNumber;
 
-    // Existing story function can be added here.
+    return;
+
   }
+
+
+  /*
+   * If another card is clicked directly,
+   * bring that clicked card to front.
+   */
+  if (this.selectedCard !== cardNumber) {
+
+    this.selectedCard = cardNumber;
+
+    return;
+
+  }
+
+
+  /*
+   * CURRENT FRONT CARD CLICKED
+   *
+   * Move to next card:
+   *
+   * 1 -> 2
+   * 2 -> 3
+   * 3 -> 4
+   * 4 -> 5
+   * 5 -> 6
+   */
+  if (
+    this.selectedCard <
+    this.totalFanCards
+  ) {
+
+    this.selectedCard =
+      this.selectedCard + 1;
+
+    return;
+
+  }
+
+
+  /*
+   * Card 6 clicked.
+   *
+   * Return to original fan format.
+   */
+  this.resetFan();
+
+}
+
+
+/*
+ * Reset everything back to
+ * original fan layout.
+ */
+private resetFan(): void {
+
+  this.selectedCard = null;
+
+  this.fanOpen = false;
+
+}
+
+
+/*
+ * Optional existing story function
+ */
+viewStory(
+  cardNumber: number,
+  event: Event
+): void {
+
+  event.stopPropagation();
+
+  console.log(
+    'View story:',
+    cardNumber
+  );
+
+}
 
   /*
    * ==========================================
@@ -440,25 +577,29 @@ loadGallery(): void {
    * ==========================================
    */
 
-  @HostListener(
-    'document:keydown.escape'
-  )
-  handleEscape(): void {
+@HostListener(
+  'document:keydown.escape'
+)
+handleEscape(): void {
 
-    if (this.lightboxOpen) {
-      this.closeLightbox();
-      return;
-    }
+  if (this.lightboxOpen) {
 
-    if (this.selectedCard !== null) {
-      this.selectedCard = null;
-      return;
-    }
+    this.closeLightbox();
 
-    if (this.fanOpen) {
-      this.fanOpen = false;
-    }
+    return;
+
   }
+
+  if (
+    this.selectedCard !== null ||
+    this.fanOpen
+  ) {
+
+    this.resetFan();
+
+  }
+
+}
 
   @HostListener(
     'document:keydown.arrowleft'
