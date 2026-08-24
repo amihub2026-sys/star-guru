@@ -7,7 +7,9 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-
+import {
+  HostListener
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
@@ -170,4 +172,30 @@ loadServiceGallery(): void {
       );
     }
   }
+
+
+  selectedGalleryImage: any | null = null;
+
+openGalleryImage(image: any): void {
+  this.selectedGalleryImage = image;
+
+  if (typeof document !== 'undefined') {
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+closeGalleryImage(): void {
+  this.selectedGalleryImage = null;
+
+  if (typeof document !== 'undefined') {
+    document.body.style.overflow = '';
+  }
+}
+
+@HostListener('document:keydown.escape')
+handleEscapeKey(): void {
+  if (this.selectedGalleryImage) {
+    this.closeGalleryImage();
+  }
+}
 }

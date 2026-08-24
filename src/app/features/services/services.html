@@ -892,16 +892,20 @@
 <section class="service-gallery">
 
   <div class="section-heading">
+
     <span class="section-tag">
       Our Gallery
     </span>
 
-    <h2>Moments of Service & Compassion</h2>
+    <h2>
+      Moments of Service & Compassion
+    </h2>
 
     <p>
       Every photograph reflects our commitment to serving communities
       with compassion, dignity and dedication.
     </p>
+
   </div>
 
   <div
@@ -916,26 +920,44 @@
       !galleryLoading &&
       serviceGalleryImages.length > 0
     "
-    class="gallery-mosaic"
+    class="gallery-masonry"
   >
+
     <article
       *ngFor="
         let image of serviceGalleryImages;
         let i = index
       "
-      class="gallery-mosaic-item"
+      class="gallery-masonry-item"
+      role="button"
+      tabindex="0"
+      (click)="openGalleryImage(image)"
+      (keydown.enter)="openGalleryImage(image)"
+      (keydown.space)="openGalleryImage(image)"
     >
+
       <img
         [src]="image.imageUrl"
-        [alt]="image.imageName"
+        [alt]="image.imageName || 'Service gallery image'"
         loading="lazy"
       >
 
-      <div class="gallery-overlay">
-        <span>Service moment</span>
-        <strong>0{{ i + 1 }}</strong>
+      <div class="gallery-card-overlay">
+
+        <span>
+          Service Moment
+        </span>
+
+        <strong>
+          {{ i + 1 < 10 ? '0' + (i + 1) : i + 1 }}
+        </strong>
+
       </div>
+
+      
+
     </article>
+
   </div>
 
   <div
@@ -949,3 +971,47 @@
   </div>
 
 </section>
+
+
+<!-- =================================
+     FULL-SCREEN IMAGE LIGHTBOX
+================================== -->
+
+<div
+  *ngIf="selectedGalleryImage"
+  class="gallery-lightbox"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Gallery image preview"
+  (click)="closeGalleryImage()"
+>
+
+  <button
+    type="button"
+    class="gallery-lightbox-close"
+    aria-label="Close image preview"
+    (click)="closeGalleryImage()"
+  >
+    ×
+  </button>
+
+  <div
+    class="gallery-lightbox-content"
+    (click)="$event.stopPropagation()"
+  >
+
+    <img
+      [src]="selectedGalleryImage.imageUrl"
+      [alt]="selectedGalleryImage.imageName || 'Gallery image preview'"
+    >
+
+    <div
+      *ngIf="selectedGalleryImage.imageName"
+      class="gallery-lightbox-caption"
+    >
+      {{ selectedGalleryImage.imageName }}
+    </div>
+
+  </div>
+
+</div>
