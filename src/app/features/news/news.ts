@@ -32,6 +32,8 @@ eventsErrorMessage = '';
 mediaLoading = true;
 mediaErrorMessage = '';
 
+
+
 constructor(
   private newsService: NewsService,
   private cdr: ChangeDetectorRef,
@@ -147,6 +149,8 @@ loadMedia(): void {
       }
 
     });
+
+    
 }
 
 
