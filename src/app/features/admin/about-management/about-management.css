@@ -350,3 +350,152 @@ button:disabled {
     grid-template-columns: 1fr;
   }
 }
+
+
+.about-stats-management {
+  margin-bottom: 28px;
+  padding: 26px;
+  background: #ffffff;
+  border: 1px solid #e1e6ef;
+  border-radius: 18px;
+  box-shadow: 0 12px 35px rgba(15, 28, 52, 0.06);
+}
+
+.stats-management-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 26px;
+}
+
+.stats-management-header span {
+  display: block;
+  margin-bottom: 7px;
+  color: #d19d18;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.stats-management-header h2 {
+  margin: 0 0 7px;
+  color: #101b34;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 26px;
+}
+
+.stats-management-header p {
+  margin: 0;
+  color: #69758b;
+  font-size: 14px;
+}
+
+.stats-refresh-button,
+.save-stats-button {
+  border: 0;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.stats-refresh-button {
+  padding: 12px 22px;
+  color: #ffffff;
+  background: #dda915;
+}
+
+.about-stats-form {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.stats-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.stats-input-group label {
+  color: #17223a;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.stats-input-group input {
+  width: 100%;
+  height: 52px;
+  padding: 0 15px;
+  color: #17223a;
+  background: #fbfcff;
+  border: 1px solid #d9dfeb;
+  border-radius: 10px;
+  outline: none;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.stats-input-group input:focus {
+  border-color: #d5a119;
+  box-shadow: 0 0 0 3px rgba(213, 161, 25, 0.13);
+}
+
+.stats-form-footer {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.save-stats-button {
+  min-width: 220px;
+  padding: 14px 24px;
+  color: #ffffff;
+  background: #111d35;
+}
+
+.save-stats-button:disabled,
+.stats-refresh-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.stats-success-message {
+  margin: 0;
+  color: #278348;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.stats-error-message {
+  margin: 0;
+  color: #c23838;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .about-stats-form {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-form-footer {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .about-stats-management {
+    padding: 20px;
+  }
+
+  .stats-management-header,
+  .stats-form-footer {
+    flex-direction: column;
+  }
+
+  .save-stats-button {
+    width: 100%;
+  }
+}

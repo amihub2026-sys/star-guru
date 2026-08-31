@@ -7,8 +7,12 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
+import {
+  AboutStats
+} from '../../services/about-gallery';
 
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import {
   AboutGalleryImage,
@@ -63,6 +67,12 @@ private journeyTimer?: number;
   private impactObserver?: IntersectionObserver;
   private counterStarted = false;
 
+ aboutStats: AboutStats = {
+  daysOfService: 0,
+  mealsServed: 0,
+  peopleServedDaily: 0
+};
+
 
   /* =========================
      FOUNDER MESSAGE SECTION
@@ -108,6 +118,7 @@ loadAboutGallery(): void {
 
   ngOnInit(): void {
   this.loadAboutGallery();
+  this.loadAboutStats();
 }
 
   ngAfterViewInit(): void {
@@ -535,6 +546,42 @@ if (this.galleryTimer !== undefined) {
 
   }
 
-  
+loadAboutStats(): void {
+
+  this.aboutGalleryService
+    .getAboutStats()
+    .subscribe({
+
+      next: (response: AboutStats) => {
+
+        this.aboutStats = {
+          daysOfService:
+            Number(response.daysOfService),
+
+          mealsServed:
+            Number(response.mealsServed),
+
+          peopleServedDaily:
+            Number(response.peopleServedDaily)
+        };
+      },
+
+      error: (error: HttpErrorResponse) => {
+
+        console.error(
+          'Unable to load About statistics:',
+          error
+        );
+      }
+
+    });
+}
+
+
+formatIndianNumber(value: number): string {
+
+  return new Intl.NumberFormat('en-IN')
+    .format(value || 0);
+}
 
 }

@@ -233,3 +233,121 @@
   </div>
 
 </section>
+
+<section class="about-stats-management">
+
+  <div class="stats-management-header">
+
+    <div>
+      <span>ABOUT PAGE</span>
+      <h2>Impact Number Management</h2>
+
+      <p>
+        Update the three numbers displayed in the
+        public About page impact section.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="stats-refresh-button"
+      (click)="loadAboutStats()"
+      [disabled]="isLoadingStats || isSavingStats"
+    >
+      {{ isLoadingStats ? 'Loading...' : 'Refresh' }}
+    </button>
+
+  </div>
+
+
+  <form
+    #statsForm="ngForm"
+    class="about-stats-form"
+    (ngSubmit)="saveAboutStats()"
+  >
+
+    <div class="stats-input-group">
+      <label for="daysOfService">
+        Days of Continuous Service
+      </label>
+
+      <input
+        id="daysOfService"
+        name="daysOfService"
+        type="number"
+        min="0"
+        required
+        [(ngModel)]="aboutStats.daysOfService"
+      >
+    </div>
+
+
+    <div class="stats-input-group">
+      <label for="mealsServed">
+        Meals Served
+      </label>
+
+      <input
+        id="mealsServed"
+        name="mealsServed"
+        type="number"
+        min="0"
+        required
+        [(ngModel)]="aboutStats.mealsServed"
+      >
+    </div>
+
+
+    <div class="stats-input-group">
+      <label for="peopleServedDaily">
+        People Served Daily
+      </label>
+
+      <input
+        id="peopleServedDaily"
+        name="peopleServedDaily"
+        type="number"
+        min="0"
+        required
+        [(ngModel)]="aboutStats.peopleServedDaily"
+      >
+    </div>
+
+
+    <div class="stats-form-footer">
+
+      <button
+        type="submit"
+        class="save-stats-button"
+        [disabled]="
+          statsForm.invalid ||
+          isSavingStats ||
+          isLoadingStats
+        "
+      >
+        {{
+          isSavingStats
+            ? 'Saving...'
+            : 'Save Impact Numbers'
+        }}
+      </button>
+
+      <p
+        *ngIf="statsMessage"
+        class="stats-success-message"
+      >
+        {{ statsMessage }}
+      </p>
+
+      <p
+        *ngIf="statsError"
+        class="stats-error-message"
+      >
+        {{ statsError }}
+      </p>
+
+    </div>
+
+  </form>
+
+</section>

@@ -1434,1335 +1434,494 @@ flex-wrap:wrap;
 ==================================*/
 
 .promise-section {
-    position: relative;
-    padding: 60px 6px;
-    overflow: hidden;
-
-    background:
-        radial-gradient(
-            circle at 72% 60%,
-            rgba(255, 193, 7, 0.11),
-            transparent 35%
-        ),
-        linear-gradient(180deg, #ffffff, #f7f9fc);
+  position: relative;
+  overflow: hidden;
+  padding: 120px 6%;
+  background:
+    radial-gradient(
+      circle at 90% 40%,
+      rgba(216, 174, 74, 0.11),
+      transparent 32%
+    ),
+    linear-gradient(180deg, #ffffff 0%, #fafbff 100%);
 }
+
+/* DECORATIVE BACKGROUND */
+.promise-section::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  top: -220px;
+  left: -180px;
+  border: 1px solid rgba(201, 154, 44, 0.13);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.promise-section::after {
+  content: "";
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  right: -100px;
+  bottom: -110px;
+  background: rgba(201, 154, 44, 0.07);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+
+/* HEADING */
 .section-heading {
-    position: relative;
-    z-index: 5;
-
-    max-width: 850px;
-
-    margin: 0 auto 75px;
-
-    text-align: center;
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+  margin: 0 auto 65px;
+  text-align: center;
 }
 
-/*==================================
-        DECORATIVE BLOBS
-==================================*/
-
-.promise-section::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:420px;
-    height:420px;
-
-    top:-180px;
-    left:-120px;
-
-    border-radius:50%;
-
-    background:rgba(255,193,7,.14);
-
-    filter:blur(80px);
-
-    pointer-events:none;
-
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  color: #b78920;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
 }
 
-.promise-section::after{
+.section-tag::before,
+.section-tag::after {
+  content: "";
+  width: 34px;
+  height: 1px;
+  background: #d5ad4a;
+}
 
-    content:"";
+.section-heading h2 {
+  margin: 0;
+  color: #101c35;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(38px, 4vw, 60px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+}
 
-    position:absolute;
+.section-heading h2 span {
+  display: block;
+  color: #bf8d23;
+}
 
-    width:380px;
-    height:380px;
-
-    right:-140px;
-    bottom:-160px;
-
-    border-radius:50%;
-
-    background:rgba(59,130,246,.10);
-
-    filter:blur(80px);
-
-    pointer-events:none;
-
+.section-heading p {
+  max-width: 690px;
+  margin: 22px auto 0;
+  color: #65718a;
+  font-size: 17px;
+  line-height: 1.8;
 }
 
 
-/*==================================
-        SECTION HEADING
-==================================*/
-
-
-.section-tag{
-
-    display:inline-block;
-
-    margin-bottom:18px;
-
-    padding:10px 22px;
-
-    border-radius:40px;
-
-    background:#FFC107;
-
-    color:#111827;
-
-    font-size:15px;
-
-    font-weight:700;
-
-}
-
-.section-heading h2{
-
-    margin:0 0 20px;
-
-    color:#0f172a;
-
-    font-size:clamp(34px,4vw,48px);
-
-    line-height:1.2;
-
-    font-weight:800;
-
-}
-
-.section-heading p{
-
-    max-width:760px;
-
-    margin:0 auto;
-
-    color:#64748b;
-
-    font-size:18px;
-
-    line-height:1.8;
-
-}
-
-
-/*==================================
-        MAIN TWO-COLUMN LAYOUT
-==================================*/
-
+/* MAIN LAYOUT */
 .promise-layout {
-    position: relative;
-    z-index: 3;
-
-    width: min(1400px, 100%);
-
-    margin: 0 auto;
-
-    display: grid;
-
-    grid-template-columns:
-        minmax(200px, 680px)
-        minmax(300px, 1fr);
-
-    align-items: center;
-
-
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+  gap: 70px;
+  max-width: 1320px;
+  margin: 0 auto;
+  align-items: center;
 }
 
 
-/*==================================
-        LEFT IMAGE COLLAGE
-==================================*/
-
-.promise-images{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    grid-template-rows:300px 210px;
-
-    gap:18px;
-
-}
-
-.promise-image{
-
-    position:relative;
-
-    overflow:hidden;
-
-    border-radius:28px;
-
-    border:4px solid rgba(255,255,255,.95);
-
-    background:#e2e8f0;
-
-    box-shadow:
-        0 20px 50px rgba(15,23,42,.16);
-
-}
-
-.promise-image.image-large{
-
-    grid-column:1 / 3;
-
-}
-
-.promise-image img{
-
-    display:block;
-
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    transition:
-        transform .7s ease,
-        filter .7s ease;
-
-}
-
-.promise-image:hover img{
-
-    transform:scale(1.08);
-
-    filter:saturate(1.08);
-
-}
-
-.promise-image::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-        linear-gradient(
-            180deg,
-            transparent 45%,
-            rgba(15,23,42,.30)
-        );
-
-    pointer-events:none;
-
-}
-
-
-/*==================================
-        RIGHT BUBBLE AREA
-==================================*/
-
-.bubble-container{
-
-    position:relative;
-
-    width:550px;
-    height:600px;
-
-    margin:0;
-
-    justify-self:end;
-
-    overflow:visible;
-
-    perspective:1000px;
-
-}
-
-
-/*==================================
-        ROTATING CENTER LOGO
-==================================*/
-
-.bubble-container::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    width:340px;
-    height:340px;
-
-    transform:
-        translate(-50%,-50%)
-        rotateX(10deg)
-        rotateY(0deg);
-
-    transform-style:preserve-3d;
-
-    transform-origin:center center;
-
-    background:
-        url("/images/logo.png")
-        center center / contain
-        no-repeat;
-
-    animation:
-        earthRotate 10s linear infinite;
-
-    z-index:1;
-
-    pointer-events:none;
-
-    filter:
-        drop-shadow(0 20px 25px rgba(0,0,0,.16));
-
-}
-
-@keyframes earthRotate{
-
-    0%{
-
-        transform:
-            translate(-50%,-50%)
-            rotateX(10deg)
-            rotateY(0deg);
-
-    }
-
-    100%{
-
-        transform:
-            translate(-50%,-50%)
-            rotateX(10deg)
-            rotateY(360deg);
-
-    }
-
-}
-
-
-/*==================================
-        LOGO GLOW
-==================================*/
-
-.bubble-container::before{
-
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    width:450px;
-    height:450px;
-
-    transform:translate(-50%,-50%);
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,193,7,.18) 0%,
-            rgba(255,193,7,.08) 35%,
-            transparent 72%
-        );
-
-    z-index:0;
-
-    pointer-events:none;
-
-}
-
-
-/*==================================
-        BUBBLES
-==================================*/
-
-.bubble{
-
-    position:absolute;
-
-    z-index:4;
-
-    width:120px;
-    height:120px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:
-        rgba(255,255,255,.70);
-
-    backdrop-filter:blur(18px);
-
-    border:
-        1px solid rgba(255,255,255,.90);
-
-    box-shadow:
-        0 15px 40px rgba(15,23,42,.10);
-
-    cursor:pointer;
-
-    overflow:hidden;
-
-    transition:
-        width .45s ease,
-        height .45s ease,
-        border-radius .45s ease,
-        background .45s ease,
-        box-shadow .45s ease;
-
-}
-
-
-/*==================================
-        BUBBLE SHINE
-==================================*/
-
-.bubble::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:-90%;
-    left:-100%;
-
-    width:120%;
-    height:270%;
-
-    background:
-        linear-gradient(
-            120deg,
-            transparent,
-            rgba(255,255,255,.65),
-            transparent
-        );
-
-    transform:rotate(25deg);
-
-    transition:left .9s ease;
-
-    pointer-events:none;
-
-}
-
-.bubble:hover::before{
-
-    left:140%;
-
-}
-
-
-/*==================================
-        BUBBLE HOVER CARD
-==================================*/
-
-.bubble:hover{
-
-       width:220px;
-
-    height:220px;
-
-    border-radius:28px;
-
-    background:#ffffff;
-
-    border:2px solid #FFC107;
-
-    box-shadow:
-        0 30px 70px rgba(255,193,7,.24);
-
-    z-index:20;
-
-}
-
-
-/*==================================
-        BUBBLE ICON
-==================================*/
-
-.bubble-icon{
-
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    z-index:3;
-
-    font-size:50px;
-
-    line-height:1;
-
-    transition:
-        top .45s ease,
-        transform .45s ease,
-        font-size .45s ease;
-
-}
-
-.bubble:hover .bubble-icon{
-
-    top:42px;
-
-    transform:translateX(-50%);
-
-    font-size:54px;
-
-    animation:spinIcon .6s ease;
-
-}
-
-@keyframes spinIcon{
-
-    0%{
-
-        transform:
-            translateX(-50%)
-            rotate(0deg)
-            scale(1);
-
-    }
-
-    50%{
-
-        transform:
-            translateX(-50%)
-            rotate(12deg)
-            scale(1.24);
-
-    }
-
-    100%{
-
-        transform:
-            translateX(-50%)
-            rotate(0deg)
-            scale(1.10);
-
-    }
-
-}
-
-
-/*==================================
-        BUBBLE CONTENT
-==================================*/
-
-.bubble-content{
-
-    position:absolute;
-
-    left:50%;
-    top:105px;
-
-    width:220px;
-
-    transform:
-        translateX(-50%)
-        translateY(20px);
-
-    opacity:0;
-
-    visibility:hidden;
-
-    text-align:center;
-
-    transition:
-        opacity .4s ease,
-        visibility .4s ease,
-        transform .4s ease;
-
-}
-
-.bubble:hover .bubble-content{
-
-    opacity:1;
-
-    visibility:visible;
-
-    transform:
-        translateX(-50%)
-        translateY(0);
-
-}
-
-.bubble-content h3{
-
-    margin:0 0 10px;
-
-    color:#0f172a;
-
-    font-size:24px;
-
-    line-height:1.2;
-
-}
-
-.bubble-content p{
-
-    margin:0;
-
-    color:#64748b;
-
-    font-size:15px;
-
-    line-height:1.75;
-
-}
-
-
-/*==================================
-        BUBBLE POSITIONS
-==================================*/
-
-.bubble1{
-
-    left:50%;
-    top:0;
-
-    animation:
-        floatTop 6s ease-in-out infinite;
-
-}
-
-.bubble2{
-
-    left:20px;
-    top:235px;
-
-    animation:
-        floatLeft 7s ease-in-out infinite;
-
-}
-
-.bubble3{
-
-    right:20px;
-    top:235px;
-
-    animation:
-        floatRight 8s ease-in-out infinite;
-
-}
-
-.bubble4{
-
-    left:50%;
-    bottom:0;
-
-    animation:
-        floatBottom 6.5s ease-in-out infinite;
-
-}
-
-
-/*==================================
-        FLOAT ANIMATIONS
-==================================*/
-
-@keyframes floatTop{
-
-    0%,
-    100%{
-
-        transform:
-            translateX(-50%)
-            translateY(0);
-
-    }
-
-    50%{
-
-        transform:
-            translateX(-50%)
-            translateY(-16px);
-
-    }
-
-}
-
-@keyframes floatLeft{
-
-    0%,
-    100%{
-
-        transform:translate(0,0);
-
-    }
-
-    50%{
-
-        transform:translate(-12px,-12px);
-
-    }
-
-}
-
-@keyframes floatRight{
-
-    0%,
-    100%{
-
-        transform:translate(0,0);
-
-    }
-
-    50%{
-
-        transform:translate(12px,-12px);
-
-    }
-
-}
-
-@keyframes floatBottom{
-
-    0%,
-    100%{
-
-        transform:
-            translateX(-50%)
-            translateY(0);
-
-    }
-
-    50%{
-
-        transform:
-            translateX(-50%)
-            translateY(14px);
-
-    }
-
-}
-
-/*==================================
-      PROMISE IMAGE SCROLL REVEAL
-==================================*/
-
+/* IMAGE COLLAGE */
 .promise-images {
-    perspective: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-/* Initial hidden state */
-
-.image-reveal {
-    opacity: 0;
-    will-change:
-        opacity,
-        transform,
-        clip-path;
-
-    transition:
-        opacity 0.85s ease,
-        transform 1s cubic-bezier(.18, .75, .25, 1),
-        clip-path 1s cubic-bezier(.18, .75, .25, 1);
+.promise-image {
+  position: relative;
+  overflow: hidden;
+  background: #e9edf4;
+  border-radius: 22px;
+  box-shadow: 0 18px 45px rgba(14, 27, 52, 0.12);
 }
-
-
-/* Large top image */
-
-.image-reveal-large {
-    transform:
-        translateX(-90px)
-        rotateY(10deg)
-        scale(0.94);
-
-    clip-path:
-        inset(0 100% 0 0 round 28px);
-}
-
-
-/* Bottom left image */
-
-.image-reveal-left {
-    transform:
-        translateY(90px)
-        rotateX(10deg)
-        scale(0.92);
-
-    clip-path:
-        inset(100% 0 0 0 round 28px);
-}
-
-
-/* Bottom right image */
-
-.image-reveal-right {
-    transform:
-        translateX(90px)
-        rotateY(-10deg)
-        scale(0.92);
-
-    clip-path:
-        inset(0 0 0 100% round 28px);
-}
-
-
-/* Section visible state */
-
-.promise-section.promise-visible .image-reveal {
-    opacity: 1;
-
-    transform:
-        translate3d(0, 0, 0)
-        rotateX(0)
-        rotateY(0)
-        scale(1);
-
-    clip-path:
-        inset(0 0 0 0 round 28px);
-}
-
-
-/* Stagger timing */
-
-.promise-section.promise-visible .image-reveal-large {
-    transition-delay: 0.1s;
-}
-
-.promise-section.promise-visible .image-reveal-left {
-    transition-delay: 0.35s;
-}
-
-.promise-section.promise-visible .image-reveal-right {
-    transition-delay: 0.55s;
-}
-
-
-/* Light sweep after opening */
-
-.image-reveal::before {
-    content: "";
-
-    position: absolute;
-    z-index: 4;
-
-    top: 0;
-    left: -130%;
-
-    width: 65%;
-    height: 100%;
-
-    background:
-        linear-gradient(
-            110deg,
-            transparent,
-            rgba(255, 255, 255, 0.55),
-            transparent
-        );
-
-    transform: skewX(-18deg);
-
-    pointer-events: none;
-}
-
-.promise-section.promise-visible .image-reveal::before {
-    animation: promiseImageShine 1.2s ease forwards;
-}
-
-.promise-section.promise-visible .image-reveal-large::before {
-    animation-delay: 0.7s;
-}
-
-.promise-section.promise-visible .image-reveal-left::before {
-    animation-delay: 0.95s;
-}
-
-.promise-section.promise-visible .image-reveal-right::before {
-    animation-delay: 1.15s;
-}
-
-@keyframes promiseImageShine {
-
-    from {
-        left: -130%;
-    }
-
-    to {
-        left: 150%;
-    }
-
-}
-
-
-/* Image zoom after reveal */
 
 .promise-image img {
-    transform: scale(1.08);
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.7s ease;
 }
 
-.promise-section.promise-visible .promise-image img {
-    transform: scale(1);
-    transition:
-        transform 1.3s cubic-bezier(.18, .75, .25, 1),
-        filter .7s ease;
+.promise-image:hover img {
+  transform: scale(1.05);
 }
 
-.promise-section.promise-visible .promise-image:hover img {
-    transform: scale(1.08);
+.image-large {
+  height: 430px;
 }
 
-
-
-/*==================================
-              MOBILE
-==================================*/
-
-@media (max-width: 700px) {
-
-    .promise-section {
-        padding: 60px 14px;
-    }
-
-    .section-heading {
-        margin-bottom: 38px;
-    }
-
-    .section-heading h2 {
-        font-size: 30px;
-        line-height: 1.2;
-    }
-
-    .section-heading p {
-        font-size: 14px;
-        line-height: 1.7;
-    }
-
-
-    /*==================================
-        IMAGE LAYOUT
-
-        First row  : one large image
-        Second row : two small images
-    ==================================*/
-
-    .promise-images {
-        width: 100%;
-        margin: 0 auto;
-
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        grid-template-rows: 220px 135px;
-
-        gap: 10px;
-    }
-
-    .promise-image.image-large {
-        grid-column: 1 / -1;
-        grid-row: 1;
-    }
-
-    .promise-image:not(.image-large) {
-        grid-column: auto;
-        grid-row: 2;
-    }
-
-    .promise-image {
-        width: 100%;
-        height: 100%;
-
-        border: 3px solid #ffffff;
-        border-radius: 18px;
-
-        overflow: hidden;
-    }
-
-    .promise-image img {
-        width: 100%;
-        height: 100%;
-
-        display: block;
-        object-fit: cover;
-    }
-
-
-    /*==================================
-            PROMISE MAIN LAYOUT
-    ==================================*/
-
-    .promise-layout {
-        display: grid;
-        grid-template-columns: 1fr;
-
-        gap: 25px;
-    }
-
-
-    /*==================================
-        LOGO + 4 CARDS CONTAINER
-    ==================================*/
-
-    .bubble-container {
-        position: relative;
-
-        width: 100%;
-        height: auto;
-        min-height: 0;
-
-        margin: 0 auto;
-        padding: 0;
-
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-
-        column-gap: 12px;
-        row-gap: 12px;
-
-        align-items: stretch;
-        justify-items: stretch;
-
-        overflow: visible;
-    }
-
-
-    /* Remove old background glow */
-
-    .bubble-container::before {
-        display: none;
-    }
-
-
-    /*==================================
-              ROTATING LOGO
-    ==================================*/
-
-    .bubble-container::after {
-        content: "";
-
-        position: relative;
-
-        left: auto;
-        right: auto;
-        top: auto;
-        bottom: auto;
-
-        grid-column: 1 / -1;
-        grid-row: 1;
-
-        justify-self: center;
-
-        width: 145px;
-        height: 145px;
-
-        margin: 0 auto 2px;
-
-        background:
-            url("/images/logo.png")
-            center / contain
-            no-repeat;
-
-        pointer-events: none;
-
-        transform-origin: center;
-        animation: mobileLogoRotate 8s linear infinite;
-
-        filter:
-            drop-shadow(0 12px 18px rgba(0, 0, 0, 0.15));
-    }
-
-    @keyframes mobileLogoRotate {
-
-        from {
-            transform: rotateY(0deg);
-        }
-
-        to {
-            transform: rotateY(360deg);
-        }
-    }
-
-
-    /*==================================
-              2 × 2 CARDS
-    ==================================*/
-
-    .bubble {
-        position: relative !important;
-
-        left: auto !important;
-        right: auto !important;
-        top: auto !important;
-        bottom: auto !important;
-
-        transform: none !important;
-        animation: none !important;
-
-        width: 100%;
-        max-width: none;
-        height: 125px;
-
-        margin: 0;
-        padding: 0;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        border-radius: 20px;
-
-        overflow: hidden;
-    }
-
-    /* First card starts on row 2 */
-
-    .bubble1 {
-        grid-column: 1;
-        grid-row: 2;
-    }
-
-    .bubble2 {
-        grid-column: 2;
-        grid-row: 2;
-    }
-
-    .bubble3 {
-        grid-column: 1;
-        grid-row: 3;
-    }
-
-    .bubble4 {
-        grid-column: 2;
-        grid-row: 3;
-    }
-
-
-    /* Do not enlarge card on mobile */
-
-    .bubble:hover {
-        width: 100%;
-        max-width: none;
-        height: 125px;
-
-        border-radius: 20px;
-    }
-
-
-    /*==================================
-                CARD ICON
-    ==================================*/
-
-    .bubble-icon {
-        position: absolute;
-
-        left: 50%;
-        top: 50%;
-
-        transform: translate(-50%, -50%);
-
-        font-size: 38px;
-        line-height: 1;
-
-        transition:
-            top 0.3s ease,
-            transform 0.3s ease,
-            font-size 0.3s ease;
-    }
-
-
-    /* Show icon slightly upward on touch/hover */
-
-    .bubble:hover .bubble-icon {
-        top: 35px;
-
-        transform: translateX(-50%);
-
-        font-size: 34px;
-    }
-
-
-    /*==================================
-               CARD CONTENT
-    ==================================*/
-
-    .bubble-content {
-        position: absolute;
-
-        left: 50%;
-        top: 68px;
-
-        width: calc(100% - 16px);
-
-        transform: translateX(-50%);
-
-        text-align: center;
-
-        opacity: 0;
-
-        transition:
-            opacity 0.3s ease,
-            top 0.3s ease;
-    }
-
-    .bubble:hover .bubble-content {
-        top: 66px;
-        opacity: 1;
-    }
-
-    .bubble-content h3 {
-        margin: 0 0 3px;
-
-        font-size: 12px;
-        line-height: 1.2;
-    }
-
-    .bubble-content p {
-        display: none;
-    }
-
-
-    /*==================================
-          MOBILE IMAGE REVEAL
-    ==================================*/
-
-    .image-reveal-large,
-    .image-reveal-left,
-    .image-reveal-right {
-        transform:
-            translateY(50px)
-            scale(0.96);
-
-        clip-path:
-            inset(100% 0 0 0 round 18px);
-    }
-
-    .promise-section.promise-visible .image-reveal {
-        transform:
-            translateY(0)
-            scale(1);
-
-        clip-path:
-            inset(0 0 0 0 round 18px);
-    }
+.small-images {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.image-small {
+  height: 205px;
+}
+
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      transparent 35%,
+      rgba(6, 16, 35, 0.9) 100%
+    );
+}
+
+.image-caption {
+  position: absolute;
+  left: 32px;
+  right: 32px;
+  bottom: 28px;
+  color: #ffffff;
+}
+
+.image-caption span {
+  display: block;
+  margin-bottom: 7px;
+  color: #f2cc70;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+
+.image-caption h3 {
+  max-width: 440px;
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  line-height: 1.25;
+}
+
+.small-image-label {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  padding: 9px 14px;
+  color: #ffffff;
+  background: rgba(8, 20, 43, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  backdrop-filter: blur(10px);
+  font-size: 12px;
+  font-weight: 600;
 }
 
 
-/*==================================
-          VERY SMALL MOBILE
-==================================*/
+/* VALUES CONTENT */
+.promise-values {
+  width: 100%;
+}
 
-@media (max-width: 420px) {
+.values-intro {
+  margin-bottom: 30px;
+}
 
-    .promise-section {
-        padding: 52px 10px;
-    }
+.values-intro > span {
+  display: block;
+  margin-bottom: 10px;
+  color: #bd8b20;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
 
-    .section-heading {
-        margin-bottom: 32px;
-    }
+.values-intro h3 {
+  max-width: 530px;
+  margin: 0 0 14px;
+  color: #101c35;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(30px, 3vw, 43px);
+  line-height: 1.18;
+}
 
-    .section-heading h2 {
-        font-size: 27px;
-    }
-
-    .section-heading p {
-        font-size: 13px;
-    }
-
-    .promise-images {
-        grid-template-rows: 200px 115px;
-        gap: 8px;
-    }
-
-    .promise-image {
-        border-radius: 15px;
-    }
-
-    .bubble-container {
-        column-gap: 9px;
-        row-gap: 9px;
-    }
-
-    .bubble-container::after {
-        width: 120px;
-        height: 120px;
-
-        margin-bottom: 0;
-    }
-
-    .bubble {
-        width: 100%;
-        max-width: none;
-        height: 110px;
-
-        border-radius: 17px;
-    }
-
-    .bubble:hover {
-        width: 100%;
-        max-width: none;
-        height: 110px;
-
-        border-radius: 17px;
-    }
-
-    .bubble-icon {
-        font-size: 34px;
-    }
-
-    .bubble:hover .bubble-icon {
-        top: 31px;
-        font-size: 30px;
-    }
-
-    .bubble-content {
-        top: 59px;
-        width: calc(100% - 12px);
-    }
-
-    .bubble:hover .bubble-content {
-        top: 57px;
-    }
-
-    .bubble-content h3 {
-        font-size: 11px;
-    }
+.values-intro p {
+  max-width: 560px;
+  margin: 0;
+  color: #68748b;
+  font-size: 15px;
+  line-height: 1.75;
 }
 
 
-/*==================================
-          REDUCED MOTION
-==================================*/
+/* VALUE CARDS */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
 
-@media (prefers-reduced-motion: reduce) {
+.value-card {
+  position: relative;
+  min-height: 230px;
+  padding: 25px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid #e6eaf1;
+  border-radius: 18px;
+  box-shadow: 0 12px 35px rgba(20, 35, 65, 0.07);
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
 
-    .image-reveal {
-        opacity: 1;
-        transform: none;
-        clip-path: none;
-        transition: none;
-    }
+.value-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(195, 145, 32, 0.55);
+  box-shadow: 0 20px 45px rgba(20, 35, 65, 0.12);
+}
 
-    .image-reveal::before {
-        display: none;
-    }
+.value-card::after {
+  content: "";
+  position: absolute;
+  width: 75px;
+  height: 75px;
+  right: -35px;
+  bottom: -35px;
+  border: 1px solid rgba(192, 141, 31, 0.18);
+  border-radius: 50%;
+}
 
-    .bubble-container::after {
-        animation: none;
-    }
+.value-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.value-icon {
+  width: 51px;
+  height: 51px;
+  display: grid;
+  place-items: center;
+  color: #b9841c;
+  background: #fff7e4;
+  border: 1px solid #f0d896;
+  border-radius: 14px;
+}
+
+.value-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.value-number {
+  color: #c7ceda;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.value-card h4 {
+  margin: 0 0 10px;
+  color: #13203a;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.value-card p {
+  margin: 0;
+  color: #6c778c;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+
+/* FEATURED CARD */
+.featured-card {
+  background: linear-gradient(145deg, #12213e, #1c3159);
+  border-color: #1c3159;
+}
+
+.featured-card .value-icon {
+  color: #f1c85d;
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(241, 200, 93, 0.35);
+}
+
+.featured-card .value-number {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.featured-card h4 {
+  color: #ffffff;
+}
+
+.featured-card p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+
+/* TABLET */
+@media (max-width: 1100px) {
+  .promise-section {
+    padding: 100px 5%;
+  }
+
+  .promise-layout {
+    gap: 40px;
+  }
+
+  .image-large {
+    height: 390px;
+  }
+
+  .image-small {
+    height: 180px;
+  }
+
+  .value-card {
+    min-height: 220px;
+    padding: 22px;
+  }
+}
+
+
+/* SMALL TABLET */
+@media (max-width: 900px) {
+  .promise-layout {
+    grid-template-columns: 1fr;
+    max-width: 760px;
+  }
+
+  .promise-values {
+    order: -1;
+  }
+
+  .values-intro {
+    text-align: center;
+  }
+
+  .values-intro h3,
+  .values-intro p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .image-large {
+    height: 450px;
+  }
+}
+
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .promise-section {
+    padding: 85px 22px;
+  }
+
+  .section-heading {
+    margin-bottom: 45px;
+  }
+
+  .section-heading h2 {
+    font-size: 38px;
+  }
+
+  .section-heading p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .value-card {
+    min-height: 215px;
+  }
+
+  .image-large {
+    height: 380px;
+  }
+
+  .image-caption {
+    left: 22px;
+    right: 22px;
+    bottom: 22px;
+  }
+
+  .image-caption h3 {
+    font-size: 24px;
+  }
+}
+
+
+/* SMALL MOBILE */
+@media (max-width: 560px) {
+  .promise-section {
+    padding: 75px 16px;
+  }
+
+  .section-tag {
+    font-size: 11px;
+    letter-spacing: 1.8px;
+  }
+
+  .section-tag::before,
+  .section-tag::after {
+    width: 22px;
+  }
+
+  .section-heading h2 {
+    font-size: 32px;
+    letter-spacing: -0.5px;
+  }
+
+  .values-intro h3 {
+    font-size: 29px;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .value-card {
+    min-height: auto;
+    padding: 22px;
+  }
+
+  .small-images {
+    grid-template-columns: 1fr;
+  }
+
+  .image-large {
+    height: 330px;
+  }
+
+  .image-small {
+    height: 230px;
+  }
 }
 
 /*==================================
