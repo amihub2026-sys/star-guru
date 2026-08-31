@@ -860,55 +860,39 @@
 
         <div class="impact-grid">
 
-            <div class="impact-card impact-card-reveal impact-card-1">
+  <div class="impact-card impact-card-reveal impact-card-1">
 
-                <h3
-                    class="counter"
-                    data-target="900"
-                >
-                    0
-                </h3>
+    <h3 class="impact-number">
+      {{ formatIndianNumber(aboutStats.daysOfService) }}
+    </h3>
 
-                <span>
-                    Days of Continuous Service
-                </span>
+    <span>Days of Continuous Service</span>
 
-            </div>
+  </div>
 
 
-            <div class="impact-card impact-card-reveal impact-card-2">
+  <div class="impact-card impact-card-reveal impact-card-2">
 
-                <h3
-                    class="counter"
-                    data-target="1000000"
-                >
-                    0
-                </h3>
+    <h3 class="impact-number">
+      {{ formatIndianNumber(aboutStats.mealsServed) }}
+    </h3>
 
-                <span>
-                    Meals Served
-                </span>
+    <span>Meals Served</span>
 
-            </div>
+  </div>
 
 
-            <div class="impact-card impact-card-reveal impact-card-3">
+  <div class="impact-card impact-card-reveal impact-card-3">
 
-                <h3
-                    class="counter"
-                    data-target="1000"
-                >
-                    0
-                </h3>
+    <h3 class="impact-number">
+      {{ formatIndianNumber(aboutStats.peopleServedDaily) }}
+    </h3>
 
-                <span>
-                    People Served Daily
-                </span>
+    <span>People Served Daily</span>
 
-            </div>
+  </div>
 
-        </div>
-
+</div>
     </div>
 
 </section>

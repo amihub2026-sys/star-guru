@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
+
 import {
   HttpClient,
   HttpParams
 } from '@angular/common/http';
+
 import { Observable } from 'rxjs';
 
+
+/* ABOUT GALLERY IMAGE MODEL */
 export interface AboutGalleryImage {
   id: number;
   imageName: string;
@@ -12,29 +16,63 @@ export interface AboutGalleryImage {
   publicId: string;
   displayOrder: number;
   active: boolean;
+
+  daysOfService: number;
+  mealsServed: number;
+  peopleServedDaily: number;
 }
+
+
+/* ABOUT IMPACT NUMBERS MODEL */
+export interface AboutStats {
+  daysOfService: number;
+  mealsServed: number;
+  peopleServedDaily: number;
+}
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AboutGalleryService {
 
-  private readonly apiUrl =
-    'https://star-guru-backend.onrender.com/api/about-gallery';
+private readonly apiUrl =
+  'http://localhost:8080/api/about-gallery';
 
-  constructor(private http: HttpClient) {}
+
+  constructor(
+    private http: HttpClient
+  ) {
+  }
+
+
+  /* ================================
+     PUBLIC ACTIVE GALLERY IMAGES
+     ================================ */
 
   getActiveImages(): Observable<AboutGalleryImage[]> {
+
     return this.http.get<AboutGalleryImage[]>(
       this.apiUrl
     );
   }
 
+
+  /* ================================
+     ADMIN GALLERY IMAGES
+     ================================ */
+
   getAdminImages(): Observable<AboutGalleryImage[]> {
+
     return this.http.get<AboutGalleryImage[]>(
       `${this.apiUrl}/admin`
     );
   }
+
+
+  /* ================================
+     UPLOAD GALLERY IMAGES
+     ================================ */
 
   uploadImages(
     files: File[]
@@ -42,7 +80,7 @@ export class AboutGalleryService {
 
     const formData = new FormData();
 
-    files.forEach(file => {
+    files.forEach((file: File) => {
       formData.append('files', file);
     });
 
@@ -52,13 +90,24 @@ export class AboutGalleryService {
     );
   }
 
+
+  /* ================================
+     DELETE GALLERY IMAGE
+     ================================ */
+
   deleteImage(
     id: number
   ): Observable<{ message: string }> {
+
     return this.http.delete<{ message: string }>(
       `${this.apiUrl}/${id}`
     );
   }
+
+
+  /* ================================
+     UPDATE ACTIVE STATUS
+     ================================ */
 
   updateActiveStatus(
     id: number,
@@ -66,7 +115,10 @@ export class AboutGalleryService {
   ): Observable<AboutGalleryImage> {
 
     const params = new HttpParams()
-      .set('active', active.toString());
+      .set(
+        'active',
+        active.toString()
+      );
 
     return this.http.put<AboutGalleryImage>(
       `${this.apiUrl}/${id}/status`,
@@ -74,6 +126,11 @@ export class AboutGalleryService {
       { params }
     );
   }
+
+
+  /* ================================
+     UPDATE DISPLAY ORDER
+     ================================ */
 
   updateDisplayOrder(
     id: number,
@@ -92,4 +149,32 @@ export class AboutGalleryService {
       { params }
     );
   }
+
+
+  /* ================================
+     GET ABOUT IMPACT NUMBERS
+     ================================ */
+
+  getAboutStats(): Observable<AboutStats> {
+
+    return this.http.get<AboutStats>(
+      `${this.apiUrl}/stats`
+    );
+  }
+
+
+  /* ================================
+     UPDATE ABOUT IMPACT NUMBERS
+     ================================ */
+
+  updateAboutStats(
+    stats: AboutStats
+  ): Observable<AboutStats> {
+
+    return this.http.put<AboutStats>(
+      `${this.apiUrl}/stats`,
+      stats
+    );
+  }
+
 }

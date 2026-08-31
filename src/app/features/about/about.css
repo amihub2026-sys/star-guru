@@ -5388,137 +5388,134 @@ p {
 }
 
 
+
+
+
 /* =========================================
-   INITIAL ANIMATION
-========================================= */
+   IMPACT SECTION REVEAL ANIMATION
+   ========================================= */
 
-.impact-reveal {
-    opacity: 0;
-
-    will-change:
-        opacity,
-        transform,
-        filter;
-
-    transition:
-        opacity 0.8s ease,
-        transform 0.9s cubic-bezier(.2, .75, .25, 1),
-        filter 0.8s ease;
+.impact-reveal,
+.impact-card-reveal {
+  opacity: 0;
+  transform: translateY(45px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
 }
-
-
-/* Tag */
 
 .impact-tag-reveal {
-    transform:
-        translateY(-25px)
-        scale(0.9);
-
-    filter: blur(5px);
+  transform: translateY(20px);
 }
-
-
-/* Title */
 
 .impact-title-reveal {
-    transform:
-        translateY(40px)
-        scale(0.96);
-
-    filter: blur(7px);
+  transform: translateY(35px);
 }
-
-
-/* Description */
 
 .impact-description-reveal {
-    transform:
-        translateY(30px);
+  transform: translateY(35px);
+}
 
-    filter: blur(5px);
+.impact-card-reveal {
+  transform: translateY(55px);
 }
 
 
-/* Cards */
+/* SHOW CONTENT */
+.impact-section.impact-visible .impact-reveal,
+.impact-section.impact-visible .impact-card-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-.impact-card-reveal {
-    opacity: 0;
 
-    transform:
-        translateY(55px)
-        scale(0.95);
+/* ANIMATION TIMING */
+.impact-section.impact-visible .impact-tag-reveal {
+  transition-delay: 0.05s;
+}
 
-    filter: blur(6px);
+.impact-section.impact-visible .impact-title-reveal {
+  transition-delay: 0.17s;
+}
 
-    transition:
-        opacity 0.8s ease,
-        transform 0.95s cubic-bezier(.2, .75, .25, 1),
-        filter 0.8s ease;
+.impact-section.impact-visible .impact-description-reveal {
+  transition-delay: 0.3s;
+}
+
+.impact-section.impact-visible .impact-card-1 {
+  transition-delay: 0.48s;
+}
+
+.impact-section.impact-visible .impact-card-2 {
+  transition-delay: 0.65s;
+}
+
+.impact-section.impact-visible .impact-card-3 {
+  transition-delay: 0.82s;
 }
 
 
 /* =========================================
-   VISIBLE STATE
-========================================= */
+   RESTORE PREVIOUS GOLD NUMBER STYLE
+   ========================================= */
 
-.impact-section.impact-visible
-.impact-reveal {
-    opacity: 1;
-
-    transform:
-        translateX(0)
-        translateY(0)
-        scale(1);
-
-    filter: blur(0);
+.impact-card .impact-number {
+  margin: 0 0 14px;
+  color: #ffbd00 !important;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(42px, 4vw, 58px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  text-shadow:
+    0 0 18px rgba(255, 189, 0, 0.16);
 }
 
-.impact-section.impact-visible
-.impact-card-reveal {
-    opacity: 1;
-
-    transform:
-        translateY(0)
-        scale(1);
-
-    filter: blur(0);
+.impact-card span {
+  display: block;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
 }
 
 
-/* =========================================
-   ANIMATION DELAYS
-========================================= */
-
-.impact-section.impact-visible
-.impact-tag-reveal {
-    transition-delay: 0.05s;
+/* CARD HOVER */
+.impact-card {
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
-.impact-section.impact-visible
-.impact-title-reveal {
-    transition-delay: 0.17s;
+.impact-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(255, 189, 0, 0.8);
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.25),
+    0 0 24px rgba(255, 189, 0, 0.08);
 }
 
-.impact-section.impact-visible
-.impact-description-reveal {
-    transition-delay: 0.3s;
+
+/* TABLET */
+@media (max-width: 768px) {
+  .impact-card .impact-number {
+    font-size: 43px;
+  }
 }
 
-.impact-section.impact-visible
-.impact-card-1 {
-    transition-delay: 0.48s;
-}
 
-.impact-section.impact-visible
-.impact-card-2 {
-    transition-delay: 0.65s;
-}
+/* MOBILE */
+@media (max-width: 480px) {
+  .impact-card .impact-number {
+    margin-bottom: 10px;
+    font-size: 38px;
+  }
 
-.impact-section.impact-visible
-.impact-card-3 {
-    transition-delay: 0.82s;
+  .impact-card span {
+    font-size: 13px;
+  }
 }
-
 
 /* =========================================
    TABLET

@@ -6,11 +6,20 @@ import {
   OnInit
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import {
+  AboutStats
+} from '../../../services/about-gallery';
+import {
+  finalize,
+  timeout
+} from 'rxjs';
 
 import {
   AboutGalleryImage,
   AboutGalleryService
 } from '../../../services/about-gallery';
+
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-about-management',
@@ -19,10 +28,21 @@ import {
     CommonModule,
     FormsModule
   ],
+  
   templateUrl: './about-management.html',
   styleUrl: './about-management.css'
 })
 export class AboutManagement implements OnInit, OnDestroy {
+  aboutStats: AboutStats = {
+  daysOfService: 900,
+  mealsServed: 1000000,
+  peopleServedDaily: 1000
+};
+
+isLoadingStats = false;
+isSavingStats = false;
+statsMessage = '';
+statsError = '';
 
   images: AboutGalleryImage[] = [];
 
@@ -37,11 +57,13 @@ export class AboutManagement implements OnInit, OnDestroy {
 
 constructor(
   private aboutGalleryService: AboutGalleryService,
-  private changeDetectorRef: ChangeDetectorRef
+  private changeDetectorRef: ChangeDetectorRef,
+  
 ) {}
 
   ngOnInit(): void {
     this.loadImages();
+    this.loadAboutStats();
   }
 
   ngOnDestroy(): void {
@@ -259,4 +281,98 @@ constructor(
 
     this.previewUrls = [];
   }
+
+  loadAboutStats(): void {
+
+  this.isLoadingStats = true;
+  this.statsError = '';
+
+  this.aboutGalleryService.getAboutStats().subscribe({
+    next: (response) => {
+      this.aboutStats = response;
+      this.isLoadingStats = false;
+    },
+    error: (error) => {
+      console.error('Unable to load About statistics:', error);
+
+      this.statsError =
+        'Unable to load the impact numbers.';
+
+      this.isLoadingStats = false;
+    }
+  });
+}
+
+saveAboutStats(): void {
+
+  if (this.isSavingStats) {
+    return;
+  }
+
+  this.statsMessage = '';
+  this.statsError = '';
+
+  if (
+    this.aboutStats.daysOfService < 0 ||
+    this.aboutStats.mealsServed < 0 ||
+    this.aboutStats.peopleServedDaily < 0
+  ) {
+    this.statsError =
+      'Please enter valid positive numbers.';
+
+    return;
+  }
+
+  this.isSavingStats = true;
+
+  this.aboutGalleryService
+    .updateAboutStats(this.aboutStats)
+    .pipe(
+      timeout(30000),
+
+      finalize(() => {
+        this.isSavingStats = false;
+      })
+    )
+    .subscribe({
+
+      next: (response: AboutStats) => {
+
+        this.aboutStats = response;
+
+        this.statsMessage =
+          'Impact numbers updated successfully.';
+      },
+
+      error: (error: HttpErrorResponse | Error) => {
+
+        console.error(
+          'Unable to save impact numbers:',
+          error
+        );
+
+        if (error.name === 'TimeoutError') {
+          this.statsError =
+            'Backend did not respond. Check whether Render or the local Java server is running.';
+
+          return;
+        }
+
+        if (error instanceof HttpErrorResponse) {
+          this.statsError =
+            error.error?.message ||
+            `Unable to save. Server returned ${error.status}.`;
+
+          return;
+        }
+
+        this.statsError =
+          'Unable to save the impact numbers.';
+      }
+
+    });
+}
+
+
+
 }
