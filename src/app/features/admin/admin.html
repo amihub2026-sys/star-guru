@@ -1,84 +1,93 @@
 <div class="admin-layout">
 
-
     <!-- SIDEBAR -->
-
     <aside class="sidebar">
 
         <div class="logo">
-
             <h2>STAR GURU</h2>
             <span>ADMIN PANEL</span>
-
         </div>
-
 
         <nav>
 
-
-            <a routerLink="dashboard">
+            <a
+                routerLink="dashboard"
+                routerLinkActive="active">
                 Dashboard
             </a>
 
-<a
-  routerLink="/admin/home"
-  routerLinkActive="active">
-  Home
-</a>
+            <a
+                routerLink="/admin/home"
+                routerLinkActive="active">
+                Home
+            </a>
 
-
-            <a routerLink="about">
+            <a
+                routerLink="about"
+                routerLinkActive="active">
                 About
             </a>
 
-
-            <a routerLink="services">
+            <a
+                routerLink="services"
+                routerLinkActive="active">
                 Services
             </a>
 
-
-            <a routerLink="gallery">
+            <a
+                routerLink="gallery"
+                routerLinkActive="active">
                 Gallery
             </a>
 
-
-            <a routerLink="impact">
+            <a
+                routerLink="impact"
+                routerLinkActive="active">
                 Impact
             </a>
 
-
-            <a routerLink="news">
+            <a
+                routerLink="news"
+                routerLinkActive="active">
                 News
             </a>
 
-
-            <a routerLink="contact">
+            <a
+                routerLink="contact"
+                routerLinkActive="active">
                 Contact
             </a>
 
-
-            <a routerLink="settings">
-                Settings
+            <a
+                routerLink="forms"
+                routerLinkActive="active">
+                Forms
             </a>
 
+            <a
+                routerLink="settings"
+                routerLinkActive="active">
+                Settings
+            </a>
+            <button
+  class="logout-btn"
+  type="button"
+  (click)="logout()"
+>
+  Logout
+</button>
 
         </nav>
-
 
     </aside>
 
 
-
     <!-- CONTENT -->
-
     <main class="admin-content">
-
 
         <router-outlet></router-outlet>
 
-
     </main>
 
-
-
 </div>
+
