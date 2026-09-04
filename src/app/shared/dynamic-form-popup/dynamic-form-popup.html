@@ -1,0 +1,506 @@
+<!-- =====================================================
+     FLOATING FORM BUTTON
+     Stays visible after popup is closed
+===================================================== -->
+
+<button
+  *ngIf="shouldShowFloatingButton()"
+  type="button"
+  class="dynamic-form-floating-btn"
+  (click)="openPopup()"
+>
+  <span class="floating-icon">
+    ✦
+  </span>
+
+  <span class="floating-text">
+    {{ activeForm?.title }}
+  </span>
+</button>
+
+
+<!-- =====================================================
+     FORM POPUP
+===================================================== -->
+
+<div
+  class="dynamic-form-overlay"
+  *ngIf="
+    showPopup &&
+    activeForm &&
+    !isAdminPage &&
+    !isLoginPage
+  "
+>
+
+  <div class="dynamic-form-modal">
+
+
+    <!-- =========================
+         CLOSE BUTTON
+    ========================== -->
+
+    <button
+      type="button"
+      class="popup-close-btn"
+      (click)="closePopup()"
+      aria-label="Close form"
+    >
+      ×
+    </button>
+
+
+    <!-- =========================
+         BANNER IMAGE
+    ========================== -->
+
+    <div
+      class="popup-banner"
+      *ngIf="activeForm.bannerImageUrl"
+    >
+
+      <img
+        [src]="activeForm.bannerImageUrl"
+        [alt]="activeForm.title"
+      >
+
+    </div>
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <div class="popup-header">
+
+      <span class="popup-label">
+        STAR GURU CHARITABLE FOUNDATION
+      </span>
+
+      <h2>
+        {{ activeForm.title }}
+      </h2>
+
+      <p
+        *ngIf="activeForm.description"
+      >
+        {{ activeForm.description }}
+      </p>
+
+    </div>
+
+
+    <!-- =========================
+         SUCCESS
+    ========================== -->
+
+    <div
+      class="popup-success"
+      *ngIf="successMessage"
+    >
+
+      <div class="success-icon">
+        ✓
+      </div>
+
+      <div>
+        <strong>
+          Thank You!
+        </strong>
+
+        <p>
+          {{ successMessage }}
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         ERROR
+    ========================== -->
+
+    <div
+      class="popup-error"
+      *ngIf="errorMessage"
+    >
+      {{ errorMessage }}
+    </div>
+
+
+    <!-- =========================
+         DYNAMIC FORM
+    ========================== -->
+
+    <form
+      *ngIf="!successMessage"
+      class="dynamic-public-form"
+      (ngSubmit)="submitForm()"
+    >
+
+
+      <!-- QUESTION -->
+
+      <div
+        class="dynamic-field"
+        *ngFor="
+          let field of fields;
+          let i = index
+        "
+      >
+
+        <label class="field-label">
+
+          <span class="field-number">
+            {{ i + 1 }}
+          </span>
+
+          <span>
+            {{ field.label }}
+
+            <strong
+              class="required-star"
+              *ngIf="field.required"
+            >
+              *
+            </strong>
+          </span>
+
+        </label>
+
+
+        <!-- =================================
+             SHORT TEXT
+        ================================== -->
+
+        <input
+          *ngIf="field.type === 'TEXT'"
+          type="text"
+          class="form-control"
+          [(ngModel)]="answers[field.id]"
+          [name]="field.id"
+          [placeholder]="
+            field.placeholder ||
+            'Enter your answer'
+          "
+        >
+
+
+        <!-- =================================
+             TEXTAREA
+        ================================== -->
+
+        <textarea
+          *ngIf="field.type === 'TEXTAREA'"
+          class="form-control textarea-control"
+          [(ngModel)]="answers[field.id]"
+          [name]="field.id"
+          [placeholder]="
+            field.placeholder ||
+            'Enter your answer'
+          "
+          rows="4"
+        ></textarea>
+
+
+        <!-- =================================
+             NUMBER
+        ================================== -->
+
+        <input
+          *ngIf="field.type === 'NUMBER'"
+          type="number"
+          class="form-control"
+          [(ngModel)]="answers[field.id]"
+          [name]="field.id"
+          [placeholder]="
+            field.placeholder ||
+            'Enter number'
+          "
+        >
+
+
+        <!-- =================================
+             PHONE
+        ================================== -->
+
+        <input
+          *ngIf="field.type === 'PHONE'"
+          type="tel"
+          class="form-control"
+          [(ngModel)]="answers[field.id]"
+          [name]="field.id"
+          [placeholder]="
+            field.placeholder ||
+            'Enter 10 digit mobile number'
+          "
+          maxlength="10"
+          inputmode="numeric"
+        >
+
+
+        <!-- =================================
+             EMAIL
+        ================================== -->
+
+        <input
+          *ngIf="field.type === 'EMAIL'"
+          type="email"
+          class="form-control"
+          [(ngModel)]="answers[field.id]"
+          [name]="field.id"
+          [placeholder]="
+            field.placeholder ||
+            'Enter email address'
+          "
+        >
+
+
+        <!-- =================================
+             DATE
+        ================================== -->
+
+        <input
+          *ngIf="field.type === 'DATE'"
+          type="date"
+          class="form-control"
+          [(ngModel)]="answers[field.id]"
+          [name]="field.id"
+        >
+
+
+        <!-- =================================
+             TIME
+        ================================== -->
+
+        <input
+          *ngIf="field.type === 'TIME'"
+          type="time"
+          class="form-control"
+          [(ngModel)]="answers[field.id]"
+          [name]="field.id"
+        >
+
+
+        <!-- =================================
+             DROPDOWN
+        ================================== -->
+
+        <select
+          *ngIf="field.type === 'DROPDOWN'"
+          class="form-control"
+          [(ngModel)]="answers[field.id]"
+          [name]="field.id"
+        >
+
+          <option value="">
+            Select an option
+          </option>
+
+          <option
+            *ngFor="
+              let option of field.options
+            "
+            [value]="option"
+          >
+            {{ option }}
+          </option>
+
+        </select>
+
+
+        <!-- =================================
+             RADIO / MULTIPLE CHOICE
+        ================================== -->
+
+        <div
+          *ngIf="field.type === 'RADIO'"
+          class="choice-list"
+        >
+
+          <label
+            class="choice-item"
+            *ngFor="
+              let option of field.options;
+              let optionIndex = index
+            "
+          >
+
+            <input
+              type="radio"
+              [(ngModel)]="
+                answers[field.id]
+              "
+              [name]="field.id"
+              [value]="option"
+            >
+
+            <span class="choice-circle"></span>
+
+            <span class="choice-text">
+              {{ option }}
+            </span>
+
+          </label>
+
+        </div>
+
+
+        <!-- =================================
+             CHECKBOX
+        ================================== -->
+
+        <div
+          *ngIf="field.type === 'CHECKBOX'"
+          class="choice-list"
+        >
+
+          <label
+            class="choice-item"
+            *ngFor="
+              let option of field.options;
+              let optionIndex = index
+            "
+          >
+
+            <input
+              type="checkbox"
+              [name]="
+                field.id +
+                '_' +
+                optionIndex
+              "
+              [checked]="
+                answers[field.id]?.includes(
+                  option
+                )
+              "
+              (change)="
+                toggleCheckbox(
+                  field.id,
+                  option,
+                  $event
+                )
+              "
+            >
+
+            <span class="checkbox-box"></span>
+
+            <span class="choice-text">
+              {{ option }}
+            </span>
+
+          </label>
+
+        </div>
+
+
+        <!-- =================================
+             IMAGE FIELD
+             UI placeholder for now.
+             Cloudinary upload comes next.
+        ================================== -->
+
+        <div
+          *ngIf="field.type === 'IMAGE'"
+          class="image-upload-box"
+        >
+
+          <div class="upload-icon">
+            ↑
+          </div>
+
+          <div>
+            <strong>
+              Upload Image
+            </strong>
+
+            <p>
+              Image upload will be available
+              after connecting Cloudinary.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           SUBMIT
+      ========================== -->
+
+      <div class="popup-submit-area">
+
+        <p class="required-note">
+          <span>*</span>
+          Required fields
+        </p>
+
+        <button
+          type="submit"
+          class="popup-submit-btn"
+          [disabled]="submitting"
+        >
+
+          <span *ngIf="!submitting">
+            {{
+              activeForm.buttonText ||
+              'Submit'
+            }}
+          </span>
+
+          <span *ngIf="submitting">
+            Submitting...
+          </span>
+
+          <span
+            class="submit-arrow"
+            *ngIf="!submitting"
+          >
+            →
+          </span>
+
+        </button>
+
+      </div>
+
+    </form>
+
+
+    <!-- =========================
+         SUCCESS CLOSE
+    ========================== -->
+
+    <div
+      class="success-close-area"
+      *ngIf="successMessage"
+    >
+
+      <button
+        type="button"
+        (click)="closePopup()"
+      >
+        Close
+      </button>
+
+    </div>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <div class="popup-footer">
+
+      <span class="footer-dot"></span>
+
+      <span>
+        Star Guru Charitable Foundation
+      </span>
+
+    </div>
+
+  </div>
+
+</div>

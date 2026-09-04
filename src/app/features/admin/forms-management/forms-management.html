@@ -1,0 +1,695 @@
+<section class="forms-admin-page">
+
+  <div class="forms-page-header">
+    <div>
+      <span class="page-tag">DYNAMIC FORMS</span>
+
+      <h1>Form Management</h1>
+
+      <p>
+        Create and manage volunteer,
+        activity and registration forms.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="create-form-btn"
+      (click)="openCreateForm()"
+    >
+      + Create New Form
+    </button>
+  </div>
+
+
+  <!-- SUCCESS MESSAGE -->
+
+  <div
+    class="form-alert success"
+    *ngIf="successMessage"
+  >
+    {{ successMessage }}
+  </div>
+
+
+  <!-- ERROR MESSAGE -->
+
+  <div
+    class="form-alert error"
+    *ngIf="errorMessage"
+  >
+    {{ errorMessage }}
+  </div>
+
+
+  <!-- LOADING -->
+
+  <div
+    class="loading-box"
+    *ngIf="loading"
+  >
+    Loading forms...
+  </div>
+
+
+  <!-- EMPTY STATE -->
+
+  <div
+    class="empty-form-state"
+    *ngIf="
+      !loading &&
+      forms.length === 0
+    "
+  >
+    <div class="empty-form-icon">
+      📋
+    </div>
+
+    <h2>
+      No forms created yet
+    </h2>
+
+    <p>
+      Create your first volunteer
+      or activity registration form.
+    </p>
+
+    <button
+      type="button"
+      (click)="openCreateForm()"
+    >
+      Create First Form
+    </button>
+  </div>
+
+
+  <!-- FORM LIST -->
+
+  <div
+    class="forms-grid"
+    *ngIf="
+      !loading &&
+      forms.length > 0
+    "
+  >
+
+    <article
+      class="form-card"
+      *ngFor="let form of forms"
+      [class.active-form]="form.active"
+    >
+
+      <div class="form-card-status">
+        <span
+          class="status-badge"
+          [class.active]="form.active"
+        >
+          {{
+            form.active
+              ? 'ACTIVE'
+              : 'INACTIVE'
+          }}
+        </span>
+      </div>
+
+
+      <!-- BANNER -->
+
+      <div
+        class="form-banner"
+        *ngIf="form.bannerImageUrl"
+      >
+        <img
+          [src]="form.bannerImageUrl"
+          [alt]="form.title"
+        >
+      </div>
+
+
+      <div class="form-card-body">
+
+        <h2>
+          {{ form.title }}
+        </h2>
+
+        <p>
+          {{
+            form.description ||
+            'No description'
+          }}
+        </p>
+
+        <div class="form-meta">
+
+          <span>
+            {{
+              parseFields(form).length
+            }}
+            Questions
+          </span>
+
+          <span>
+            {{
+              form.createdAt
+                | date:'dd MMM yyyy'
+            }}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-card-actions">
+
+        <button
+          type="button"
+          (click)="viewResponses(form)"
+        >
+          Responses
+        </button>
+
+        <button
+          type="button"
+          (click)="editForm(form)"
+        >
+          Edit
+        </button>
+
+        <button
+          type="button"
+          class="status-btn"
+          (click)="toggleFormStatus(form)"
+        >
+          {{
+            form.active
+              ? 'Disable'
+              : 'Activate'
+          }}
+        </button>
+
+        <button
+          type="button"
+          class="delete-btn"
+          (click)="deleteForm(form)"
+        >
+          Delete
+        </button>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     CREATE / EDIT FORM BUILDER
+===================================================== -->
+
+<div
+  class="builder-overlay"
+  *ngIf="showBuilder"
+>
+
+  <div class="form-builder">
+
+
+    <!-- BUILDER HEADER -->
+
+    <div class="builder-topbar">
+
+      <div>
+        <span>
+          {{
+            editingId !== null
+              ? 'EDIT FORM'
+              : 'CREATE FORM'
+          }}
+        </span>
+
+        <h2>
+          {{
+            editingId !== null
+              ? 'Edit Dynamic Form'
+              : 'Create Dynamic Form'
+          }}
+        </h2>
+      </div>
+
+      <button
+        type="button"
+        class="close-builder"
+        (click)="closeBuilder()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="builder-scroll">
+
+
+      <!-- FORM TITLE CARD -->
+
+      <div class="google-form-card title-card">
+
+        <input
+          class="form-title-input"
+          [(ngModel)]="formModel.title"
+          placeholder="Untitled Form"
+        >
+
+        <textarea
+          class="form-description-input"
+          [(ngModel)]="formModel.description"
+          placeholder="Form description"
+          rows="3"
+        ></textarea>
+
+
+        <div class="form-config-grid">
+
+          <label>
+            <span>
+              Banner Image URL
+            </span>
+
+            <input
+              type="text"
+              [(ngModel)]="
+                formModel.bannerImageUrl
+              "
+              placeholder="https://..."
+            >
+          </label>
+
+
+          <label>
+            <span>
+              Submit Button Text
+            </span>
+
+            <input
+              type="text"
+              [(ngModel)]="
+                formModel.buttonText
+              "
+              placeholder="Submit"
+            >
+          </label>
+
+        </div>
+
+
+        <label class="active-toggle">
+
+          <input
+            type="checkbox"
+            [(ngModel)]="
+              formModel.active
+            "
+          >
+
+          <span>
+            Make this form active
+          </span>
+
+        </label>
+
+      </div>
+
+
+      <!-- QUESTIONS -->
+
+      <div
+        class="question-card"
+        *ngFor="
+          let field of fields;
+          let i = index
+        "
+      >
+
+        <div class="question-header">
+
+          <span class="question-number">
+            {{ i + 1 }}
+          </span>
+
+
+          <input
+            class="question-title"
+            [(ngModel)]="
+              field.label
+            "
+            placeholder="Question"
+          >
+
+
+          <select
+            class="question-type"
+            [(ngModel)]="
+              field.type
+            "
+            (ngModelChange)="
+              onFieldTypeChange(field)
+            "
+          >
+
+            <option
+              *ngFor="
+                let type of fieldTypes
+              "
+              [value]="type.value"
+            >
+              {{ type.label }}
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- PLACEHOLDER -->
+
+        <input
+          *ngIf="
+            field.type !== 'CHECKBOX' &&
+            field.type !== 'RADIO' &&
+            field.type !== 'DROPDOWN'
+          "
+          class="question-placeholder"
+          [(ngModel)]="
+            field.placeholder
+          "
+          placeholder="Placeholder text"
+        >
+
+
+        <!-- OPTIONS -->
+
+        <div
+          class="options-editor"
+          *ngIf="hasOptions(field)"
+        >
+
+          <div
+            class="option-row"
+            *ngFor="
+              let option of field.options;
+              let optionIndex = index
+            "
+          >
+
+            <span class="option-symbol">
+              {{
+                field.type === 'CHECKBOX'
+                  ? '□'
+                  : field.type === 'RADIO'
+                  ? '○'
+                  : '▾'
+              }}
+            </span>
+
+
+            <input
+              [(ngModel)]="
+                field.options![optionIndex]
+              "
+              placeholder="Option"
+            >
+
+
+            <button
+              type="button"
+              (click)="
+                removeOption(
+                  field,
+                  optionIndex
+                )
+              "
+            >
+              ×
+            </button>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="add-option-btn"
+            (click)="addOption(field)"
+          >
+            + Add option
+          </button>
+
+        </div>
+
+
+        <!-- QUESTION FOOTER -->
+
+        <div class="question-footer">
+
+          <div class="order-buttons">
+
+            <button
+              type="button"
+              (click)="moveFieldUp(i)"
+              [disabled]="i === 0"
+            >
+              ↑
+            </button>
+
+            <button
+              type="button"
+              (click)="moveFieldDown(i)"
+              [disabled]="
+                i === fields.length - 1
+              "
+            >
+              ↓
+            </button>
+
+          </div>
+
+
+          <div class="question-actions">
+
+            <label class="required-check">
+
+              <input
+                type="checkbox"
+                [(ngModel)]="
+                  field.required
+                "
+              >
+
+              Required
+
+            </label>
+
+
+            <button
+              type="button"
+              class="remove-question"
+              (click)="removeField(i)"
+            >
+              🗑
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ADD QUESTION -->
+
+      <button
+        type="button"
+        class="add-question-btn"
+        (click)="addField()"
+      >
+        <span>+</span>
+        Add Question
+      </button>
+
+    </div>
+
+
+    <!-- BUILDER FOOTER -->
+
+    <div class="builder-footer">
+
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="closeBuilder()"
+      >
+        Cancel
+      </button>
+
+      <button
+        type="button"
+        class="save-form-btn"
+        [disabled]="saving"
+        (click)="saveForm()"
+      >
+        {{
+          saving
+            ? 'Saving...'
+            : editingId !== null
+            ? 'Update Form'
+            : 'Create Form'
+        }}
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     RESPONSES POPUP
+===================================================== -->
+
+<div
+  class="responses-overlay"
+  *ngIf="showResponses"
+>
+
+  <div class="responses-panel">
+
+
+    <!-- RESPONSES HEADER -->
+
+    <div class="responses-header">
+
+      <div>
+
+        <span>
+          RESPONSES
+        </span>
+
+        <h2>
+          {{
+            selectedResponseForm?.title
+          }}
+        </h2>
+
+        <p>
+          {{
+            selectedResponses.length
+          }}
+          submissions
+        </p>
+
+      </div>
+
+
+      <button
+        type="button"
+        (click)="closeResponses()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <!-- NO RESPONSES -->
+
+    <div
+      class="no-responses"
+      *ngIf="
+        selectedResponses.length === 0
+      "
+    >
+      No responses yet.
+    </div>
+
+
+    <!-- RESPONSE CARDS -->
+
+    <div
+      class="response-card"
+      *ngFor="
+        let response
+        of selectedResponses;
+        let i = index
+      "
+    >
+
+      <div class="response-card-header">
+
+        <div>
+
+          <strong>
+            Response #{{ i + 1 }}
+          </strong>
+
+          <small>
+            {{
+              response.submittedAt
+                | date:'dd MMM yyyy, hh:mm a'
+            }}
+          </small>
+
+        </div>
+
+
+        <span class="response-status">
+          {{
+            response.status || 'NEW'
+          }}
+        </span>
+
+      </div>
+
+
+      <!-- ANSWERS -->
+
+      <div
+        class="answer-row"
+        *ngFor="
+          let answer
+          of getAnswerEntries(response)
+        "
+      >
+
+        <span>
+          {{ answer.key }}
+        </span>
+
+        <strong>
+          {{ answer.value }}
+        </strong>
+
+      </div>
+
+
+      <div class="response-actions">
+
+        <button
+          type="button"
+          class="delete-response"
+          (click)="
+            deleteResponse(response)
+          "
+        >
+          Delete Response
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
