@@ -941,3 +941,146 @@ input[type="checkbox"]:checked
     max-width: 150px;
   }
 }
+
+.dynamic-image-upload {
+  width: 100%;
+}
+
+.image-upload-box {
+  min-height: 78px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  padding: 16px 18px;
+
+  border: 1px dashed #e3ad12;
+  border-radius: 12px;
+
+  background: #fffdf5;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.image-upload-box:hover {
+  background: #fff8df;
+  border-color: #c99300;
+}
+
+.upload-icon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #f9bd19;
+
+  color: #111827;
+
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.upload-content {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.upload-content strong {
+  color: #111827;
+
+  font-size: 14px;
+}
+
+.upload-content span {
+  color: #7a8495;
+
+  font-size: 11px;
+}
+
+.uploading-state {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  color: #8a6500;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.upload-spinner {
+  width: 18px;
+  height: 18px;
+
+  border: 2px solid #edd482;
+  border-top-color: #b98300;
+
+  border-radius: 50%;
+
+  animation: imageSpin 0.7s linear infinite;
+}
+
+@keyframes imageSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.image-preview {
+  margin-top: 12px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+.image-preview img {
+  width: 90px;
+  height: 90px;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+
+  border: 1px solid #e4e7ec;
+}
+
+.remove-image-btn {
+  border: none;
+
+  padding: 8px 12px;
+
+  border-radius: 7px;
+
+  background: #b42318;
+
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.field-error {
+  margin-top: 7px;
+
+  color: #b42318;
+
+  font-size: 12px;
+}

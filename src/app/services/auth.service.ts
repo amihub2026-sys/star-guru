@@ -20,7 +20,7 @@ export interface LoginResponse {
 export class AuthService {
 
   private readonly apiUrl =
-    'http://localhost:8080/api/auth';
+    'https://star-guru-backend.onrender.com/api/auth';
 
   constructor(
     private http: HttpClient
