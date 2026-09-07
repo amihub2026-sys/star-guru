@@ -470,7 +470,12 @@
       </div>
 
     }
-
+@if (uploadSuccess[field.id]) {
+  <div class="field-success">
+    <span>✓</span>
+    {{ uploadSuccess[field.id] }}
+  </div>
+}
 
     @if (uploadError[field.id]) {
 

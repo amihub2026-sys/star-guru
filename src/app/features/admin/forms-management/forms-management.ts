@@ -1,5 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import {
@@ -21,7 +25,7 @@ import {
 export class FormsManagement implements OnInit {
 
   forms: DynamicForm[] = [];
-
+responseCounts: Record<number, number> = {};
   loading = false;
   saving = false;
 
@@ -35,6 +39,9 @@ export class FormsManagement implements OnInit {
 
   selectedResponses: any[] = [];
   selectedResponseForm: DynamicForm | null = null;
+
+  currentResponsePage = 1;
+readonly responsesPerPage = 10;
 
   formModel = {
     title: '',
@@ -93,43 +100,132 @@ export class FormsManagement implements OnInit {
     }
   ];
 
-  constructor(
-    private dynamicFormService: DynamicFormService
-  ) {}
+constructor(
+  private dynamicFormService: DynamicFormService,
+  private cdr: ChangeDetectorRef
+) {}
 
-  ngOnInit(): void {
-    this.loadForms();
+ngOnInit(): void {
+  this.loadForms();
+}
+
+
+
+get paginatedResponses(): any[] {
+  const start =
+    (this.currentResponsePage - 1) *
+    this.responsesPerPage;
+
+  return this.selectedResponses.slice(
+    start,
+    start + this.responsesPerPage
+  );
+}
+
+get totalResponsePages(): number {
+  return Math.max(
+    1,
+    Math.ceil(
+      this.selectedResponses.length /
+      this.responsesPerPage
+    )
+  );
+}
+
+get responsePageNumbers(): number[] {
+  return Array.from(
+    { length: this.totalResponsePages },
+    (_, index) => index + 1
+  );
+}
+
+changeResponsePage(page: number): void {
+  if (
+    page < 1 ||
+    page > this.totalResponsePages
+  ) {
+    return;
   }
 
+  this.currentResponsePage = page;
+  this.cdr.markForCheck();
+}
+
+getResponseNumber(index: number): number {
+  return (
+    (this.currentResponsePage - 1) *
+    this.responsesPerPage +
+    index +
+    1
+  );
+}
   // =============================
   // LOAD FORMS
   // =============================
 
-  loadForms(): void {
+loadForms(): void {
+  this.loading = true;
+  this.errorMessage = '';
+  this.cdr.markForCheck();
 
-    this.loading = true;
-    this.errorMessage = '';
+  this.dynamicFormService
+    .getAllForms()
+    .subscribe({
+     next: (forms) => {
+  this.forms = forms || [];
+  this.loading = false;
+
+  this.loadResponseCounts();
+  this.cdr.markForCheck();
+},
+
+      error: (error) => {
+        console.error(
+          'Unable to load forms:',
+          error
+        );
+
+        this.errorMessage =
+          'Unable to load forms.';
+
+        this.loading = false;
+
+        this.cdr.markForCheck();
+      }
+    });
+}
+
+
+loadResponseCounts(): void {
+  for (const form of this.forms) {
+    if (form.id === undefined) {
+      continue;
+    }
+
+    const formId = form.id;
 
     this.dynamicFormService
-      .getAllForms()
+      .getResponseCount(formId)
       .subscribe({
+        next: (result) => {
+          this.responseCounts[formId] =
+            result.count ?? 0;
 
-        next: (forms) => {
-          this.forms = forms;
-          this.loading = false;
+          this.cdr.markForCheck();
         },
 
         error: (error) => {
-          console.error(error);
+          console.error(
+            `Unable to load response count for form ${formId}:`,
+            error
+          );
 
-          this.errorMessage =
-            'Unable to load forms.';
-
-          this.loading = false;
+          this.responseCounts[formId] = 0;
+          this.cdr.markForCheck();
         }
       });
   }
-
+}
   // =============================
   // OPEN CREATE FORM
   // =============================
@@ -446,6 +542,7 @@ saveForm(): void {
         this.saving = false;
 
         this.showBuilder = false;
+        this.cdr.markForCheck();
 
         this.resetBuilder();
 
@@ -651,13 +748,15 @@ saveForm(): void {
       .subscribe({
 
         next: (responses) => {
+  this.selectedResponses =
+    responses || [];
 
-          this.selectedResponses =
-            responses;
+  this.currentResponsePage = 1;
 
-          this.showResponses =
-            true;
-        },
+  this.showResponses = true;
+
+  this.cdr.markForCheck();
+},
 
         error: (error) => {
 
@@ -822,4 +921,71 @@ saveForm(): void {
 
     this.errorMessage = '';
   }
+
+
+  getFieldById(
+  fieldId: string
+): DynamicFormField | undefined {
+
+  if (!this.selectedResponseForm) {
+    return undefined;
+  }
+
+  return this.parseFields(
+    this.selectedResponseForm
+  ).find(
+    field => field.id === fieldId
+  );
+}
+
+getAnswerLabel(
+  fieldId: string
+): string {
+
+  return (
+    this.getFieldById(fieldId)?.label ||
+    'Question'
+  );
+}
+
+isImageAnswer(
+  fieldId: string,
+  value: any
+): boolean {
+
+  return (
+    this.getFieldById(fieldId)?.type === 'IMAGE' &&
+    typeof value === 'string' &&
+    value.trim() !== ''
+  );
+}
+
+formatAnswer(
+  value: any
+): string {
+
+  if (
+    value === null ||
+    value === undefined ||
+    value === ''
+  ) {
+    return '—';
+  }
+
+  if (Array.isArray(value)) {
+    return value.join(', ');
+  }
+
+  return String(value);
+}
+
+get responseFields(): DynamicFormField[] {
+  if (!this.selectedResponseForm) {
+    return [];
+  }
+
+  return this.parseFields(
+    this.selectedResponseForm
+  );
+}
 }

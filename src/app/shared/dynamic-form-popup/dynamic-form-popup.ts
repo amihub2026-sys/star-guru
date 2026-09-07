@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
 import {
+  ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit
@@ -77,11 +78,12 @@ export class DynamicFormPopup
   private routerSubscription?: Subscription;
 
 
-  constructor(
-    private dynamicFormService: DynamicFormService,
-    private http: HttpClient,
-    private router: Router
-  ) {}
+constructor(
+  private dynamicFormService: DynamicFormService,
+  private http: HttpClient,
+  private router: Router,
+  private cdr: ChangeDetectorRef
+) {}
 
 
   /* =========================
@@ -249,7 +251,8 @@ export class DynamicFormPopup
                 !this.isCompleted()
               ) {
 
-                this.showPopup = true;
+               this.showPopup = true;
+this.cdr.markForCheck();
               }
 
             }, 600);
@@ -593,46 +596,47 @@ export class DynamicFormPopup
         this.answers
       )
       .subscribe({
+  next: () => {
+    this.submitting = false;
 
-        next: () => {
+    this.successMessage =
+      'Form submitted successfully. Thank you!';
 
-          this.submitting = false;
+    this.errorMessage = '';
 
-          this.successMessage =
-            'Form submitted successfully.';
+    localStorage.setItem(
+      `dynamic_form_completed_${this.activeForm!.id}`,
+      'true'
+    );
 
+    this.cdr.markForCheck();
 
-          localStorage.setItem(
-            `dynamic_form_completed_${this.activeForm!.id}`,
-            'true'
-          );
+    setTimeout(() => {
+      const modal =
+        document.querySelector('.dynamic-form-modal');
 
-
-          setTimeout(() => {
-
-            this.showPopup = false;
-
-          }, 1500);
-        },
-
-
-        error: (error) => {
-
-          console.error(
-            'Form submission error',
-            error
-          );
-
-
-          this.submitting = false;
-
-
-          this.errorMessage =
-            error?.error?.message ||
-            'Unable to submit form. Please try again.';
-        }
-
+      modal?.scrollTo({
+        top: 0,
+        behavior: 'smooth'
       });
+    }, 0);
+  },
+
+  error: (error) => {
+    console.error(
+      'Form submission error:',
+      error
+    );
+
+    this.submitting = false;
+
+    this.errorMessage =
+      error?.error?.message ||
+      'Unable to submit form. Please try again.';
+
+    this.cdr.markForCheck();
+  }
+});
   }
 
 
@@ -717,7 +721,7 @@ export class DynamicFormPopup
         'Please select an image file.';
 
       input.value = '';
-
+this.cdr.detectChanges();
       return;
     }
 
@@ -765,27 +769,21 @@ export class DynamicFormPopup
       )
       .subscribe({
 
-        next: (response) => {
+    next: (response) => {
+  this.answers[fieldId] = response.url;
 
-          this.answers[fieldId] =
-            response.url;
+  this.uploadingFieldId = null;
 
+  this.uploadError[fieldId] = '';
 
-          this.uploadingFieldId =
-            null;
+  this.uploadSuccess[fieldId] =
+    response.message ||
+    'Image uploaded successfully.';
 
+  input.value = '';
 
-          this.uploadError[fieldId] =
-            '';
-
-
-          this.uploadSuccess[fieldId] =
-            response.message ||
-            'Image uploaded successfully.';
-
-
-          input.value = '';
-        },
+  this.cdr.detectChanges();
+},
 
 
         error: (error) => {
