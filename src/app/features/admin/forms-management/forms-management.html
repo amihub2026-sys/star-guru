@@ -163,11 +163,19 @@
       <div class="form-card-actions">
 
         <button
-          type="button"
-          (click)="viewResponses(form)"
-        >
-          Responses
-        </button>
+  type="button"
+  class="responses-count-btn"
+  (click)="viewResponses(form)"
+>
+  Responses
+  <span class="response-count-badge">
+    {{
+      form.id
+        ? (responseCounts[form.id] || 0)
+        : 0
+    }}
+  </span>
+</button>
 
         <button
           type="button"
@@ -617,78 +625,155 @@
 
     <!-- RESPONSE CARDS -->
 
-    <div
-      class="response-card"
-      *ngFor="
-        let response
-        of selectedResponses;
-        let i = index
-      "
-    >
+ <!-- RESPONSE CARDS -->
 
-      <div class="response-card-header">
+<!-- EXCEL-STYLE RESPONSE TABLE -->
 
-        <div>
+<div
+  class="response-table-wrapper"
+  *ngIf="selectedResponses.length > 0"
+>
+  <table class="response-excel-table">
 
-          <strong>
-            Response #{{ i + 1 }}
-          </strong>
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Submitted Date</th>
 
-          <small>
-            {{
-              response.submittedAt
-                | date:'dd MMM yyyy, hh:mm a'
-            }}
-          </small>
+        <th *ngFor="let field of responseFields">
+          {{ field.label }}
+        </th>
 
-        </div>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
 
 
-        <span class="response-status">
-          {{
-            response.status || 'NEW'
-          }}
-        </span>
-
-      </div>
-
-
-      <!-- ANSWERS -->
-
-      <div
-        class="answer-row"
+    <tbody>
+      <tr
         *ngFor="
-          let answer
-          of getAnswerEntries(response)
+          let response of paginatedResponses;
+          let i = index
         "
       >
 
-        <span>
-          {{ answer.key }}
-        </span>
+        <td class="serial-column">
+          {{ getResponseNumber(i) }}
+        </td>
 
-        <strong>
-          {{ answer.value }}
-        </strong>
+        <td class="date-column">
+          {{
+            response.submittedAt
+              | date:'dd MMM yyyy, hh:mm a'
+          }}
+        </td>
 
-      </div>
 
-
-      <div class="response-actions">
-
-        <button
-          type="button"
-          class="delete-response"
-          (click)="
-            deleteResponse(response)
-          "
+        <td
+          *ngFor="let field of responseFields"
+          class="answer-column"
         >
-          Delete Response
-        </button>
 
-      </div>
+          @if (
+            field.type === 'IMAGE' &&
+            response.answers?.[field.id]
+          ) {
 
-    </div>
+            <a
+              [href]="response.answers[field.id]"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="table-image-link"
+            >
+              <img
+                [src]="response.answers[field.id]"
+                [alt]="field.label"
+                class="table-response-image"
+              >
+            </a>
+
+          } @else {
+
+            <span>
+              {{
+                formatAnswer(
+                  response.answers?.[field.id]
+                )
+              }}
+            </span>
+
+          }
+
+        </td>
+
+
+        <td>
+          <span class="table-status">
+            {{ response.status || 'NEW' }}
+          </span>
+        </td>
+
+
+        <td class="table-action-column">
+
+          <button
+            type="button"
+            class="delete-response"
+            (click)="deleteResponse(response)"
+          >
+            Delete
+          </button>
+
+        </td>
+
+      </tr>
+    </tbody>
+
+  </table>
+</div>
+
+
+<!-- PAGINATION -->
+
+<div
+  class="responses-pagination"
+  *ngIf="totalResponsePages > 1"
+>
+
+  <button
+    type="button"
+    (click)="
+      changeResponsePage(
+        currentResponsePage - 1
+      )
+    "
+    [disabled]="currentResponsePage === 1"
+  >
+    ← Previous
+  </button>
+
+  <span>
+    Page {{ currentResponsePage }}
+    of {{ totalResponsePages }}
+  </span>
+
+  <button
+    type="button"
+    (click)="
+      changeResponsePage(
+        currentResponsePage + 1
+      )
+    "
+    [disabled]="
+      currentResponsePage ===
+      totalResponsePages
+    "
+  >
+    Next →
+  </button>
+
+</div>
 
   </div>
 
