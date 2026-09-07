@@ -401,28 +401,88 @@
              Cloudinary upload comes next.
         ================================== -->
 
-        <div
-          *ngIf="field.type === 'IMAGE'"
-          class="image-upload-box"
-        >
+       @if (field.type === 'IMAGE') {
 
-          <div class="upload-icon">
-            ↑
-          </div>
+  <div class="dynamic-image-upload">
 
-          <div>
-            <strong>
-              Upload Image
-            </strong>
+    <label
+      class="image-upload-box"
+      [for]="'image-' + field.id"
+    >
 
-            <p>
-              Image upload will be available
-              after connecting Cloudinary.
-            </p>
-          </div>
+      <input
+        [id]="'image-' + field.id"
+        type="file"
+        accept="image/*"
+        hidden
+        (change)="onImageSelected($event, field.id)"
+      />
 
+      @if (uploadingFieldId === field.id) {
+
+        <div class="uploading-state">
+          <span class="upload-spinner"></span>
+          <span>Uploading image...</span>
         </div>
 
+      } @else {
+
+        <div class="upload-icon">
+          ↑
+        </div>
+
+        <div class="upload-content">
+          <strong>
+            {{
+              answers[field.id]
+                ? 'Change Image'
+                : 'Upload Image'
+            }}
+          </strong>
+
+          <span>
+            JPG, PNG or WEBP
+          </span>
+        </div>
+
+      }
+
+    </label>
+
+
+    @if (answers[field.id]) {
+
+      <div class="image-preview">
+
+        <img
+          [src]="answers[field.id]"
+          alt="Uploaded image"
+        />
+
+        <button
+          type="button"
+          class="remove-image-btn"
+          (click)="answers[field.id] = ''"
+        >
+          Remove
+        </button>
+
+      </div>
+
+    }
+
+
+    @if (uploadError[field.id]) {
+
+      <div class="field-error">
+        {{ uploadError[field.id] }}
+      </div>
+
+    }
+
+  </div>
+
+}
       </div>
 
 

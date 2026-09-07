@@ -1,14 +1,19 @@
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+
 import {
   Component,
   OnDestroy,
   OnInit
 } from '@angular/core';
+
 import { FormsModule } from '@angular/forms';
+
 import {
   NavigationEnd,
   Router
 } from '@angular/router';
+
 import {
   Subscription,
   filter
@@ -23,15 +28,19 @@ import {
 
 @Component({
   selector: 'app-dynamic-form-popup',
+
   standalone: true,
+
   imports: [
     CommonModule,
     FormsModule
   ],
+
   templateUrl: './dynamic-form-popup.html',
   styleUrl: './dynamic-form-popup.css'
 })
-export class DynamicFormPopup implements OnInit, OnDestroy {
+export class DynamicFormPopup
+  implements OnInit, OnDestroy {
 
   activeForm: DynamicForm | null = null;
 
@@ -53,23 +62,44 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
 
   isLoginPage = false;
 
+
+  /* =========================
+     IMAGE UPLOAD
+  ========================= */
+
+  uploadingFieldId: string | null = null;
+
+  uploadError: Record<string, string> = {};
+
+  uploadSuccess: Record<string, string> = {};
+
+
   private routerSubscription?: Subscription;
 
 
   constructor(
     private dynamicFormService: DynamicFormService,
+    private http: HttpClient,
     private router: Router
   ) {}
 
 
+  /* =========================
+     INIT
+  ========================= */
+
   ngOnInit(): void {
 
-    this.checkRoute(this.router.url);
+    this.checkRoute(
+      this.router.url
+    );
+
 
     if (
       !this.isAdminPage &&
       !this.isLoginPage
     ) {
+
       this.loadActiveForm();
     }
 
@@ -106,10 +136,14 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
 
-    this.routerSubscription?.unsubscribe();
-
+    this.routerSubscription
+      ?.unsubscribe();
   }
 
+
+  /* =========================
+     ROUTE CHECK
+  ========================= */
 
   private checkRoute(
     url: string
@@ -128,11 +162,13 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
     ) {
 
       this.showPopup = false;
-
     }
-
   }
 
+
+  /* =========================
+     LOAD ACTIVE FORM
+  ========================= */
 
   loadActiveForm(): void {
 
@@ -140,6 +176,7 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
       this.isAdminPage ||
       this.isLoginPage
     ) {
+
       return;
     }
 
@@ -151,7 +188,9 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
       .getActiveForm()
       .subscribe({
 
-        next: (form: DynamicForm | null) => {
+        next: (
+          form: DynamicForm | null
+        ) => {
 
           this.loading = false;
 
@@ -171,7 +210,6 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
             this.showPopup = false;
 
             return;
-
           }
 
 
@@ -193,7 +231,6 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
             );
 
             this.fields = [];
-
           }
 
 
@@ -213,7 +250,6 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
               ) {
 
                 this.showPopup = true;
-
               }
 
             }, 600);
@@ -221,9 +257,7 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
           } else {
 
             this.showPopup = false;
-
           }
-
         },
 
 
@@ -241,13 +275,15 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
           this.fields = [];
 
           this.showPopup = false;
-
         }
 
       });
-
   }
 
+
+  /* =========================
+     HOME PAGE CHECK
+  ========================= */
 
   private isHomePage(): boolean {
 
@@ -261,16 +297,27 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
       currentUrl === '/' ||
       currentUrl === ''
     );
-
   }
 
+
+  /* =========================
+     PREPARE ANSWERS
+  ========================= */
 
   private prepareAnswers(): void {
 
     this.answers = {};
 
+    this.uploadError = {};
 
-    for (const field of this.fields) {
+    this.uploadSuccess = {};
+
+    this.uploadingFieldId = null;
+
+
+    for (
+      const field of this.fields
+    ) {
 
       if (
         field.type === 'CHECKBOX'
@@ -281,17 +328,19 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
       } else {
 
         this.answers[field.id] = '';
-
       }
-
     }
-
   }
 
+
+  /* =========================
+     OPEN POPUP
+  ========================= */
 
   openPopup(): void {
 
     if (!this.activeForm) {
+
       return;
     }
 
@@ -301,18 +350,24 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
     this.errorMessage = '';
 
     this.showPopup = true;
-
   }
 
+
+  /* =========================
+     CLOSE POPUP
+  ========================= */
 
   closePopup(): void {
 
     this.showPopup = false;
 
     this.errorMessage = '';
-
   }
 
+
+  /* =========================
+     CHECKBOX
+  ========================= */
 
   toggleCheckbox(
     fieldId: string,
@@ -331,7 +386,6 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
     ) {
 
       this.answers[fieldId] = [];
-
     }
 
 
@@ -344,7 +398,6 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
 
         this.answers[fieldId]
           .push(option);
-
       }
 
     } else {
@@ -355,20 +408,27 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
             (value: string) =>
               value !== option
           );
-
     }
-
   }
 
+
+  /* =========================
+     VALIDATE FORM
+  ========================= */
 
   private validateForm(): boolean {
 
     this.errorMessage = '';
 
 
-    for (const field of this.fields) {
+    /* REQUIRED FIELD VALIDATION */
+
+    for (
+      const field of this.fields
+    ) {
 
       if (!field.required) {
+
         continue;
       }
 
@@ -389,7 +449,6 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
             `${field.label} is required.`;
 
           return false;
-
         }
 
       } else if (
@@ -402,13 +461,15 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
           `${field.label} is required.`;
 
         return false;
-
       }
-
     }
 
 
-    for (const field of this.fields) {
+    /* EMAIL VALIDATION */
+
+    for (
+      const field of this.fields
+    ) {
 
       if (
         field.type === 'EMAIL'
@@ -434,17 +495,17 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
               `Please enter a valid ${field.label}.`;
 
             return false;
-
           }
-
         }
-
       }
-
     }
 
 
-    for (const field of this.fields) {
+    /* PHONE VALIDATION */
+
+    for (
+      const field of this.fields
+    ) {
 
       if (
         field.type === 'PHONE'
@@ -469,31 +530,43 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
               `Please enter a valid 10 digit ${field.label}.`;
 
             return false;
-
           }
-
         }
-
       }
-
     }
 
 
     return true;
-
   }
 
+
+  /* =========================
+     SUBMIT FORM
+  ========================= */
 
   submitForm(): void {
 
     if (
       !this.activeForm?.id
     ) {
+
       return;
     }
 
 
     if (this.submitting) {
+
+      return;
+    }
+
+
+    if (
+      this.uploadingFieldId
+    ) {
+
+      this.errorMessage =
+        'Please wait until image upload is completed.';
+
       return;
     }
 
@@ -506,6 +579,7 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
     if (
       !this.validateForm()
     ) {
+
       return;
     }
 
@@ -539,7 +613,6 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
             this.showPopup = false;
 
           }, 1500);
-
         },
 
 
@@ -557,19 +630,22 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
           this.errorMessage =
             error?.error?.message ||
             'Unable to submit form. Please try again.';
-
         }
 
       });
-
   }
 
+
+  /* =========================
+     CHECK COMPLETED FORM
+  ========================= */
 
   isCompleted(): boolean {
 
     if (
       !this.activeForm?.id
     ) {
+
       return false;
     }
 
@@ -579,9 +655,12 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
         `dynamic_form_completed_${this.activeForm.id}`
       ) === 'true'
     );
-
   }
 
+
+  /* =========================
+     FLOATING BUTTON
+  ========================= */
 
   shouldShowFloatingButton(): boolean {
 
@@ -592,7 +671,164 @@ export class DynamicFormPopup implements OnInit, OnDestroy {
       !this.showPopup &&
       !this.isCompleted()
     );
+  }
 
+
+  /* =========================
+     IMAGE UPLOAD
+  ========================= */
+
+  onImageSelected(
+    event: Event,
+    fieldId: string
+  ): void {
+
+    const input =
+      event.target as HTMLInputElement;
+
+
+    if (
+      !input.files ||
+      input.files.length === 0
+    ) {
+
+      return;
+    }
+
+
+    const file =
+      input.files[0];
+
+
+    /* CLEAR OLD MESSAGES */
+
+    this.uploadError[fieldId] = '';
+
+    this.uploadSuccess[fieldId] = '';
+
+
+    /* CHECK IMAGE TYPE */
+
+    if (
+      !file.type.startsWith('image/')
+    ) {
+
+      this.uploadError[fieldId] =
+        'Please select an image file.';
+
+      input.value = '';
+
+      return;
+    }
+
+
+    /* OPTIONAL SIZE CHECK - 5MB */
+
+    const maxSize =
+      5 * 1024 * 1024;
+
+
+    if (
+      file.size > maxSize
+    ) {
+
+      this.uploadError[fieldId] =
+        'Image size must be less than 5 MB.';
+
+      input.value = '';
+
+      return;
+    }
+
+
+    const formData =
+      new FormData();
+
+
+    formData.append(
+      'file',
+      file
+    );
+
+
+    this.uploadingFieldId =
+      fieldId;
+
+
+    this.http
+      .post<{
+        url: string;
+        message: string;
+      }>(
+        'https://star-guru-backend.onrender.com/api/upload/image',
+        formData
+      )
+      .subscribe({
+
+        next: (response) => {
+
+          this.answers[fieldId] =
+            response.url;
+
+
+          this.uploadingFieldId =
+            null;
+
+
+          this.uploadError[fieldId] =
+            '';
+
+
+          this.uploadSuccess[fieldId] =
+            response.message ||
+            'Image uploaded successfully.';
+
+
+          input.value = '';
+        },
+
+
+        error: (error) => {
+
+          console.error(
+            'Image upload error:',
+            error
+          );
+
+
+          this.uploadingFieldId =
+            null;
+
+
+          this.uploadSuccess[fieldId] =
+            '';
+
+
+          this.uploadError[fieldId] =
+            error?.error?.message ||
+            'Image upload failed.';
+
+
+          input.value = '';
+        }
+
+      });
+  }
+
+
+  /* =========================
+     REMOVE IMAGE
+  ========================= */
+
+  removeImage(
+    fieldId: string
+  ): void {
+
+    this.answers[fieldId] = '';
+
+    this.uploadSuccess[fieldId] = '';
+
+    this.uploadError[fieldId] = '';
   }
 
 }
