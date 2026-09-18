@@ -577,38 +577,53 @@
 
     <!-- RESPONSES HEADER -->
 
-    <div class="responses-header">
+    <!-- RESPONSES HEADER -->
 
-      <div>
+<div class="responses-header">
 
-        <span>
-          RESPONSES
-        </span>
+  <div>
 
-        <h2>
-          {{
-            selectedResponseForm?.title
-          }}
-        </h2>
+    <span>
+      RESPONSES
+    </span>
 
-        <p>
-          {{
-            selectedResponses.length
-          }}
-          submissions
-        </p>
+    <h2>
+      {{
+        selectedResponseForm?.title
+      }}
+    </h2>
 
-      </div>
+    <p>
+      {{
+        selectedResponses.length
+      }}
+      submissions
+    </p>
 
+  </div>
 
-      <button
-        type="button"
-        (click)="closeResponses()"
-      >
-        ×
-      </button>
+  <div class="responses-header-actions">
 
-    </div>
+    <button
+      type="button"
+      class="download-all-btn"
+      *ngIf="selectedResponses.length > 0"
+      (click)="downloadAllResponses()"
+    >
+      ⬇ Download All
+    </button>
+
+    <button
+      type="button"
+      class="close-responses-btn"
+      (click)="closeResponses()"
+    >
+      ×
+    </button>
+
+  </div>
+
+</div>
 
 
     <!-- NO RESPONSES -->
@@ -717,15 +732,27 @@
 
         <td class="table-action-column">
 
-          <button
-            type="button"
-            class="delete-response"
-            (click)="deleteResponse(response)"
-          >
-            Delete
-          </button>
+  <div class="response-action-buttons">
 
-        </td>
+    <button
+      type="button"
+      class="view-response-btn"
+      (click)="viewSingleResponse(response)"
+    >
+      View
+    </button>
+
+    <button
+      type="button"
+      class="delete-response"
+      (click)="deleteResponse(response)"
+    >
+      Delete
+    </button>
+
+  </div>
+
+</td>
 
       </tr>
     </tbody>
@@ -774,6 +801,146 @@
   </button>
 
 </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     SINGLE RESPONSE DETAILS POPUP
+===================================================== -->
+
+<div
+  class="single-response-overlay"
+  *ngIf="
+    showResponseDetails &&
+    selectedSingleResponse
+  "
+>
+
+  <div class="single-response-panel">
+
+    <div class="single-response-header">
+
+      <div>
+        <span>SUBMISSION DETAILS</span>
+
+        <h2>
+          {{
+            selectedResponseForm?.title
+          }}
+        </h2>
+      </div>
+
+      <button
+        type="button"
+        class="close-single-response"
+        (click)="closeSingleResponse()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="single-response-body">
+
+      <div class="response-detail-row">
+
+        <span class="detail-label">
+          Submitted Date
+        </span>
+
+        <span class="detail-value">
+          {{
+            selectedSingleResponse.submittedAt
+              | date:'dd MMM yyyy, hh:mm a'
+          }}
+        </span>
+
+      </div>
+
+
+      <div
+        class="response-detail-row"
+        *ngFor="let field of responseFields"
+      >
+
+        <span class="detail-label">
+          {{ field.label }}
+        </span>
+
+
+        <div class="detail-value">
+
+          @if (
+            field.type === 'IMAGE' &&
+            selectedSingleResponse.answers?.[field.id]
+          ) {
+
+            <a
+              [href]="
+                selectedSingleResponse.answers[field.id]
+              "
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+
+              <img
+                [src]="
+                  selectedSingleResponse.answers[field.id]
+                "
+                [alt]="field.label"
+                class="single-response-image"
+              >
+
+            </a>
+
+          } @else {
+
+            <span>
+              {{
+                formatAnswer(
+                  selectedSingleResponse.answers?.[field.id]
+                )
+              }}
+            </span>
+
+          }
+
+        </div>
+
+      </div>
+
+
+      <div class="response-detail-row">
+
+        <span class="detail-label">
+          Status
+        </span>
+
+        <span class="detail-value">
+          {{
+            selectedSingleResponse.status || 'NEW'
+          }}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="single-response-footer">
+
+      <button
+        type="button"
+        (click)="closeSingleResponse()"
+      >
+        Close
+      </button>
+
+    </div>
 
   </div>
 
