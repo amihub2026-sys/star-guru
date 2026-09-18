@@ -80,20 +80,29 @@ export class Gallery
     this.closeBook();
   }
 
-  closeBook(): void {
-    this.isClosing = true;
-    this.contentOpen = false;
+closeBook(): void {
 
-    window.setTimeout(() => {
-      this.pageOpen = false;
-      this.currentPage = 0;
-    }, 180);
-
-    window.setTimeout(() => {
-      this.bookOpen = false;
-      this.isClosing = false;
-    }, 450);
+  if (this.isClosing) {
+    return;
   }
+
+  this.isClosing = true;
+
+  // Close the front cover directly
+  this.bookOpen = false;
+
+  // After cover is fully closed,
+  // reset inside pages silently
+  window.setTimeout(() => {
+
+    this.contentOpen = false;
+    this.pageOpen = false;
+    this.currentPage = 0;
+
+    this.isClosing = false;
+
+  }, 1300);
+}
 
   /*
    * ==========================================
