@@ -21,68 +21,117 @@
       =============================== -->
       <div class="open-book">
 
-        <!-- PERMANENT LEFT PAGE -->
-        <div class="left-page">
+        <!-- =====================================
+             PAGE 1 - WELCOME
+        ====================================== -->
+        <div
+          class="left-page"
+          [class.hide-welcome-content]="currentPage >= 1"
+        >
 
           <img
-            src="/images/edu1.jpeg"
-            alt="Star Guru Foundation"
+            src="/images/gh3.jpeg"
+            alt="Welcome to Star Guru Charitable Foundation"
           >
+
+          <div class="left-page-content">
+
+            <h2>
+              Welcome to the World of Star Guru
+            </h2>
+
+            <p>
+              Welcome to the inspiring world of Star Guru Charitable
+              Foundation, where compassion becomes action and service
+              becomes a way of life.
+            </p>
+
+            <p>
+              Every initiative reflects a deep commitment to humanity,
+              care and social responsibility.
+            </p>
+
+          </div>
 
         </div>
 
 
-        <!-- CENTER -->
+        <!-- =====================================
+             BOOK CENTER
+        ====================================== -->
         <div class="book-center"></div>
 
 
-        <!-- PERMANENT RIGHT BACK PAGE -->
+        <!-- =====================================
+             PERMANENT RIGHT BACK PAGE
+        ====================================== -->
         <div class="right-page">
 
-          <h2>Star Guru Foundation</h2>
+          <h2>
+            Star Guru Charitable Foundation
+          </h2>
 
           <p>
-            Serving humanity with compassion.
-            Our foundation supports food distribution,
-            charity activities and community welfare
-            programs.
+            Star Guru Charitable Foundation stands as a symbol of
+            kindness, leadership and social responsibility.
           </p>
 
           <p>
-            Every initiative is dedicated towards
-            creating a better society with kindness
-            and care.
+            Through every service initiative, the foundation continues
+            to bring hope, dignity and encouragement to people from
+            different walks of life.
+          </p>
+
+          <p>
+            This book presents a few meaningful moments from the journey
+            of service carried forward under the guidance of
+            Dr. T. Gurusamy.
           </p>
 
         </div>
 
 
-        <!-- ==============================
-             TURN PAGE 1
-        =============================== -->
+        <!-- =====================================
+             PAGE 2 - FOOD DISTRIBUTION
+        ====================================== -->
         <div
           class="turn-page turn-page-1"
           [class.flipped]="currentPage >= 1"
         >
 
+          <!-- FRONT -->
           <div class="turn-page-front">
 
-            <h2>Our Mission</h2>
+            <h2>
+              Food Distribution
+            </h2>
 
             <p>
-              Our mission is to serve people with
-              compassion and create meaningful change
-              in communities.
+              Food distribution is one of the most heartfelt initiatives
+              of Star Guru Charitable Foundation.
+            </p>
+
+            <p>
+              Meals are shared with people in need with dignity, care
+              and compassion, helping families and individuals feel
+              supported during difficult moments.
+            </p>
+
+            <p>
+              For Star Guru, serving food is more than charity.
+              It is a simple but powerful way of sharing hope and
+              humanity.
             </p>
 
           </div>
 
 
+          <!-- BACK -->
           <div class="turn-page-back">
 
             <img
-              src="/images/edu2.jpeg"
-              alt="Our Mission"
+              src="/images/edu8.jpg"
+              alt="Star Guru Food Distribution"
             >
 
           </div>
@@ -90,32 +139,49 @@
         </div>
 
 
-        <!-- ==============================
-             TURN PAGE 2
-        =============================== -->
+        <!-- =====================================
+             PAGE 3 - DRUG AWARENESS
+        ====================================== -->
         <div
           class="turn-page turn-page-2"
           [class.flipped]="currentPage >= 2"
         >
 
+          <!-- FRONT -->
           <div class="turn-page-front">
 
-            <h2>Food Distribution</h2>
+            <h2>
+              Drug Awareness &
+              Motivational Programs
+            </h2>
 
             <p>
-              Supporting families and communities
-              through food distribution and
-              charitable activities.
+              Star Guru Charitable Foundation conducts drug awareness
+              programs in schools to guide students toward a healthy,
+              responsible and positive future.
+            </p>
+
+            <p>
+              These sessions help young people understand the dangers
+              of harmful habits and the importance of making wise
+              choices in life.
+            </p>
+
+            <p>
+              Motivational speeches also encourage students to build
+              confidence, discipline, self-belief and the courage to
+              work toward their dreams.
             </p>
 
           </div>
 
 
+          <!-- BACK -->
           <div class="turn-page-back">
 
             <img
-              src="/images/news1.jpeg"
-              alt="Food Distribution"
+              src="/images/vaigai2.jpeg"
+              alt="Drug Awareness and Motivational Program"
             >
 
           </div>
@@ -123,32 +189,49 @@
         </div>
 
 
-        <!-- ==============================
-             TURN PAGE 3
-        =============================== -->
+        <!-- =====================================
+             PAGE 4 - VAIGAI RIVER CLEANING
+        ====================================== -->
         <div
           class="turn-page turn-page-3"
           [class.flipped]="currentPage >= 3"
         >
 
+          <!-- FRONT -->
           <div class="turn-page-front">
 
-            <h2>Education Support</h2>
+            <h2>
+              Vaigai River Cleaning
+            </h2>
 
             <p>
-              Helping students and young people
-              access opportunities for education
-              and personal development.
+              Caring for society also means caring for nature.
+              Through Vaigai River cleaning initiatives,
+              Star Guru Foundation promotes environmental
+              responsibility and public cleanliness.
+            </p>
+
+            <p>
+              Volunteers and community members come together to
+              protect natural resources and encourage people to
+              take responsibility for their surroundings.
+            </p>
+
+            <p>
+              The initiative reflects a simple message:
+              protecting our environment is also a service to
+              future generations.
             </p>
 
           </div>
 
 
+          <!-- BACK -->
           <div class="turn-page-back">
 
             <img
-              src="/images/edu4.jpeg"
-              alt="Education Support"
+              src="/images/sports4.jpeg"
+              alt="Vaigai River Cleaning"
             >
 
           </div>
@@ -156,32 +239,48 @@
         </div>
 
 
-        <!-- ==============================
-             TURN PAGE 4
-        =============================== -->
+        <!-- =====================================
+             PAGE 5 - SPORTS DEVELOPMENT
+        ====================================== -->
         <div
           class="turn-page turn-page-4"
           [class.flipped]="currentPage >= 4"
         >
 
+          <!-- FRONT -->
           <div class="turn-page-front">
 
-            <h2>Community Welfare</h2>
+            <h2>
+              Sports Development
+            </h2>
 
             <p>
-              Working together to support communities,
-              families and people who need a helping
-              hand.
+              Star Guru Charitable Foundation also conducts its own
+              sports functions and community events to encourage
+              young talent.
+            </p>
+
+            <p>
+              These programs provide opportunities for youngsters
+              to participate, perform and develop confidence through
+              healthy competition.
+            </p>
+
+            <p>
+              Through sports, the foundation promotes teamwork,
+              discipline, leadership, physical fitness and the
+              courage to grow beyond limitations.
             </p>
 
           </div>
 
 
+          <!-- BACK -->
           <div class="turn-page-back">
 
             <img
-              src="/images/edu5.jpg"
-              alt="Community Welfare"
+              src="/images/general7.jpeg"
+              alt="Star Guru Sports Development"
             >
 
           </div>
@@ -189,41 +288,69 @@
         </div>
 
 
-        <!-- ==============================
-             TURN PAGE 5
-        =============================== -->
+        <!-- =====================================
+             PAGE 6 - FINAL TRIBUTE
+        ====================================== -->
         <div
           class="turn-page turn-page-5"
           [class.flipped]="currentPage >= 5"
         >
 
+          <!-- FRONT -->
           <div class="turn-page-front">
 
-            <h2>Our Journey Continues</h2>
+            <h2>
+              A Journey of Service
+            </h2>
 
             <p>
-              Together we can create a better society
-              through kindness, care and compassion.
+              Behind every initiative of Star Guru Charitable
+              Foundation is a strong belief that humanity must
+              always come first.
+            </p>
+
+            <p>
+              Through his dedication to social service,
+              Dr. T. Gurusamy has encouraged people to help,
+              support and uplift others with compassion and
+              responsibility.
+            </p>
+
+            <p>
+              His journey continues to inspire the spirit of
+              service and reminds us that meaningful change can
+              begin with one sincere act of kindness.
             </p>
 
           </div>
 
 
+          <!-- FINAL BACK PAGE -->
           <div class="turn-page-back final-page">
 
             <img
               src="/images/logo.png"
               class="final-book-logo"
-              alt="Star Guru"
+              alt="Star Guru Charitable Foundation"
             >
 
             <h2>
               Star Guru Charitable Foundation
             </h2>
 
-            <p>
-              Serving Humanity With Compassion
+            <p class="final-message">
+              A journey of compassion, leadership and humanity.
             </p>
+
+            <p class="final-founder-message">
+              With heartfelt respect to
+              <strong>Dr. T. Gurusamy</strong>
+              for his continued dedication to serving society.
+            </p>
+
+            <span class="final-tagline">
+              Serving Humanity With Compassion
+            </span>
 
           </div>
 
@@ -232,10 +359,9 @@
       </div>
 
 
-      <!-- ==============================
+      <!-- =====================================
            FRONT COVER
-           IMPORTANT: SEPARATE FROM PAGES
-      =============================== -->
+      ====================================== -->
       <div class="cover">
 
         <div class="cover-inner">
@@ -275,7 +401,9 @@
       </div>
 
 
-      <!-- BOOK SPINE -->
+      <!-- =====================================
+           BOOK SPINE
+      ====================================== -->
       <div class="spine"></div>
 
     </div>
