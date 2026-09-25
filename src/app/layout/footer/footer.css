@@ -772,178 +772,123 @@
 }
 
 
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media (max-width: 1100px) {
-
-  .site-footer {
-    padding-top: 65px;
-  }
-
-  .footer-main {
-    width: min(900px, calc(100% - 40px));
-
-    grid-template-columns: repeat(2, 1fr);
-
-    gap: 20px;
-
-    margin-bottom: 45px;
-  }
-
-  .footer-bottom {
-    width: calc(100% - 40px);
-  }
-
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
+/* =========================================
+   FOOTER MOBILE - QUICK LINKS + WHAT WE DO
+   SIDE BY SIDE
+========================================= */
 
 @media (max-width: 650px) {
 
-  .site-footer {
-    padding-top: 50px;
-  }
-
-
-  .footer-top-line {
-    width: calc(100% - 40px);
-  }
-
-
   .footer-main {
-    width: calc(100% - 32px);
+    width: calc(100% - 28px);
+    max-width: 390px;
 
-    grid-template-columns: 1fr;
+    margin: 0 auto 30px;
 
-    gap: 16px;
+    display: grid;
 
-    margin-bottom: 35px;
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
   }
 
+  /* BRAND - FULL WIDTH */
+  .footer-brand {
+    grid-column: 1 / -1;
 
-  .footer-brand,
-  .footer-column,
+    width: 100%;
+
+    padding: 22px 18px;
+  }
+
+  /* QUICK LINKS */
+  .footer-main > .footer-column:not(.footer-service-column) {
+    grid-column: 1;
+
+    width: 100%;
+
+    padding: 20px 14px;
+  }
+
+  /* WHAT WE DO */
+  .footer-service-column {
+    grid-column: 2;
+
+    width: 100%;
+
+    padding: 20px 14px;
+  }
+
+  /* CONTACT - FULL WIDTH */
   .footer-contact {
-    padding: 26px 22px;
+    grid-column: 1 / -1;
 
-    border-radius: 19px;
+    width: 100%;
+
+    padding: 22px 18px;
   }
 
+  /* COLUMN TITLES */
+  .footer-column h3 {
+    margin-bottom: 18px;
 
-  .footer-logo {
-    width: 55px;
-    height: 55px;
-
-    border-radius: 14px;
+    font-size: 14px;
   }
 
-
-  .footer-brand-name strong {
-    font-size: 18px;
+  /* QUICK LINK TEXT */
+  .footer-column ul li {
+    margin-bottom: 10px;
   }
 
-
-  .footer-brand-name span {
-    font-size: 10px;
+  .footer-column ul li a {
+    font-size: 11px;
+    line-height: 1.4;
   }
 
-
-  .footer-description {
-    font-size: 13px;
-
-    line-height: 1.8;
+  /* WHAT WE DO TEXT */
+  .footer-service-list {
+    gap: 11px;
   }
 
+  .footer-service-list li {
+    gap: 7px;
 
-  .footer-column h3,
-  .footer-contact h3 {
-    font-size: 16px;
-
-    margin-bottom: 22px;
+    font-size: 10.5px;
+    line-height: 1.45;
   }
 
+  .service-dot {
+    width: 6px;
+    height: 6px;
 
-  .footer-social-link {
-    width: 40px;
-    height: 40px;
-  }
-
-
-  .footer-contact-item {
-    margin-bottom: 17px;
-  }
-
-
-  .footer-volunteer-btn {
-    min-height: 50px;
-  }
-
-
-  .footer-bottom {
-    width: calc(100% - 32px);
-
-    min-height: auto;
-
-    padding: 23px 0;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    text-align: center;
-
-    gap: 13px;
-  }
-
-
-  .copyright {
-    max-width: 290px;
+    margin-top: 5px;
   }
 
 }
-
-
-/* =========================================================
-   VERY SMALL MOBILE
-========================================================= */
 
 @media (max-width: 380px) {
 
   .footer-main {
-    width: calc(100% - 24px);
+    width: calc(100% - 20px);
+
+    gap: 9px;
   }
 
-
-  .footer-brand,
-  .footer-column,
-  .footer-contact {
-    padding: 23px 18px;
+  .footer-main > .footer-column:not(.footer-service-column),
+  .footer-service-column {
+    padding: 18px 10px;
   }
 
-
-  .footer-logo-wrap {
-    gap: 12px;
+  .footer-column h3 {
+    font-size: 13px;
   }
 
-
-  .footer-logo {
-    width: 50px;
-    height: 50px;
+  .footer-column ul li a {
+    font-size: 10px;
   }
 
-
-  .footer-brand-name strong {
-    font-size: 16px;
+  .footer-service-list li {
+    font-size: 9.5px;
   }
-
-
-  .footer-socials {
-    gap: 8px;
-  }
-
 }
